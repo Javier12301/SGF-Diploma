@@ -1,0 +1,12 @@
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\SGF.DAL.dll.config
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\SGF.DAL.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\SGF.DAL.pdb
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\EntityFramework.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\EntityFramework.xml
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\obj\Debug\SGF.DAL.csproj.AssemblyReference.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\obj\Debug\SGF.DAL.csproj.CoreCompileInputs.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\obj\Debug\SGF.DAL.csproj.CopyComplete
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\obj\Debug\SGF.DAL.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.DAL\obj\Debug\SGF.DAL.pdb

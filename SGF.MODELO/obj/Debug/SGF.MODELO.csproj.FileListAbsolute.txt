@@ -1,0 +1,6 @@
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\bin\Debug\SGF.MODELO.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\bin\Debug\SGF.MODELO.pdb
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\obj\Debug\SGF.MODELO.csproj.AssemblyReference.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\obj\Debug\SGF.MODELO.csproj.CoreCompileInputs.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\obj\Debug\SGF.MODELO.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.MODELO\obj\Debug\SGF.MODELO.pdb

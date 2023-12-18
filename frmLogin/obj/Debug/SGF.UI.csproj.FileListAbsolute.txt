@@ -1,0 +1,11 @@
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\bin\Debug\frmLogin.exe.config
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\bin\Debug\frmLogin.exe
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\bin\Debug\frmLogin.pdb
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\SGF.UI.csproj.AssemblyReference.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\SGF.UI.csproj.SuggestedBindingRedirects.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\frmLogin.frmLogin.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\frmLogin.Properties.Resources.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\SGF.UI.csproj.GenerateResource.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\SGF.UI.csproj.CoreCompileInputs.cache
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\frmLogin.exe
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\frmLogin\obj\Debug\frmLogin.pdb

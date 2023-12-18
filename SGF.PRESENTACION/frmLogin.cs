@@ -1,0 +1,166 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using FontAwesome.Sharp;
+using Guna.UI.WinForms;
+using SGF.PRESENTACION.UtilidadesComunes;
+using SGF.NEGOCIO;
+using SGF.MODELO;
+using SGF.PRESENTACION.frmModales.Seguridad;
+
+namespace SGF.PRESENTACION
+{
+    public partial class frmLogin : Form
+    {
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+        private bool contraseñaVisible { get; set; }
+        private N_Usuario lUsuario = N_Usuario.ObtenerInstancia;
+        private Usuario oUsuario;
+        public frmLogin()
+        {
+            InitializeComponent();
+            contraseñaVisible = false;
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            txtUsuarioG.Select();
+        }
+
+        private void btnOjo_Click(object sender, EventArgs e)
+        {
+            alternarVisibilidadContraseña();
+        }
+
+
+        private void btnOjo_MouseEnter(object sender, EventArgs e)
+        {
+            btnOjo.IconFont = IconFont.Solid;
+
+        }
+
+        private void btnOjo_MouseLeave(object sender, EventArgs e)
+        {
+            btnOjo.IconFont = IconFont.Regular;
+        }
+
+        private void txtCredenciales_Enter(object sender, EventArgs e)
+        {
+            GunaLineTextBox textbox = (GunaLineTextBox)sender;
+            textbox.LineColor = Color.Gainsboro;
+        }
+
+        private void txtCredenciales_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                iniciar_sesion();
+            }
+        }
+
+        private void btnContraseña_Click(object sender, EventArgs e)
+        {
+            // Abrir formulario de recuperación de contraseña
+            using (var modal = new frmRecuperarContraseña())
+            {
+                modal.ShowDialog();
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            iniciar_sesion();
+        }
+
+        private void iniciar_sesion()
+        {
+            // Validaciones
+            bool txtUsuarioValido = uiUtilidades.VerificarTextboxG(txtUsuarioG);
+            bool txtContraseñaValido = uiUtilidades.VerificarTextboxG(txtContraseñaG);
+            if (txtUsuarioValido && txtContraseñaValido)
+            {
+                // Comprobar si existe el usuario
+                if (lUsuario.ExisteUsuario(txtUsuarioG.Text))
+                {
+                    oUsuario = lUsuario.ObtenerUsuario(txtUsuarioG.Text);
+                    string contraseña = lUsuario.EncriptarClave(txtContraseñaG.Text);
+                    if (oUsuario.Estado)
+                    {
+                        if (oUsuario.Contraseña == contraseña)
+                        {
+                            MessageBox.Show("Inicio de sesión exitoso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Usuario y/o contraseña incorrecta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario ingresado se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        uiUtilidades.errorTextboxG(txtUsuarioG, true);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El usuario no existe.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    uiUtilidades.errorTextboxG(txtUsuarioG, true);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Completar los campos vacíos.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+
+        // Utilidades de Interfaz
+        private void alternarVisibilidadContraseña()
+        {
+            if (contraseñaVisible)
+            {
+                contraseñaVisible = false;
+                uiUtilidades.MostrarContraseña(txtContraseñaG, btnOjo);
+            }
+            else
+            {
+                contraseñaVisible = true;
+                uiUtilidades.OcultarContraseña(txtContraseñaG, btnOjo);
+            }
+        }
+
+        // Control de movimiento de la ventana
+        private Point mousePosicion;
+        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mousePosicion = e.Location;
+            }
+        }
+
+        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int deltaX = e.X - mousePosicion.X;
+                int deltaY = e.Y - mousePosicion.Y;
+                this.Location = new Point(this.Location.X + deltaX, this.Location.Y + deltaY);
+            }
+        }
+
+      
+    }
+}
