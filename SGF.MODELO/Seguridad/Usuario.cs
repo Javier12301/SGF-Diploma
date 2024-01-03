@@ -20,14 +20,28 @@ namespace SGF.MODELO
         public int DNI { get; set; }
         public bool Estado { get; set; }
 
-        // Relación con grupo de usuarios
-        public virtual List<Grupo> Grupos { get; set; }
+        public Grupo Grupo { get; set; }
+        public List<Modulo> ModulosPermitidos { get; set; }
 
-        public override string ToString()
+        public string ObtenerNombreUsuario()
         {
-            // Retornaremos apellido nombre y nombre de usuario
-            // se utilizará para mostrar el dato de usuario
-            return Apellido + " " + Nombre + " (" + NombreUsuario + ")";
+            return NombreUsuario;
+        }
+
+        public string ObtenerNombreyApellido()
+        {
+            return $"{Nombre} {Apellido}";
+        }
+
+        public List<Modulo> ObtenerModulosPermitidos()
+        {
+            return ModulosPermitidos;
+        }
+
+        public string GrupoPerteneciente()
+        {
+            return Grupo.ObtenerNombre();
         }
     }
+
 }

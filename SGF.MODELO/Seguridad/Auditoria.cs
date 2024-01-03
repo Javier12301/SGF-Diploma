@@ -10,9 +10,16 @@ namespace SGF.MODELO.Seguridad
     {
         public int AuditoriaID { get; set; }
         public DateTime FechayHora { get; set; }
-        public string Movimiento { get; set; } 
+        public string Movimiento { get; set; }
         public string NombreUsuario { get; set; }
         public string Descripcion { get; set; }
-        public string Permiso { get; set; }
+
+        public Auditoria(string movimiento, string nombreUsuario, string descripcion)
+        {
+            FechayHora = DateTime.Now;
+            Movimiento = movimiento;
+            NombreUsuario = nombreUsuario;
+            Descripcion = descripcion;
+        }
     }
 }

@@ -29,17 +29,30 @@ namespace SGF.PRESENTACION.UtilidadesComunes
         }
 
         // Función modular, se necesitará fontawesome y un textbox guna
-        public void MostrarContraseña(GunaLineTextBox textbox, IconButton btnOjo)
+        public void MostrarContraseñaG(GunaLineTextBox textbox, IconButton btnOjo)
         {
             textbox.PasswordChar = (char)0;
             btnOjo.IconFont = IconFont.Solid;
         }
 
-        public void OcultarContraseña(GunaLineTextBox textbox, IconButton btnOjo)
+        public void OcultarContraseñaG(GunaLineTextBox textbox, IconButton btnOjo)
         {
             textbox.PasswordChar = '*';
             btnOjo.IconFont = IconFont.Regular;
         }
+
+        public void MostrarContraseña(TextBox textbox, IconButton btnOjo)
+        {
+            textbox.PasswordChar = (char)0;
+            btnOjo.IconFont = IconFont.Solid;
+        }
+
+        public void OcultarContraseña(TextBox textbox, IconButton btnOjo)
+        {
+            textbox.PasswordChar = '*';
+            btnOjo.IconFont = IconFont.Regular;
+        }
+
 
         public bool VerificarTextbox(TextBoxBase textbox, ErrorProvider mensajeError, Label lbl)
         {
@@ -147,5 +160,27 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                 return false;
             }
         }
+
+        // Solo mayusculas y numeros sin espacios con keypresseventargs
+        public void SoloMayusculasYNumeros(KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar))
+            {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+            else if (char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+        }
+
     }
 }

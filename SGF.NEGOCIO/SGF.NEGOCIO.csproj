@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Seguridad\N_Usuario.cs" />
+    <Compile Include="CorreoService.cs" />
+    <Compile Include="Seguridad\AuditoriaBLL.cs" />
+    <Compile Include="Seguridad\GrupoBLL.cs" />
+    <Compile Include="Seguridad\SesionBLL.cs" />
+    <Compile Include="Seguridad\UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +59,9 @@
       <Project>{b1d2a8c7-276d-414c-87f3-928d2b47f7af}</Project>
       <Name>SGF.MODELO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

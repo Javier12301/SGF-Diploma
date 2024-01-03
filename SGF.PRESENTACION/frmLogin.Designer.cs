@@ -83,7 +83,7 @@
             this.btnSalir.Location = new System.Drawing.Point(43, 374);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(225, 37);
-            this.btnSalir.TabIndex = 28;
+            this.btnSalir.TabIndex = 6;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -103,7 +103,7 @@
             this.btnContraseña.Location = new System.Drawing.Point(164, 300);
             this.btnContraseña.Name = "btnContraseña";
             this.btnContraseña.Size = new System.Drawing.Size(134, 25);
-            this.btnContraseña.TabIndex = 27;
+            this.btnContraseña.TabIndex = 5;
             this.btnContraseña.Text = "Olvide mi contraseña";
             this.btnContraseña.UseVisualStyleBackColor = false;
             this.btnContraseña.Click += new System.EventHandler(this.btnContraseña_Click);
@@ -121,7 +121,7 @@
             this.btnOjo.Location = new System.Drawing.Point(269, 267);
             this.btnOjo.Name = "btnOjo";
             this.btnOjo.Size = new System.Drawing.Size(29, 27);
-            this.btnOjo.TabIndex = 24;
+            this.btnOjo.TabIndex = 3;
             this.btnOjo.UseVisualStyleBackColor = true;
             this.btnOjo.Click += new System.EventHandler(this.btnOjo_Click);
             this.btnOjo.MouseEnter += new System.EventHandler(this.btnOjo_MouseEnter);
@@ -167,7 +167,7 @@
             this.btnLogin.Location = new System.Drawing.Point(43, 331);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(225, 37);
-            this.btnLogin.TabIndex = 22;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Iniciar Sesión";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -183,7 +183,7 @@
             this.txtContraseñaG.Name = "txtContraseñaG";
             this.txtContraseñaG.PasswordChar = '\0';
             this.txtContraseñaG.Size = new System.Drawing.Size(225, 29);
-            this.txtContraseñaG.TabIndex = 18;
+            this.txtContraseñaG.TabIndex = 2;
             this.txtContraseñaG.Text = "Reloj12301";
             this.txtContraseñaG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
             this.txtContraseñaG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
@@ -199,8 +199,8 @@
             this.txtUsuarioG.Name = "txtUsuarioG";
             this.txtUsuarioG.PasswordChar = '\0';
             this.txtUsuarioG.Size = new System.Drawing.Size(247, 29);
-            this.txtUsuarioG.TabIndex = 17;
-            this.txtUsuarioG.Text = "javierramirez1230123@gmail.com";
+            this.txtUsuarioG.TabIndex = 1;
+            this.txtUsuarioG.Text = "Admin";
             this.txtUsuarioG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
             this.txtUsuarioG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
             // 

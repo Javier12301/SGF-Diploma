@@ -9,16 +9,14 @@ namespace SGF.MODELO.Seguridad
     public class Permiso
     {
         public int PermisoID { get; set; }
-        public string Accion { get; set; }
-        public string Formulario { get; set; }
-        public string Descripcion { get; set; }
+        public Grupo Grupo { get; set; }
+        public Accion Accion { get; set; }
+        public Modulo Modulo { get; set; }
+        public bool Permito { get; set; }
 
-        // Relaciones
-        public virtual List<Grupo> Grupos { get; set; }
-
-        public override string ToString()
+        public string ObtenerNombre()
         {
-            return Descripcion;
+            return this.Modulo.Descripcion + @" - " + this.Accion.Descripcion;
         }
     }
 }

@@ -13,6 +13,11 @@ using SGF.PRESENTACION.UtilidadesComunes;
 using SGF.NEGOCIO;
 using SGF.MODELO;
 using SGF.PRESENTACION.frmModales.Seguridad;
+using SGF.MODELO.Seguridad;
+using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formPrincipales;
+using System.Drawing.Text;
+using Microsoft.VisualBasic.Devices;
 
 namespace SGF.PRESENTACION
 {
@@ -20,8 +25,10 @@ namespace SGF.PRESENTACION
     {
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private bool contraseñaVisible { get; set; }
-        private N_Usuario lUsuario = N_Usuario.ObtenerInstancia;
-        private Usuario oUsuario;
+        private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
+        private AuditoriaBLL lAuditoria = AuditoriaBLL.ObtenerInstancia;
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+        private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
         public frmLogin()
         {
             InitializeComponent();
@@ -31,6 +38,7 @@ namespace SGF.PRESENTACION
         private void frmLogin_Load(object sender, EventArgs e)
         {
             txtUsuarioG.Select();
+            alternarVisibilidadContraseña();
         }
 
         private void btnOjo_Click(object sender, EventArgs e)
@@ -58,16 +66,16 @@ namespace SGF.PRESENTACION
 
         private void txtCredenciales_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                iniciar_sesion();
+                IniciarSesion();
             }
         }
 
         private void btnContraseña_Click(object sender, EventArgs e)
         {
             // Abrir formulario de recuperación de contraseña
-            using (var modal = new frmRecuperarContraseña())
+            using (var modal = new formRecuperarContraseña())
             {
                 modal.ShowDialog();
             }
@@ -75,55 +83,98 @@ namespace SGF.PRESENTACION
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            iniciar_sesion();
+            IniciarSesion();
         }
 
-        private void iniciar_sesion()
+
+
+        private void IniciarSesion()
         {
-            // Validaciones
-            bool txtUsuarioValido = uiUtilidades.VerificarTextboxG(txtUsuarioG);
-            bool txtContraseñaValido = uiUtilidades.VerificarTextboxG(txtContraseñaG);
-            if (txtUsuarioValido && txtContraseñaValido)
+            try
             {
-                // Comprobar si existe el usuario
-                if (lUsuario.ExisteUsuario(txtUsuarioG.Text))
+                // Validaciones
+                bool txtUsuarioValido = uiUtilidades.VerificarTextboxG(txtUsuarioG);
+                bool txtContraseñaValido = uiUtilidades.VerificarTextboxG(txtContraseñaG);
+
+                if (txtUsuarioValido && txtContraseñaValido)
                 {
-                    oUsuario = lUsuario.ObtenerUsuario(txtUsuarioG.Text);
-                    string contraseña = lUsuario.EncriptarClave(txtContraseñaG.Text);
-                    if (oUsuario.Estado)
+                    // Comprobar si existe el usuario
+                    if (lUsuario.ExisteUsuario(txtUsuarioG.Text))
                     {
-                        if (oUsuario.Contraseña == contraseña)
+                        Usuario oUsuario = lUsuario.ObtenerUsuario(txtUsuarioG.Text);
+                        // Permisos de cada modulo
+                        oUsuario.ModulosPermitidos = lGrupo.ObtenerModulosPermitidos(oUsuario.UsuarioID);
+                        string contraseña = lUsuario.EncriptarClave(txtContraseñaG.Text);
+
+                        if (oUsuario.Estado)
                         {
-                            MessageBox.Show("Inicio de sesión exitoso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (oUsuario.Contraseña == contraseña)
+                            {
+                                // Iniciar sesión utilizando el SessionManager
+                                lSesion.Login(oUsuario);
+
+                                // Registrar auditoria (si lo deseas)
+                                abrirFormMain();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Usuario y/o contraseña incorrecta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Usuario y/o contraseña incorrecta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("El usuario ingresado se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            uiUtilidades.errorTextboxG(txtUsuarioG, true);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("El usuario ingresado se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("El usuario no existe.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         uiUtilidades.errorTextboxG(txtUsuarioG, true);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("El usuario no existe.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    uiUtilidades.errorTextboxG(txtUsuarioG, true);
+                    MessageBox.Show("Completar los campos vacíos.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Completar los campos vacíos.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{ex.Message}", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        private void abrirFormMain()
+        {
+            if (lSesion != null)
+            {
+                using (var frmMain = new formMain())
+                {
+                    this.Hide();
+                    var resultado = frmMain.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        this.Show();
+                    }
+                    else
+                    {
+                        Application.Exit();
+                    }
+
+                }
+            }
+            else
+            {
+                // En caso de que un usuario encuentre un bug y logre abrir el formulario principal sin iniciar sesión, se le mostrará un mensaje de error.
+                MessageBox.Show("No se ha iniciado sesión", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
         // Utilidades de Interfaz
@@ -132,12 +183,12 @@ namespace SGF.PRESENTACION
             if (contraseñaVisible)
             {
                 contraseñaVisible = false;
-                uiUtilidades.MostrarContraseña(txtContraseñaG, btnOjo);
+                uiUtilidades.MostrarContraseñaG(txtContraseñaG, btnOjo);
             }
             else
             {
                 contraseñaVisible = true;
-                uiUtilidades.OcultarContraseña(txtContraseñaG, btnOjo);
+                uiUtilidades.OcultarContraseñaG(txtContraseñaG, btnOjo);
             }
         }
 
@@ -161,6 +212,6 @@ namespace SGF.PRESENTACION
             }
         }
 
-      
+
     }
 }

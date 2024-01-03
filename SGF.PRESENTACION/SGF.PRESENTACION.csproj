@@ -43,6 +43,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xaml" />
@@ -58,47 +59,182 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="formModales\mdAjustes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdAjustes.Designer.cs">
+      <DependentUpon>mdAjustes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdCategorias.Designer.cs">
+      <DependentUpon>mdCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdGrupo.Designer.cs">
+      <DependentUpon>mdGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdProductos.Designer.cs">
+      <DependentUpon>mdProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdUsuario.Designer.cs">
+      <DependentUpon>mdUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\formGrupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\formGrupos.Designer.cs">
+      <DependentUpon>formGrupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\formUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\formUsuarios.Designer.cs">
+      <DependentUpon>formUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formInventario.Designer.cs">
+      <DependentUpon>formInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formMain.Designer.cs">
+      <DependentUpon>formMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formProductos.Designer.cs">
+      <DependentUpon>formProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formPerfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formPerfiles.Designer.cs">
+      <DependentUpon>formPerfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formProveedores.Designer.cs">
+      <DependentUpon>formProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formRegistros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formRegistros.Designer.cs">
+      <DependentUpon>formRegistros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formReportes.Designer.cs">
+      <DependentUpon>formReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formVentas.Designer.cs">
+      <DependentUpon>formVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmCambiarContraseña.cs">
+    <Compile Include="formModales\Seguridad\formCambiarContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmCambiarContraseña.Designer.cs">
-      <DependentUpon>frmCambiarContraseña.cs</DependentUpon>
+    <Compile Include="formModales\Seguridad\formCambiarContraseña.Designer.cs">
+      <DependentUpon>formCambiarContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmRecuperarContraseña.cs">
+    <Compile Include="formModales\Seguridad\formRecuperarContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmRecuperarContraseña.Designer.cs">
-      <DependentUpon>frmRecuperarContraseña.cs</DependentUpon>
+    <Compile Include="formModales\Seguridad\formRecuperarContraseña.Designer.cs">
+      <DependentUpon>formRecuperarContraseña.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmVerificarMail.cs">
+    <Compile Include="formModales\Seguridad\formVerificarMail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmModales\Seguridad\frmVerificarMail.Designer.cs">
-      <DependentUpon>frmVerificarMail.cs</DependentUpon>
+    <Compile Include="formModales\Seguridad\formVerificarMail.Designer.cs">
+      <DependentUpon>formVerificarMail.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilidadesComunes\UtilidadesUI.cs" />
+    <EmbeddedResource Include="formModales\mdAjustes.resx">
+      <DependentUpon>mdAjustes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdCategorias.resx">
+      <DependentUpon>mdCategorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdGrupo.resx">
+      <DependentUpon>mdGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdProductos.resx">
+      <DependentUpon>mdProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdUsuario.resx">
+      <DependentUpon>mdUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formHijos\formGrupos.resx">
+      <DependentUpon>formGrupos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formHijos\formUsuarios.resx">
+      <DependentUpon>formUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formInventario.resx">
+      <DependentUpon>formInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formMain.resx">
+      <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formProductos.resx">
+      <DependentUpon>formProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formPerfiles.resx">
+      <DependentUpon>formPerfiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formProveedores.resx">
+      <DependentUpon>formProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formRegistros.resx">
+      <DependentUpon>formRegistros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formReportes.resx">
+      <DependentUpon>formReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formVentas.resx">
+      <DependentUpon>formVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModales\Seguridad\frmCambiarContraseña.resx">
-      <DependentUpon>frmCambiarContraseña.cs</DependentUpon>
+    <EmbeddedResource Include="formModales\Seguridad\formCambiarContraseña.resx">
+      <DependentUpon>formCambiarContraseña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModales\Seguridad\frmRecuperarContraseña.es-AR.resx">
-      <DependentUpon>frmRecuperarContraseña.cs</DependentUpon>
+    <EmbeddedResource Include="formModales\Seguridad\formRecuperarContraseña.es-AR.resx">
+      <DependentUpon>formRecuperarContraseña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModales\Seguridad\frmRecuperarContraseña.resx">
-      <DependentUpon>frmRecuperarContraseña.cs</DependentUpon>
+    <EmbeddedResource Include="formModales\Seguridad\formRecuperarContraseña.resx">
+      <DependentUpon>formRecuperarContraseña.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmModales\Seguridad\frmVerificarMail.resx">
-      <DependentUpon>frmVerificarMail.cs</DependentUpon>
+    <EmbeddedResource Include="formModales\Seguridad\formVerificarMail.resx">
+      <DependentUpon>formVerificarMail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -134,8 +270,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="frmPrincipales\" />
-    <Folder Include="Idiomas\" />
+    <Folder Include="formModales\modalesBuscadores\" />
     <Folder Include="Recursos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
