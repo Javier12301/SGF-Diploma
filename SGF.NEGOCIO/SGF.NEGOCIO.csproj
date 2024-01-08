@@ -46,6 +46,7 @@
     <Compile Include="CorreoService.cs" />
     <Compile Include="Seguridad\AuditoriaBLL.cs" />
     <Compile Include="Seguridad\GrupoBLL.cs" />
+    <Compile Include="Seguridad\ModuloBLL.cs" />
     <Compile Include="Seguridad\SesionBLL.cs" />
     <Compile Include="Seguridad\UsuarioBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

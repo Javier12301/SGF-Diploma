@@ -53,8 +53,8 @@ namespace SGF.PRESENTACION.frmModales.Seguridad
                 {
                     if (uiUtilidades.VerificarMail(txtEmail, errorProvider, lblEmail))
                     {
-                        // Comprobamos si existe el usuario
-                        if (UsuarioBLL.ObtenerInstancia.Existe_Usuario_Mail(txtUsuario.Text, txtEmail.Text))
+                        // Comprobamos si el usuario ingresado y el email ingresado pertenece a ese usuario
+                        if (UsuarioBLL.ObtenerInstancia.ExisteUsuarioConEmail(txtUsuario.Text, txtEmail.Text))
                         {
                             // Enviar mail
                             // Codigo random para enviar al mail de 5 digitos se puede usar numeros y letras                       

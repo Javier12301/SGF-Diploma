@@ -36,6 +36,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.usuarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
             this.bnpCantidadDeItems = new System.Windows.Forms.ToolStripLabel();
             this.bnpUltimoItem = new System.Windows.Forms.ToolStripButton();
             this.bnpSiguienteItem = new System.Windows.Forms.ToolStripButton();
@@ -49,9 +51,16 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.dgvcNombreCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmbFiltroGrupo = new System.Windows.Forms.ToolStripComboBox();
+            this.dgvUsuario = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.btnLimpiar = new FontAwesome.Sharp.IconButton();
@@ -68,10 +77,13 @@
             this.btnModificarP = new System.Windows.Forms.Button();
             this.btnEliminarP = new System.Windows.Forms.Button();
             this.btnExportarP = new System.Windows.Forms.Button();
+            this.usuarioTableAdapter = new SGF.PRESENTACION.FarmaciaDatosDataSetTableAdapters.UsuarioTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usuarioBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -81,7 +93,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.bindingNavigator1);
-            this.panel1.Controls.Add(this.dgvProductos);
+            this.panel1.Controls.Add(this.dgvUsuario);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
@@ -96,6 +108,7 @@
             this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.AutoSize = false;
             this.bindingNavigator1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.bindingNavigator1.BindingSource = this.usuarioBindingSource;
             this.bindingNavigator1.CountItem = this.bnpCantidadDeItems;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -115,7 +128,7 @@
             this.toolStripLabel2,
             this.toolStripSeparator3,
             this.toolStripLabel1,
-            this.toolStripComboBox1});
+            this.cmbFiltroGrupo});
             this.bindingNavigator1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 311);
             this.bindingNavigator1.MoveFirstItem = this.bnpPrimerItem;
@@ -128,6 +141,16 @@
             this.bindingNavigator1.Size = new System.Drawing.Size(1081, 49);
             this.bindingNavigator1.TabIndex = 112;
             this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // usuarioBindingSource
+            // 
+            this.usuarioBindingSource.DataMember = "Usuario";
+            this.usuarioBindingSource.DataSource = this.farmaciaDatosDataSet;
+            // 
+            // farmaciaDatosDataSet
+            // 
+            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
+            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bnpCantidadDeItems
             // 
@@ -213,6 +236,7 @@
             this.cmbFiltroEstado.Font = new System.Drawing.Font("Roboto", 9.75F);
             this.cmbFiltroEstado.Name = "cmbFiltroEstado";
             this.cmbFiltroEstado.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroEstado.SelectedIndexChanged += new System.EventHandler(this.cmbChanged_Index);
             // 
             // toolStripLabel2
             // 
@@ -235,24 +259,27 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(43, 46);
             this.toolStripLabel1.Text = "Grupo:";
             // 
-            // toolStripComboBox1
+            // cmbFiltroGrupo
             // 
-            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBox1.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltroGrupo.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.cmbFiltroGrupo.Name = "cmbFiltroGrupo";
+            this.cmbFiltroGrupo.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroGrupo.SelectedIndexChanged += new System.EventHandler(this.cmbChanged_Index);
             // 
-            // dgvProductos
+            // dgvUsuario
             // 
-            this.dgvProductos.AllowUserToAddRows = false;
+            this.dgvUsuario.AllowUserToAddRows = false;
+            this.dgvUsuario.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
+            this.dgvUsuario.AutoGenerateColumns = false;
+            this.dgvUsuario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvUsuario.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -260,11 +287,19 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProductos.ColumnHeadersHeight = 40;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvcNombreCategoria});
+            this.dgvUsuario.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvUsuario.ColumnHeadersHeight = 40;
+            this.dgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvcID,
+            this.dgvcNombreUsuario,
+            this.dgvcGrupo,
+            this.dgvcNombre,
+            this.dgvcApellido,
+            this.dgvcEmail,
+            this.dgvcDNI,
+            this.dgvcEstado});
+            this.dgvUsuario.DataSource = this.usuarioBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
@@ -272,11 +307,11 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvProductos.GridColor = System.Drawing.Color.White;
-            this.dgvProductos.Location = new System.Drawing.Point(6, 139);
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
+            this.dgvUsuario.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvUsuario.GridColor = System.Drawing.Color.White;
+            this.dgvUsuario.Location = new System.Drawing.Point(6, 139);
+            this.dgvUsuario.Name = "dgvUsuario";
+            this.dgvUsuario.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
@@ -284,21 +319,76 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvProductos.RowHeadersVisible = false;
-            this.dgvProductos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.Size = new System.Drawing.Size(1071, 169);
-            this.dgvProductos.TabIndex = 111;
+            this.dgvUsuario.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvUsuario.RowHeadersVisible = false;
+            this.dgvUsuario.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsuario.Size = new System.Drawing.Size(1071, 169);
+            this.dgvUsuario.TabIndex = 111;
+            this.dgvUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellDoubleClick);
+            this.dgvUsuario.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvUsuario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvUsuario_KeyDown);
             // 
-            // dgvcNombreCategoria
+            // dgvcID
             // 
-            this.dgvcNombreCategoria.DataPropertyName = "NombreCategoria";
-            this.dgvcNombreCategoria.HeaderText = "Categoría";
-            this.dgvcNombreCategoria.Name = "dgvcNombreCategoria";
-            this.dgvcNombreCategoria.ReadOnly = true;
+            this.dgvcID.DataPropertyName = "UsuarioID";
+            this.dgvcID.HeaderText = "ID";
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            // 
+            // dgvcNombreUsuario
+            // 
+            this.dgvcNombreUsuario.DataPropertyName = "NombreUsuario";
+            this.dgvcNombreUsuario.HeaderText = "Usuario";
+            this.dgvcNombreUsuario.Name = "dgvcNombreUsuario";
+            this.dgvcNombreUsuario.ReadOnly = true;
+            // 
+            // dgvcGrupo
+            // 
+            this.dgvcGrupo.DataPropertyName = "NombreGrupo";
+            this.dgvcGrupo.HeaderText = "Grupo";
+            this.dgvcGrupo.Name = "dgvcGrupo";
+            this.dgvcGrupo.ReadOnly = true;
+            // 
+            // dgvcNombre
+            // 
+            this.dgvcNombre.DataPropertyName = "Nombre";
+            this.dgvcNombre.HeaderText = "Nombre";
+            this.dgvcNombre.Name = "dgvcNombre";
+            this.dgvcNombre.ReadOnly = true;
+            // 
+            // dgvcApellido
+            // 
+            this.dgvcApellido.DataPropertyName = "Apellido";
+            this.dgvcApellido.HeaderText = "Apellido";
+            this.dgvcApellido.Name = "dgvcApellido";
+            this.dgvcApellido.ReadOnly = true;
+            // 
+            // dgvcEmail
+            // 
+            this.dgvcEmail.DataPropertyName = "Email";
+            this.dgvcEmail.HeaderText = "Email";
+            this.dgvcEmail.Name = "dgvcEmail";
+            this.dgvcEmail.ReadOnly = true;
+            // 
+            // dgvcDNI
+            // 
+            this.dgvcDNI.DataPropertyName = "DNI";
+            this.dgvcDNI.HeaderText = "DNI";
+            this.dgvcDNI.Name = "dgvcDNI";
+            this.dgvcDNI.ReadOnly = true;
+            // 
+            // dgvcEstado
+            // 
+            this.dgvcEstado.DataPropertyName = "Estado";
+            this.dgvcEstado.HeaderText = "Estado";
+            this.dgvcEstado.Name = "dgvcEstado";
+            this.dgvcEstado.ReadOnly = true;
             // 
             // panel4
             // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.btnBuscar);
@@ -350,6 +440,7 @@
             this.btnLimpiar.TabIndex = 97;
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // txtBuscar
             // 
@@ -359,16 +450,19 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(188, 23);
             this.txtBuscar.TabIndex = 3;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // cmbFiltroBuscar
             // 
             this.cmbFiltroBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFiltroBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFiltroBuscar.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFiltroBuscar.FormattingEnabled = true;
             this.cmbFiltroBuscar.Location = new System.Drawing.Point(690, 14);
             this.cmbFiltroBuscar.Name = "cmbFiltroBuscar";
             this.cmbFiltroBuscar.Size = new System.Drawing.Size(113, 23);
             this.cmbFiltroBuscar.TabIndex = 2;
+            this.cmbFiltroBuscar.SelectedIndexChanged += new System.EventHandler(this.cmbChanged_Index);
             // 
             // label3
             // 
@@ -397,41 +491,43 @@
             this.panel2.BackColor = System.Drawing.Color.LightGray;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(883, 4);
+            this.panel2.Location = new System.Drawing.Point(913, 4);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 68);
+            this.panel2.Size = new System.Drawing.Size(164, 68);
             this.panel2.TabIndex = 109;
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.lblEstado);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(184, 57);
+            this.panel3.Size = new System.Drawing.Size(151, 57);
             this.panel3.TabIndex = 7;
             // 
             // lblEstado
             // 
             this.lblEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEstado.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblEstado.Location = new System.Drawing.Point(37, 38);
+            this.lblEstado.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.Location = new System.Drawing.Point(41, 33);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(109, 18);
+            this.lblEstado.Size = new System.Drawing.Size(76, 18);
             this.lblEstado.TabIndex = 1;
-            this.lblEstado.Text = "--------";
+            this.lblEstado.Text = "------";
             this.lblEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(67, 9);
+            this.label2.Location = new System.Drawing.Point(58, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 15);
@@ -471,6 +567,7 @@
             this.btnNuevoP.Text = "Nuevo";
             this.btnNuevoP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNuevoP.UseVisualStyleBackColor = false;
+            this.btnNuevoP.Click += new System.EventHandler(this.btnNuevoP_Click);
             // 
             // btnModificarP
             // 
@@ -489,6 +586,7 @@
             this.btnModificarP.Text = "Modificar";
             this.btnModificarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnModificarP.UseVisualStyleBackColor = false;
+            this.btnModificarP.Click += new System.EventHandler(this.btnModificarP_Click);
             // 
             // btnEliminarP
             // 
@@ -507,6 +605,7 @@
             this.btnEliminarP.Text = "Eliminar";
             this.btnEliminarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEliminarP.UseVisualStyleBackColor = false;
+            this.btnEliminarP.Click += new System.EventHandler(this.btnEliminarP_Click);
             // 
             // btnExportarP
             // 
@@ -525,6 +624,11 @@
             this.btnExportarP.Text = "Exportar";
             this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportarP.UseVisualStyleBackColor = false;
+            this.btnExportarP.Click += new System.EventHandler(this.btnExportarP_Click);
+            // 
+            // usuarioTableAdapter
+            // 
+            this.usuarioTableAdapter.ClearBeforeFill = true;
             // 
             // formUsuarios
             // 
@@ -535,11 +639,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formUsuarios";
             this.Text = "formUsuarios";
+            this.Load += new System.EventHandler(this.formUsuarios_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usuarioBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -569,8 +676,7 @@
         private System.Windows.Forms.ComboBox cmbFiltroBuscar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombreCategoria;
+        private System.Windows.Forms.DataGridView dgvUsuario;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bnpCantidadDeItems;
         private System.Windows.Forms.ToolStripButton bnpUltimoItem;
@@ -585,6 +691,17 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripComboBox cmbFiltroGrupo;
+        private FarmaciaDatosDataSet farmaciaDatosDataSet;
+        private System.Windows.Forms.BindingSource usuarioBindingSource;
+        private FarmaciaDatosDataSetTableAdapters.UsuarioTableAdapter usuarioTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombreUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcGrupo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcApellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDNI;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcEstado;
     }
 }

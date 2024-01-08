@@ -55,7 +55,9 @@
             // 
             // pnlPerfilesPadre
             // 
-            this.pnlPerfilesPadre.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlPerfilesPadre.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPerfilesPadre.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlPerfilesPadre.Location = new System.Drawing.Point(0, 88);
             this.pnlPerfilesPadre.Name = "pnlPerfilesPadre";
@@ -105,6 +107,7 @@
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnUsuarios.UseVisualStyleBackColor = false;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // btnGrupos
             // 
@@ -122,6 +125,7 @@
             this.btnGrupos.Text = "Grupos";
             this.btnGrupos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnGrupos.UseVisualStyleBackColor = false;
+            this.btnGrupos.Click += new System.EventHandler(this.btnGrupos_Click);
             // 
             // btnInformes
             // 

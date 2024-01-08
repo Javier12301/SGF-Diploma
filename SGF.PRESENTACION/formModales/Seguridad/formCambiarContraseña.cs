@@ -88,7 +88,7 @@ namespace SGF.PRESENTACION.frmModales.Seguridad
             {
                 if (txtNuevaContraseña.Text == txtConfirmarContraseña.Text)
                 {
-                    Usuario oUsuario = lUsuario.ObtenerUsuario(nombreUsario);
+                    Usuario oUsuario = lUsuario.ObtenerUsuarioPorNombre(nombreUsario);
                     oUsuario.Contraseña = lUsuario.EncriptarClave(txtNuevaContraseña.Text);
                     try
                     {
@@ -105,8 +105,8 @@ namespace SGF.PRESENTACION.frmModales.Seguridad
                 }
                 else
                 {
-                    errorProvider.SetError(lblConfirmarContraseña, "La contraseña no coinciden.");
-                    MessageBox.Show("Las contraseñas no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errorProvider.SetError(lblConfirmarContraseña, "La contraseñas no coincide.");
+                    MessageBox.Show("Las contraseñas ingresada no coinciden", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

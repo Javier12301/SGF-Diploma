@@ -26,7 +26,6 @@ namespace SGF.PRESENTACION
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private bool contraseñaVisible { get; set; }
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
-        private AuditoriaBLL lAuditoria = AuditoriaBLL.ObtenerInstancia;
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
         public frmLogin()
@@ -101,7 +100,7 @@ namespace SGF.PRESENTACION
                     // Comprobar si existe el usuario
                     if (lUsuario.ExisteUsuario(txtUsuarioG.Text))
                     {
-                        Usuario oUsuario = lUsuario.ObtenerUsuario(txtUsuarioG.Text);
+                        Usuario oUsuario = lUsuario.ObtenerUsuarioPorNombre(txtUsuarioG.Text);
                         // Permisos de cada modulo
                         oUsuario.ModulosPermitidos = lGrupo.ObtenerModulosPermitidos(oUsuario.UsuarioID);
                         string contraseña = lUsuario.EncriptarClave(txtContraseñaG.Text);

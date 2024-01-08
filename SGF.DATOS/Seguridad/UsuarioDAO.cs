@@ -17,6 +17,103 @@ namespace SGF.DATOS.Seguridad
     public class UsuarioDAO
     {
 
+        // ALTA USUARIO
+        public static bool AltaUsuarioD(Usuario usuario)
+        {
+            bool alta = false;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("INSERT INTO Usuario (NombreUsuario, Contraseña, Nombre, Apellido, Email, DNI, GrupoID, Estado)");
+                    query.AppendLine("VALUES (@nombreUsuario, @contraseña, @nombre, @apellido, @email,");
+                    query.AppendLine("@dni, @grupoID, @estado)");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@nombreUsuario", usuario.NombreUsuario);
+                        cmd.Parameters.AddWithValue("@contraseña", usuario.Contraseña);
+                        cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                        cmd.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                        cmd.Parameters.AddWithValue("@email", usuario.Email);
+                        cmd.Parameters.AddWithValue("@dni", usuario.DNI);
+                        cmd.Parameters.AddWithValue("@grupoID", usuario.Grupo.GrupoID);
+                        cmd.Parameters.AddWithValue("@estado", usuario.Estado);
+                        oContexto.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        alta = filasAfectadas > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar registrar el nuevo usuario. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return alta;
+        }
+
+        // Modificar Usuario
+        public static bool ModificarUsuarioD(Usuario usuario)
+        {
+            bool modificado = false;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("UPDATE Usuario SET NombreUsuario = @nombreUsuario, Contraseña = @contraseña, Nombre = @nombre, Apellido = @apellido, Email = @email,");
+                    query.AppendLine("DNI = @dni, GrupoID = @grupoID, Estado = @estado WHERE UsuarioID = @usuarioID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@nombreUsuario", usuario.NombreUsuario);
+                        cmd.Parameters.AddWithValue("@contraseña", usuario.Contraseña);
+                        cmd.Parameters.AddWithValue("@nombre", usuario.Nombre);
+                        cmd.Parameters.AddWithValue("@apellido", usuario.Apellido);
+                        cmd.Parameters.AddWithValue("@email", usuario.Email);
+                        cmd.Parameters.AddWithValue("@dni", usuario.DNI);
+                        cmd.Parameters.AddWithValue("@grupoID", usuario.Grupo.GrupoID);
+                        cmd.Parameters.AddWithValue("@estado", usuario.Estado);
+                        cmd.Parameters.AddWithValue("@usuarioID", usuario.UsuarioID);
+                        oContexto.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        modificado = filasAfectadas > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar modificar el usuario. Por favor, vuelva a intentarlo y, si el problema persiste, pónganse en contacto con el administrador del sistema.");
+                }
+            }
+            return modificado;
+        }
+
+
+        // BAJA USUARIO
+        public static bool BajaUsuarioD(int usuarioID)
+        {
+            bool baja = false;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("DELETE FROM Usuario WHERE UsuarioID = @usuarioID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@usuarioID", usuarioID);
+                        oContexto.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        baja = filasAfectadas > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar eliminar el usuario. Por favor, vuelva a intentarlo y si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return baja;
+        }
+
         // Listar
         public static List<Usuario> ListarUsuarioD()
         {
@@ -42,7 +139,7 @@ namespace SGF.DATOS.Seguridad
                                 usuario.Nombre = reader["Nombre"].ToString();
                                 usuario.Apellido = reader["Apellido"].ToString();
                                 usuario.Email = reader["Email"].ToString();
-                                usuario.DNI = Convert.ToInt32(reader["DNI"]);
+                                usuario.DNI = reader["DNI"].ToString();
                                 // estado es un bit 1 o 0
                                 usuario.Estado = Convert.ToBoolean(reader["Estado"]);
                                 oLista.Add(usuario);
@@ -59,8 +156,8 @@ namespace SGF.DATOS.Seguridad
         }
 
 
-        // Comprobar si existe un usuario
-        public static bool ExisteUsuarioD(string nombreUsuario)
+        // Comprobar si existe un usuario en el sistema
+        public static bool ExisteNombreUsuarioD(string nombreUsuario)
         {
             bool existe = false;
 
@@ -83,15 +180,44 @@ namespace SGF.DATOS.Seguridad
                 }
                 catch (Exception)
                 {
-                    return existe;
+                    throw new Exception("Error al verificar si existe el usuario, contactar con el administrador del sistema.");
                 }
             }
 
             return existe;
         }
 
-        // Comprobar si existe usuario y email ingresado
-        public static bool ExisteUsuarioMailD(string nombreUsuario, string email)
+        // Comprobar si existe un email en el sistema
+        public static bool ExisteEmailD(string email)
+        {
+            bool existe = false;
+            using(var oConteexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Usuario WHERE Email COLLATE SQL_Latin1_General_CP1_CS_AS = @email");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oConteexto))
+                    {
+                        cmd.Parameters.AddWithValue("@email", email);
+                        oConteexto.Open();
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        // si retorna mayor a 0 es porque existe
+                        existe = count > 0;
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return existe;
+                }
+            }
+            return existe;
+        }
+
+
+        // Comprobar si el usuario ingresado tiene el email ingresado
+        public static bool ExisteUsuarioConEmailD(string nombreUsuario, string email)
         {
             bool existe = false;
             using (var oContexto = new SqlConnection(ConexionSGF.cadena))
@@ -99,14 +225,16 @@ namespace SGF.DATOS.Seguridad
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT COUNT(*) FROM Usuario WHERE NombreUsuario COLLATE SQL_Latin1_General_CP1_CS_AS = @nombreUsuario AND Email COLLATE SQL_Latin1_General_CP1_CS_AS = @email");
+                    query.AppendLine("SELECT COUNT(*) FROM Usuario");
+                    query.AppendLine("WHERE NombreUsuario COLLATE SQL_Latin1_General_CP1_CS_AS = @nombreUsuario");
+                    query.AppendLine("AND Email COLLATE SQL_Latin1_General_CP1_CS_AS = @email");
                     using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
                         cmd.Parameters.AddWithValue("@email", email);
                         oContexto.Open();
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-                        existe = count > 0;
+                        int count = (int)cmd.ExecuteScalar();
+                        existe = (count > 0);
                     }
                 }
                 catch (Exception)
@@ -116,6 +244,7 @@ namespace SGF.DATOS.Seguridad
             }
             return existe;
         }
+
 
         // Obtener un usuario
         public static Usuario ObtenerUsuarioD(string nombreUsuario)
@@ -140,7 +269,7 @@ namespace SGF.DATOS.Seguridad
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            if (reader.Read())
+                            while (reader.Read())
                             {
                                 usuario = new Usuario();
                                 usuario.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
@@ -149,12 +278,12 @@ namespace SGF.DATOS.Seguridad
                                 usuario.Nombre = reader["NombreU"].ToString();
                                 usuario.Apellido = reader["Apellido"].ToString();
                                 usuario.Email = reader["Email"].ToString();
-                                usuario.DNI = Convert.ToInt32(reader["DNI"]);
+                                usuario.DNI = reader["DNI"].ToString();
                                 usuario.Estado = Convert.ToBoolean(reader["EstadoU"]);
 
                                 Grupo grupo = new Grupo();
                                 grupo.GrupoID = Convert.ToInt32(reader["GrupoID"]);
-                                grupo.Descripcion = reader["NombreG"].ToString();
+                                grupo.Nombre = reader["NombreG"].ToString();
                                 grupo.Estado = Convert.ToBoolean(reader["EstadoG"]);
 
                                 usuario.Grupo = grupo;
@@ -171,7 +300,54 @@ namespace SGF.DATOS.Seguridad
             return usuario;
         }
 
+        // Obtener usuario por ID
+        public static Usuario ObtenerUsuarioPorIDD(int usuarioID)
+        {
+            Usuario oUsuario = new Usuario();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU,");
+                    query.AppendLine("G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG");
+                    query.AppendLine("FROM Usuario U");
+                    query.AppendLine("INNER JOIN Grupo G ON U.GrupoID = G.GrupoID");
+                    query.AppendLine("WHERE U.UsuarioID = @usuarioID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@usuarioID", usuarioID);
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                oUsuario.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
+                                oUsuario.NombreUsuario = reader["NombreUsuario"].ToString();
+                                oUsuario.Contraseña = reader["Contraseña"].ToString();
+                                oUsuario.Nombre = reader["NombreU"].ToString();
+                                oUsuario.Apellido = reader["Apellido"].ToString();
+                                oUsuario.Email = reader["Email"].ToString();
+                                oUsuario.DNI = reader["DNI"].ToString();
+                                oUsuario.Estado = Convert.ToBoolean(reader["EstadoU"]);
 
+                                Grupo grupo = new Grupo();
+                                grupo.GrupoID = Convert.ToInt32(reader["GrupoID"]);
+                                grupo.Nombre = reader["NombreG"].ToString();
+                                grupo.Estado = Convert.ToBoolean(reader["EstadoG"]);
+
+                                oUsuario.Grupo = grupo;
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    return oUsuario;
+                }
+            }
+            return oUsuario;
+        }
 
         public static List<Modulo> ObtenerModulosPermitidosD(int UsuarioID)
         {
@@ -309,41 +485,7 @@ namespace SGF.DATOS.Seguridad
         //    return Permisos;
         //}
 
-        // Modificar Usuario
-        public static bool ModificarUsuarioD(Usuario oUsuario)
-        {
-            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
-            {
-                try
-                {
-                    StringBuilder query = new StringBuilder();
-                    // Query separada por linea para que no sea tan larga
-                    query.AppendLine("UPDATE Usuario SET");
-                    query.AppendLine("NombreUsuario = @nombreUsuario, Contraseña = @contraseña,");
-                    query.AppendLine("Nombre = @nombre, Apellido = @apellido, Email = @email,");
-                    query.AppendLine("DNI = @dni, Estado = @estado");
-                    query.AppendLine("WHERE UsuarioID = @usuarioID");
-                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
-                    {
-                        cmd.Parameters.AddWithValue("@nombreUsuario", oUsuario.NombreUsuario);
-                        cmd.Parameters.AddWithValue("@contraseña", oUsuario.Contraseña);
-                        cmd.Parameters.AddWithValue("@nombre", oUsuario.Nombre);
-                        cmd.Parameters.AddWithValue("@apellido", oUsuario.Apellido);
-                        cmd.Parameters.AddWithValue("@email", oUsuario.Email);
-                        cmd.Parameters.AddWithValue("@dni", oUsuario.DNI);
-                        cmd.Parameters.AddWithValue("@estado", oUsuario.Estado);
-                        cmd.Parameters.AddWithValue("@usuarioID", oUsuario.UsuarioID);
-                        oContexto.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
+        
 
 
 

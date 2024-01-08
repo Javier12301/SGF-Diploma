@@ -14,12 +14,11 @@ CREATE TABLE Usuario (
     Nombre NVARCHAR(255),
     Apellido NVARCHAR(255),
     Email NVARCHAR(255),
-    DNI INT,
+    DNI NVARCHAR(255),
     GrupoID INT,
     Estado BIT,
     FOREIGN KEY (GrupoID) REFERENCES Grupo(GrupoID)
 );
-
 -- Modulo serían las distintas ABM o sea los distintos formularios.
 CREATE TABLE Modulo (
     ModuloID INT IDENTITY(1,1) PRIMARY KEY,
@@ -53,9 +52,11 @@ GO
 
 
 SELECT * FROM Auditoria
+SELECT * FROM Usuario
 
+--DBCC CHECKIDENT ('Auditoria', RESEED, 1)
 
-SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
-FROM Usuario U
-INNER JOIN Grupo G ON U.GrupoID = G.GrupoID
-WHERE U.NombreUsuario COLLATE SQL_Latin1_General_CP1_CS_AS = 'Admin'
+SELECT op.* FROM Accion op
+JOIN Modulo m ON m.ModuloID = op.ModuloID
+WHERE m.Descripcion = 'formVentas'
+

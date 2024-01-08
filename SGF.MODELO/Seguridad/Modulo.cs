@@ -9,6 +9,7 @@ namespace SGF.MODELO.Seguridad
 {
     public class Modulo
     {
+        public int ModuloID { get; set; }
         public string Descripcion { get; set; }
         public List<Accion> ListaAcciones { get; set; }
     }

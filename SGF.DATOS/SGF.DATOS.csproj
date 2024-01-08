@@ -45,6 +45,8 @@
     <Compile Include="ConexionSGF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\AuditoriaDAO.cs" />
+    <Compile Include="Seguridad\GrupoDAO.cs" />
+    <Compile Include="Seguridad\ModuloDAO.cs" />
     <Compile Include="Seguridad\UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>

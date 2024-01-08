@@ -163,6 +163,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 switch (formModal.OpcionSeleccionada)
                 {
                     case "Perfiles":
+                        abrirFormularioHijo(new formPerfiles(), btnAjustes);
                         break;
                     
                 }

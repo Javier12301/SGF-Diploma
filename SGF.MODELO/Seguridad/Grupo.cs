@@ -9,13 +9,13 @@ namespace SGF.MODELO.Seguridad
     public class Grupo
     {
         public int GrupoID { get; set; }
-        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
         public bool Estado { get; set; }
 
         // Retornaremos el nombre del grupo
         public string ObtenerNombre()
         {
-            return Descripcion;
+            return Nombre;
         }
     }
 }

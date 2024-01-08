@@ -9,5 +9,4 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\obj\
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\obj\Debug\SGF.NEGOCIO.pdb
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\bin\Debug\SGF.DATOS.dll
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\bin\Debug\SGF.DATOS.pdb
-C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\bin\Debug\System.Text.Encoding.CodePages.dll
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.NEGOCIO\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
