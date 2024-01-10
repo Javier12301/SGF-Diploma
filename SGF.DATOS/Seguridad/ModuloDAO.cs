@@ -10,6 +10,38 @@ namespace SGF.DATOS.Seguridad
 {
     public class ModuloDAO
     {
+        public static Modulo ObtenerModuloD(string Descripcion)
+        {
+            Modulo oModulo = new Modulo();
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT * FROM Modulo");
+                    query.AppendLine("WHERE Descripcion = @Descripcion");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@Descripcion", Descripcion);
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                oModulo.ModuloID = Convert.ToInt32(reader["ModuloID"]);
+                                oModulo.Descripcion = reader["Descripcion"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el módulo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return oModulo;
+        }
+
         // Obtener modulos disponibles
         public static List<Modulo> ObtenerModulosDisponiblesD()
         {
@@ -32,7 +64,6 @@ namespace SGF.DATOS.Seguridad
                                 Modulo modulo = new Modulo();
                                 modulo.ModuloID = Convert.ToInt32(reader["ModuloID"]);
                                 modulo.Descripcion = reader["Descripcion"].ToString();
-                                modulo.ListaAcciones = ObtenerAccionesDeModuloD(modulo.Descripcion);
                                 modulos.Add(modulo);
                             }
                         }

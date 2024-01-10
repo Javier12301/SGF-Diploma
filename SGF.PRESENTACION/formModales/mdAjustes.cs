@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SGF.MODELO.Seguridad;
+using SGF.NEGOCIO.Seguridad;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +15,57 @@ namespace SGF.PRESENTACION.formModales
     public partial class mdAjustes : Form
     {
         public string OpcionSeleccionada { get; set; }
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         public mdAjustes()
         {
             InitializeComponent();
             OpcionSeleccionada = string.Empty;
         }
 
+        private void mdAjustes_Load(object sender, EventArgs e)
+        {
+            cargarPermisos();
+        }
+
+        private void cargarPermisos()
+        {
+            List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+
+            // Módulo 'formAjustes'
+            Modulo moduloAjuste = modulosPermitidos.FirstOrDefault(m => m.Descripcion == "formAjustes");
+
+            List<Accion> accionesPermitidas = null;
+            if(moduloAjuste != null)
+            {
+                accionesPermitidas = moduloAjuste.ListaAcciones;
+            }
+
+            // Obtener nombre del formulario actual
+            string nombreFormulario = "formAjustes";
+
+            // Buscar módulo correspondiente al formulario actual
+            Modulo moduloActual = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);
+
+            // Si se encuentra el módulo, cargar las opciones
+            if(moduloActual != null)
+            {
+                foreach(Control control in flpContenedorBotones.Controls)
+                {
+                    if(control is Button && control.Tag != null)
+                    {
+                        // Obtener el nombre de la acción desde el Tag del botón
+                        string nombreAccionBoton = control.Tag.ToString();
+
+                        // Verificar si el nombre de la acción está en la lista de acciones del módulo
+                        bool tienePermiso = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == nombreAccionBoton);
+
+                        // Activar o desactivar el botón según los permisos
+                        control.Enabled = tienePermiso;
+                        control.Visible = tienePermiso;
+                    }
+                }
+            }
+        }
         private void btnPerfiles_Click(object sender, EventArgs e)
         {
             OpcionSeleccionada = "Perfiles";
@@ -70,5 +117,6 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
+       
     }
 }

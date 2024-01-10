@@ -1,4 +1,5 @@
 ﻿using SGF.MODELO.Seguridad;
+using SGF.MODELO.Seguridad.Composite;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
@@ -18,13 +19,17 @@ namespace SGF.PRESENTACION.formModales
     {
         private List<Modulo> listaModulos { get; set; }
         private List<Permiso> listaPermisos { get; set; }
+        private List<Permiso> listaPermisosActivados { get; set; }
         private UtilidadesUI lUtiliades = UtilidadesUI.ObtenerInstancia;
         private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
         private ModuloBLL lModulo = ModuloBLL.ObtenerInstancia;
+        private PermisoBLL lPermiso = PermisoBLL.ObtenerInstancia;
+        private AccionBLL lAccion = AccionBLL.ObtenerInstancia;
         public mdGrupo()
         {
             InitializeComponent();
             listaPermisos = new List<Permiso>();
+            listaPermisosActivados = new List<Permiso>();
         }
 
         private void mdGrupo_Load(object sender, EventArgs e)
@@ -43,18 +48,42 @@ namespace SGF.PRESENTACION.formModales
                 string nombreAccion = checkBox.Text;
                 bool estado = checkBox.Checked;
 
-                // Actualizar el estado en el diccionario
-                if (checkboxStates.ContainsKey(nombreModulo) && checkboxStates[nombreModulo].ContainsKey(nombreAccion))
+                // Buscar el permiso en la lista
+                Permiso permiso = listaPermisos.FirstOrDefault(p => p.Modulo.Descripcion == nombreModulo && p.Accion.Descripcion == nombreAccion);
+
+                if (permiso != null)
                 {
-                    checkboxStates[nombreModulo][nombreAccion] = estado;
+                    permiso.Permitido = estado;
+
+                    // Actualizar la lista de permisos activados
+                    if (estado)
+                    {
+                        if (!listaPermisosActivados.Contains(permiso))
+                        {
+                            listaPermisosActivados.Add(permiso);
+                        }
+                    }
+                    else
+                    {
+                        listaPermisosActivados.Remove(permiso);
+                    }
                 }
             }
         }
 
-        // ALTA DE GRUPO
+
+
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            altaGrupo();
+            try
+            {
+                altaGrupo();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Manejo de responsabilidades
@@ -74,22 +103,107 @@ namespace SGF.PRESENTACION.formModales
             };
         }
 
+        // ALTA DE GRUPO
+
         private void altaGrupo()
         {
             if (ValidarCampos())
             {
                 Grupo grupo = CrearGrupo();
-                bool grupoExiste = lGrupo.ExisteGrupo(grupo.Nombre);
-                if (grupoExiste)
+
+                if (lGrupo.ExisteGrupo(grupo.Nombre))
                 {
-                    errorProvider.SetError(lblNombreGrupo, "El nombre del grupo ya se encuentra en uso.");
-                    MessageBox.Show("El nombre del grupo ya se encuentra en uso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errorProvider.SetError(lblNombreGrupo, "El Grupo ingresado ya se encuentra en uso.");
+                    MessageBox.Show("El grupo ingresado ya se encuentra en uso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                bool resultado = lGrupo.
+                // Dar de alta al grupo
+                bool resultado = lGrupo.AltaGrupo(grupo);
+                if (resultado)
+                {
+                    grupo = lGrupo.ObtenerGrupoPorNombre(grupo.Nombre);
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al dar de alta el grupo. Si este error persiste, contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                Componente grupoRoot = crearComposite(grupo);
+                listaPermisos.Clear();
+                AgregarPermisos(grupoRoot, grupo);
+                altaPermiso();
             }
         }
 
+        private void altaPermiso()
+        {
+            try
+            {
+                bool resultado = lPermiso.AgregarPermisos(listaPermisos);
+                if (resultado)
+                {
+                    MessageBox.Show("El grupo fue dado de alta con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ocurrió un error al insertar los permisos al grupo correspondiente, contactar con el administrador si el error persiste.");
+            }
+        }
+
+        private Componente crearComposite(Grupo grupo)
+        {
+            Composite grupoRoot = new Composite(grupo.ObtenerNombre());
+
+            foreach(var modulo in listaModulos)
+            {
+                if(listaPermisosActivados.Any(p => p.Modulo.Descripcion == modulo.Descripcion))
+                {
+                    Composite moduloComposite = new Composite(modulo.Descripcion);
+                    foreach(var accion in modulo.ListaAcciones)
+                    {
+                        // Solo agregamos las acciones que esten activadas
+                        if(listaPermisosActivados.Any(p => p.Accion.Descripcion == accion.Descripcion && p.Modulo.Descripcion == modulo.Descripcion))
+                        {
+                            Hoja accionHoja = new Hoja(accion.Descripcion);
+                            moduloComposite.Agregar(accionHoja);
+                        }
+                    }
+                    grupoRoot.Agregar(moduloComposite);
+                }
+            }
+            return grupoRoot;
+        }
+
+        private void AgregarPermisos(Componente componente, Grupo grupo, Modulo modulo = null)
+        {
+            if (componente is Composite composite)
+            {
+                // Si el componente es un Composite, entonces es un Modulo
+                modulo = new Modulo { Descripcion = composite.ObtenerNombre() };
+                foreach (Componente hijo in composite.ObtenerHijos())
+                {
+                    AgregarPermisos(hijo, grupo, modulo);
+                }
+            }
+            else if (componente is Hoja hoja)
+            {
+                if (!string.IsNullOrEmpty(modulo.Descripcion))
+                {
+                    Permiso permiso = new Permiso
+                    {
+                        Grupo = grupo,
+                        Modulo = lModulo.ObtenerModulo(modulo.Descripcion), // Aquí establecemos el Modulo
+                        Accion = lAccion.ObtenerAccion(modulo.Descripcion, hoja.ObtenerNombre()),
+                        Permitido = true
+                    };
+                    listaPermisos.Add(permiso);
+                }
+            }
+        }
+
+       
         // MODIFICAR GRUPO
         private void modificarGrupo()
         {
@@ -165,45 +279,39 @@ namespace SGF.PRESENTACION.formModales
         }
 
         // Pestañas de Formularios
-        Dictionary<string, Dictionary<string, bool>> checkboxStates = new Dictionary<string, Dictionary<string, bool>>();
         private void ActualizarPermisos(string nombreModulo, FlowLayoutPanel flpPermisos)
         {
             try
             {
                 Modulo modulo = listaModulos.FirstOrDefault(m => m.Descripcion == nombreModulo);
+                List<Accion> accionesDisponibles = modulo.ListaAcciones;
 
-                List<Accion> accionesDisponibles = null;
-                if (modulo != null)
-                {
-                    accionesDisponibles = modulo.ListaAcciones;
-                }
+                flpPermisos.Controls.Clear();
+                listaPermisos.Clear();
 
-                if (!checkboxStates.ContainsKey(nombreModulo))
+                foreach (var accion in accionesDisponibles)
                 {
-                    checkboxStates[nombreModulo] = new Dictionary<string, bool>();
-                }
-
-                foreach (Control control in flpPermisos.Controls)
-                {
-                    if (control is CheckBox && control.Text != null)
+                    CheckBox checkbox = new CheckBox
                     {
-                        string nombreAccionBoton = control.Text.ToString();
-                        bool tienePermiso = accionesDisponibles.Any(accion => accion.Descripcion == nombreAccionBoton);
-                        control.Enabled = tienePermiso;
-                        control.Visible = tienePermiso;
+                        Text = accion.Descripcion,
+                        AutoSize = true,
+                        Enabled = true,
+                        Visible = true,
+                        Tag = nombreModulo,
+                        Checked = listaPermisosActivados.Any(p => p.Modulo.Descripcion == nombreModulo && p.Accion.Descripcion == accion.Descripcion)
+                    };
 
-                        control.Tag = nombreModulo;
+                    checkbox.CheckedChanged += chkPermisos_Changed;
+                    flpPermisos.Controls.Add(checkbox);
 
-                        if (checkboxStates[nombreModulo].ContainsKey(nombreAccionBoton))
-                        {
-                            CheckBox checkbox = (CheckBox)control;
-                            checkbox.Checked = checkboxStates[nombreModulo][nombreAccionBoton];
-                        }
-                        else
-                        {
-                            checkboxStates[nombreModulo][nombreAccionBoton] = false;
-                        }
-                    }
+                    Permiso permiso = new Permiso
+                    {
+                        Modulo = modulo,
+                        Accion = accion,
+                        Permitido = checkbox.Checked
+                    };
+
+                    listaPermisos.Add(permiso);
                 }
             }
             catch (Exception)
@@ -211,6 +319,7 @@ namespace SGF.PRESENTACION.formModales
                 MessageBox.Show($"Error al cargar los permisos del módulo {nombreModulo}. Intente nuevamente y si este error persiste contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void tpVentas_Abierto()
         {
@@ -332,7 +441,7 @@ namespace SGF.PRESENTACION.formModales
         // Carga de Datos
         private void cargarModulos()
         {
-            listaModulos = lModulo.ObtenerListaModulosDisponibles();
+            listaModulos = lModulo.ObtenerModulosConAcciones();
         }
 
 

@@ -10,6 +10,34 @@ namespace SGF.DATOS.Seguridad
 {
     public class GrupoDAO
     {
+
+        // Alta Grupo
+        public static bool AltaGrupoD(Grupo oGrupo)
+        {
+            bool alta = false;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("INSERT INTO Grupo (Nombre, Estado) VALUES (@nombre, @estado)");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@nombre", oGrupo.Nombre);
+                        cmd.Parameters.AddWithValue("@estado", oGrupo.Estado);
+                        oContexto.Open();
+                        int filaAfectada = cmd.ExecuteNonQuery();
+                        alta = filaAfectada > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar registrar el nuevo grupo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return alta;
+        }
+
         // Obtener lista de grupos existentes
         public static List<Grupo> ListarGruposD()
         {
@@ -57,7 +85,7 @@ namespace SGF.DATOS.Seguridad
                     query.AppendLine("SELECT COUNT(*) FROM Grupo WHERE Nombre COLLATE SQL_Latin1_General_CP1_CS_AS = @nombreGrupo");
                     using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
-                        cmd.Parameters.AddWithValue(nombreGrupo, nombreGrupo);
+                        cmd.Parameters.AddWithValue("@nombreGrupo", nombreGrupo);
                         oContexto.Open();
                         int count = Convert.ToInt32(cmd.ExecuteScalar());
                         existe = count > 0;

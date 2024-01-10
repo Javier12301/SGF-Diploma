@@ -24,19 +24,19 @@ namespace SGF.NEGOCIO.Seguridad
             }
         }
 
-        public List<Modulo> ObtenerListaModulosDisponibles()
+        public List<Modulo> ObtenerModulosConAcciones()
         {
             List<Modulo> modulos = ModuloDAO.ObtenerModulosDisponiblesD();
-            if(modulos != null || modulos.Count > 0)
+            foreach(var modulo in modulos)
             {
-                return modulos;
+                modulo.ListaAcciones = ModuloDAO.ObtenerAccionesDeModuloD(modulo.Descripcion);
             }
-            else
-            {
-                throw new Exception("Ocurrió un error al obtener los modulos disponibles en el sistema, si este error persiste contacte con el administrador del sistema.");
-            }
+            return modulos;
         }
 
-
+        public Modulo ObtenerModulo(string Descripcion)
+        {
+            return ModuloDAO.ObtenerModuloD(Descripcion);
+        }
     }
 }

@@ -331,7 +331,7 @@
             // 
             this.chkHistorialVenta.Location = new System.Drawing.Point(3, 3);
             this.chkHistorialVenta.Name = "chkHistorialVenta";
-            this.chkHistorialVenta.Size = new System.Drawing.Size(164, 19);
+            this.chkHistorialVenta.Size = new System.Drawing.Size(213, 19);
             this.chkHistorialVenta.TabIndex = 0;
             this.chkHistorialVenta.Text = "Historial de ventas";
             this.chkHistorialVenta.UseVisualStyleBackColor = true;

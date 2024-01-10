@@ -196,7 +196,6 @@ WHERE ModuloID NOT IN
     (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros')
     AND ModuloID NOT IN
     (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes');
-
 -- Insertar para el grupo Empleados
 -- Obtén el ID del usuario 'Javier12301'
 DECLARE @UsuarioID INT;
@@ -213,9 +212,9 @@ FROM Accion
 WHERE ModuloID = @ModuloID AND Descripcion IN ('Alta', 'Baja', 'Exportar');
 go
 
-
+SELECT * FROM Usuario
 -- MODULOS PERMITIDOS DEL USUARIO ID = ?
-DECLARE @UsuarioID INT = 2;
+DECLARE @UsuarioID INT = 11;
 SELECT DISTINCT M.* FROM Permiso p
 join Grupo Gr ON Gr.GrupoID = p.GrupoID
 join Accion op on op.AccionID = p.AccionID
@@ -250,3 +249,47 @@ SELECT M.Descripcion AS Modulo, A.Descripcion AS Accion
 FROM Modulo M
 INNER JOIN Accion A ON M.ModuloID = A.ModuloID
 WHERE M.Descripcion = @modulo;
+
+
+-- ACCIONES Y MODULOS PERMITIDO PARA GRUPOS
+-- MODULOS PERMITIDOS DEL GRUPO ID = ?
+select * from Grupo
+
+DECLARE @GrupoID INT = 5;
+
+SELECT DISTINCT M.*
+FROM Permiso p
+JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
+JOIN Accion op ON op.AccionID = p.AccionID
+JOIN Modulo M ON M.ModuloID = op.ModuloID
+WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
+
+-- Obtener la descripcion de modulos permitidos
+DECLARE @GrupoID INT = 5;
+
+SELECT DISTINCT M.Descripcion
+FROM Permiso p
+JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
+JOIN Accion op ON op.AccionID = p.AccionID
+JOIN Modulo M ON M.ModuloID = op.ModuloID
+WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
+
+-- Acciones PERMITIDAS DEL GRUPO ID = ?
+DECLARE @GrupoID INT = 5;
+
+SELECT op.*
+FROM Permiso p
+JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
+JOIN Accion op ON op.AccionID = p.AccionID
+JOIN Modulo M ON M.ModuloID = op.ModuloID
+WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
+
+DECLARE @modulo NVARCHAR(255);
+SET @modulo = 'formProductos'; -- Aquí puedes cambiar el nombre del módulo
+
+SELECT M.Descripcion AS Modulo, A.Descripcion AS Accion
+FROM Modulo M
+INNER JOIN Accion A ON M.ModuloID = A.ModuloID
+WHERE M.Descripcion = @modulo;
+
+

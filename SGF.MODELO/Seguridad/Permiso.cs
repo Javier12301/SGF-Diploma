@@ -12,7 +12,7 @@ namespace SGF.MODELO.Seguridad
         public Grupo Grupo { get; set; }
         public Accion Accion { get; set; }
         public Modulo Modulo { get; set; }
-        public bool Permito { get; set; }
+        public bool Permitido { get; set; }
 
         public string ObtenerNombre()
         {

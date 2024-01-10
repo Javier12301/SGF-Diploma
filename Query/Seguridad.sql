@@ -60,3 +60,21 @@ SELECT op.* FROM Accion op
 JOIN Modulo m ON m.ModuloID = op.ModuloID
 WHERE m.Descripcion = 'formVentas'
 
+DECLARE @NombreModulo NVARCHAR(255) = 'formProductos'
+DECLARE @NombreAccion NVARCHAR(255) = 'Alta'
+SELECT A.*
+FROM Accion A
+INNER JOIN Modulo M ON A.ModuloID = M.ModuloID
+WHERE M.Descripcion = @NombreModulo AND A.Descripcion = @NombreAccion;
+
+SELECT * FROM Modulo
+WHERE Descripcion = 'formVentas'
+
+SELECT * FROM Grupo
+
+
+DECLARE @grupoID int = 11
+DECLARE @accionID int = 11
+DECLARE @moduloID int = 3
+DECLARE @permitido bit = 1
+INSERT INTO Permiso (GrupoID, AccionID, Permitido) VALUES (@grupoID, @accionID, @permitido)

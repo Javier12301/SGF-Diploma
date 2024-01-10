@@ -31,14 +31,14 @@
             this.pnlControl = new System.Windows.Forms.Panel();
             this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPerfiles = new FontAwesome.Sharp.IconButton();
             this.btnNegocio = new FontAwesome.Sharp.IconButton();
             this.btnBaseDatos = new FontAwesome.Sharp.IconButton();
             this.btnOtrasConfiguraciones = new FontAwesome.Sharp.IconButton();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.pnlControl.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlControl
@@ -84,16 +84,16 @@
             this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
             this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
             // 
-            // flowLayoutPanel2
+            // flpContenedorBotones
             // 
-            this.flowLayoutPanel2.Controls.Add(this.btnPerfiles);
-            this.flowLayoutPanel2.Controls.Add(this.btnNegocio);
-            this.flowLayoutPanel2.Controls.Add(this.btnBaseDatos);
-            this.flowLayoutPanel2.Controls.Add(this.btnOtrasConfiguraciones);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 38);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(372, 176);
-            this.flowLayoutPanel2.TabIndex = 3;
+            this.flpContenedorBotones.Controls.Add(this.btnPerfiles);
+            this.flpContenedorBotones.Controls.Add(this.btnNegocio);
+            this.flpContenedorBotones.Controls.Add(this.btnBaseDatos);
+            this.flpContenedorBotones.Controls.Add(this.btnOtrasConfiguraciones);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(0, 38);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(372, 176);
+            this.flpContenedorBotones.TabIndex = 3;
             // 
             // btnPerfiles
             // 
@@ -106,6 +106,7 @@
             this.btnPerfiles.Name = "btnPerfiles";
             this.btnPerfiles.Size = new System.Drawing.Size(180, 82);
             this.btnPerfiles.TabIndex = 0;
+            this.btnPerfiles.Tag = "Perfiles";
             this.btnPerfiles.Text = "Perfiles";
             this.btnPerfiles.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPerfiles.UseVisualStyleBackColor = true;
@@ -122,6 +123,7 @@
             this.btnNegocio.Name = "btnNegocio";
             this.btnNegocio.Size = new System.Drawing.Size(180, 82);
             this.btnNegocio.TabIndex = 1;
+            this.btnNegocio.Tag = "Datos de negocio";
             this.btnNegocio.Text = "Datos de negocio";
             this.btnNegocio.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNegocio.UseVisualStyleBackColor = true;
@@ -138,6 +140,7 @@
             this.btnBaseDatos.Name = "btnBaseDatos";
             this.btnBaseDatos.Size = new System.Drawing.Size(180, 82);
             this.btnBaseDatos.TabIndex = 2;
+            this.btnBaseDatos.Tag = "Gestionar base de datos";
             this.btnBaseDatos.Text = "Gestionar base de datos";
             this.btnBaseDatos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnBaseDatos.UseVisualStyleBackColor = true;
@@ -154,6 +157,7 @@
             this.btnOtrasConfiguraciones.Name = "btnOtrasConfiguraciones";
             this.btnOtrasConfiguraciones.Size = new System.Drawing.Size(180, 82);
             this.btnOtrasConfiguraciones.TabIndex = 3;
+            this.btnOtrasConfiguraciones.Tag = "Otras configuraciones";
             this.btnOtrasConfiguraciones.Text = "Otras configuraciones";
             this.btnOtrasConfiguraciones.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnOtrasConfiguraciones.UseVisualStyleBackColor = true;
@@ -182,16 +186,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(372, 257);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flpContenedorBotones);
             this.Controls.Add(this.pnlControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "mdAjustes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "formAjustes";
             this.Text = "mdAjustes";
+            this.Load += new System.EventHandler(this.mdAjustes_Load);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flpContenedorBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -201,7 +206,7 @@
         private System.Windows.Forms.Panel pnlControl;
         private Guna.UI.WinForms.GunaControlBox gControlCerrar;
         private System.Windows.Forms.Label lblNombreForm;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private FontAwesome.Sharp.IconButton btnPerfiles;
         private FontAwesome.Sharp.IconButton btnNegocio;
         private FontAwesome.Sharp.IconButton btnBaseDatos;

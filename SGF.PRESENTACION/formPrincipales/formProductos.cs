@@ -15,7 +15,7 @@ namespace SGF.PRESENTACION.formPrincipales
 {
     public partial class formProductos : Form
     {
-        private SesionBLL lSessionManager = SesionBLL.ObtenerInstancia;
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         public formProductos()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void cargarPermisos()
         {
-            List<Modulo> modulosPermitidos = lSessionManager.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+            List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
 
             // Módulo 'formProductos' 
             Modulo moduloProductos = modulosPermitidos.FirstOrDefault(m => m.Descripcion == "formProductos");
