@@ -171,6 +171,12 @@
     <Compile Include="formModales\mdUsuario.Designer.cs">
       <DependentUpon>mdUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="formPrincipales\formHijos\formAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\formAuditoria.Designer.cs">
+      <DependentUpon>formAuditoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="formPrincipales\formHijos\formGrupos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdUsuario.resx">
       <DependentUpon>mdUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formHijos\formAuditoria.resx">
+      <DependentUpon>formAuditoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formHijos\formGrupos.resx">
       <DependentUpon>formGrupos.cs</DependentUpon>

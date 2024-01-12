@@ -205,22 +205,35 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             }
         }
 
-
-
         // Exportar a Excel
         private void btnExportarP_Click(object sender, EventArgs e)
         {
-
+            uiUtilidades.ExportarDataGridViewAExcel(dgvGrupos, "Lista de Grupos", "Informe de Grupos");
         }
-
-
-
-
 
         // Manejo de Filtros
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             filtrarLista();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Desea limpiar el campo de búsqueda?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(resultado == DialogResult.Yes)
+            {
+                LimpiarBusqueda();
+            }
+        }
+
+        private void LimpiarBusqueda()
+        {
+            txtBuscar.Text = string.Empty;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void cmbFiltroBuscar_SelectedIndexChanged(object sender, EventArgs e)
@@ -252,12 +265,6 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             }
         }
 
-        // Manejo de Interfaz
-        private void limpiarBusqueda()
-        {
-            txtBuscar.Text = string.Empty;
-        }
-
         private void cargarFiltros()
         {
             cmbFiltroBuscar.Items.Add("Nombre");
@@ -269,9 +276,8 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             cmbFiltroEstado.SelectedIndex = 0;
         }
 
-        private void dgvProductos_CellEnter(object sender, DataGridViewCellEventArgs e)
+        private void dgvGrupos_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            // Comprobar si la celda es mayor a 0
             if (e.RowIndex >= 0)
             {
                 if (dgvGrupos.Rows[e.RowIndex].Cells["dgvcEstado"].Value.ToString() == "True")
@@ -287,5 +293,6 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             }
         }
 
+       
     }
 }

@@ -4288,29 +4288,11 @@ SELECT GrupoID, Nombre, Estado FROM Grupo WHERE (GrupoID = @GrupoID)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT GrupoID, Nombre, Estado FROM dbo.Grupo";
+            this._commandCollection[0].CommandText = "SELECT GrupoID, Nombre, Estado\r\nFROM dbo.Grupo\r\nWHERE GrupoID > 0;";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT 
-    GrupoID, 
-    Nombre, 
-    Estado
-FROM 
-    dbo.Grupo
-WHERE
-    (
-        (@FiltroBuscar = 'Todos' AND (
-            Nombre LIKE '%' + @Buscar + '%'
-        ))
-        OR (@FiltroBuscar = 'Nombre' AND Nombre LIKE '%' + @Buscar + '%')
-    )
-    AND (
-        @FiltroEstado = 'Todos' OR 
-        (Estado = 1 AND @FiltroEstado = 'Activo') OR 
-        (Estado = 0 AND @FiltroEstado = 'Inactivo')
-    );
-";
+            this._commandCollection[1].CommandText = @"SELECT Estado, GrupoID, Nombre FROM Grupo WHERE (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Todos') OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Todos') OR (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Activo') AND (Estado = 1) OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Activo') AND (Estado = 1) OR (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Inactivo') AND (Estado = 0) OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Inactivo') AND (Estado = 0)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroBuscar", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Buscar", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "Nombre", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

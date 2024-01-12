@@ -1,6 +1,7 @@
 ﻿using FontAwesome.Sharp;
 using SGF.MODELO;
 using SGF.NEGOCIO;
+using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -93,6 +94,7 @@ namespace SGF.PRESENTACION.frmModales.Seguridad
                     try
                     {
                         contraseñaModificada = lUsuario.ModificarUsuario(oUsuario);
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modificó la contraseña del usuario: {oUsuario.NombreUsuario}");
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }

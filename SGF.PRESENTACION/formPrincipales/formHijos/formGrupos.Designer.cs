@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formGrupos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -53,11 +53,6 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvGrupos = new System.Windows.Forms.DataGridView();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.grupoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.btnLimpiar = new FontAwesome.Sharp.IconButton();
@@ -70,6 +65,11 @@
             this.btnModificarP = new System.Windows.Forms.Button();
             this.btnEliminarP = new System.Windows.Forms.Button();
             this.btnExportarP = new System.Windows.Forms.Button();
+            this.grupoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.grupoTableAdapter = new SGF.PRESENTACION.FarmaciaDatosDataSetTableAdapters.GrupoTableAdapter();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -77,10 +77,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
             this.panel4.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grupoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -150,6 +150,7 @@
             this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.AutoSize = false;
             this.bindingNavigator1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.bindingNavigator1.BindingSource = this.grupoBindingSource;
             this.bindingNavigator1.CountItem = this.bnpCantidadDeItems;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -284,23 +285,23 @@
             // dgvGrupos
             // 
             this.dgvGrupos.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvGrupos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvGrupos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvGrupos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrupos.AutoGenerateColumns = false;
             this.dgvGrupos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvGrupos.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGrupos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGrupos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvGrupos.ColumnHeadersHeight = 40;
             this.dgvGrupos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvGrupos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -308,63 +309,34 @@
             this.dgvcNombre,
             this.dgvcEstado});
             this.dgvGrupos.DataSource = this.grupoBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvGrupos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvGrupos.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvGrupos.GridColor = System.Drawing.Color.White;
             this.dgvGrupos.Location = new System.Drawing.Point(6, 139);
             this.dgvGrupos.Name = "dgvGrupos";
             this.dgvGrupos.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvGrupos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvGrupos.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvGrupos.RowHeadersVisible = false;
             this.dgvGrupos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvGrupos.Size = new System.Drawing.Size(1071, 169);
             this.dgvGrupos.TabIndex = 111;
+            this.dgvGrupos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellEnter);
             this.dgvGrupos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellDoubleClick);
+            this.dgvGrupos.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupos_CellEnter);
             this.dgvGrupos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvGrupos_KeyDown);
-            // 
-            // dgvcID
-            // 
-            this.dgvcID.DataPropertyName = "GrupoID";
-            this.dgvcID.HeaderText = "ID";
-            this.dgvcID.Name = "dgvcID";
-            this.dgvcID.ReadOnly = true;
-            // 
-            // dgvcNombre
-            // 
-            this.dgvcNombre.DataPropertyName = "Nombre";
-            this.dgvcNombre.HeaderText = "Nombre";
-            this.dgvcNombre.Name = "dgvcNombre";
-            this.dgvcNombre.ReadOnly = true;
-            // 
-            // dgvcEstado
-            // 
-            this.dgvcEstado.DataPropertyName = "Estado";
-            this.dgvcEstado.HeaderText = "Estado";
-            this.dgvcEstado.Name = "dgvcEstado";
-            this.dgvcEstado.ReadOnly = true;
-            // 
-            // grupoBindingSource
-            // 
-            this.grupoBindingSource.DataMember = "Grupo";
-            this.grupoBindingSource.DataSource = this.farmaciaDatosDataSet;
-            // 
-            // farmaciaDatosDataSet
-            // 
-            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
-            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panel4
             // 
@@ -401,6 +373,7 @@
             this.btnBuscar.Size = new System.Drawing.Size(29, 23);
             this.btnBuscar.TabIndex = 96;
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // btnLimpiar
             // 
@@ -421,6 +394,7 @@
             this.btnLimpiar.TabIndex = 97;
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // txtBuscar
             // 
@@ -561,6 +535,37 @@
             this.btnExportarP.UseVisualStyleBackColor = false;
             this.btnExportarP.Click += new System.EventHandler(this.btnExportarP_Click);
             // 
+            // grupoBindingSource
+            // 
+            this.grupoBindingSource.DataMember = "Grupo";
+            this.grupoBindingSource.DataSource = this.farmaciaDatosDataSet;
+            // 
+            // farmaciaDatosDataSet
+            // 
+            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
+            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dgvcID
+            // 
+            this.dgvcID.DataPropertyName = "GrupoID";
+            this.dgvcID.HeaderText = "ID";
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            // 
+            // dgvcNombre
+            // 
+            this.dgvcNombre.DataPropertyName = "Nombre";
+            this.dgvcNombre.HeaderText = "Nombre";
+            this.dgvcNombre.Name = "dgvcNombre";
+            this.dgvcNombre.ReadOnly = true;
+            // 
+            // dgvcEstado
+            // 
+            this.dgvcEstado.DataPropertyName = "Estado";
+            this.dgvcEstado.HeaderText = "Estado";
+            this.dgvcEstado.Name = "dgvcEstado";
+            this.dgvcEstado.ReadOnly = true;
+            // 
             // grupoTableAdapter
             // 
             this.grupoTableAdapter.ClearBeforeFill = true;
@@ -583,11 +588,11 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grupoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.flpContenedorBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grupoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
