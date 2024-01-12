@@ -63,17 +63,6 @@ namespace SGF.NEGOCIO.Seguridad
             }
         }
 
-        public bool GrupoTieneUsuarios(int grupoID)
-        {
-            if(grupoID > 0)
-            {
-                return GrupoDAO.GrupoTieneUsuariosD(grupoID);
-            }
-            else
-            {
-                throw new Exception("Ocurrió un error al comprobar si el grupo tiene usuarios asignados, contacte con el administrador del sistema si este error persiste.");
-            }
-        }
 
         // Modificar grupo
         public bool ModificarGrupo(Grupo oGrupo)
@@ -114,6 +103,103 @@ namespace SGF.NEGOCIO.Seguridad
         }
 
         // Baja grupo
+        public bool BajaGrupo(Operacion operacion)
+        {
+            bool resultado = true;
+            switch (operacion.NombreOperacion)
+            {
+                case "EliminarGrupo":
+                    return EliminarGrupo(operacion);
+                case "AsignarUsuariosSinGrupo":
+                    resultado &= AsignarUsuarioSinGrupo(operacion);
+                    resultado &= EliminarGrupo(operacion);
+                    return resultado;
+                case "EliminarGrupoYUsuarios":
+                    List<int> listaUsuarioID = ListarUsuariosIDEnGrupoD(operacion.ID);
+                    foreach(var usuarioID in listaUsuarioID)
+                    {
+                        resultado &= UsuarioBLL.ObtenerInstancia.BajaUsuario(usuarioID);
+                    }
+                    resultado &= EliminarGrupo(operacion);
+                    return resultado;
+
+                default:
+                    throw new Exception("Ocurrió un error al intentar eliminar el grupo, contacte con el administrador del sistema si este error persiste.");
+            }
+        }
+
+        public List<int> ListarUsuariosIDEnGrupoD(int grupoID)
+        {
+            List<int> listaUsuarioID = GrupoDAO.ListarUsuariosEnGrupoD(grupoID);
+            return listaUsuarioID;
+        }
+
+        private bool AsignarUsuarioSinGrupo(Operacion operacion)
+        {
+            bool resultado = true;
+            List<int> listaUsuarioID = ListarUsuariosIDEnGrupoD(operacion.ID);
+            foreach(var usuarioID in listaUsuarioID)
+            {
+                resultado &= GrupoDAO.AsignarUsuarioSinGrupoD(usuarioID);
+            }
+            return resultado;
+        }
+
+        private bool EliminarGrupo(Operacion operacion)
+        {
+            int grupoID = operacion.ID;
+
+            // Comprobar si el grupo tiene permisos asignados
+            bool tienePermisos = PermisoBLL.ObtenerInstancia.GrupoTienePermisos(grupoID);
+
+            if (tienePermisos)
+            {
+                // Desactivar permisos antes de eliminar el grupo
+                PermisoBLL.ObtenerInstancia.DesactivarPermisos(grupoID);
+            }
+
+            // Realizar la eliminación del grupo
+            bool eliminacionExitosa = GrupoDAO.BajaGrupoD(grupoID);
+
+            if (eliminacionExitosa)
+            {
+                if (lSesion.UsuarioEnSesion() == null)
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", $"Se eliminó con éxito al grupo: {operacion.Nombre}");
+                }
+                else
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se eliminó con éxito al grupo: {operacion.Nombre}");
+                }
+            }
+            else
+            {
+                if (lSesion.UsuarioEnSesion() == null)
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", $"Error al eliminar el grupo: {operacion.Nombre}");
+                }
+                else
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Error al eliminar el grupo: {operacion.Nombre}");
+                }
+            }
+
+            return eliminacionExitosa;
+        }
+
+
+        // Comprobar si el grupo tiene usuarios asignados
+        public bool GrupoTieneUsuarios(int grupoID)
+        {
+            if (grupoID > 0)
+            {
+                return GrupoDAO.GrupoTieneUsuariosD(grupoID);
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al comprobar si el grupo tiene usuarios asignados, contacte con el administrador del sistema si este error persiste.");
+            }
+        }
 
         // Obtener lista de grupos existentes
         public List<Grupo> ListarGrupos()

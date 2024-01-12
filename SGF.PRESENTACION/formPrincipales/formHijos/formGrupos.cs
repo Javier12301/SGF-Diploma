@@ -103,16 +103,18 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         // Baja de Grupo
         private void btnEliminarP_Click(object sender, EventArgs e)
         {
-
+            bajaGrupo();
         }
 
 
         private void dgvGrupos_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if(e.KeyCode == Keys.Delete)
+            {
+                bajaGrupo();
+            }
         }
 
-        // FALTA TERMINAR
         private void bajaGrupo()
         {
             try
@@ -137,6 +139,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                 foreach(DataGridViewCell celda in dgvGrupos.SelectedCells)
                 {
                     int grupoID = Convert.ToInt32(dgvGrupos.Rows[celda.RowIndex].Cells["dgvcID"].Value);
+                    string nombreGrupo = dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value.ToString();
                     string operacion = string.Empty;
                     // Comprobar si no se está por eliminar el grupo al que pertenece el usuario en sesión
                     if(grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
@@ -159,7 +162,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                         }
                         else if(DialogResult.No == respuesta)
                         {
-                            respuesta = MessageBox.Show($"¿Desea eliminar el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) y los usuarios asignados a este?", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                            respuesta = MessageBox.Show($"¿Desea eliminar el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) y los usuarios asignados a este?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                             if(DialogResult.Yes == respuesta)
                             {
                                 operacion = "EliminarGrupoYUsuarios";
@@ -179,11 +182,23 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     {
                         operacion = "EliminarGrupo";
                     }
-                    gruposAEliminar.Add(new Operacion { ID = grupoID, NombreOperacion = operacion });
+                    gruposAEliminar.Add(new Operacion { ID = grupoID, Nombre = nombreGrupo ,NombreOperacion = operacion });
                 }
                 int gruposEliminados = 0;
 
+                foreach(var grupo in gruposAEliminar)
+                {
+                    if(lGrupo.BajaGrupo(grupo))
+                        gruposEliminados++;
+                    else
+                        MessageBox.Show($"No se pudo eliminar el grupo con ID: ( {grupo.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
+                if(gruposEliminados > 0)
+                {
+                    MessageBox.Show(gruposEliminados > 1 ? "Grupos eliminados con éxito." : "Grupo eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cargarLista();
+                }
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);

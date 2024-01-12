@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,13 +16,13 @@ namespace SGF.DATOS.Seguridad
         public static bool AltaGrupoD(Grupo oGrupo)
         {
             bool alta = false;
-            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("INSERT INTO Grupo (Nombre, Estado) VALUES (@nombre, @estado)");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@nombre", oGrupo.Nombre);
                         cmd.Parameters.AddWithValue("@estado", oGrupo.Estado);
@@ -42,13 +43,13 @@ namespace SGF.DATOS.Seguridad
         public static bool ModificarGrupoD(Grupo oGrupo)
         {
             bool modificado = false;
-            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("UPDATE Grupo SET Nombre = @nombre, Estado = @estado WHERE GrupoID = @grupoID");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@nombre", oGrupo.Nombre);
                         cmd.Parameters.AddWithValue("@estado", oGrupo.Estado);
@@ -66,6 +67,93 @@ namespace SGF.DATOS.Seguridad
             return modificado;
         }
 
+        // Baja Grupo
+        public static bool BajaGrupoD(int grupoID)
+        {
+            bool baja = false;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("DELETE FROM Grupo WHERE GrupoID = @grupoID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@grupoID", grupoID);
+                        oContexto.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        baja = filasAfectadas > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar eliminar el grupo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return baja;
+        }
+
+        // Asignar a usuarios como sin grupo
+        public static bool AsignarUsuarioSinGrupoD(int usuarioID)
+        {
+            bool asignado = false;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("UPDATE Usuario SET GrupoID = 0");
+                    query.AppendLine("WHERE UsuarioID = @usuarioID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@usuarioID", usuarioID);
+                        oContexto.Open();
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+                        asignado = filasAfectadas > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar asignar los usuarios como sin grupo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return asignado;
+        }
+
+        // Obtener ID de todo los usuarios de un grupo utilizando la ID
+        public static List<int> ListarUsuariosEnGrupoD(int grupoID)
+        {
+            List<int> listaID = new List<int>();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT UsuarioID FROM Usuario");
+                    query.AppendLine("WHERE GrupoID = @grupoID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@grupoID", grupoID);
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            int usuarioID;
+                            while (reader.Read())
+                            {
+                                usuarioID = Convert.ToInt32(reader["UsuarioID"]);
+                                listaID.Add(usuarioID);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar obtener los usuarios del grupo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return listaID;
+        }
+
         // Obtener lista de grupos existentes
         public static List<Grupo> ListarGruposD()
         {
@@ -79,7 +167,7 @@ namespace SGF.DATOS.Seguridad
                     using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         oContexto.Open();
-                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -105,7 +193,7 @@ namespace SGF.DATOS.Seguridad
         public static bool GrupoTieneUsuariosD(int grupoID)
         {
             bool tieneUsuarios = false;
-            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
                 {
@@ -114,7 +202,7 @@ namespace SGF.DATOS.Seguridad
                     query.AppendLine("FROM Grupo G");
                     query.AppendLine("LEFT JOIN Usuario U ON G.GrupoID = U.GrupoID");
                     query.AppendLine("WHERE G.GrupoID = @grupoID");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@grupoID", grupoID);
                         oContexto.Open();
@@ -134,20 +222,21 @@ namespace SGF.DATOS.Seguridad
         public static bool ExisteGrupoD(string nombreGrupo)
         {
             bool existe = false;
-            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT COUNT(*) FROM Grupo WHERE Nombre COLLATE SQL_Latin1_General_CP1_CS_AS = @nombreGrupo");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@nombreGrupo", nombreGrupo);
                         oContexto.Open();
                         int count = Convert.ToInt32(cmd.ExecuteScalar());
                         existe = count > 0;
                     }
-                }catch(Exception)
+                }
+                catch (Exception)
                 {
                     throw new Exception("Error al verificar si existe el grupo, contactar con el administrador del sistema.");
                 }
@@ -245,7 +334,7 @@ namespace SGF.DATOS.Seguridad
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT * FROM Grupo WHERE Nombre = @nombre");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         oContexto.Open();
                         cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -259,7 +348,8 @@ namespace SGF.DATOS.Seguridad
                             }
                         }
                     }
-                }catch(Exception)
+                }
+                catch (Exception)
                 {
                     throw new Exception("Error al obtener el grupo, contactar con el administrador del sistema.");
                 }
@@ -270,17 +360,17 @@ namespace SGF.DATOS.Seguridad
         public static Grupo ObtenerGrupoPorIDD(int grupoID)
         {
             Grupo oGrupo = new Grupo();
-            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
                 {
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT * FROM Grupo WHERE GrupoID = @grupoID");
-                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
                         cmd.Parameters.AddWithValue("@grupoID", grupoID);
                         oContexto.Open();
-                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {

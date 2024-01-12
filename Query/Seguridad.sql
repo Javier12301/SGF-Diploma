@@ -6,6 +6,12 @@ CREATE TABLE Grupo (
     Nombre NVARCHAR(255),
     Estado BIT
 );
+SET IDENTITY_INSERT Grupo ON;
+-- Estante default
+INSERT INTO Grupo (GrupoID, Nombre, Estado)
+VALUES (0, 'N/A', 0);
+SET IDENTITY_INSERT Grupo OFF;
+GO
 
 CREATE TABLE Usuario (
     UsuarioID INT IDENTITY(1,1) PRIMARY KEY,

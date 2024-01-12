@@ -9,6 +9,7 @@ namespace SGF.MODELO
     public class Operacion
     {
         public int ID { get; set; }
+        public string Nombre { get; set; }
         public string NombreOperacion { get; set; }
     }
 }
