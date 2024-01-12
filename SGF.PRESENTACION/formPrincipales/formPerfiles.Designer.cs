@@ -32,21 +32,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlPerfilesPadre = new System.Windows.Forms.Panel();
             this.pctLineSeparator = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnGrupos = new System.Windows.Forms.Button();
             this.btnInformes = new System.Windows.Forms.Button();
             this.btnMisDatos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.pnlPerfilesPadre);
             this.panel1.Controls.Add(this.pctLineSeparator);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -75,21 +75,21 @@
             this.pctLineSeparator.TabStop = false;
             this.pctLineSeparator.Tag = "txtUser";
             // 
-            // flowLayoutPanel1
+            // flpContenedorBotones
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.LightGray;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.btnUsuarios);
-            this.flowLayoutPanel1.Controls.Add(this.btnGrupos);
-            this.flowLayoutPanel1.Controls.Add(this.btnInformes);
-            this.flowLayoutPanel1.Controls.Add(this.btnMisDatos);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 6);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(857, 70);
-            this.flowLayoutPanel1.TabIndex = 106;
+            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
+            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnUsuarios);
+            this.flpContenedorBotones.Controls.Add(this.btnGrupos);
+            this.flpContenedorBotones.Controls.Add(this.btnInformes);
+            this.flpContenedorBotones.Controls.Add(this.btnMisDatos);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(0, 6);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 70);
+            this.flpContenedorBotones.TabIndex = 106;
             // 
             // btnUsuarios
             // 
@@ -104,6 +104,7 @@
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(118, 62);
             this.btnUsuarios.TabIndex = 18;
+            this.btnUsuarios.Tag = "formUsuarios";
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnUsuarios.UseVisualStyleBackColor = false;
@@ -122,6 +123,7 @@
             this.btnGrupos.Name = "btnGrupos";
             this.btnGrupos.Size = new System.Drawing.Size(118, 62);
             this.btnGrupos.TabIndex = 15;
+            this.btnGrupos.Tag = "formGrupos";
             this.btnGrupos.Text = "Grupos";
             this.btnGrupos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnGrupos.UseVisualStyleBackColor = false;
@@ -140,6 +142,7 @@
             this.btnInformes.Name = "btnInformes";
             this.btnInformes.Size = new System.Drawing.Size(118, 62);
             this.btnInformes.TabIndex = 16;
+            this.btnInformes.Tag = "formAuditoria";
             this.btnInformes.Text = "Auditoria";
             this.btnInformes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnInformes.UseVisualStyleBackColor = false;
@@ -157,6 +160,7 @@
             this.btnMisDatos.Name = "btnMisDatos";
             this.btnMisDatos.Size = new System.Drawing.Size(118, 62);
             this.btnMisDatos.TabIndex = 19;
+            this.btnMisDatos.Tag = "formMisDatos";
             this.btnMisDatos.Text = "Mis datos";
             this.btnMisDatos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMisDatos.UseVisualStyleBackColor = false;
@@ -170,9 +174,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formPerfiles";
             this.Text = "formPerfiles";
+            this.Load += new System.EventHandler(this.formPerfiles_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpContenedorBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -182,7 +187,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlPerfilesPadre;
         private System.Windows.Forms.PictureBox pctLineSeparator;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnGrupos;
         private System.Windows.Forms.Button btnInformes;

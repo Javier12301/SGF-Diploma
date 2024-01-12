@@ -26,10 +26,10 @@ VALUES ('Gestor de inventario', 1)
 
 -- Grupos de prueba
 INSERT INTO Grupo(Nombre, Estado)
-VALUES ('xd', 0)
+VALUES ('Tester2', 0)
 
 INSERT INTO Grupo(Nombre, Estado)
-VALUES ('xddd', 0)
+VALUES ('Tester', 0)
 
 select * from Grupo
 -- Insertar el usuario Admin
@@ -162,6 +162,12 @@ VALUES
     ('Auditoria', 13),
     ('Mis datos', 13);
 
+SELECT * FROM Modulo
+WHERE Descripcion = 'formPerfiles'
+
+select * from Accion
+WHERE ModuloID = 13 
+
 -- Insertar las acciones para el módulo formUsuarios
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
@@ -211,85 +217,4 @@ SELECT @UsuarioID, AccionID, 1
 FROM Accion
 WHERE ModuloID = @ModuloID AND Descripcion IN ('Alta', 'Baja', 'Exportar');
 go
-
-SELECT * FROM Usuario
--- MODULOS PERMITIDOS DEL USUARIO ID = ?
-DECLARE @UsuarioID INT = 11;
-SELECT DISTINCT M.* FROM Permiso p
-join Grupo Gr ON Gr.GrupoID = p.GrupoID
-join Accion op on op.AccionID = p.AccionID
-join Modulo M on M.ModuloID = op.ModuloID
-join Usuario U on U.GrupoID = p.GrupoID and p.Permitido = 1
-WHERE U.UsuarioID = @UsuarioID
-
--- Obtener la descripcion de modulos permitidos
-DECLARE @UsuarioID INT = 2;
-
-SELECT DISTINCT M.Descripcion FROM Permiso p
-join Grupo Gr ON Gr.GrupoID = p.GrupoID
-join Accion op on op.AccionID = p.AccionID
-join Modulo M on M.ModuloID = op.ModuloID
-join Usuario U on U.GrupoID = p.GrupoID and p.Permitido = 1
-WHERE U.UsuarioID = @UsuarioID
-
--- AccionES PERMITIDAS DEL USUARIO ID = ?
-DECLARE @UsuarioID INT = 2;
-
-SELECT op.* FROM Permiso p
-join Grupo Gr ON Gr.GrupoID = p.GrupoID
-join Accion op on op.AccionID = p.AccionID
-join Modulo M on M.ModuloID = op.ModuloID
-join Usuario U on U.GrupoID = p.GrupoID and p.Permitido = 1
-WHERE U.UsuarioID = @UsuarioID
-
-DECLARE @modulo NVARCHAR(255);
-SET @modulo = 'formVentas'; -- Aquí puedes cambiar el nombre del módulo
-
-SELECT M.Descripcion AS Modulo, A.Descripcion AS Accion
-FROM Modulo M
-INNER JOIN Accion A ON M.ModuloID = A.ModuloID
-WHERE M.Descripcion = @modulo;
-
-
--- ACCIONES Y MODULOS PERMITIDO PARA GRUPOS
--- MODULOS PERMITIDOS DEL GRUPO ID = ?
-select * from Grupo
-
-DECLARE @GrupoID INT = 5;
-
-SELECT DISTINCT M.*
-FROM Permiso p
-JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
-JOIN Accion op ON op.AccionID = p.AccionID
-JOIN Modulo M ON M.ModuloID = op.ModuloID
-WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
-
--- Obtener la descripcion de modulos permitidos
-DECLARE @GrupoID INT = 5;
-
-SELECT DISTINCT M.Descripcion
-FROM Permiso p
-JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
-JOIN Accion op ON op.AccionID = p.AccionID
-JOIN Modulo M ON M.ModuloID = op.ModuloID
-WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
-
--- Acciones PERMITIDAS DEL GRUPO ID = ?
-DECLARE @GrupoID INT = 5;
-
-SELECT op.*
-FROM Permiso p
-JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
-JOIN Accion op ON op.AccionID = p.AccionID
-JOIN Modulo M ON M.ModuloID = op.ModuloID
-WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1;
-
-DECLARE @modulo NVARCHAR(255);
-SET @modulo = 'formProductos'; -- Aquí puedes cambiar el nombre del módulo
-
-SELECT M.Descripcion AS Modulo, A.Descripcion AS Accion
-FROM Modulo M
-INNER JOIN Accion A ON M.ModuloID = A.ModuloID
-WHERE M.Descripcion = @modulo;
-
 

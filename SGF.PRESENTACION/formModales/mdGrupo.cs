@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static SGF.PRESENTACION.FarmaciaDatosDataSet;
 
 namespace SGF.PRESENTACION.formModales
 {
@@ -25,18 +26,48 @@ namespace SGF.PRESENTACION.formModales
         private ModuloBLL lModulo = ModuloBLL.ObtenerInstancia;
         private PermisoBLL lPermiso = PermisoBLL.ObtenerInstancia;
         private AccionBLL lAccion = AccionBLL.ObtenerInstancia;
-        public mdGrupo()
+
+        // Modificar Grupo
+        private bool modificandoGrupo { get; set; }
+        private int grupoID { get; set; }
+        private Grupo oGrupo { get; set; }
+
+        public mdGrupo(bool modificar = false, int grupoID = 0)
         {
             InitializeComponent();
+            modificandoGrupo = modificar;
+            this.grupoID = grupoID;
             listaPermisos = new List<Permiso>();
             listaPermisosActivados = new List<Permiso>();
         }
 
         private void mdGrupo_Load(object sender, EventArgs e)
         {
-            cargarModulos();
-            // seleccionar tab page 0
-            tcMain.SelectedIndex = 1;
+            try
+            {
+                cargarModulos();
+                // seleccionar tab page 0
+                if (modificandoGrupo)
+                {
+                    if (grupoID > 0)
+                    {
+                        oGrupo = new Grupo();
+                        oGrupo = lGrupo.ObtenerGrupoPorID(grupoID);
+                        cargarDatosDeGrupo(oGrupo);
+                        cargarPermisosActivos();
+                    }
+                    else
+                    {
+                        throw new Exception("Ocurrió un error al modificar el grupo, contactar con el administrador si este error persiste.");
+                    }
+                }
+                tcMain.SelectedIndex = 0;
+                lbAccionesVentas.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void chkPermisos_Changed(object sender, EventArgs e)
@@ -65,22 +96,32 @@ namespace SGF.PRESENTACION.formModales
                     }
                     else
                     {
-                        listaPermisosActivados.Remove(permiso);
+                        // Buscar el permiso en la listaPermisosActivados y eliminarlo
+                        Permiso eliminarPermiso = listaPermisosActivados.FirstOrDefault(p => p.Modulo.Descripcion == permiso.Modulo.Descripcion && p.Accion.Descripcion == permiso.Accion.Descripcion);
+                        bool eliminado = listaPermisosActivados.Remove(eliminarPermiso);
+                        if (eliminado)
+                        {
+                            MessageBox.Show("Se elimino con exito el item");
+                        }
                     }
                 }
             }
         }
 
-
-
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                altaGrupo();
+                if (!modificandoGrupo)
+                {
+                    altaGrupo();
+                }
+                else
+                {
+                    modificarGrupo();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -98,6 +139,16 @@ namespace SGF.PRESENTACION.formModales
         {
             return new Grupo
             {
+                Nombre = txtNombreGrupo.Text,
+                Estado = chkEstado.Checked
+            };
+        }
+
+        private Grupo CrearGrupoModificado()
+        {
+            return new Grupo
+            {
+                GrupoID = int.Parse(txtID.Text),
                 Nombre = txtNombreGrupo.Text,
                 Estado = chkEstado.Checked
             };
@@ -142,8 +193,18 @@ namespace SGF.PRESENTACION.formModales
                 bool resultado = lPermiso.AgregarPermisos(listaPermisos);
                 if (resultado)
                 {
-                    MessageBox.Show("El grupo fue dado de alta con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
+                    if (modificandoGrupo)
+                    {
+                        MessageBox.Show("El grupo fue modificado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El grupo fue dado de alta con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
                 }
             }
             catch (Exception)
@@ -152,30 +213,43 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-        private Componente crearComposite(Grupo grupo)
+        // MODIFICAR GRUPO
+        private void modificarGrupo()
         {
-            Composite grupoRoot = new Composite(grupo.ObtenerNombre());
-
-            foreach(var modulo in listaModulos)
+            if (ValidarCampos())
             {
-                if(listaPermisosActivados.Any(p => p.Modulo.Descripcion == modulo.Descripcion))
+                Grupo grupo = CrearGrupoModificado();
+                bool grupoExiste = false;
+                if (oGrupo.Nombre != grupo.Nombre)
                 {
-                    Composite moduloComposite = new Composite(modulo.Descripcion);
-                    foreach(var accion in modulo.ListaAcciones)
+                    grupoExiste = lGrupo.ExisteGrupo(grupo.Nombre);
+                    if (grupoExiste)
                     {
-                        // Solo agregamos las acciones que esten activadas
-                        if(listaPermisosActivados.Any(p => p.Accion.Descripcion == accion.Descripcion && p.Modulo.Descripcion == modulo.Descripcion))
-                        {
-                            Hoja accionHoja = new Hoja(accion.Descripcion);
-                            moduloComposite.Agregar(accionHoja);
-                        }
+                        errorProvider.SetError(lblNombreGrupo, "El Grupo ingresado ya se encuentra en uso.");
+                        MessageBox.Show("El grupo ingresado ya se encuentra en uso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
-                    grupoRoot.Agregar(moduloComposite);
                 }
+
+                bool resultado = lGrupo.ModificarGrupo(grupo);
+                if (resultado)
+                {
+                    grupo = lGrupo.ObtenerGrupoPorNombre(grupo.Nombre);
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al modificar el grupo. Si este error persiste, contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                lPermiso.DesactivarPermisos(grupo.GrupoID);
+                Componente grupoRoot = crearComposite(grupo);
+                listaPermisos.Clear();
+                AgregarPermisos(grupoRoot, grupo);
+                altaPermiso();
             }
-            return grupoRoot;
         }
 
+        // Agregar Permisos
         private void AgregarPermisos(Componente componente, Grupo grupo, Modulo modulo = null)
         {
             if (componente is Composite composite)
@@ -203,12 +277,32 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-       
-        // MODIFICAR GRUPO
-        private void modificarGrupo()
-        {
 
+        // Composite
+        private Componente crearComposite(Grupo grupo)
+        {
+            Composite grupoRoot = new Composite(grupo.ObtenerNombre());
+
+            foreach (var modulo in listaModulos)
+            {
+                if (listaPermisosActivados.Any(p => p.Modulo.Descripcion == modulo.Descripcion))
+                {
+                    Composite moduloComposite = new Composite(modulo.Descripcion);
+                    foreach (var accion in modulo.ListaAcciones)
+                    {
+                        // Solo agregamos las acciones que esten activadas
+                        if (listaPermisosActivados.Any(p => p.Accion.Descripcion == accion.Descripcion && p.Modulo.Descripcion == modulo.Descripcion))
+                        {
+                            Hoja accionHoja = new Hoja(accion.Descripcion);
+                            moduloComposite.Agregar(accionHoja);
+                        }
+                    }
+                    grupoRoot.Agregar(moduloComposite);
+                }
+            }
+            return grupoRoot;
         }
+
 
         private void tcMain_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -308,9 +402,8 @@ namespace SGF.PRESENTACION.formModales
                     {
                         Modulo = modulo,
                         Accion = accion,
-                        Permitido = checkbox.Checked
+                        Permitido = listaPermisosActivados.Any(p => p.Modulo.Descripcion == nombreModulo && p.Accion.Descripcion == accion.Descripcion)
                     };
-
                     listaPermisos.Add(permiso);
                 }
             }
@@ -345,10 +438,11 @@ namespace SGF.PRESENTACION.formModales
         {
             try
             {
-                if(lbAccionesProductos.SelectedItem.ToString() == "PRODUCTOS")
+                if (lbAccionesProductos.SelectedItem.ToString() == "PRODUCTOS")
                 {
                     ActualizarPermisos("formProductos", flpPermisosProductos);
-                }else if(lbAccionesProductos.SelectedItem.ToString() == "CATEGORIAS")
+                }
+                else if (lbAccionesProductos.SelectedItem.ToString() == "CATEGORIAS")
                 {
                     ActualizarPermisos("formCategorias", flpPermisosProductos);
                 }
@@ -362,7 +456,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void tpProveedores_Abierto()
         {
-            if(lbAccionesProveedor.SelectedItem.ToString() == "PROVEEDORES")
+            if (lbAccionesProveedor.SelectedItem.ToString() == "PROVEEDORES")
             {
                 ActualizarPermisos("formProveedores", flpPermisosProveedores);
             }
@@ -370,7 +464,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void tpInventario_Abierto()
         {
-            if(lbAccionesInventario.SelectedItem.ToString() == "INVENTARIO")
+            if (lbAccionesInventario.SelectedItem.ToString() == "INVENTARIO")
             {
                 ActualizarPermisos("formInventario", flpPermisosInventario);
             }
@@ -378,7 +472,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void tpRegistros_Abierto()
         {
-            if(lbAccionesRegistros.SelectedItem.ToString() == "REGISTROS")
+            if (lbAccionesRegistros.SelectedItem.ToString() == "REGISTROS")
             {
                 ActualizarPermisos("formRegistros", flpPermisosRegistros);
             }
@@ -396,7 +490,8 @@ namespace SGF.PRESENTACION.formModales
             else if (lbAccionesReportes.SelectedItem.ToString() == "REPORTES DE VENTAS")
             {
                 ActualizarPermisos("formReporteVentas", flpPermisosReportes);
-            }else if(lbAccionesReportes.SelectedItem.ToString() == "REPORTES DE CLIENTES")
+            }
+            else if (lbAccionesReportes.SelectedItem.ToString() == "REPORTES DE CLIENTES")
             {
                 ActualizarPermisos("formReporteClientes", flpPermisosReportes);
             }
@@ -405,16 +500,17 @@ namespace SGF.PRESENTACION.formModales
         private void tpAjustes_Abierto()
         {
             lbSubMenuPerfiles.Items.Clear();
-            if(lbAccionesAjustes.SelectedItem.ToString() == "AJUSTES")
+            if (lbAccionesAjustes.SelectedItem.ToString() == "AJUSTES")
             {
-               ActualizarPermisos("formAjustes", flpPermisosAjustes);
-            }else if(lbAccionesAjustes.SelectedItem.ToString() == "PERFILES")
+                ActualizarPermisos("formAjustes", flpPermisosAjustes);
+            }
+            else if (lbAccionesAjustes.SelectedItem.ToString() == "PERFILES")
             {
                 lbSubMenuPerfiles.Items.Add("USUARIOS");
-                lbSubMenuPerfiles.Items.Add("AUDITORIA");
                 lbSubMenuPerfiles.Items.Add("GRUPOS");
+                lbSubMenuPerfiles.Items.Add("AUDITORIA");
                 lbSubMenuPerfiles.Items.Add("MIS DATOS");
-            }          
+            }
         }
 
         private void flpSubMenuPerfiles_SelectedIndexChanged(object sender, EventArgs e)
@@ -437,13 +533,36 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
+        // Manejo de Interfaz
+        private void cargarDatosDeGrupo(Grupo oGrupo)
+        {
+            if (oGrupo != null)
+            {
+                txtID.Text = oGrupo.GrupoID.ToString();
+                txtNombreGrupo.Text = oGrupo.Nombre;
+                chkEstado.Checked = oGrupo.Estado;
+            }
+        }
+
+        private void cargarPermisosActivos()
+        {
+            // Cargamos la lista de permisos activados
+            listaPermisosActivados = lPermiso.ObtenerPermisosActivos(oGrupo.GrupoID);
+            // Se obtendrá una lista de permisos activos, pero esto solo contendrán las id
+            // se deberá hacer un recorrido a toda la lista y obtener con la id el módulo y la acción correspondiente
+            foreach (var permiso in listaPermisosActivados)
+            {
+                permiso.Grupo = null;
+                permiso.Modulo = lModulo.ObtenerModuloID(permiso.Modulo.ModuloID);
+                permiso.Accion = lAccion.ObtenerAccionID(permiso.Accion.AccionID);
+            }
+        }
 
         // Carga de Datos
         private void cargarModulos()
         {
             listaModulos = lModulo.ObtenerModulosConAcciones();
         }
-
 
         // Movimiento de ventana
         private Point mousePosicion;
@@ -465,6 +584,6 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-        
+
     }
 }

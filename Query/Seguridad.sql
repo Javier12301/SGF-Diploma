@@ -25,6 +25,7 @@ CREATE TABLE Modulo (
     Descripcion NVARCHAR(255)
 );
 
+
 CREATE TABLE Accion (
     AccionID INT IDENTITY(1,1) PRIMARY KEY,
     Descripcion NVARCHAR(255),
@@ -51,30 +52,30 @@ CREATE TABLE Auditoria (
 GO
 
 
+
+-- Modulos
+DECLARE @GrupoID INT = 6
+SELECT DISTINCT M.Descripcion FROM Permiso p
+join Grupo Gr ON Gr.GrupoID = p.GrupoID
+join Accion op on op.AccionID = p.AccionID
+join Modulo M on M.ModuloID = op.ModuloID
+WHERE Gr.GrupoID = @GrupoID AND p.Permitido = 1
+go
+-- Acciones correspondientes
+DECLARE @GrupoID INT = 6
+declare @moduloDescripcion NVARCHAR(255) = 'formUsuarios'
+
+SELECT op.* FROM Permiso p
+join Grupo Gr ON Gr.GrupoID = p.GrupoID
+join Accion op on op.AccionID = p.AccionID
+join Modulo M on M.ModuloID = op.ModuloID
+WHERE Gr.GrupoID = @GrupoID AND M.Descripcion = @moduloDescripcion AND p.Permitido = 1
+GO
+
 SELECT * FROM Auditoria
-SELECT * FROM Usuario
 
---DBCC CHECKIDENT ('Auditoria', RESEED, 1)
-
-SELECT op.* FROM Accion op
-JOIN Modulo m ON m.ModuloID = op.ModuloID
-WHERE m.Descripcion = 'formVentas'
-
-DECLARE @NombreModulo NVARCHAR(255) = 'formProductos'
-DECLARE @NombreAccion NVARCHAR(255) = 'Alta'
-SELECT A.*
-FROM Accion A
-INNER JOIN Modulo M ON A.ModuloID = M.ModuloID
-WHERE M.Descripcion = @NombreModulo AND A.Descripcion = @NombreAccion;
-
-SELECT * FROM Modulo
-WHERE Descripcion = 'formVentas'
+select * from Accion
+where ModuloID = 14
 
 SELECT * FROM Grupo
 
-
-DECLARE @grupoID int = 11
-DECLARE @accionID int = 11
-DECLARE @moduloID int = 3
-DECLARE @permitido bit = 1
-INSERT INTO Permiso (GrupoID, AccionID, Permitido) VALUES (@grupoID, @accionID, @permitido)

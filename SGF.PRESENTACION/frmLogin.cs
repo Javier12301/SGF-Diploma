@@ -102,27 +102,35 @@ namespace SGF.PRESENTACION
                     {
                         Usuario oUsuario = lUsuario.ObtenerUsuarioPorNombre(txtUsuarioG.Text);
                         // Permisos de cada modulo
-                        oUsuario.ModulosPermitidos = lGrupo.ObtenerModulosPermitidos(oUsuario.UsuarioID);
+                        oUsuario.ModulosPermitidos = lGrupo.ObtenerModulosPermitidos(oUsuario.ObtenerGrupoID());
                         string contraseña = lUsuario.EncriptarClave(txtContraseñaG.Text);
 
-                        if (oUsuario.Estado)
+                        if (oUsuario.Grupo.Estado)
                         {
-                            if (oUsuario.Contraseña == contraseña)
+                            if (oUsuario.Estado)
                             {
-                                // Iniciar sesión utilizando el SessionManager
-                                lSesion.Login(oUsuario);
+                                if (oUsuario.Contraseña == contraseña)
+                                {
+                                    // Iniciar sesión utilizando el SessionManager
+                                    lSesion.Login(oUsuario);
 
-                                // Registrar auditoria (si lo deseas)
-                                abrirFormMain();
+                                    // Registrar auditoria (si lo deseas)
+                                    abrirFormMain();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Usuario y/o contraseña incorrecta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Usuario y/o contraseña incorrecta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("El usuario ingresado se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                uiUtilidades.errorTextboxG(txtUsuarioG, true);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("El usuario ingresado se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("El grupo al que pertenece el usuario se encuentra inactivo, consultar al administrador", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             uiUtilidades.errorTextboxG(txtUsuarioG, true);
                         }
                     }

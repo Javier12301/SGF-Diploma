@@ -32,23 +32,20 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlReportesPadre = new System.Windows.Forms.Panel();
             this.pctLineSeparator = new System.Windows.Forms.PictureBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnExistencias = new System.Windows.Forms.Button();
             this.btnEntradas = new System.Windows.Forms.Button();
             this.btnSalidas = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnExportarP = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.pnlReportesPadre);
             this.panel1.Controls.Add(this.pctLineSeparator);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -75,23 +72,20 @@
             this.pctLineSeparator.TabStop = false;
             this.pctLineSeparator.Tag = "txtUser";
             // 
-            // flowLayoutPanel1
+            // flpContenedorBotones
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.LightGray;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.btnExistencias);
-            this.flowLayoutPanel1.Controls.Add(this.btnEntradas);
-            this.flowLayoutPanel1.Controls.Add(this.btnSalidas);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.btnExportarP);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 6);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(857, 81);
-            this.flowLayoutPanel1.TabIndex = 106;
+            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
+            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnExistencias);
+            this.flpContenedorBotones.Controls.Add(this.btnEntradas);
+            this.flpContenedorBotones.Controls.Add(this.btnSalidas);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(0, 6);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 81);
+            this.flpContenedorBotones.TabIndex = 106;
             // 
             // btnExistencias
             // 
@@ -106,7 +100,8 @@
             this.btnExistencias.Name = "btnExistencias";
             this.btnExistencias.Size = new System.Drawing.Size(118, 73);
             this.btnExistencias.TabIndex = 18;
-            this.btnExistencias.Text = "Existencias";
+            this.btnExistencias.Tag = "Ventas";
+            this.btnExistencias.Text = "Ventas";
             this.btnExistencias.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExistencias.UseVisualStyleBackColor = false;
             // 
@@ -123,7 +118,8 @@
             this.btnEntradas.Name = "btnEntradas";
             this.btnEntradas.Size = new System.Drawing.Size(118, 73);
             this.btnEntradas.TabIndex = 15;
-            this.btnEntradas.Text = "Entrada a Inventario";
+            this.btnEntradas.Tag = "Inventario";
+            this.btnEntradas.Text = "Inventario";
             this.btnEntradas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEntradas.UseVisualStyleBackColor = false;
             // 
@@ -140,60 +136,10 @@
             this.btnSalidas.Name = "btnSalidas";
             this.btnSalidas.Size = new System.Drawing.Size(118, 73);
             this.btnSalidas.TabIndex = 16;
-            this.btnSalidas.Text = "Salida de Inventario";
+            this.btnSalidas.Tag = "Clientes";
+            this.btnSalidas.Text = "Clientes";
             this.btnSalidas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalidas.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(499, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 73);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Imprimir";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // btnExportarP
-            // 
-            this.btnExportarP.BackColor = System.Drawing.Color.White;
-            this.btnExportarP.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnExportarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportarP.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportarP.ForeColor = System.Drawing.Color.Black;
-            this.btnExportarP.Image = ((System.Drawing.Image)(resources.GetObject("btnExportarP.Image")));
-            this.btnExportarP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExportarP.Location = new System.Drawing.Point(623, 3);
-            this.btnExportarP.Name = "btnExportarP";
-            this.btnExportarP.Size = new System.Drawing.Size(118, 73);
-            this.btnExportarP.TabIndex = 17;
-            this.btnExportarP.Text = "Exportar";
-            this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportarP.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(375, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 73);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Historico";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // formReportes
             // 
@@ -204,9 +150,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formReportes";
             this.Text = "formReportes";
+            this.Load += new System.EventHandler(this.formReportes_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpContenedorBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -214,14 +161,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnExistencias;
         private System.Windows.Forms.Button btnEntradas;
         private System.Windows.Forms.Button btnSalidas;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnExportarP;
         private System.Windows.Forms.PictureBox pctLineSeparator;
         private System.Windows.Forms.Panel pnlReportesPadre;
-        private System.Windows.Forms.Button button2;
     }
 }

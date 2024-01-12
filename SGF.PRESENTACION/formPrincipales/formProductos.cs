@@ -29,9 +29,9 @@ namespace SGF.PRESENTACION.formPrincipales
         private void cargarPermisos()
         {
             List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+            string nombreFormulario = this.GetType().Name;
 
-            // Módulo 'formProductos' 
-            Modulo moduloProductos = modulosPermitidos.FirstOrDefault(m => m.Descripcion == "formProductos");
+            Modulo moduloProductos = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);
 
             // Si se encuentra el módulo 'formProductos', obtener las acciones permitidas
             List<Accion> accionesPermitidas = null;
@@ -39,9 +39,6 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 accionesPermitidas = moduloProductos.ListaAcciones;
             }
-
-            // Obtener el nombre del formulario actual
-            string nombreFormulario = this.GetType().Name;
 
             // Buscar el módulo correspondiente al formulario actual
             Modulo moduloActual = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);

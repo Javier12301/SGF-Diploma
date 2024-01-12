@@ -1,4 +1,7 @@
-﻿using SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles;
+﻿using SGF.MODELO.Seguridad;
+using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles;
+using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +18,43 @@ namespace SGF.PRESENTACION.formPrincipales
     {
         private Form formularioActivo;
         private Button botonActivo;
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+        SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         public formPerfiles()
         {
             InitializeComponent();
+        }
+
+        private void formPerfiles_Load(object sender, EventArgs e)
+        {
+            cargarPermisos();
+        }
+
+        private void cargarPermisos()
+        {
+            List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+            // el modulos perfil está compuesto de 4 botones
+            foreach(Control control in flpContenedorBotones.Controls)
+            {
+                if(control is Button && ((Button)control).Tag != null)
+                {
+                    // Descripción del módulo del tag del botón
+                    string descripcionModulo = ((Button)control).Tag.ToString();
+                    // Verificar modulos permitidos, los que no desactivar
+                    bool moduloPermitido = modulosPermitidos.Any(modulo => modulo.Descripcion == descripcionModulo);
+
+                    if (moduloPermitido)
+                    {
+                        ((Button)control).Enabled = true;
+                        ((Button)control).Visible = true;
+                    }
+                    else
+                    {
+                        ((Button)control).Enabled = false;
+                        ((Button)control).Visible = false;
+                    }
+                }
+            }
         }
 
         private void activarBoton(Button btnSender)
@@ -86,5 +123,7 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             abrirFormularioHijo(new formGrupos(), btnGrupos);
         }
+
+       
     }
 }

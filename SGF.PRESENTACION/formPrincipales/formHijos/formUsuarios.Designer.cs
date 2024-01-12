@@ -72,7 +72,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblEstado = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNuevoP = new System.Windows.Forms.Button();
             this.btnModificarP = new System.Windows.Forms.Button();
             this.btnEliminarP = new System.Windows.Forms.Button();
@@ -87,7 +87,7 @@
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -96,7 +96,7 @@
             this.panel1.Controls.Add(this.dgvUsuario);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -534,21 +534,21 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Estado";
             // 
-            // flowLayoutPanel1
+            // flpContenedorBotones
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.LightGray;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.btnNuevoP);
-            this.flowLayoutPanel1.Controls.Add(this.btnModificarP);
-            this.flowLayoutPanel1.Controls.Add(this.btnEliminarP);
-            this.flowLayoutPanel1.Controls.Add(this.btnExportarP);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(833, 68);
-            this.flowLayoutPanel1.TabIndex = 107;
+            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
+            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnNuevoP);
+            this.flpContenedorBotones.Controls.Add(this.btnModificarP);
+            this.flpContenedorBotones.Controls.Add(this.btnEliminarP);
+            this.flpContenedorBotones.Controls.Add(this.btnExportarP);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(833, 68);
+            this.flpContenedorBotones.TabIndex = 107;
             // 
             // btnNuevoP
             // 
@@ -564,6 +564,7 @@
             this.btnNuevoP.Name = "btnNuevoP";
             this.btnNuevoP.Size = new System.Drawing.Size(112, 57);
             this.btnNuevoP.TabIndex = 9;
+            this.btnNuevoP.Tag = "Alta";
             this.btnNuevoP.Text = "Nuevo";
             this.btnNuevoP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNuevoP.UseVisualStyleBackColor = false;
@@ -583,6 +584,7 @@
             this.btnModificarP.Name = "btnModificarP";
             this.btnModificarP.Size = new System.Drawing.Size(112, 57);
             this.btnModificarP.TabIndex = 10;
+            this.btnModificarP.Tag = "Modificar";
             this.btnModificarP.Text = "Modificar";
             this.btnModificarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnModificarP.UseVisualStyleBackColor = false;
@@ -602,6 +604,7 @@
             this.btnEliminarP.Name = "btnEliminarP";
             this.btnEliminarP.Size = new System.Drawing.Size(112, 57);
             this.btnEliminarP.TabIndex = 13;
+            this.btnEliminarP.Tag = "Baja";
             this.btnEliminarP.Text = "Eliminar";
             this.btnEliminarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEliminarP.UseVisualStyleBackColor = false;
@@ -621,6 +624,7 @@
             this.btnExportarP.Name = "btnExportarP";
             this.btnExportarP.Size = new System.Drawing.Size(112, 57);
             this.btnExportarP.TabIndex = 14;
+            this.btnExportarP.Tag = "Exportar";
             this.btnExportarP.Text = "Exportar";
             this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportarP.UseVisualStyleBackColor = false;
@@ -652,7 +656,7 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpContenedorBotones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -660,7 +664,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnNuevoP;
         private System.Windows.Forms.Button btnModificarP;
         private System.Windows.Forms.Button btnEliminarP;

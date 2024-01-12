@@ -23,6 +23,26 @@ namespace SGF.MODELO
         public Grupo Grupo { get; set; }
         public List<Modulo> ModulosPermitidos { get; set; }
 
+        public int ObtenerGrupoID()
+        {
+            return Grupo.GrupoID;
+        }
+
+        public string ObtenerNombreGrupo()
+        {
+            return Grupo.ObtenerNombre();
+        }
+
+        public bool ObtenerEstadoGrupo()
+        {
+            return Grupo.Estado;
+        }
+
+        public int ObtenerUsuarioID()
+        {
+            return UsuarioID;
+        }
+
         public string ObtenerNombreUsuario()
         {
             return NombreUsuario;

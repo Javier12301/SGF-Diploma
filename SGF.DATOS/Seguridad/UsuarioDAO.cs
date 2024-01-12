@@ -293,7 +293,7 @@ namespace SGF.DATOS.Seguridad
                 }
                 catch (Exception)
                 {
-                    return usuario;
+                    throw new Exception("Ocurrió un error al obtener el usuario, contactar con el administrador del sistema.");
                 }
             }
 
@@ -343,152 +343,11 @@ namespace SGF.DATOS.Seguridad
                 }
                 catch (Exception)
                 {
-                    return oUsuario;
+                    throw new Exception("Ocurrió un error al obtener el usuario, contactar con el administrador del sistema.");
                 }
             }
             return oUsuario;
         }
-
-        public static List<Modulo> ObtenerModulosPermitidosD(int UsuarioID)
-        {
-            List<Modulo> modulos = new List<Modulo>();
-            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
-            {
-                try
-                {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT DISTINCT M.Descripcion FROM Permiso p");
-                    query.AppendLine("join Grupo Gr ON Gr.GrupoID = p.GrupoID");
-                    query.AppendLine("join Accion op on op.AccionID = p.AccionID");
-                    query.AppendLine("join Modulo M on M.ModuloID = op.ModuloID");
-                    query.AppendLine("join Usuario U on U.GrupoID = p.GrupoID and p.Permitido = 1");
-                    query.AppendLine("WHERE U.UsuarioID = @UsuarioID");
-
-                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
-                    {
-                        cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
-                        oContexto.Open();
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Modulo modulo = new Modulo();
-                                modulo.Descripcion = reader["Descripcion"].ToString();
-                                modulo.ListaAcciones = ObtenerAccionesPermitidasD(UsuarioID, modulo.Descripcion);
-                                modulos.Add(modulo);
-                            }
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    return modulos;
-                }
-            }
-            return modulos;
-        }
-
-        public static List<Accion> ObtenerAccionesPermitidasD(int UsuarioID, string moduloDescripcion)
-        {
-            List<Accion> acciones = new List<Accion>();
-            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
-            {
-                try
-                {
-                    StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT op.* FROM Permiso p");
-                    query.AppendLine("join Grupo Gr ON Gr.GrupoID = p.GrupoID");
-                    query.AppendLine("join Accion op on op.AccionID = p.AccionID");
-                    query.AppendLine("join Modulo M on M.ModuloID = op.ModuloID");
-                    query.AppendLine("join Usuario U on U.GrupoID = p.GrupoID and p.Permitido = 1");
-                    query.AppendLine("WHERE U.UsuarioID = @UsuarioID AND M.Descripcion = @moduloDescripcion");
-
-                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
-                    {
-                        cmd.Parameters.AddWithValue("@UsuarioID", UsuarioID);
-                        cmd.Parameters.AddWithValue("@moduloDescripcion", moduloDescripcion);
-                        oContexto.Open();
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                Accion accion = new Accion();
-                                accion.AccionID = Convert.ToInt32(reader["AccionID"]);
-                                accion.Descripcion = reader["Descripcion"].ToString();
-                                acciones.Add(accion);
-                            }
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    return acciones;
-                }
-            }
-            return acciones;
-        }
-
-
-        //public static List<Modulo> ObtenerPermisosD(int UsuarioID)
-        //{
-
-        //    List<Modulo> Permisos = new List<Modulo>();
-
-        //    using (SqlConnection cadena = new SqlConnection(ConexionSGF.cadena))
-        //    {
-        //        try
-        //        {
-        //            using (SqlCommand cmd = new SqlCommand("mds_ObtenerPermisos", cadena))
-        //            {
-        //                cmd.Parameters.AddWithValue("UsuarioID", UsuarioID);
-        //                cmd.CommandType = CommandType.StoredProcedure;
-
-        //                cadena.Open();
-
-
-        //                XmlReader leerXML = cmd.ExecuteXmlReader();
-
-        //                while (leerXML.Read())
-        //                {
-
-        //                    XDocument doc = XDocument.Load(leerXML);
-
-        //                    if (doc.Element("Permiso") != null)
-        //                    {
-
-        //                        Permisos = doc.Element("Permiso").Element("DetalleModulo") == null ? new List<Modulo>() :
-
-        //                                   (from modulo in doc.Element("Permiso").Element("DetalleModulo").Elements("Modulo")
-        //                                    select new Modulo()
-        //                                    {
-        //                                        NombreModulo = modulo.Element("NombreModulo").Value,
-        //                                        ListaOpciones = modulo.Element("DetalleOpciones") == null ? new List<Opciones>() :
-        //                                        (from opciones in modulo.Element("DetalleOpciones").Elements("Opcion")
-        //                                         select new Opciones()
-        //                                         {
-        //                                             NombreOpcion = opciones.Element("NombreOpcion").Value
-        //                                         }
-        //                                        ).ToList()
-        //                                    }).ToList();
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        catch(Exception)
-        //        {
-        //            Permisos = null;
-        //        }
-        //    }
-
-        //    return Permisos;
-        //}
-
-        
-
-
-
 
     }
 

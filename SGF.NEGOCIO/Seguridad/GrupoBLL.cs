@@ -63,7 +63,55 @@ namespace SGF.NEGOCIO.Seguridad
             }
         }
 
+        public bool GrupoTieneUsuarios(int grupoID)
+        {
+            if(grupoID > 0)
+            {
+                return GrupoDAO.GrupoTieneUsuariosD(grupoID);
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al comprobar si el grupo tiene usuarios asignados, contacte con el administrador del sistema si este error persiste.");
+            }
+        }
+
         // Modificar grupo
+        public bool ModificarGrupo(Grupo oGrupo)
+        {
+            if (oGrupo != null)
+            {
+                if (GrupoDAO.ModificarGrupoD(oGrupo))
+                {
+                    if (lSesion.UsuarioEnSesion() == null)
+                    {
+                        AuditoriaBLL.RegistrarMovimiento("Modificacion", "Sistema", $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                    }
+                    else
+                    {
+                        AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                    }
+                    return true;
+                }
+                else
+                {
+                    if (lSesion.UsuarioEnSesion() == null)
+                    {
+                        AuditoriaBLL.RegistrarMovimiento("Modificacion", "Sistema", "Error al modificar al grupo.");
+                    }
+                    else
+                    {
+                        AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
+                    }
+                    return false;
+                }
+            }
+            else
+            {
+                // Excepción indicando que el objeto de usuario es nulo
+                AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
+                throw new ArgumentNullException("Se ha producido un error: el campo de usuario no puede estar vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
+            }
+        }
 
         // Baja grupo
 
@@ -95,9 +143,9 @@ namespace SGF.NEGOCIO.Seguridad
         }
 
         // Obtener los modulos permitido del grupo
-        public List<Modulo> ObtenerModulosPermitidos(int usuarioID)
+        public List<Modulo> ObtenerModulosPermitidos(int grupoID)
         {
-            List<Modulo> modulosPermitidos = UsuarioDAO.ObtenerModulosPermitidosD(usuarioID);
+            List<Modulo> modulosPermitidos = GrupoDAO.ObtenerModulosPermitidosD(grupoID);
             if (modulosPermitidos != null)
             {
                 return modulosPermitidos;
@@ -105,6 +153,19 @@ namespace SGF.NEGOCIO.Seguridad
             else
             {
                 throw new Exception("Ocurrió un error inesperado al intentar obtener los permisos, contactar con el administrador si el error persiste.");
+            }
+        }
+
+        public Grupo ObtenerGrupoPorID(int grupoID)
+        {
+            Grupo oGrupo = GrupoDAO.ObtenerGrupoPorIDD(grupoID);
+            if(oGrupo != null)
+            {
+                return oGrupo;
+            }
+            else
+            {
+                throw new Exception("El grupo ingresado no existe, contactar con el administrador si el error persiste.");
             }
         }
 

@@ -314,6 +314,7 @@
             this.btnExportarP.Name = "btnExportarP";
             this.btnExportarP.Size = new System.Drawing.Size(112, 73);
             this.btnExportarP.TabIndex = 12;
+            this.btnExportarP.Tag = "Exportar";
             this.btnExportarP.Text = "Exportar";
             this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportarP.UseVisualStyleBackColor = false;
@@ -480,6 +481,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formRegistros";
             this.Text = "formRegistros";
+            this.Load += new System.EventHandler(this.formRegistros_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.panel2.ResumeLayout(false);

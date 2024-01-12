@@ -1,6 +1,8 @@
 ﻿using ClosedXML.Excel;
 using FontAwesome.Sharp;
 using Guna.UI.WinForms;
+using SGF.MODELO.Seguridad;
+using SGF.NEGOCIO.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +16,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
 {
     public class UtilidadesUI
     {
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private static UtilidadesUI _instancia = null;
         private UtilidadesUI()
         {
@@ -29,6 +32,43 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                 return _instancia;
             }
         }
+
+        public void cargarPermisos(string nombreFormulario, FlowLayoutPanel flpContenedorBotones)
+        {
+            List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+
+            Modulo modulosActivos = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);
+
+            List<Accion> accionesPermitidas = null;
+            if (modulosActivos != null)
+            {
+                accionesPermitidas = modulosActivos.ListaAcciones;
+            }
+
+            // Buscar el módulo correspondiente al formulario actual
+            Modulo moduloActual = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);
+
+            // Si se encuentra el módulo, cargar las opciones
+            if (moduloActual != null)
+            {
+                foreach (Control control in flpContenedorBotones.Controls)
+                {
+                    if (control is Button && control.Tag != null)
+                    {
+                        // Obtener el nombre de la acción desde el Tag del botón
+                        string nombreAccionBoton = control.Tag.ToString();
+
+                        // Verificar si el nombre de la acción está en la lista de acciones del módulo
+                        bool tienePermiso = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == nombreAccionBoton);
+
+                        // Activar o desactivar el botón según los permisos
+                        control.Enabled = tienePermiso;
+                        control.Visible = tienePermiso;
+                    }
+                }
+            }
+        }
+
 
         public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja)
         {

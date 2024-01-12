@@ -38,5 +38,19 @@ namespace SGF.NEGOCIO.Seguridad
         {
             return ModuloDAO.ObtenerModuloD(Descripcion);
         }
+
+        public Modulo ObtenerModuloID(int moduloID)
+        {
+            Modulo oModulo = ModuloDAO.ObtenerModuloIDD(moduloID);
+            if(oModulo != null)
+            {
+                oModulo.ListaAcciones = ModuloDAO.ObtenerAccionesDeModuloD(oModulo.Descripcion);
+                return oModulo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error inesperado al intentar obtener el módulo, si el problema persiste contacte con el administrador del sistema.");
+            }
+        }
     }
 }

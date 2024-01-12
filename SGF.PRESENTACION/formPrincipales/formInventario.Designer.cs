@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formInventario));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
@@ -44,7 +44,7 @@
             this.cmbFiltroBuscar = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnEntradaMasiva = new System.Windows.Forms.Button();
             this.btnSalidaMasiva = new System.Windows.Forms.Button();
             this.btnExportarP = new System.Windows.Forms.Button();
@@ -66,7 +66,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.panel4.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +75,7 @@
             // 
             this.panel1.Controls.Add(this.dgvProductos);
             this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Controls.Add(this.bindingNavigator1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -86,46 +86,46 @@
             // dgvProductos
             // 
             this.dgvProductos.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvProductos.ColumnHeadersHeight = 40;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvcNombreCategoria});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProductos.GridColor = System.Drawing.Color.White;
             this.dgvProductos.Location = new System.Drawing.Point(5, 152);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvProductos.RowHeadersVisible = false;
             this.dgvProductos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductos.Size = new System.Drawing.Size(1059, 244);
@@ -232,20 +232,20 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Inventario";
             // 
-            // flowLayoutPanel1
+            // flpContenedorBotones
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.LightGray;
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.btnEntradaMasiva);
-            this.flowLayoutPanel1.Controls.Add(this.btnSalidaMasiva);
-            this.flowLayoutPanel1.Controls.Add(this.btnExportarP);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 4);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(857, 81);
-            this.flowLayoutPanel1.TabIndex = 106;
+            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
+            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnEntradaMasiva);
+            this.flpContenedorBotones.Controls.Add(this.btnSalidaMasiva);
+            this.flpContenedorBotones.Controls.Add(this.btnExportarP);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(0, 4);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 81);
+            this.flpContenedorBotones.TabIndex = 106;
             // 
             // btnEntradaMasiva
             // 
@@ -260,6 +260,7 @@
             this.btnEntradaMasiva.Name = "btnEntradaMasiva";
             this.btnEntradaMasiva.Size = new System.Drawing.Size(118, 74);
             this.btnEntradaMasiva.TabIndex = 13;
+            this.btnEntradaMasiva.Tag = "Entrada";
             this.btnEntradaMasiva.Text = "Entrada a Inventario";
             this.btnEntradaMasiva.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEntradaMasiva.UseVisualStyleBackColor = false;
@@ -277,6 +278,7 @@
             this.btnSalidaMasiva.Name = "btnSalidaMasiva";
             this.btnSalidaMasiva.Size = new System.Drawing.Size(118, 74);
             this.btnSalidaMasiva.TabIndex = 14;
+            this.btnSalidaMasiva.Tag = "Salida";
             this.btnSalidaMasiva.Text = "Salida de Inventario";
             this.btnSalidaMasiva.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalidaMasiva.UseVisualStyleBackColor = false;
@@ -295,6 +297,7 @@
             this.btnExportarP.Name = "btnExportarP";
             this.btnExportarP.Size = new System.Drawing.Size(112, 73);
             this.btnExportarP.TabIndex = 12;
+            this.btnExportarP.Tag = "Exportar";
             this.btnExportarP.Text = "Exportar";
             this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExportarP.UseVisualStyleBackColor = false;
@@ -376,7 +379,6 @@
             this.bnpNumeroItem.AccessibleName = "Posición";
             this.bnpNumeroItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.bnpNumeroItem.AutoSize = false;
-            this.bnpNumeroItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bnpNumeroItem.Name = "bnpNumeroItem";
             this.bnpNumeroItem.Size = new System.Drawing.Size(65, 23);
             this.bnpNumeroItem.Text = "0";
@@ -461,11 +463,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formInventario";
             this.Text = "formInventario";
+            this.Load += new System.EventHandler(this.formInventario_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpContenedorBotones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
@@ -485,7 +488,7 @@
         private System.Windows.Forms.ComboBox cmbFiltroBuscar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnExportarP;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bnpCantidadDeItems;

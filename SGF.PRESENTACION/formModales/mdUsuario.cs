@@ -27,6 +27,8 @@ namespace SGF.PRESENTACION.formModales
         private bool contraseñaVisibleConfirmar { get; set; }
         private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
+
+        // Modificar Usuario
         private bool modificandoUsuario { get; set; }
         private int usuarioID { get; set; }
         private Usuario oUsuario { get; set; }

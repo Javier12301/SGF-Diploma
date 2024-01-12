@@ -42,6 +42,37 @@ namespace SGF.DATOS.Seguridad
             return oModulo;
         }
 
+        public static Modulo ObtenerModuloIDD(int moduloID)
+        {
+            Modulo oModulo = new Modulo();
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT * FROM Modulo WHERE ModuloID = @moduloID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@moduloID", moduloID);
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                oModulo.ModuloID = Convert.ToInt32(reader["ModuloID"]);
+                                oModulo.Descripcion = reader["Descripcion"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el módulo. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return oModulo;
+        }
+
         // Obtener modulos disponibles
         public static List<Modulo> ObtenerModulosDisponiblesD()
         {

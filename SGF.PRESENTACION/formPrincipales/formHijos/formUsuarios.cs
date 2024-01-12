@@ -21,6 +21,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
         private AuditoriaBLL lAuditoria = AuditoriaBLL.ObtenerInstancia;
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         public formUsuarios()
         {
             InitializeComponent();
@@ -28,8 +29,17 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 
         private void formUsuarios_Load(object sender, EventArgs e)
         {
-            cargarLista();
-            cargarFiltros();
+            try
+            {
+                cargarLista();
+                cargarFiltros();
+                uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + " , si el error persiste contacte al administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         // Alta de Usuario
@@ -109,7 +119,10 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             {
                 // Verificar si hay celdas seleccionadas
                 if (dgvUsuario.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Seleccione por lo menos un usuario para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
+                }
 
                 List<int> usuariosAEliminar = new List<int>();
 
@@ -128,7 +141,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     int usuarioID = Convert.ToInt32(dgvUsuario.Rows[celda.RowIndex].Cells["dgvcID"].Value);
 
                     // Verificar si el usuario es el mismo que el logueado o si es el administrador
-                    if (usuarioID == Sesion.ObtenerInstancia.Usuario.UsuarioID)
+                    if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
                     {
                         MessageBox.Show("No puede eliminar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;

@@ -44,5 +44,36 @@ namespace SGF.DATOS.Seguridad
             }
             return oAccion;
         }
+
+        public static Accion ObtenerAccionIDD(int accionID)
+        {
+            Accion oAccion = new Accion();
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT * FROM Accion WHERE AccionID = @accionID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@accionID", accionID);
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                oAccion.AccionID = Convert.ToInt32(reader["AccionID"]);
+                                oAccion.Descripcion = reader["Descripcion"].ToString();
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener la acción. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return oAccion;
+        }
     }
 }

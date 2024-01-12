@@ -28,5 +28,18 @@ namespace SGF.NEGOCIO.Seguridad
         {
             return AccionDAO.ObtenerAccionD(NombreModulo, NombreAccion);
         }
+
+        public Accion ObtenerAccionID(int accionID)
+        {
+            Accion oAccion = AccionDAO.ObtenerAccionIDD(accionID);
+            if (oAccion != null)
+            {
+                return oAccion;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error inesperado al intentar obtener la acción, si el problema persiste contacte con el administrador del sistema.");
+            }
+        }
     }
 }
