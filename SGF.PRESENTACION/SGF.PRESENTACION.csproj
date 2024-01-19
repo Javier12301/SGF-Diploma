@@ -261,6 +261,11 @@
     <Compile Include="formModales\Seguridad\formVerificarMail.Designer.cs">
       <DependentUpon>formVerificarMail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Negocio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Negocio.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilidadesComunes\UtilidadesUI.cs" />
@@ -335,6 +340,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="FarmaciaDatosDataSet.xsc">
       <DependentUpon>FarmaciaDatosDataSet.xsd</DependentUpon>
@@ -346,6 +352,17 @@
     </None>
     <None Include="FarmaciaDatosDataSet.xss">
       <DependentUpon>FarmaciaDatosDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Negocio.xsc">
+      <DependentUpon>Negocio.xsd</DependentUpon>
+    </None>
+    <None Include="Negocio.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Negocio.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Negocio.xss">
+      <DependentUpon>Negocio.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -373,7 +390,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="formModales\modalesBuscadores\" />
-    <Folder Include="Recursos\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
@@ -406,6 +422,18 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\Iconos Blancos\checkList_Blanco.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\Iconos Negros\checkList_Negro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\Iconos Coloridos\modificar-boton-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\Iconos Coloridos\eliminar-boton-15.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

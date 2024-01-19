@@ -25,6 +25,7 @@ namespace SGF.PRESENTACION.formModales
 
         private bool contraseñaVisibleNueva { get; set; }
         private bool contraseñaVisibleConfirmar { get; set; }
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
 
@@ -311,6 +312,16 @@ namespace SGF.PRESENTACION.formModales
                 txtContraseña.Text = oUsuario.Contraseña;
                 txtContraseñaConfirmar.Text = oUsuario.Contraseña;
                 chkEstado.Checked = oUsuario.Estado;
+                if(oUsuario.UsuarioID == lSesion.UsuarioEnSesion().Usuario.UsuarioID)
+                {
+                    if(oUsuario.UsuarioID == 1)
+                    {
+                        txtNombreUsuario.Enabled = false;
+                    }
+                    cmbGrupo.Enabled = false;
+                    // Si se ingreso desde el formulario mis datos, el usuario no puede desactivarse/activarse por si mismo.
+                    chkEstado.Enabled = false;
+                }
             }
         }
 

@@ -218,3 +218,32 @@ FROM Accion
 WHERE ModuloID = @ModuloID AND Descripcion IN ('Alta', 'Baja', 'Exportar');
 go
 
+-- INSERTAR DATOS PARA PRODUCTOS, CATEGORÍA Y PROVEEDOR PARA TESTEAR SISTEMA
+-- Insertar Categorías
+INSERT INTO Categoria (Nombre, Descripcion, Estado) VALUES
+('Medicamentos', 'Categoría de medicamentos', 1),
+('Productos No Médicos', 'Categoría de productos no médicos', 1);
+
+-- Insertar Proveedores
+INSERT INTO Proveedor (RazonSocial, TipoDocumento, Documento, Direccion, TelefonoProveedor, Correo, Estado) VALUES
+('Farmacia XYZ', 'CUIT', '30-12345678-9', 'Calle 123', '123-456789', 'info@farmaciaxyz.com', 1),
+('Distribuidora ABC', 'CUIT', '30-87654321-0', 'Avenida Principal', '987-654321', 'info@distribuidoraabc.com', 1);
+
+-- Insertar Medicamentos
+INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
+('123456789012', 'Paracetamol 500mg', 1, 1, 5.00, 10.00, 'Lote123', '2024-01-01', 0, 1, 50, 10, 'Medicamentos', 1),
+('987654321098', 'Ibuprofeno 400mg', 1, 2, 8.00, 15.00, 'Lote456', '2024-02-01', 0, 1, 30, 10, 'Medicamentos', 1);
+
+-- Insertar Productos No Médicos
+INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
+('111222333444', 'Gaseosa Cola', 2, 2, 1.50, 3.00, 'Lote789', '2025-01-01', 0, 0, 100, 20, 'Producto no médico', 1),
+('555666777888', 'Chicles Menta', 2, 1, 0.75, 1.50, 'LoteABC', '2025-02-01', 0, 0, 200, 20, 'Producto no médico', 1);
+GO
+
+
+
+INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
+('333', 'Helado Menta', 2, 1, 0.75, 1.50, NULL, NULL, 0, 0, 200, 20, 'Producto no médico', 1);
+
+INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
+('55553', 'Penicilina', 3, 1, 0.75, 1.50, 'LoteAB00', '2027-01-01', 0, 0, 200, 20, 'Medicamentos', 1);

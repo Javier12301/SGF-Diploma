@@ -35,7 +35,7 @@
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.btnGrupos = new System.Windows.Forms.Button();
-            this.btnInformes = new System.Windows.Forms.Button();
+            this.btnAuditoria = new System.Windows.Forms.Button();
             this.btnMisDatos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).BeginInit();
@@ -83,13 +83,13 @@
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpContenedorBotones.Controls.Add(this.btnUsuarios);
             this.flpContenedorBotones.Controls.Add(this.btnGrupos);
-            this.flpContenedorBotones.Controls.Add(this.btnInformes);
+            this.flpContenedorBotones.Controls.Add(this.btnAuditoria);
             this.flpContenedorBotones.Controls.Add(this.btnMisDatos);
             this.flpContenedorBotones.Location = new System.Drawing.Point(0, 6);
             this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
             this.flpContenedorBotones.Name = "flpContenedorBotones";
             this.flpContenedorBotones.Size = new System.Drawing.Size(857, 70);
-            this.flpContenedorBotones.TabIndex = 106;
+            this.flpContenedorBotones.TabIndex = 0;
             // 
             // btnUsuarios
             // 
@@ -103,7 +103,7 @@
             this.btnUsuarios.Location = new System.Drawing.Point(3, 3);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(118, 62);
-            this.btnUsuarios.TabIndex = 18;
+            this.btnUsuarios.TabIndex = 1;
             this.btnUsuarios.Tag = "formUsuarios";
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -122,30 +122,31 @@
             this.btnGrupos.Location = new System.Drawing.Point(127, 3);
             this.btnGrupos.Name = "btnGrupos";
             this.btnGrupos.Size = new System.Drawing.Size(118, 62);
-            this.btnGrupos.TabIndex = 15;
+            this.btnGrupos.TabIndex = 2;
             this.btnGrupos.Tag = "formGrupos";
             this.btnGrupos.Text = "Grupos";
             this.btnGrupos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnGrupos.UseVisualStyleBackColor = false;
             this.btnGrupos.Click += new System.EventHandler(this.btnGrupos_Click);
             // 
-            // btnInformes
+            // btnAuditoria
             // 
-            this.btnInformes.BackColor = System.Drawing.Color.White;
-            this.btnInformes.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnInformes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInformes.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformes.ForeColor = System.Drawing.Color.Black;
-            this.btnInformes.Image = ((System.Drawing.Image)(resources.GetObject("btnInformes.Image")));
-            this.btnInformes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnInformes.Location = new System.Drawing.Point(251, 3);
-            this.btnInformes.Name = "btnInformes";
-            this.btnInformes.Size = new System.Drawing.Size(118, 62);
-            this.btnInformes.TabIndex = 16;
-            this.btnInformes.Tag = "formAuditoria";
-            this.btnInformes.Text = "Auditoria";
-            this.btnInformes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnInformes.UseVisualStyleBackColor = false;
+            this.btnAuditoria.BackColor = System.Drawing.Color.White;
+            this.btnAuditoria.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnAuditoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAuditoria.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAuditoria.ForeColor = System.Drawing.Color.Black;
+            this.btnAuditoria.Image = ((System.Drawing.Image)(resources.GetObject("btnAuditoria.Image")));
+            this.btnAuditoria.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAuditoria.Location = new System.Drawing.Point(251, 3);
+            this.btnAuditoria.Name = "btnAuditoria";
+            this.btnAuditoria.Size = new System.Drawing.Size(118, 62);
+            this.btnAuditoria.TabIndex = 3;
+            this.btnAuditoria.Tag = "formAuditoria";
+            this.btnAuditoria.Text = "Auditoria";
+            this.btnAuditoria.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnAuditoria.UseVisualStyleBackColor = false;
+            this.btnAuditoria.Click += new System.EventHandler(this.btnAuditoria_Click);
             // 
             // btnMisDatos
             // 
@@ -159,11 +160,12 @@
             this.btnMisDatos.Location = new System.Drawing.Point(375, 3);
             this.btnMisDatos.Name = "btnMisDatos";
             this.btnMisDatos.Size = new System.Drawing.Size(118, 62);
-            this.btnMisDatos.TabIndex = 19;
+            this.btnMisDatos.TabIndex = 4;
             this.btnMisDatos.Tag = "formMisDatos";
             this.btnMisDatos.Text = "Mis datos";
             this.btnMisDatos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMisDatos.UseVisualStyleBackColor = false;
+            this.btnMisDatos.Click += new System.EventHandler(this.btnMisDatos_Click);
             // 
             // formPerfiles
             // 
@@ -190,7 +192,7 @@
         private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnUsuarios;
         private System.Windows.Forms.Button btnGrupos;
-        private System.Windows.Forms.Button btnInformes;
+        private System.Windows.Forms.Button btnAuditoria;
         private System.Windows.Forms.Button btnMisDatos;
     }
 }

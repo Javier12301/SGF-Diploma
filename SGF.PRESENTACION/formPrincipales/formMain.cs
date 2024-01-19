@@ -144,12 +144,18 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            Cerrar_Sesion();
+        }
+
+        public void Cerrar_Sesion()
+        {
             try
             {
                 lSesion.Logout();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

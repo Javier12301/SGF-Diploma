@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorreoService.cs" />
+    <Compile Include="Negocio\CategoriaBLL.cs" />
+    <Compile Include="Negocio\ProductoBLL.cs" />
+    <Compile Include="Negocio\ProveedorBLL.cs" />
     <Compile Include="Seguridad\AccionBLL.cs" />
     <Compile Include="Seguridad\AuditoriaBLL.cs" />
     <Compile Include="Seguridad\GrupoBLL.cs" />
@@ -66,5 +69,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

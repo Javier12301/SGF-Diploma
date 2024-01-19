@@ -3869,12 +3869,61 @@ SELECT AuditoriaID, FechayHora, Movimiento, NombreUsuario, Descripcion FROM Audi
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT AuditoriaID, FechayHora, Movimiento, NombreUsuario, Descripcion FROM dbo.A" +
                 "uditoria";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT *
+FROM Auditoria
+WHERE
+    (
+        (@FiltroUsuario = 'Todos' OR NombreUsuario = @FiltroUsuario)
+    )
+    AND
+    (
+        (@FiltroMovimiento = 'Todos' OR Movimiento = @FiltroMovimiento)
+    )
+    AND
+    (
+        (
+            @FiltroBuscar = 'Todo' AND 
+            (
+                NombreUsuario LIKE '%' + @Buscar + '%' OR
+                Movimiento LIKE '%' + @Buscar + '%' OR
+                Descripcion LIKE '%' + @Buscar + '%'
+            )
+        )
+        OR
+        (
+            @FiltroBuscar = 'Nombre Usuario' AND NombreUsuario LIKE '%' + @Buscar + '%'
+        )
+        OR
+        (
+            @FiltroBuscar = 'Movimiento' AND Movimiento LIKE '%' + @Buscar + '%'
+        )
+        OR
+        (
+            @FiltroBuscar = 'Descripcion' AND Descripcion LIKE '%' + @Buscar + '%'
+        )
+    )
+    AND
+    (
+        (@FechaInicio IS NULL OR FechayHora >= @FechaInicio)
+        AND
+        (@FechaFin IS NULL OR FechayHora <= @FechaFin)
+    );
+";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroUsuario", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "NombreUsuario", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroMovimiento", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "Movimiento", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroBuscar", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Buscar", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "NombreUsuario", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaInicio", global::System.Data.SqlDbType.Date, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechayHora", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaFin", global::System.Data.SqlDbType.Date, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechayHora", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3896,6 +3945,102 @@ SELECT AuditoriaID, FechayHora, Movimiento, NombreUsuario, Descripcion FROM Audi
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual FarmaciaDatosDataSet.AuditoriaDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            FarmaciaDatosDataSet.AuditoriaDataTable dataTable = new FarmaciaDatosDataSet.AuditoriaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int Filtrar(FarmaciaDatosDataSet.AuditoriaDataTable dataTable, string FiltroUsuario, string FiltroMovimiento, string FiltroBuscar, string Buscar, global::System.Nullable<global::System.DateTime> FechaInicio, global::System.Nullable<global::System.DateTime> FechaFin) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((FiltroUsuario == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroUsuario));
+            }
+            if ((FiltroMovimiento == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FiltroMovimiento));
+            }
+            if ((FiltroBuscar == null)) {
+                throw new global::System.ArgumentNullException("FiltroBuscar");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroBuscar));
+            }
+            if ((Buscar == null)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(Buscar));
+            }
+            if ((FechaInicio.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(FechaInicio.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((FechaFin.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((System.DateTime)(FechaFin.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FarmaciaDatosDataSet.AuditoriaDataTable GetDataBy(string FiltroUsuario, string FiltroMovimiento, string FiltroBuscar, string Buscar, global::System.Nullable<global::System.DateTime> FechaInicio, global::System.Nullable<global::System.DateTime> FechaFin) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((FiltroUsuario == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroUsuario));
+            }
+            if ((FiltroMovimiento == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FiltroMovimiento));
+            }
+            if ((FiltroBuscar == null)) {
+                throw new global::System.ArgumentNullException("FiltroBuscar");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroBuscar));
+            }
+            if ((Buscar == null)) {
+                this.Adapter.SelectCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(Buscar));
+            }
+            if ((FechaInicio.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((System.DateTime)(FechaInicio.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((FechaFin.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[5].Value = ((System.DateTime)(FechaFin.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             FarmaciaDatosDataSet.AuditoriaDataTable dataTable = new FarmaciaDatosDataSet.AuditoriaDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -4292,7 +4437,22 @@ SELECT GrupoID, Nombre, Estado FROM Grupo WHERE (GrupoID = @GrupoID)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = @"SELECT Estado, GrupoID, Nombre FROM Grupo WHERE (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Todos') OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Todos') OR (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Activo') AND (Estado = 1) OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Activo') AND (Estado = 1) OR (GrupoID > 0) AND (@FiltroBuscar = 'Todos') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Inactivo') AND (Estado = 0) OR (GrupoID > 0) AND (@FiltroBuscar = 'Nombre') AND (Nombre LIKE '%' + @Buscar + '%') AND (@FiltroEstado = 'Inactivo') AND (Estado = 0)";
+            this._commandCollection[1].CommandText = @"SELECT Estado, GrupoID, Nombre
+FROM Grupo
+WHERE GrupoID > 0
+  AND (
+      (@FiltroBuscar = 'Todos' AND Nombre LIKE '%' + @Buscar + '%')
+      OR
+      (@FiltroBuscar = 'Nombre' AND Nombre LIKE '%' + @Buscar + '%')
+  )
+  AND (
+      (@FiltroEstado = 'Todos')
+      OR
+      (@FiltroEstado = 'Activo' AND Estado = 1)
+      OR
+      (@FiltroEstado = 'Inactivo' AND Estado = 0)
+  );
+";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroBuscar", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Buscar", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "Nombre", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

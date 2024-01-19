@@ -98,11 +98,7 @@ namespace SGF.PRESENTACION.formModales
                     {
                         // Buscar el permiso en la listaPermisosActivados y eliminarlo
                         Permiso eliminarPermiso = listaPermisosActivados.FirstOrDefault(p => p.Modulo.Descripcion == permiso.Modulo.Descripcion && p.Accion.Descripcion == permiso.Accion.Descripcion);
-                        bool eliminado = listaPermisosActivados.Remove(eliminarPermiso);
-                        if (eliminado)
-                        {
-                            MessageBox.Show("Se elimino con exito el item");
-                        }
+                        listaPermisosActivados.Remove(eliminarPermiso);
                     }
                 }
             }
@@ -541,6 +537,11 @@ namespace SGF.PRESENTACION.formModales
                 txtID.Text = oGrupo.GrupoID.ToString();
                 txtNombreGrupo.Text = oGrupo.Nombre;
                 chkEstado.Checked = oGrupo.Estado;
+                if(oGrupo.GrupoID == 1)
+                {
+                    txtNombreGrupo.Enabled = false;
+                    chkEstado.Enabled = false;
+                }
             }
         }
 

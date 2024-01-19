@@ -36,6 +36,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.auditoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
             this.bnpCantidadDeItems = new System.Windows.Forms.ToolStripLabel();
             this.bnpUltimoItem = new System.Windows.Forms.ToolStripButton();
             this.bnpSiguienteItem = new System.Windows.Forms.ToolStripButton();
@@ -50,8 +52,20 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbFiltroUsuario = new System.Windows.Forms.ToolStripComboBox();
-            this.dgvUsuario = new System.Windows.Forms.DataGridView();
+            this.dgvAuditoria = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcFechayHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.cmbFiltroBuscar = new System.Windows.Forms.ComboBox();
@@ -59,32 +73,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnExportar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtpFin = new System.Windows.Forms.DateTimePicker();
-            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
-            this.auditoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.auditoriaTableAdapter = new SGF.PRESENTACION.FarmaciaDatosDataSetTableAdapters.AuditoriaTableAdapter();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcFechayHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcNombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.flpContenedorBotones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.bindingNavigator1);
-            this.panel1.Controls.Add(this.dgvUsuario);
+            this.panel1.Controls.Add(this.dgvAuditoria);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -98,6 +104,7 @@
             this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.AutoSize = false;
             this.bindingNavigator1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.bindingNavigator1.BindingSource = this.auditoriaBindingSource;
             this.bindingNavigator1.CountItem = this.bnpCantidadDeItems;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -128,8 +135,18 @@
             this.bindingNavigator1.PositionItem = this.bnpNumeroItem;
             this.bindingNavigator1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.bindingNavigator1.Size = new System.Drawing.Size(1081, 49);
-            this.bindingNavigator1.TabIndex = 112;
+            this.bindingNavigator1.TabIndex = 13;
             this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // auditoriaBindingSource
+            // 
+            this.auditoriaBindingSource.DataMember = "Auditoria";
+            this.auditoriaBindingSource.DataSource = this.farmaciaDatosDataSet;
+            // 
+            // farmaciaDatosDataSet
+            // 
+            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
+            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bnpCantidadDeItems
             // 
@@ -215,6 +232,7 @@
             this.cmbFiltroMovimiento.Font = new System.Drawing.Font("Roboto", 9.75F);
             this.cmbFiltroMovimiento.Name = "cmbFiltroMovimiento";
             this.cmbFiltroMovimiento.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroMovimiento.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
             // 
             // toolStripLabel2
             // 
@@ -243,20 +261,21 @@
             this.cmbFiltroUsuario.Font = new System.Drawing.Font("Roboto", 9.75F);
             this.cmbFiltroUsuario.Name = "cmbFiltroUsuario";
             this.cmbFiltroUsuario.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroUsuario.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
             // 
-            // dgvUsuario
+            // dgvAuditoria
             // 
-            this.dgvUsuario.AllowUserToAddRows = false;
-            this.dgvUsuario.AllowUserToDeleteRows = false;
+            this.dgvAuditoria.AllowUserToAddRows = false;
+            this.dgvAuditoria.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvAuditoria.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAuditoria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvUsuario.AutoGenerateColumns = false;
-            this.dgvUsuario.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvUsuario.BackgroundColor = System.Drawing.Color.White;
+            this.dgvAuditoria.AutoGenerateColumns = false;
+            this.dgvAuditoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAuditoria.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -264,16 +283,16 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsuario.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvUsuario.ColumnHeadersHeight = 40;
-            this.dgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvAuditoria.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAuditoria.ColumnHeadersHeight = 40;
+            this.dgvAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvAuditoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvcID,
             this.dgvcFechayHora,
             this.dgvcMovimiento,
             this.dgvcNombreUsuario,
             this.dgvcDescripcion});
-            this.dgvUsuario.DataSource = this.auditoriaBindingSource;
+            this.dgvAuditoria.DataSource = this.auditoriaBindingSource;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
@@ -281,11 +300,11 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuario.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvUsuario.GridColor = System.Drawing.Color.White;
-            this.dgvUsuario.Location = new System.Drawing.Point(6, 139);
-            this.dgvUsuario.Name = "dgvUsuario";
-            this.dgvUsuario.ReadOnly = true;
+            this.dgvAuditoria.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvAuditoria.GridColor = System.Drawing.Color.White;
+            this.dgvAuditoria.Location = new System.Drawing.Point(6, 139);
+            this.dgvAuditoria.Name = "dgvAuditoria";
+            this.dgvAuditoria.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
@@ -293,181 +312,11 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsuario.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvUsuario.RowHeadersVisible = false;
-            this.dgvUsuario.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuario.Size = new System.Drawing.Size(1071, 169);
-            this.dgvUsuario.TabIndex = 111;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.dtpFin);
-            this.panel4.Controls.Add(this.dtpInicio);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.btnBuscar);
-            this.panel4.Controls.Add(this.txtBuscar);
-            this.panel4.Controls.Add(this.cmbFiltroBuscar);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Location = new System.Drawing.Point(6, 79);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1071, 54);
-            this.panel4.TabIndex = 110;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.BackColor = System.Drawing.Color.White;
-            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
-            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.btnBuscar.IconColor = System.Drawing.Color.Black;
-            this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBuscar.IconSize = 16;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(975, 17);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
-            this.btnBuscar.Size = new System.Drawing.Size(78, 23);
-            this.btnBuscar.TabIndex = 96;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBuscar.UseVisualStyleBackColor = false;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBuscar.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.txtBuscar.Location = new System.Drawing.Point(781, 17);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(188, 23);
-            this.txtBuscar.TabIndex = 3;
-            // 
-            // cmbFiltroBuscar
-            // 
-            this.cmbFiltroBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbFiltroBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltroBuscar.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbFiltroBuscar.FormattingEnabled = true;
-            this.cmbFiltroBuscar.Location = new System.Drawing.Point(662, 17);
-            this.cmbFiltroBuscar.Name = "cmbFiltroBuscar";
-            this.cmbFiltroBuscar.Size = new System.Drawing.Size(113, 23);
-            this.cmbFiltroBuscar.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(580, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 17);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Buscar por:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Auditoria";
-            // 
-            // flpContenedorBotones
-            // 
-            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
-            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flpContenedorBotones.Controls.Add(this.btnExportar);
-            this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
-            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
-            this.flpContenedorBotones.Name = "flpContenedorBotones";
-            this.flpContenedorBotones.Size = new System.Drawing.Size(833, 68);
-            this.flpContenedorBotones.TabIndex = 107;
-            // 
-            // btnExportar
-            // 
-            this.btnExportar.BackColor = System.Drawing.Color.White;
-            this.btnExportar.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportar.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportar.ForeColor = System.Drawing.Color.Black;
-            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExportar.Location = new System.Drawing.Point(4, 4);
-            this.btnExportar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(112, 57);
-            this.btnExportar.TabIndex = 14;
-            this.btnExportar.Tag = "Exportar";
-            this.btnExportar.Text = "Exportar";
-            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportar.UseVisualStyleBackColor = false;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(120, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 17);
-            this.label2.TabIndex = 97;
-            this.label2.Text = "Fecha Inicio:";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(325, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 17);
-            this.label4.TabIndex = 98;
-            this.label4.Text = "Fecha Fin:";
-            // 
-            // dtpInicio
-            // 
-            this.dtpInicio.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new System.Drawing.Point(211, 17);
-            this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new System.Drawing.Size(103, 23);
-            this.dtpInicio.TabIndex = 99;
-            // 
-            // dtpFin
-            // 
-            this.dtpFin.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFin.Location = new System.Drawing.Point(400, 17);
-            this.dtpFin.Name = "dtpFin";
-            this.dtpFin.Size = new System.Drawing.Size(103, 23);
-            this.dtpFin.TabIndex = 100;
-            // 
-            // farmaciaDatosDataSet
-            // 
-            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
-            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // auditoriaBindingSource
-            // 
-            this.auditoriaBindingSource.DataMember = "Auditoria";
-            this.auditoriaBindingSource.DataSource = this.farmaciaDatosDataSet;
-            // 
-            // auditoriaTableAdapter
-            // 
-            this.auditoriaTableAdapter.ClearBeforeFill = true;
+            this.dgvAuditoria.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvAuditoria.RowHeadersVisible = false;
+            this.dgvAuditoria.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAuditoria.Size = new System.Drawing.Size(1071, 169);
+            this.dgvAuditoria.TabIndex = 12;
             // 
             // dgvcID
             // 
@@ -475,6 +324,7 @@
             this.dgvcID.HeaderText = "ID";
             this.dgvcID.Name = "dgvcID";
             this.dgvcID.ReadOnly = true;
+            this.dgvcID.Visible = false;
             // 
             // dgvcFechayHora
             // 
@@ -504,6 +354,197 @@
             this.dgvcDescripcion.Name = "dgvcDescripcion";
             this.dgvcDescripcion.ReadOnly = true;
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.flowLayoutPanel1);
+            this.panel4.Controls.Add(this.btnBuscar);
+            this.panel4.Controls.Add(this.txtBuscar);
+            this.panel4.Controls.Add(this.cmbFiltroBuscar);
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Location = new System.Drawing.Point(6, 79);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1071, 54);
+            this.panel4.TabIndex = 2;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(112, 6);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 43);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.dtpInicio);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 35);
+            this.panel2.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(85, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Fecha Inicio:";
+            // 
+            // dtpInicio
+            // 
+            this.dtpInicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpInicio.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInicio.Location = new System.Drawing.Point(90, 7);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(103, 23);
+            this.dtpInicio.TabIndex = 5;
+            this.dtpInicio.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
+            this.dtpInicio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFin_KeyPress);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.dtpFin);
+            this.panel3.Location = new System.Drawing.Point(209, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(189, 35);
+            this.panel3.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Fecha Fin:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dtpFin
+            // 
+            this.dtpFin.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFin.Location = new System.Drawing.Point(78, 7);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(103, 23);
+            this.dtpFin.TabIndex = 7;
+            this.dtpFin.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
+            this.dtpFin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dtpFin_KeyPress);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.BackColor = System.Drawing.Color.White;
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
+            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.btnBuscar.IconColor = System.Drawing.Color.Black;
+            this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBuscar.IconSize = 16;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(975, 17);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.btnBuscar.Size = new System.Drawing.Size(78, 23);
+            this.btnBuscar.TabIndex = 11;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.txtBuscar.Location = new System.Drawing.Point(781, 17);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(188, 23);
+            this.txtBuscar.TabIndex = 10;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
+            // 
+            // cmbFiltroBuscar
+            // 
+            this.cmbFiltroBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbFiltroBuscar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltroBuscar.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbFiltroBuscar.FormattingEnabled = true;
+            this.cmbFiltroBuscar.Location = new System.Drawing.Point(662, 17);
+            this.cmbFiltroBuscar.Name = "cmbFiltroBuscar";
+            this.cmbFiltroBuscar.Size = new System.Drawing.Size(113, 23);
+            this.cmbFiltroBuscar.TabIndex = 9;
+            this.cmbFiltroBuscar.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(580, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Buscar por:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Auditoria";
+            // 
+            // flpContenedorBotones
+            // 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
+            this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnExportar);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
+            this.flpContenedorBotones.Name = "flpContenedorBotones";
+            this.flpContenedorBotones.Size = new System.Drawing.Size(833, 68);
+            this.flpContenedorBotones.TabIndex = 0;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.White;
+            this.btnExportar.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.Black;
+            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
+            this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnExportar.Location = new System.Drawing.Point(4, 4);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(112, 57);
+            this.btnExportar.TabIndex = 1;
+            this.btnExportar.Tag = "Exportar";
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
+            // auditoriaTableAdapter
+            // 
+            this.auditoriaTableAdapter.ClearBeforeFill = true;
+            // 
             // formAuditoria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,12 +559,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.flpContenedorBotones.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -546,7 +592,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripComboBox cmbFiltroUsuario;
-        private System.Windows.Forms.DataGridView dgvUsuario;
+        private System.Windows.Forms.DataGridView dgvAuditoria;
         private System.Windows.Forms.Panel panel4;
         private FontAwesome.Sharp.IconButton btnBuscar;
         private System.Windows.Forms.TextBox txtBuscar;
@@ -555,10 +601,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnExportar;
-        private System.Windows.Forms.DateTimePicker dtpFin;
-        private System.Windows.Forms.DateTimePicker dtpInicio;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
         private FarmaciaDatosDataSet farmaciaDatosDataSet;
         private System.Windows.Forms.BindingSource auditoriaBindingSource;
         private FarmaciaDatosDataSetTableAdapters.AuditoriaTableAdapter auditoriaTableAdapter;
@@ -567,5 +609,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcMovimiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombreUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescripcion;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtpInicio;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dtpFin;
     }
 }

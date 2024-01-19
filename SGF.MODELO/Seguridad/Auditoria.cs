@@ -14,6 +14,8 @@ namespace SGF.MODELO.Seguridad
         public string NombreUsuario { get; set; }
         public string Descripcion { get; set; }
 
+        public Auditoria() { }
+
         public Auditoria(string movimiento, string nombreUsuario, string descripcion)
         {
             FechayHora = DateTime.Now;

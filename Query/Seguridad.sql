@@ -57,6 +57,7 @@ CREATE TABLE Auditoria (
 );
 GO
 
+SELECT * FROM Auditoria
 
 
 -- Modulos
@@ -79,6 +80,7 @@ WHERE Gr.GrupoID = @GrupoID AND M.Descripcion = @moduloDescripcion AND p.Permiti
 GO
 
 SELECT * FROM Auditoria
+
 
 select * from Accion
 where ModuloID = 14

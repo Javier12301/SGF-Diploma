@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SGF.MODELO;
+using SGF.PRESENTACION.formPrincipales;
 
 namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 {
@@ -72,20 +73,39 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     int grupoID = Convert.ToInt32(dgvGrupos.Rows[filaIndex].Cells["dgvcID"].Value);
                     if (grupoID > 0)
                     {
-                        if (grupoID != lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
-                        {
-                            using (var modal = new mdGrupo(true, grupoID))
-                            {
-                                var resultado = modal.ShowDialog();
-                                if (resultado == DialogResult.OK)
-                                {
-                                    cargarLista();
-                                }
-                            }
-                        }
-                        else
+                        if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID() && grupoID != 1)
                         {
                             MessageBox.Show("No puede modificar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // El unico que puede modificar el grupo Administradores es el usuario Admin
+                        if (grupoID == 1 && lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID() != 1)
+                        {
+                            MessageBox.Show("No puede modificar el grupo de Administradores", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        using (var modal = new mdGrupo(true, grupoID))
+                        {
+                            var resultado = modal.ShowDialog();
+                            if (resultado == DialogResult.OK)
+                            {
+                                if (grupoID == 1)
+                                {
+                                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin modifico el grupo Administradores.");
+                                    MessageBox.Show("Se cerrará la sesión para aplicar los cambios.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    // Obtenemos la instancia del formulario principal que es el padre de todos y luego cerramos la sesión
+                                    // haciendo uso de su función encargada de cerrar la sesión.
+                                    formMain formMain = (formMain)Application.OpenForms["formMain"];
+                                    formMain.Cerrar_Sesion();
+                                }
+                                else
+                                {
+                                    cargarLista();
+
+                                }
+                            }
                         }
                     }
                 }
@@ -109,7 +129,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 
         private void dgvGrupos_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
                 bajaGrupo();
             }
@@ -120,7 +140,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             try
             {
                 // Verificar si hay celdas seleccionadas
-                if(dgvGrupos.SelectedCells.Count == 0)
+                if (dgvGrupos.SelectedCells.Count == 0)
                 {
                     MessageBox.Show("Seleccione por lo menos un grupo para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -136,34 +156,35 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                 gruposAEliminar.Clear();
 
                 // Recorrer celdas seleccionadas
-                foreach(DataGridViewCell celda in dgvGrupos.SelectedCells)
+                foreach (DataGridViewCell celda in dgvGrupos.SelectedCells)
                 {
                     int grupoID = Convert.ToInt32(dgvGrupos.Rows[celda.RowIndex].Cells["dgvcID"].Value);
                     string nombreGrupo = dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value.ToString();
                     string operacion = string.Empty;
                     // Comprobar si no se está por eliminar el grupo al que pertenece el usuario en sesión
-                    if(grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
+                    if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
                     {
                         MessageBox.Show("No puede eliminar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
-                    }else if(grupoID == 1)
+                    }
+                    else if (grupoID == 1)
                     {
                         MessageBox.Show("No puede eliminar al grupo Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
                     // Comprobar si el grupo tiene usuarios asignados
-                    if(lGrupo.GrupoTieneUsuarios(grupoID))
+                    if (lGrupo.GrupoTieneUsuarios(grupoID))
                     {
                         DialogResult respuesta = MessageBox.Show($"El grupo seleccionado: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) tiene usuarios asignados, ¿desea asignar a los usuarios de este grupo como sin grupo?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                        if(DialogResult.Yes == respuesta)
+                        if (DialogResult.Yes == respuesta)
                         {
                             operacion = "AsignarUsuariosSinGrupo";
                         }
-                        else if(DialogResult.No == respuesta)
+                        else if (DialogResult.No == respuesta)
                         {
                             respuesta = MessageBox.Show($"¿Desea eliminar el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) y los usuarios asignados a este?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                            if(DialogResult.Yes == respuesta)
+                            if (DialogResult.Yes == respuesta)
                             {
                                 operacion = "EliminarGrupoYUsuarios";
                             }
@@ -182,24 +203,25 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     {
                         operacion = "EliminarGrupo";
                     }
-                    gruposAEliminar.Add(new Operacion { ID = grupoID, Nombre = nombreGrupo ,NombreOperacion = operacion });
+                    gruposAEliminar.Add(new Operacion { ID = grupoID, Nombre = nombreGrupo, NombreOperacion = operacion });
                 }
                 int gruposEliminados = 0;
 
-                foreach(var grupo in gruposAEliminar)
+                foreach (var grupo in gruposAEliminar)
                 {
-                    if(lGrupo.BajaGrupo(grupo))
+                    if (lGrupo.BajaGrupo(grupo))
                         gruposEliminados++;
                     else
                         MessageBox.Show($"No se pudo eliminar el grupo con ID: ( {grupo.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                if(gruposEliminados > 0)
+                if (gruposEliminados > 0)
                 {
                     MessageBox.Show(gruposEliminados > 1 ? "Grupos eliminados con éxito." : "Grupo eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cargarLista();
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -220,7 +242,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             DialogResult resultado = MessageBox.Show("¿Desea limpiar el campo de búsqueda?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(resultado == DialogResult.Yes)
+            if (resultado == DialogResult.Yes)
             {
                 LimpiarBusqueda();
             }
@@ -293,6 +315,6 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             }
         }
 
-       
+
     }
 }

@@ -38,5 +38,38 @@ namespace SGF.DATOS.Seguridad
             }
             return true;
         }
+
+        public static List<Auditoria> ObtenerListaAuditoriaD()
+        {
+            List<Auditoria> oLista = new List<Auditoria>();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT DISTINCT Movimiento, NombreUsuario FROM Auditoria");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Auditoria auditoria = new Auditoria();
+                                auditoria.Movimiento = reader["Movimiento"].ToString();
+                                auditoria.NombreUsuario = reader["NombreUsuario"].ToString();
+                                oLista.Add(auditoria);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al generar la Auditoria, por favor contacte al administrador para solucionar este error.");
+                }
+            }
+            return oLista;
+        }
+
     }
 }

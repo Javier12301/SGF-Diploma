@@ -324,9 +324,9 @@
             this.dgvUsuario.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvUsuario.Size = new System.Drawing.Size(1071, 169);
             this.dgvUsuario.TabIndex = 111;
-            this.dgvUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellEnter);
             this.dgvUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellDoubleClick);
-            this.dgvUsuario.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvUsuario.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellEnter);
             this.dgvUsuario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvUsuario_KeyDown);
             // 
             // dgvcID

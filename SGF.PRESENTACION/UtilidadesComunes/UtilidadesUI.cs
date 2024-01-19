@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Office2016.Drawing.Charts;
 using FontAwesome.Sharp;
 using Guna.UI.WinForms;
 using SGF.MODELO.Seguridad;
@@ -153,36 +154,6 @@ namespace SGF.PRESENTACION.UtilidadesComunes
         }
 
 
-        public bool VerificarTextbox(TextBoxBase textbox, ErrorProvider mensajeError, Label lbl)
-        {
-            if (!string.IsNullOrEmpty(textbox.Text))
-            {
-                // No está vacío
-                mensajeError.SetError(lbl, "");
-                return true;
-            }
-            else
-            {
-                // Está vacío
-                mensajeError.SetError(lbl, "Este campo no puede estar vacío.");
-                return false;
-            }
-        }
-
-        // Estos tipos de textbox poseen lineas inferiores, lo que indica visualmente al usuario donde ocurrio un error
-        public bool VerificarTextboxG(GunaLineTextBox textbox)
-        {
-            if (!string.IsNullOrEmpty(textbox.Text))
-            {
-                errorTextboxG(textbox, false);
-                return true;
-            }
-            else
-            {
-                errorTextboxG(textbox, true);
-                return false;
-            }
-        }
 
         public bool errorTextboxG(GunaLineTextBox textbox, bool error)
         {
@@ -213,6 +184,37 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             foreach (ComboBox combobox in comboboxes)
             {
                 combobox.SelectedIndex = 0;
+            }
+        }
+
+        public bool VerificarTextbox(TextBoxBase textbox, ErrorProvider mensajeError, Label lbl)
+        {
+            if (!string.IsNullOrEmpty(textbox.Text))
+            {
+                // No está vacío
+                mensajeError.SetError(lbl, "");
+                return true;
+            }
+            else
+            {
+                // Está vacío
+                mensajeError.SetError(lbl, "Este campo no puede estar vacío.");
+                return false;
+            }
+        }
+
+        // Estos tipos de textbox poseen lineas inferiores, lo que indica visualmente al usuario donde ocurrio un error
+        public bool VerificarTextboxG(GunaLineTextBox textbox)
+        {
+            if (!string.IsNullOrEmpty(textbox.Text))
+            {
+                errorTextboxG(textbox, false);
+                return true;
+            }
+            else
+            {
+                errorTextboxG(textbox, true);
+                return false;
             }
         }
 
@@ -261,10 +263,85 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
+        // Verificar fecha vencimiento utilizando el dia de hoy
+        public bool VerificarFechaVencimiento(DateTimePicker fechaVencimiento, ErrorProvider mensajeError, Label lbl)
+        {
+            if (fechaVencimiento.Value.Date >= DateTime.Now.Date)
+            {
+                // Fecha valida
+                mensajeError.SetError(lbl, "");
+                return true;
+            }
+            else
+            {
+                // Vencido
+                mensajeError.SetError(lbl, "El producto ingresado se encuentra vencido, por favor, verifique la fecha de vencimiento antes de cargar el producto.");
+                return false;
+            }
+        }
+
+        public bool VerificarTextboxPrecio(TextBoxBase textbox, ErrorProvider mensajeError)
+        {
+            if (!string.IsNullOrEmpty(textbox.Text))
+            {
+                // No está vacío
+                mensajeError.SetError(textbox, "");
+                return true;
+            }
+            else
+            {
+                // Está vacío
+                mensajeError.SetError(textbox, "Este campo no puede estar vacío.");
+                return false;
+            }
+        }
+        
+        public bool VerificarFormatoMoneda(TextBoxBase textbox, ErrorProvider mensajeError)
+        {
+            if (decimal.TryParse(textbox.Text, out decimal valor))
+            {
+                if (valor == 0.00m)  // Verifica si el valor es igual a 0.00
+                {
+                    mensajeError.SetError(textbox, "El valor ingresado debe ser mayor a 0.");
+                    return false;
+                }
+                else
+                {
+                    mensajeError.SetError(textbox, "");
+                    return true;
+                }
+            }
+            else
+            {
+                mensajeError.SetError(textbox, "El valor ingresado no cumple con el formato moneda, si desea agregar centavos, utilice el formato 0.00");
+                return false;
+            }
+        }
+
+
+        // Verificar precio y costo ingresado, el costo no debe ser mayor al precio
+        public bool VerificarPrecioyCosto(TextBoxBase precio, TextBoxBase costo, ErrorProvider mensajeError)
+        {
+            decimal costoDecimal = decimal.Parse(costo.Text);
+            decimal precioDecimal = decimal.Parse(precio.Text);
+
+            if (costoDecimal > precioDecimal)
+            {
+                mensajeError.SetError(precio, "");
+                return true;
+            }
+            else
+            {
+                mensajeError.SetError(precio, "El precio ingresado debe ser mayor al costo.");
+                return false;
+            }
+        }
+
+
         // Solo numeros
         public void SoloNumero(KeyPressEventArgs e)
         {
-            if(!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }

@@ -62,10 +62,10 @@
             this.panel1.Controls.Add(this.txtFechayHora);
             this.panel1.Controls.Add(this.lblFecha);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 498);
+            this.panel1.Location = new System.Drawing.Point(0, 539);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1076, 39);
+            this.panel1.Size = new System.Drawing.Size(1256, 39);
             this.panel1.TabIndex = 15;
             // 
             // txtFechayHora
@@ -82,7 +82,7 @@
             this.txtFechayHora.FocusedForeColor = System.Drawing.SystemColors.ControlText;
             this.txtFechayHora.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
             this.txtFechayHora.ForeColor = System.Drawing.Color.DimGray;
-            this.txtFechayHora.Location = new System.Drawing.Point(821, 2);
+            this.txtFechayHora.Location = new System.Drawing.Point(1001, 2);
             this.txtFechayHora.Margin = new System.Windows.Forms.Padding(4);
             this.txtFechayHora.Name = "txtFechayHora";
             this.txtFechayHora.PasswordChar = '\0';
@@ -113,7 +113,7 @@
             this.pnlPadre.Location = new System.Drawing.Point(7, 83);
             this.pnlPadre.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPadre.Name = "pnlPadre";
-            this.pnlPadre.Size = new System.Drawing.Size(1064, 414);
+            this.pnlPadre.Size = new System.Drawing.Size(1244, 455);
             this.pnlPadre.TabIndex = 16;
             // 
             // tHorayFecha
@@ -140,7 +140,7 @@
             this.btnLogOut});
             this.tsSuperior.Location = new System.Drawing.Point(0, 0);
             this.tsSuperior.Name = "tsSuperior";
-            this.tsSuperior.Size = new System.Drawing.Size(1076, 54);
+            this.tsSuperior.Size = new System.Drawing.Size(1256, 54);
             this.tsSuperior.TabIndex = 106;
             this.tsSuperior.Text = "toolStrip2";
             // 
@@ -289,7 +289,7 @@
             this.lblGrupo});
             this.toolStrip1.Location = new System.Drawing.Point(0, 54);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1076, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1256, 25);
             this.toolStrip1.TabIndex = 107;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -334,12 +334,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1076, 537);
+            this.ClientSize = new System.Drawing.Size(1256, 578);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tsSuperior);
             this.Controls.Add(this.pnlPadre);
             this.Controls.Add(this.panel1);
-            this.MinimumSize = new System.Drawing.Size(1092, 576);
+            this.MinimumSize = new System.Drawing.Size(1272, 617);
             this.Name = "formMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sistema de Gestión Farmacéutico";

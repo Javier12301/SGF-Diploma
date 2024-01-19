@@ -78,6 +78,18 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     int usuarioID = Convert.ToInt32(dgvUsuario.Rows[filaIndex].Cells["dgvcID"].Value);
                     if (usuarioID > 0)
                     {
+                        if(usuarioID == 1)
+                        {
+                            MessageBox.Show("No puede modificar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        // No se puede modificar su propio usuario
+                        if(usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
+                        {
+                            MessageBox.Show("No puede modificar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
                         using (var modal = new mdUsuario(true, usuarioID))
                         {
                             var resultado = modal.ShowDialog();
@@ -273,7 +285,8 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             cmbFiltroEstado.SelectedIndex = 0;
         }
 
-        private void dgvProductos_CellEnter(object sender, DataGridViewCellEventArgs e)
+
+        private void dgvUsuario_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             // Comprobar si la celda es mayor a 0
             if (e.RowIndex >= 0)
@@ -290,7 +303,6 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                 }
             }
         }
-
 
     }
 }

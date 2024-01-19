@@ -73,11 +73,11 @@ namespace SGF.NEGOCIO.Seguridad
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificacion", "Sistema", $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con exito al grupo: {oGrupo.Nombre}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con exito al grupo: {oGrupo.Nombre}");
                     }
                     return true;
                 }
@@ -85,11 +85,11 @@ namespace SGF.NEGOCIO.Seguridad
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificacion", "Sistema", "Error al modificar al grupo.");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", "Error al modificar al grupo.");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
                     }
                     return false;
                 }
@@ -97,7 +97,7 @@ namespace SGF.NEGOCIO.Seguridad
             else
             {
                 // Excepción indicando que el objeto de usuario es nulo
-                AuditoriaBLL.RegistrarMovimiento("Modificacion", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
+                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar al grupo.");
                 throw new ArgumentNullException("Se ha producido un error: el campo de usuario no puede estar vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
             }
         }

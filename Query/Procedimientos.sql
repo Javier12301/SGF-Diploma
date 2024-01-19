@@ -7,9 +7,46 @@ FROM Usuario U
 INNER JOIN Grupo G ON U.GrupoID = G.GrupoID
 WHERE U.NombreUsuario COLLATE SQL_Latin1_General_CP1_CS_AS = 'Admin'
 
+-- Seleccionar Producto, nombre de proveedor y categoria correspondiente
+SELECT 
+    P.ProductoID, 
+    P.CodigoBarras, 
+    P.Nombre, 
+    C.Nombre AS Categoria, 
+    Pr.RazonSocial AS Proveedor, 
+    P.PrecioCompra, 
+    P.PrecioVenta, 
+    COALESCE(P.NumeroLote, '-') AS NumeroLote, 
+    CASE 
+        WHEN P.FechaVencimiento IS NULL THEN '-'
+        ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23)
+    END AS FechaVencimiento,
+    P.Refrigerado, 
+    P.BajoReceta, 
+    P.Stock, 
+    P.CantidadMinima, 
+    P.TipoProducto, 
+    P.Estado 
+FROM 
+    dbo.Producto P
+    INNER JOIN dbo.Categoria C ON P.CategoriaID = C.CategoriaID
+    INNER JOIN dbo.Proveedor Pr ON P.ProveedorID = Pr.ProveedorID;
 
-SELECT * FROM Usuario
-WHERE UsuarioID = 1
+
+-- Permite Categoría existentes en la base de datos productos.
+SELECT DISTINCT
+    CategoriaID,
+    (SELECT TOP 1 Nombre FROM Categoria WHERE CategoriaID = P.CategoriaID) AS Categoria
+FROM
+    Producto P;
+
+-- Comprobar si una Categoría tiene productos
+DECLARE @categoriaID int = 1
+SELECT COUNT(P.ProductoID) AS Cantidad
+FROM Categoria C
+LEFT JOIN Producto P ON C.CategoriaID = P.CategoriaID
+WHERE C.CategoriaID = @categoriaID;
+GO
 
 
 -- FILL USUARIO CON GRUPO
@@ -19,7 +56,6 @@ INNER JOIN Grupo ON Usuario.GrupoID = Grupo.GrupoID;
 
 
 --FILTROS
-
  -- FILTRAR USUARIO
 DECLARE @FiltroBuscar NVARCHAR(50) = 'Nombre';
 DECLARE @Buscar NVARCHAR(255) = 'ja';
@@ -63,7 +99,142 @@ WHERE
     );
 GO
 
+-- Filtrar Auditoria
+DECLARE @FiltroUsuario NVARCHAR(255) = 'Todos'; 
+DECLARE @FiltroMovimiento NVARCHAR(255) = 'Alta'; 
+DECLARE @FiltroBuscar NVARCHAR(255) = 'Todo'; 
+DECLARE @Buscar NVARCHAR(255) = ''; 
+DECLARE @FechaInicio DATE = '2022-01-09'; 
+DECLARE @FechaFin DATE = '2024 /01 /15'; 
 
+SELECT *
+FROM Auditoria
+WHERE
+    (
+        (@FiltroUsuario = 'Todos' OR NombreUsuario = @FiltroUsuario)
+    )
+    AND
+    (
+        (@FiltroMovimiento = 'Todos' OR Movimiento = @FiltroMovimiento)
+    )
+    AND
+    (
+        (
+            @FiltroBuscar = 'Todo' AND 
+            (
+                NombreUsuario LIKE '%' + @Buscar + '%' OR
+                Movimiento LIKE '%' + @Buscar + '%' OR
+                Descripcion LIKE '%' + @Buscar + '%'
+            )
+        )
+        OR
+        (
+            @FiltroBuscar = 'Nombre Usuario' AND NombreUsuario LIKE '%' + @Buscar + '%'
+        )
+        OR
+        (
+            @FiltroBuscar = 'Movimiento' AND Movimiento LIKE '%' + @Buscar + '%'
+        )
+        OR
+        (
+            @FiltroBuscar = 'Descripcion' AND Descripcion LIKE '%' + @Buscar + '%'
+        )
+    )
+    AND
+    (
+        (@FechaInicio IS NULL OR FechayHora >= @FechaInicio)
+        AND
+        (@FechaFin IS NULL OR FechayHora <= @FechaFin)
+    );
+
+
+-- Filtrar Categoria
+DECLARE @Buscar NVARCHAR(255) = 'Categoría';
+DECLARE @FiltroEstado NVARCHAR(50) = 'Activo';
+
+SELECT 
+    CategoriaID, 
+    Nombre, 
+    Descripcion, 
+    Estado
+FROM 
+    Categoria
+WHERE 
+    CategoriaID > 0
+    AND (
+        @FiltroEstado = 'Todos' 
+        OR (Estado = 1 AND @FiltroEstado = 'Activo') 
+        OR (Estado = 0 AND @FiltroEstado = 'Inactivo')
+    )
+    AND (
+        @Buscar IS NULL 
+        OR Nombre LIKE '%' + @Buscar + '%'
+        OR Descripcion LIKE '%' + @Buscar + '%'
+    );
+GO
+
+-- Filtrar Producto
+DECLARE @FiltroBuscar NVARCHAR(50) = 'Todos';
+DECLARE @Buscar NVARCHAR(255) = '';
+DECLARE @FiltroTipoProducto NVARCHAR(50) = 'Todos';
+DECLARE @FiltroCategoria NVARCHAR(50) = 'Todos';
+DECLARE @FiltroEstado NVARCHAR(50) = 'Activo';
+DECLARE @FechaDesde DATE = NULL;
+DECLARE @FechaHasta DATE = NULL;
+
+SELECT 
+    P.ProductoID, 
+    P.CodigoBarras, 
+    P.Nombre, 
+    C.Nombre AS Categoria, 
+    Pr.RazonSocial AS Proveedor, 
+    P.PrecioCompra, 
+    P.PrecioVenta, 
+    COALESCE(P.NumeroLote, '-') AS NumeroLote, 
+    CASE 
+        WHEN P.FechaVencimiento IS NULL THEN '-'
+        ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23)
+    END AS FechaVencimiento,
+    P.Refrigerado, 
+    P.BajoReceta, 
+    P.Stock, 
+    P.CantidadMinima, 
+    P.TipoProducto, 
+    P.Estado 
+FROM 
+    dbo.Producto P
+    INNER JOIN dbo.Categoria C ON P.CategoriaID = C.CategoriaID
+    INNER JOIN dbo.Proveedor Pr ON P.ProveedorID = Pr.ProveedorID
+WHERE
+    (
+        (@FiltroBuscar = 'Todo' AND (
+            P.CodigoBarras LIKE '%' + @Buscar + '%' OR
+            P.Nombre LIKE '%' + @Buscar + '%' OR
+            Pr.RazonSocial LIKE '%' + @Buscar + '%' OR
+            P.NumeroLote LIKE '%' + @Buscar + '%'
+        ))
+        OR (@FiltroBuscar = 'Código' AND P.CodigoBarras LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Nombre' AND P.Nombre LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Proveedor' AND Pr.RazonSocial LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Lote' AND P.NumeroLote LIKE '%' + @Buscar + '%')
+    )
+    AND (@FiltroTipoProducto = 'Todos' OR P.TipoProducto = @FiltroTipoProducto)
+    AND (@FiltroCategoria = 'Todos' OR C.Nombre = @FiltroCategoria)
+    AND (
+        @FiltroEstado = 'Todos' OR 
+        (P.Estado = 1 AND @FiltroEstado = 'Activo') OR 
+        (P.Estado = 0 AND @FiltroEstado = 'Inactivo')
+    )
+    AND (
+        (@FechaDesde IS NULL OR P.FechaVencimiento >= @FechaDesde)
+        AND (@FechaHasta IS NULL OR P.FechaVencimiento <= @FechaHasta)
+    );
+GO
+
+
+
+
+SELECT DISTINCT Movimiento, NombreUsuario FROM Auditoria
 
 SELECT * FROM Modulo m
 inner join Accion op on m.ModuloID = op.ModuloID
@@ -207,3 +378,6 @@ WHERE Descripcion = 'formUsuarios'
 
 --exec mds_ObtenerPermisos 1
 --go
+
+SELECT * FROM Producto
+

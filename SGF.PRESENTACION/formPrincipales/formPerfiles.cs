@@ -1,6 +1,9 @@
-﻿using SGF.MODELO.Seguridad;
+﻿using SGF.MODELO;
+using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales;
 using SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles;
+using SGF.PRESENTACION.formPrincipales.formHijos;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -34,9 +37,9 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
             // el modulos perfil está compuesto de 4 botones
-            foreach(Control control in flpContenedorBotones.Controls)
+            foreach (Control control in flpContenedorBotones.Controls)
             {
-                if(control is Button && ((Button)control).Tag != null)
+                if (control is Button && ((Button)control).Tag != null)
                 {
                     // Descripción del módulo del tag del botón
                     string descripcionModulo = ((Button)control).Tag.ToString();
@@ -124,6 +127,54 @@ namespace SGF.PRESENTACION.formPrincipales
             abrirFormularioHijo(new formGrupos(), btnGrupos);
         }
 
-       
+        private void btnAuditoria_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new formAuditoria(), btnAuditoria);
+        }
+
+        private void btnMisDatos_Click(object sender, EventArgs e)
+        {
+            // Cargar datos del usuario en sesión
+            int usuarioID = lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID();
+            // Comprobar si es el usuario admin
+            if(lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario() == "Admin")
+            {
+                DialogResult resultado = MessageBox.Show("¿Está seguro de modificar los datos del usuario admin?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(resultado == DialogResult.Yes)
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin entro al formulario de modificación de datos.");
+                    abrirFormularioMisDatos(usuarioID);
+                }
+            }else if(lSesion.UsuarioEnSesion().Usuario.ObtenerNombreGrupo() == "Administrador")
+            {
+                DialogResult resultado = MessageBox.Show("¿Desea modificar su usuario perteneciente al grupo administrador?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario perteneciente al grupo administrador entro al formulario de modificación de datos.");
+                    abrirFormularioMisDatos(usuarioID);
+                }
+            }
+            else
+            {
+                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario entro al formulario de modificación de datos.");
+                abrirFormularioMisDatos(usuarioID);
+            }
+        }
+
+        private void abrirFormularioMisDatos(int usuarioID)
+        {
+            using (var modal = new mdUsuario(true, usuarioID))
+            {
+                var resultado = modal.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    MessageBox.Show("Se cerrará la sesión para aplicar los cambios.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Obtenemos la instancia del formulario principal que es el padre de todos y luego cerramos la sesión
+                    // haciendo uso de su función encargada de cerrar la sesión.
+                    formMain formMain = (formMain)Application.OpenForms["formMain"];
+                    formMain.Cerrar_Sesion();
+                }
+            }
+        }
     }
 }

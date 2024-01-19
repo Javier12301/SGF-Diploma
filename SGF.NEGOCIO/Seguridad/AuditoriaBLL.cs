@@ -32,7 +32,12 @@ namespace SGF.NEGOCIO.Seguridad
             {
                 throw new Exception("Ocurrió un error al registrar el movimiento, por favor contacte al administrador para solucionar este error.");
             }
+        }
 
+        public static List<Auditoria> ObtenerListaAuditoria()
+        {
+            List<Auditoria> listaAuditoria = AuditoriaDAO.ObtenerListaAuditoriaD();
+            return listaAuditoria;
         }
 
     }
