@@ -170,6 +170,7 @@
             this.btnLimpiar.TabIndex = 28;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCancelar
             // 
@@ -186,6 +187,7 @@
             this.btnCancelar.TabIndex = 29;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -490,6 +492,8 @@
             this.txtCosto.Size = new System.Drawing.Size(107, 22);
             this.txtCosto.TabIndex = 19;
             this.txtCosto.Text = "0";
+            this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextboxMoneda_KeyPress);
+            this.txtCosto.Leave += new System.EventHandler(this.TextboxMoneda_Leave);
             // 
             // label8
             // 
@@ -511,6 +515,8 @@
             this.txtPrecio.Size = new System.Drawing.Size(107, 22);
             this.txtPrecio.TabIndex = 20;
             this.txtPrecio.Text = "0";
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextboxMoneda_KeyPress);
+            this.txtPrecio.Leave += new System.EventHandler(this.TextboxMoneda_Leave);
             // 
             // pnlStock
             // 
@@ -719,19 +725,19 @@
         private System.Windows.Forms.Panel pnlStock;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Panel pnlCantidadMinima;
-        private System.Windows.Forms.TextBox txtCantidadMinima;
-        private System.Windows.Forms.Label lblCantidadMinima;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.CheckBox chkEstado;
         private System.Windows.Forms.Panel pnlControl;
         private Guna.UI.WinForms.GunaControlBox gControlCerrar;
         private System.Windows.Forms.Label lblNombreForm;
-        private System.Windows.Forms.Panel pnlContainerRadioButtons;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rbMedicamento;
-        private System.Windows.Forms.RadioButton rbProductoGeneral;
         private System.Windows.Forms.CheckBox chkVencimiento;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Panel pnlContainerRadioButtons;
+        private System.Windows.Forms.RadioButton rbMedicamento;
+        private System.Windows.Forms.RadioButton rbProductoGeneral;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnlCantidadMinima;
+        private System.Windows.Forms.TextBox txtCantidadMinima;
+        private System.Windows.Forms.Label lblCantidadMinima;
     }
 }

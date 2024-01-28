@@ -1,5 +1,6 @@
 ﻿using SGF.DATOS.Negocio;
 using SGF.MODELO;
+using SGF.NEGOCIO.Seguridad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace SGF.NEGOCIO.Negocio
 {
     public class CategoriaBLL
     {
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         // Singleton de cCategoria
         private static CategoriaBLL _instancia = null;
         private CategoriaBLL() { }
@@ -21,6 +23,13 @@ namespace SGF.NEGOCIO.Negocio
                     _instancia = new CategoriaBLL();
                 return _instancia;
             }
+        }
+
+        // Conteo de categorías
+        public int ConteoCategorias()
+        {
+            int conteo = CategoriaDAO.ConteoCategoriasD();
+            return conteo;
         }
 
         // Alta
@@ -97,17 +106,24 @@ namespace SGF.NEGOCIO.Negocio
         }
 
         // Habilitar productos
-        public bool HabilitarProductos(int categoriaID)
+        public int HabilitarProductos(int categoriaID)
         {
-            bool habilitado = CategoriaDAO.HabilitarProductos(categoriaID);
-            return habilitado;
+            int productosHabilitados = CategoriaDAO.HabilitarProductos(categoriaID);
+            return productosHabilitados;
         }
 
         // Deshabilitar productos
-        public bool DeshabilitarProductos(int categoriaID)
+        public int DeshabilitarProductos(int categoriaID)
         {
-            bool deshabilitado = CategoriaDAO.DeshabilitarProductos(categoriaID);
-            return deshabilitado;
+            int productosDeshabilitado = CategoriaDAO.DeshabilitarProductos(categoriaID);
+            return productosDeshabilitado;
+        }
+
+        // Conteo de productos en categoría
+        public int ConteoProductosEnCategoria(int categoriaID)
+        {
+            int conteo = CategoriaDAO.ConteoProductosEnCategoriaD(categoriaID);
+            return conteo;
         }
 
         // Comprobar si la categoría tiene productos asignados

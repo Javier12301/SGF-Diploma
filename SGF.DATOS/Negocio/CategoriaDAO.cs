@@ -10,6 +10,57 @@ namespace SGF.DATOS.Negocio
 {
     public class CategoriaDAO
     {
+        // Conteo de categorías
+        public static int ConteoCategoriasD()
+        {
+            int conteo = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Categoria");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        conteo = Convert.ToInt32(cmd.ExecuteScalar());
+                        conteo--;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar obtener el conteo de categorías, póngase en contacto con el administrador del sistema para solucionar el error.");
+                }
+            }
+            return conteo;
+        }
+
+        // Conteo de cantidad de productos en categoría
+        public static int ConteoProductosEnCategoriaD(int categoriaID)
+        {
+            int conteo = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Producto");
+                    query.AppendLine("WHERE CategoriaID = @categoriaID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@categoriaID", categoriaID);
+                        oContexto.Open();
+                        conteo = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar obtener el conteo de productos en categoría, póngase en contacto con el administrador del sistema para solucionar el error.");
+                }
+            }
+            return conteo;
+        }
+
         // Alta
         public static bool AltaCategoriaD(Categoria oCategoria)
         {
@@ -161,9 +212,9 @@ namespace SGF.DATOS.Negocio
         }
 
         // Habilitar todo los productos de la categoría
-        public static bool HabilitarProductos(int categoriaID)
+        public static int HabilitarProductos(int categoriaID)
         {
-            bool habilitado = false;
+            int productosHabilitados = -1;
             using (var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
@@ -176,7 +227,7 @@ namespace SGF.DATOS.Negocio
                         cmd.Parameters.AddWithValue("@categoriaID", categoriaID);
                         oContexto.Open();
                         int filasAfectadas = cmd.ExecuteNonQuery();
-                        habilitado = filasAfectadas > 0;
+                        productosHabilitados = filasAfectadas;
                     }
                 }
                 catch (Exception)
@@ -184,13 +235,13 @@ namespace SGF.DATOS.Negocio
                     throw new Exception("Error al habilitar los productos de la categoría, contactar con el administrador del sistema si el error persiste.");
                 }
             }
-            return habilitado;
+            return productosHabilitados;
         }
 
         // Deshabilitar todo los productos de la categoría
-        public static bool DeshabilitarProductos(int categoriaID)
+        public static int DeshabilitarProductos(int categoriaID)
         {
-            bool deshabilitado = false;
+            int productosDeshabilitado = -1;
             using(var oContexto = new SqlConnection(ConexionSGF.cadena))
             {
                 try
@@ -203,7 +254,7 @@ namespace SGF.DATOS.Negocio
                         cmd.Parameters.AddWithValue("@categoriaID", categoriaID);
                         oContexto.Open();
                         int filasAfectadas = cmd.ExecuteNonQuery();
-                        deshabilitado = filasAfectadas > 0;
+                        productosDeshabilitado = filasAfectadas;
                     }
                 }
                 catch (Exception)
@@ -211,7 +262,7 @@ namespace SGF.DATOS.Negocio
                     throw new Exception("Error al deshabilitar los productos de la categoría, contactar con el administrador del sistema si el error persiste.");
                 }
             }
-            return deshabilitado;
+            return productosDeshabilitado;
         }
 
         // Comprobar si la categoría tiene productos asignados

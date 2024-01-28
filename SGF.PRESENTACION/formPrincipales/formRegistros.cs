@@ -27,6 +27,5 @@ namespace SGF.PRESENTACION.formPrincipales
             uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
         }
 
-
     }
 }

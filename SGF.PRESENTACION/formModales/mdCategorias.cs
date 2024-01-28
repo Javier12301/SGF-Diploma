@@ -19,11 +19,14 @@ namespace SGF.PRESENTACION.formModales
     {
         UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         CategoriaBLL lCategoria = CategoriaBLL.ObtenerInstancia;
-
         SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+
         private bool permisoAgregar { get; set; }
         private bool permisoModificar { get; set; }
         private bool permisoEliminar { get; set; }
+
+        private int cantidadAntes { get; set; }
+        private int cantidadDespues { get; set; }
 
         private Categoria oCategoriaPorModificar { get; set; }
         private bool modificandoCategoria { get; set; }
@@ -55,7 +58,6 @@ namespace SGF.PRESENTACION.formModales
                 {
                     modificarCategoria();
                 }
-                alternarModoEdicion();
             }
             catch (Exception ex)
             {
@@ -110,11 +112,15 @@ namespace SGF.PRESENTACION.formModales
                     return;
                 }
 
+                cantidadAntes = lCategoria.ConteoCategorias();
                 bool resultado = lCategoria.AltaCategoria(categoria);
 
                 if (resultado)
                 {
+                    cantidadDespues = lCategoria.ConteoCategorias();
                     MessageBox.Show("La categoría fue dada de alta con éxito", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RegistroBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Categorías", $"Se dio de alta con éxito la categoría: {categoria.Nombre}");
+
                     DialogResult respuesta = MessageBox.Show("¿Desea seguir agregando categorías?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.No)
                     {
@@ -124,6 +130,7 @@ namespace SGF.PRESENTACION.formModales
                     else
                     {
                         cargarLista();
+                        alternarModoEdicion();
                     }
                 }
                 else
@@ -153,10 +160,12 @@ namespace SGF.PRESENTACION.formModales
                     }
                 }
 
+                cantidadAntes = lCategoria.ConteoCategorias();
                 bool resultado = lCategoria.ModificarCategoria(categoria);
 
                 if (resultado)
                 {
+                    cantidadDespues = lCategoria.ConteoCategorias();
                     if (lCategoria.CategoriaTieneProductos(categoria.CategoriaID))
                     {
                         if (categoria.Estado == true)
@@ -164,7 +173,9 @@ namespace SGF.PRESENTACION.formModales
                             DialogResult respuesta = MessageBox.Show("La categoría tiene productos asignados. ¿Desea activar todos los productos de la categoría?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (respuesta == DialogResult.Yes)
                             {
-                                lCategoria.HabilitarProductos(categoria.CategoriaID);
+                                int cantidadProductosEnCategoria = lCategoria.ConteoProductosEnCategoria(categoria.CategoriaID);
+                                int cantidadProductosHabilitados = lCategoria.HabilitarProductos(categoria.CategoriaID);
+                                RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), cantidadProductosHabilitados, cantidadProductosEnCategoria, cantidadProductosEnCategoria, "Categorías", $"Se habilitaron {cantidadProductosHabilitados} productos de la categoría: {categoria.Nombre}");
                             }
                         }
                         else
@@ -172,10 +183,13 @@ namespace SGF.PRESENTACION.formModales
                             DialogResult respuesta = MessageBox.Show("La categoría tiene productos asignados. ¿Desea desactivar todos los productos de la categoría?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                             if (respuesta == DialogResult.Yes)
                             {
-                                lCategoria.DeshabilitarProductos(categoria.CategoriaID);
+                                int cantidadProductosEnCategoria = lCategoria.ConteoProductosEnCategoria(categoria.CategoriaID);
+                                int cantidadProductosDeshabilitados = lCategoria.DeshabilitarProductos(categoria.CategoriaID);
+                                RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), cantidadProductosDeshabilitados, cantidadProductosEnCategoria, cantidadProductosEnCategoria, "Categorías" ,$"Se deshabilitaron {cantidadProductosDeshabilitados} productos de la categoría: {categoria.Nombre}");
                             }
                         }
                     }
+                    RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Categorías", $"Se modifico con éxito la categoría: {categoria.Nombre}");
                     MessageBox.Show("La categoría fue modificada con éxito", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult respuestaUsuario = MessageBox.Show("¿Desea seguir modificando categorías?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuestaUsuario == DialogResult.No)
@@ -248,6 +262,7 @@ namespace SGF.PRESENTACION.formModales
                 bool resultado = lCategoria.BajaCategoria(categoriaAEliminar);
                 if (resultado)
                 {
+                    RegistroBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Categorías" ,$"Se dio de baja con éxito la categoría: {nombreCategoria}");
                     MessageBox.Show("La categoría fue eliminada con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cargarLista();
                 }
@@ -546,13 +561,27 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
+        // SOLUCIONAR ERROR CADENA DE ENTRADA
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult resultado = MessageBox.Show("¿Está seguro que desea salir?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (DialogResult.Yes == resultado)
+            if (!modificandoCategoria)
             {
-                DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult resultado = MessageBox.Show("¿Está seguro que desea salir?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DialogResult.Yes == resultado)
+                {
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            else
+            {
+                DialogResult resultado = MessageBox.Show("¿Desea cancelar la modificación de la categoría?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DialogResult.Yes == resultado)
+                {
+                    modificandoCategoria = false;
+                    alternarModoEdicion();
+                    MessageBox.Show("Operación cancelada.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

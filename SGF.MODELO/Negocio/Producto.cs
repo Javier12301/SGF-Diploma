@@ -16,7 +16,7 @@ namespace SGF.NEGOCIO.Negocio
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
         public string NumeroLote { get; set; }
-        public DateTime FechaVencimiento { get; set; }
+        public DateTime? FechaVencimiento { get; set; }
         public bool Refrigerado { get; set; }
         public bool Receta { get; set; }
         public int Stock { get; set; }

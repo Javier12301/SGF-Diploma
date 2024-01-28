@@ -40,11 +40,11 @@ namespace SGF.NEGOCIO
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", $"Se dio de alta con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de alta con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }
@@ -79,11 +79,11 @@ namespace SGF.NEGOCIO
                     // Revisar si la sesion fue iniciada, sino fue iniciada, la auditoria tiene que poner de nombre de usuario al Sistema que modifico el usuario
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }
@@ -118,11 +118,11 @@ namespace SGF.NEGOCIO
                 {
                     if(lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", $"Se dio de baja con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de baja con exito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }

@@ -22,6 +22,8 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
         private AuditoriaBLL lAuditoria = AuditoriaBLL.ObtenerInstancia;
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+        private Permiso permisoDeUsuario;
+
         public formUsuarios()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             {
                 cargarLista();
                 cargarFiltros();
-                uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
+                cargarPermisos();
             }
             catch(Exception ex)
             {
@@ -42,17 +44,30 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             
         }
 
+        private void cargarPermisos()
+        {
+            permisoDeUsuario = new Permiso();
+            uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones, permisoDeUsuario);
+        }
+
         // Alta de Usuario
 
         private void btnNuevoP_Click(object sender, EventArgs e)
         {
-            using (var modal = new mdUsuario())
+            if (permisoDeUsuario.Alta)
             {
-                var resultado = modal.ShowDialog();
-                if (resultado == DialogResult.OK)
+                using (var modal = new mdUsuario())
                 {
-                    cargarLista();
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        cargarLista();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -65,44 +80,54 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 
         private void dgvUsuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            abrirModalModificar();
+            if (e.RowIndex >= 0)
+            {
+                abrirModalModificar();
+            }
         }
 
         private void abrirModalModificar()
         {
             try
             {
-                if (dgvUsuario.CurrentCell != null)
+                if (permisoDeUsuario.Modificar)
                 {
-                    int filaIndex = dgvUsuario.CurrentCell.RowIndex;
-                    int usuarioID = Convert.ToInt32(dgvUsuario.Rows[filaIndex].Cells["dgvcID"].Value);
-                    if (usuarioID > 0)
+                    if (dgvUsuario.CurrentCell != null)
                     {
-                        if(usuarioID == 1)
+                        int filaIndex = dgvUsuario.CurrentCell.RowIndex;
+                        int usuarioID = Convert.ToInt32(dgvUsuario.Rows[filaIndex].Cells["dgvcID"].Value);
+                        if (usuarioID > 0)
                         {
-                            MessageBox.Show("No puede modificar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        // No se puede modificar su propio usuario
-                        if(usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
-                        {
-                            MessageBox.Show("No puede modificar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        using (var modal = new mdUsuario(true, usuarioID))
-                        {
-                            var resultado = modal.ShowDialog();
-                            if (resultado == DialogResult.OK)
+                            if (usuarioID == 1)
                             {
-                                cargarLista();
+                                MessageBox.Show("No puede modificar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            // No se puede modificar su propio usuario
+                            if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
+                            {
+                                MessageBox.Show("No puede modificar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            using (var modal = new mdUsuario(true, usuarioID))
+                            {
+                                var resultado = modal.ShowDialog();
+                                if (resultado == DialogResult.OK)
+                                {
+                                    cargarLista();
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Seleccione un usuario para modificar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione un usuario para modificar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -129,59 +154,66 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         {
             try
             {
-                // Verificar si hay celdas seleccionadas
-                if (dgvUsuario.SelectedCells.Count == 0)
+                if (permisoDeUsuario.Baja)
                 {
-                    MessageBox.Show("Seleccione por lo menos un usuario para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                List<int> usuariosAEliminar = new List<int>();
-
-                DialogResult resultado = MessageBox.Show("¿Estás seguro que desea eliminar el/los usuario seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (resultado != DialogResult.Yes)
-                    return;
-
-                // Limpiar lista de usuarios.
-                usuariosAEliminar.Clear();
-
-                // Recorrer las celdas seleccionadas
-                foreach (DataGridViewCell celda in dgvUsuario.SelectedCells)
-                {
-                    // Obtener el ID del usuario
-                    int usuarioID = Convert.ToInt32(dgvUsuario.Rows[celda.RowIndex].Cells["dgvcID"].Value);
-
-                    // Verificar si el usuario es el mismo que el logueado o si es el administrador
-                    if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
+                    // Verificar si hay celdas seleccionadas
+                    if (dgvUsuario.SelectedCells.Count == 0)
                     {
-                        MessageBox.Show("No puede eliminar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else if (usuarioID == 1)
-                    {
-                        MessageBox.Show("No puede eliminar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Seleccione por lo menos un usuario para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Agregar el ID del usuario a la lista de usuarios a eliminar
-                    usuariosAEliminar.Add(usuarioID);
-                }
-                // Eliminar los usuarios después de recorrer todas las celdas
-                int usuariosEliminados = 0;
+                    List<int> usuariosAEliminar = new List<int>();
 
-                foreach (int usuarioID in usuariosAEliminar)
-                {
-                    if (lUsuario.BajaUsuario(usuarioID))
-                        usuariosEliminados++;
-                    else
-                        MessageBox.Show($"No se pudo eliminar el usuario con ID: {usuarioID}", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult resultado = MessageBox.Show("¿Estás seguro que desea eliminar el/los usuario seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resultado != DialogResult.Yes)
+                        return;
+
+                    // Limpiar lista de usuarios.
+                    usuariosAEliminar.Clear();
+
+                    // Recorrer las celdas seleccionadas
+                    foreach (DataGridViewCell celda in dgvUsuario.SelectedCells)
+                    {
+                        // Obtener el ID del usuario
+                        int usuarioID = Convert.ToInt32(dgvUsuario.Rows[celda.RowIndex].Cells["dgvcID"].Value);
+
+                        // Verificar si el usuario es el mismo que el logueado o si es el administrador
+                        if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
+                        {
+                            MessageBox.Show("No puede eliminar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        else if (usuarioID == 1)
+                        {
+                            MessageBox.Show("No puede eliminar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Agregar el ID del usuario a la lista de usuarios a eliminar
+                        usuariosAEliminar.Add(usuarioID);
+                    }
+                    // Eliminar los usuarios después de recorrer todas las celdas
+                    int usuariosEliminados = 0;
+
+                    foreach (int usuarioID in usuariosAEliminar)
+                    {
+                        if (lUsuario.BajaUsuario(usuarioID))
+                            usuariosEliminados++;
+                        else
+                            MessageBox.Show($"No se pudo eliminar el usuario con ID: {usuarioID}", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    // Mostrar mensaje de éxito
+                    if (usuariosEliminados > 0)
+                    {
+                        MessageBox.Show(usuariosEliminados > 1 ? "Usuarios eliminados correctamente." : "Usuario eliminado correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargarLista();
+                    }
                 }
-                // Mostrar mensaje de éxito
-                if (usuariosEliminados > 0)
+                else
                 {
-                    MessageBox.Show(usuariosEliminados > 1 ? "Usuarios eliminados correctamente." : "Usuario eliminado correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cargarLista();
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -195,8 +227,15 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         {
             try
             {
-                uiUtilidades.ExportarDataGridViewAExcel(dgvUsuario, "Lista de Usuarios", "Informe de Usuarios");
-                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con exito la lista de usuarios.");
+                if (permisoDeUsuario.Exportar)
+                {
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvUsuario, "Lista de Usuarios", "Informe de Usuarios");
+                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de usuarios.");
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {

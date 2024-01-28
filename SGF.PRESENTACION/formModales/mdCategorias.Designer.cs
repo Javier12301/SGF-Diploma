@@ -34,6 +34,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdCategorias));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.txtBusqueda = new System.Windows.Forms.TextBox();
             this.gpCategoria = new System.Windows.Forms.GroupBox();
             this.txtID = new System.Windows.Forms.TextBox();
@@ -49,30 +50,29 @@
             this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.negocio = new SGF.PRESENTACION.Negocio();
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.pnlControl = new System.Windows.Forms.Panel();
-            this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
-            this.lblNombreForm = new System.Windows.Forms.Label();
-            this.categoriaTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.CategoriaTableAdapter();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bncNumeroTotal = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.cmbFiltroEstado = new System.Windows.Forms.ToolStripComboBox();
-            this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.btnBuscar = new FontAwesome.Sharp.IconButton();
-            this.btnPrimerItem = new System.Windows.Forms.ToolStripButton();
-            this.btnItemAnterior = new System.Windows.Forms.ToolStripButton();
-            this.btnSiguienteItem = new System.Windows.Forms.ToolStripButton();
-            this.btnUltimoItem = new System.Windows.Forms.ToolStripButton();
             this.dgvcModificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dgvcEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pnlControl = new System.Windows.Forms.Panel();
+            this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
+            this.lblNombreForm = new System.Windows.Forms.Label();
+            this.categoriaTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.CategoriaTableAdapter();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bncNumeroTotal = new System.Windows.Forms.ToolStripLabel();
+            this.btnPrimerItem = new System.Windows.Forms.ToolStripButton();
+            this.btnItemAnterior = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSiguienteItem = new System.Windows.Forms.ToolStripButton();
+            this.btnUltimoItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cmbFiltroEstado = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             this.gpCategoria.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -80,14 +80,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.pnlControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.bindingNavigator);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.btnBuscar);
             this.panel1.Controls.Add(this.txtBusqueda);
@@ -98,7 +99,7 @@
             this.panel1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(597, 415);
+            this.panel1.Size = new System.Drawing.Size(874, 464);
             this.panel1.TabIndex = 3;
             // 
             // label4
@@ -111,13 +112,33 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Nombre:";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBuscar.BackColor = System.Drawing.Color.White;
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
+            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.btnBuscar.IconColor = System.Drawing.Color.Black;
+            this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBuscar.IconSize = 16;
+            this.btnBuscar.Location = new System.Drawing.Point(430, 43);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(42, 23);
+            this.btnBuscar.TabIndex = 8;
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // txtBusqueda
             // 
             this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBusqueda.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBusqueda.Location = new System.Drawing.Point(82, 41);
             this.txtBusqueda.Name = "txtBusqueda";
-            this.txtBusqueda.Size = new System.Drawing.Size(196, 26);
+            this.txtBusqueda.Size = new System.Drawing.Size(342, 26);
             this.txtBusqueda.TabIndex = 7;
             this.txtBusqueda.TextChanged += new System.EventHandler(this.txtBusqueda_TextChanged);
             // 
@@ -134,9 +155,9 @@
             this.gpCategoria.Controls.Add(this.btnCancelar);
             this.gpCategoria.Controls.Add(this.btnGuardar);
             this.gpCategoria.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpCategoria.Location = new System.Drawing.Point(381, 72);
+            this.gpCategoria.Location = new System.Drawing.Point(658, 72);
             this.gpCategoria.Name = "gpCategoria";
-            this.gpCategoria.Size = new System.Drawing.Size(213, 243);
+            this.gpCategoria.Size = new System.Drawing.Size(213, 284);
             this.gpCategoria.TabIndex = 1;
             this.gpCategoria.TabStop = false;
             this.gpCategoria.Text = "Detalle Categoría";
@@ -157,7 +178,7 @@
             this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(9, 176);
+            this.cmbEstado.Location = new System.Drawing.Point(9, 217);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(195, 22);
             this.cmbEstado.TabIndex = 4;
@@ -167,7 +188,7 @@
             // 
             this.lblEstado.AutoSize = true;
             this.lblEstado.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEstado.Location = new System.Drawing.Point(6, 159);
+            this.lblEstado.Location = new System.Drawing.Point(6, 200);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(45, 14);
             this.lblEstado.TabIndex = 0;
@@ -181,7 +202,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(9, 103);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(195, 45);
+            this.txtDescripcion.Size = new System.Drawing.Size(195, 94);
             this.txtDescripcion.TabIndex = 3;
             // 
             // lblDescripcion
@@ -224,7 +245,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(109, 204);
+            this.btnCancelar.Location = new System.Drawing.Point(109, 245);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(95, 31);
             this.btnCancelar.TabIndex = 6;
@@ -242,7 +263,7 @@
             this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(9, 204);
+            this.btnGuardar.Location = new System.Drawing.Point(9, 245);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(95, 31);
             this.btnGuardar.TabIndex = 5;
@@ -254,11 +275,10 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.bindingNavigator);
             this.panel2.Controls.Add(this.dgvCategorias);
             this.panel2.Location = new System.Drawing.Point(3, 72);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(372, 340);
+            this.panel2.Size = new System.Drawing.Size(649, 364);
             this.panel2.TabIndex = 27;
             // 
             // categoriaBindingSource
@@ -278,8 +298,7 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvCategorias.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCategorias.AutoGenerateColumns = false;
             this.dgvCategorias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -306,188 +325,10 @@
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.ReadOnly = true;
             this.dgvCategorias.RowHeadersVisible = false;
-            this.dgvCategorias.Size = new System.Drawing.Size(363, 309);
+            this.dgvCategorias.Size = new System.Drawing.Size(640, 358);
             this.dgvCategorias.TabIndex = 9;
             this.dgvCategorias.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategorias_CellContentClick);
             this.dgvCategorias.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvCategorias_CellPainting);
-            // 
-            // pnlControl
-            // 
-            this.pnlControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.pnlControl.Controls.Add(this.gControlCerrar);
-            this.pnlControl.Controls.Add(this.lblNombreForm);
-            this.pnlControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlControl.Location = new System.Drawing.Point(0, 0);
-            this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(597, 32);
-            this.pnlControl.TabIndex = 0;
-            this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
-            this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
-            // 
-            // gControlCerrar
-            // 
-            this.gControlCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gControlCerrar.AnimationHoverSpeed = 0.07F;
-            this.gControlCerrar.AnimationSpeed = 0.03F;
-            this.gControlCerrar.IconColor = System.Drawing.Color.White;
-            this.gControlCerrar.IconSize = 15F;
-            this.gControlCerrar.Location = new System.Drawing.Point(552, 0);
-            this.gControlCerrar.Name = "gControlCerrar";
-            this.gControlCerrar.OnHoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
-            this.gControlCerrar.OnHoverIconColor = System.Drawing.Color.White;
-            this.gControlCerrar.OnPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.gControlCerrar.Size = new System.Drawing.Size(45, 32);
-            this.gControlCerrar.TabIndex = 0;
-            // 
-            // lblNombreForm
-            // 
-            this.lblNombreForm.AutoSize = true;
-            this.lblNombreForm.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreForm.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblNombreForm.Location = new System.Drawing.Point(7, 8);
-            this.lblNombreForm.Name = "lblNombreForm";
-            this.lblNombreForm.Size = new System.Drawing.Size(126, 17);
-            this.lblNombreForm.TabIndex = 0;
-            this.lblNombreForm.Tag = "";
-            this.lblNombreForm.Text = "Registrar Categoría";
-            this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
-            this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
-            // 
-            // categoriaTableAdapter
-            // 
-            this.categoriaTableAdapter.ClearBeforeFill = true;
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 26);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Posición";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
-            // 
-            // bncNumeroTotal
-            // 
-            this.bncNumeroTotal.Name = "bncNumeroTotal";
-            this.bncNumeroTotal.Size = new System.Drawing.Size(37, 23);
-            this.bncNumeroTotal.Text = "de {0}";
-            this.bncNumeroTotal.ToolTipText = "Número total de elementos";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 26);
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 26);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(45, 23);
-            this.toolStripLabel1.Text = "Estado:";
-            // 
-            // cmbFiltroEstado
-            // 
-            this.cmbFiltroEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltroEstado.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbFiltroEstado.Name = "cmbFiltroEstado";
-            this.cmbFiltroEstado.Size = new System.Drawing.Size(121, 22);
-            this.cmbFiltroEstado.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroEstado_SelectedIndexChanged);
-            // 
-            // bindingNavigator
-            // 
-            this.bindingNavigator.AddNewItem = null;
-            this.bindingNavigator.BindingSource = this.categoriaBindingSource;
-            this.bindingNavigator.CountItem = this.bncNumeroTotal;
-            this.bindingNavigator.DeleteItem = null;
-            this.bindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnPrimerItem,
-            this.btnItemAnterior,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bncNumeroTotal,
-            this.bindingNavigatorSeparator1,
-            this.btnSiguienteItem,
-            this.btnUltimoItem,
-            this.bindingNavigatorSeparator2,
-            this.toolStripLabel1,
-            this.cmbFiltroEstado});
-            this.bindingNavigator.Location = new System.Drawing.Point(0, 314);
-            this.bindingNavigator.MoveFirstItem = this.btnPrimerItem;
-            this.bindingNavigator.MoveLastItem = this.btnUltimoItem;
-            this.bindingNavigator.MoveNextItem = this.btnSiguienteItem;
-            this.bindingNavigator.MovePreviousItem = this.btnItemAnterior;
-            this.bindingNavigator.Name = "bindingNavigator";
-            this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator.Size = new System.Drawing.Size(372, 26);
-            this.bindingNavigator.TabIndex = 100;
-            this.bindingNavigator.Text = "bindingNavigator1";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBuscar.BackColor = System.Drawing.Color.White;
-            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
-            this.btnBuscar.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.btnBuscar.IconColor = System.Drawing.Color.Black;
-            this.btnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnBuscar.IconSize = 16;
-            this.btnBuscar.Location = new System.Drawing.Point(284, 43);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(42, 23);
-            this.btnBuscar.TabIndex = 8;
-            this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnPrimerItem
-            // 
-            this.btnPrimerItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnPrimerItem.Image = ((System.Drawing.Image)(resources.GetObject("btnPrimerItem.Image")));
-            this.btnPrimerItem.Name = "btnPrimerItem";
-            this.btnPrimerItem.RightToLeftAutoMirrorImage = true;
-            this.btnPrimerItem.Size = new System.Drawing.Size(23, 23);
-            this.btnPrimerItem.Text = "Mover primero";
-            // 
-            // btnItemAnterior
-            // 
-            this.btnItemAnterior.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnItemAnterior.Image = ((System.Drawing.Image)(resources.GetObject("btnItemAnterior.Image")));
-            this.btnItemAnterior.Name = "btnItemAnterior";
-            this.btnItemAnterior.RightToLeftAutoMirrorImage = true;
-            this.btnItemAnterior.Size = new System.Drawing.Size(23, 23);
-            this.btnItemAnterior.Text = "Mover anterior";
-            // 
-            // btnSiguienteItem
-            // 
-            this.btnSiguienteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSiguienteItem.Image = ((System.Drawing.Image)(resources.GetObject("btnSiguienteItem.Image")));
-            this.btnSiguienteItem.Name = "btnSiguienteItem";
-            this.btnSiguienteItem.RightToLeftAutoMirrorImage = true;
-            this.btnSiguienteItem.Size = new System.Drawing.Size(23, 23);
-            this.btnSiguienteItem.Text = "Mover siguiente";
-            // 
-            // btnUltimoItem
-            // 
-            this.btnUltimoItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnUltimoItem.Image = ((System.Drawing.Image)(resources.GetObject("btnUltimoItem.Image")));
-            this.btnUltimoItem.Name = "btnUltimoItem";
-            this.btnUltimoItem.RightToLeftAutoMirrorImage = true;
-            this.btnUltimoItem.Size = new System.Drawing.Size(23, 23);
-            this.btnUltimoItem.Text = "Mover último";
             // 
             // dgvcModificar
             // 
@@ -532,16 +373,173 @@
             this.dgvcEstado.Name = "dgvcEstado";
             this.dgvcEstado.ReadOnly = true;
             // 
+            // pnlControl
+            // 
+            this.pnlControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.pnlControl.Controls.Add(this.gControlCerrar);
+            this.pnlControl.Controls.Add(this.lblNombreForm);
+            this.pnlControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlControl.Location = new System.Drawing.Point(0, 0);
+            this.pnlControl.Name = "pnlControl";
+            this.pnlControl.Size = new System.Drawing.Size(874, 32);
+            this.pnlControl.TabIndex = 0;
+            this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
+            this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
+            // 
+            // gControlCerrar
+            // 
+            this.gControlCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gControlCerrar.AnimationHoverSpeed = 0.07F;
+            this.gControlCerrar.AnimationSpeed = 0.03F;
+            this.gControlCerrar.IconColor = System.Drawing.Color.White;
+            this.gControlCerrar.IconSize = 15F;
+            this.gControlCerrar.Location = new System.Drawing.Point(829, 0);
+            this.gControlCerrar.Name = "gControlCerrar";
+            this.gControlCerrar.OnHoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.gControlCerrar.OnHoverIconColor = System.Drawing.Color.White;
+            this.gControlCerrar.OnPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.gControlCerrar.Size = new System.Drawing.Size(45, 32);
+            this.gControlCerrar.TabIndex = 0;
+            // 
+            // lblNombreForm
+            // 
+            this.lblNombreForm.AutoSize = true;
+            this.lblNombreForm.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreForm.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblNombreForm.Location = new System.Drawing.Point(7, 8);
+            this.lblNombreForm.Name = "lblNombreForm";
+            this.lblNombreForm.Size = new System.Drawing.Size(126, 17);
+            this.lblNombreForm.TabIndex = 0;
+            this.lblNombreForm.Tag = "";
+            this.lblNombreForm.Text = "Registrar Categoría";
+            this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
+            this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
+            // 
+            // categoriaTableAdapter
+            // 
+            this.categoriaTableAdapter.ClearBeforeFill = true;
+            // 
             // errorProvider
             // 
             this.errorProvider.BlinkRate = 300;
             this.errorProvider.ContainerControl = this;
             // 
+            // bindingNavigator
+            // 
+            this.bindingNavigator.AddNewItem = null;
+            this.bindingNavigator.BindingSource = this.categoriaBindingSource;
+            this.bindingNavigator.CountItem = this.bncNumeroTotal;
+            this.bindingNavigator.DeleteItem = null;
+            this.bindingNavigator.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnPrimerItem,
+            this.btnItemAnterior,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bncNumeroTotal,
+            this.bindingNavigatorSeparator1,
+            this.btnSiguienteItem,
+            this.btnUltimoItem,
+            this.bindingNavigatorSeparator2,
+            this.toolStripLabel1,
+            this.cmbFiltroEstado});
+            this.bindingNavigator.Location = new System.Drawing.Point(0, 439);
+            this.bindingNavigator.MoveFirstItem = this.btnPrimerItem;
+            this.bindingNavigator.MoveLastItem = this.btnUltimoItem;
+            this.bindingNavigator.MoveNextItem = this.btnSiguienteItem;
+            this.bindingNavigator.MovePreviousItem = this.btnItemAnterior;
+            this.bindingNavigator.Name = "bindingNavigator";
+            this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator.Size = new System.Drawing.Size(874, 25);
+            this.bindingNavigator.TabIndex = 101;
+            this.bindingNavigator.Text = "bindingNavigator1";
+            // 
+            // bncNumeroTotal
+            // 
+            this.bncNumeroTotal.Name = "bncNumeroTotal";
+            this.bncNumeroTotal.Size = new System.Drawing.Size(37, 22);
+            this.bncNumeroTotal.Text = "de {0}";
+            this.bncNumeroTotal.ToolTipText = "Número total de elementos";
+            // 
+            // btnPrimerItem
+            // 
+            this.btnPrimerItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnPrimerItem.Image = ((System.Drawing.Image)(resources.GetObject("btnPrimerItem.Image")));
+            this.btnPrimerItem.Name = "btnPrimerItem";
+            this.btnPrimerItem.RightToLeftAutoMirrorImage = true;
+            this.btnPrimerItem.Size = new System.Drawing.Size(23, 22);
+            this.btnPrimerItem.Text = "Mover primero";
+            // 
+            // btnItemAnterior
+            // 
+            this.btnItemAnterior.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnItemAnterior.Image = ((System.Drawing.Image)(resources.GetObject("btnItemAnterior.Image")));
+            this.btnItemAnterior.Name = "btnItemAnterior";
+            this.btnItemAnterior.RightToLeftAutoMirrorImage = true;
+            this.btnItemAnterior.Size = new System.Drawing.Size(23, 22);
+            this.btnItemAnterior.Text = "Mover anterior";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Posición";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnSiguienteItem
+            // 
+            this.btnSiguienteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSiguienteItem.Image = ((System.Drawing.Image)(resources.GetObject("btnSiguienteItem.Image")));
+            this.btnSiguienteItem.Name = "btnSiguienteItem";
+            this.btnSiguienteItem.RightToLeftAutoMirrorImage = true;
+            this.btnSiguienteItem.Size = new System.Drawing.Size(23, 22);
+            this.btnSiguienteItem.Text = "Mover siguiente";
+            // 
+            // btnUltimoItem
+            // 
+            this.btnUltimoItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnUltimoItem.Image = ((System.Drawing.Image)(resources.GetObject("btnUltimoItem.Image")));
+            this.btnUltimoItem.Name = "btnUltimoItem";
+            this.btnUltimoItem.RightToLeftAutoMirrorImage = true;
+            this.btnUltimoItem.Size = new System.Drawing.Size(23, 22);
+            this.btnUltimoItem.Text = "Mover último";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
+            this.toolStripLabel1.Text = "Estado:";
+            // 
+            // cmbFiltroEstado
+            // 
+            this.cmbFiltroEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltroEstado.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbFiltroEstado.Name = "cmbFiltroEstado";
+            this.cmbFiltroEstado.Size = new System.Drawing.Size(121, 25);
+            // 
             // mdCategorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 415);
+            this.ClientSize = new System.Drawing.Size(874, 464);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "mdCategorias";
@@ -553,16 +551,15 @@
             this.gpCategoria.ResumeLayout(false);
             this.gpCategoria.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -591,6 +588,13 @@
         private Negocio negocio;
         private System.Windows.Forms.BindingSource categoriaBindingSource;
         private NegocioTableAdapters.CategoriaTableAdapter categoriaTableAdapter;
+        private System.Windows.Forms.DataGridViewButtonColumn dgvcModificar;
+        private System.Windows.Forms.DataGridViewButtonColumn dgvcEliminar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescripcion;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcEstado;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.BindingNavigator bindingNavigator;
         private System.Windows.Forms.ToolStripLabel bncNumeroTotal;
         private System.Windows.Forms.ToolStripButton btnPrimerItem;
@@ -603,12 +607,5 @@
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripComboBox cmbFiltroEstado;
-        private System.Windows.Forms.DataGridViewButtonColumn dgvcModificar;
-        private System.Windows.Forms.DataGridViewButtonColumn dgvcEliminar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescripcion;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcEstado;
-        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

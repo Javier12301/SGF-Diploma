@@ -46,6 +46,7 @@
     <Compile Include="Negocio\CategoriaDAO.cs" />
     <Compile Include="Negocio\ProductoDAO.cs" />
     <Compile Include="Negocio\ProveedorDAO.cs" />
+    <Compile Include="Negocio\RegistroDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\AccionDAO.cs" />
     <Compile Include="Seguridad\AuditoriaDAO.cs" />

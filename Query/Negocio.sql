@@ -1,5 +1,6 @@
 use FarmaciaDatos
 GO
+SELECT * FROM Registros
 
 -- BASE DE DATOS DE PRODUCTOS
 
@@ -77,6 +78,24 @@ CREATE TABLE Producto (
     Estado BIT
 );
 GO
+
+
+--Registros de movimientos en el sistema
+CREATE TABLE Registro (
+	RegistrosID INT IDENTITY(1,1) PRIMARY KEY,
+	FechayHora DATETIME,
+	Movimiento NVARCHAR(255),
+	NombreUsuario NVARCHAR(255),
+	Cantidad INT,
+	CantidadAntes INT,
+	CantidadDespues INT,
+	Modulo NVARCHAR(255),
+	Descripcion NVARCHAR(255)
+);
+GO
+
+
+SELECT * FROM Registros
 
 -- Compras / Entrada de Inventario
 CREATE TABLE Compra (

@@ -1,6 +1,9 @@
 use FarmaciaDatos
 Go
 
+
+SELECT * FROM Proveedor
+
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
 FROM Usuario U
@@ -234,6 +237,8 @@ GO
 
 
 
+
+
 SELECT DISTINCT Movimiento, NombreUsuario FROM Auditoria
 
 SELECT * FROM Modulo m
@@ -379,5 +384,5 @@ WHERE Descripcion = 'formUsuarios'
 --exec mds_ObtenerPermisos 1
 --go
 
-SELECT * FROM Producto
+
 

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SGF.MODELO;
 using SGF.PRESENTACION.formPrincipales;
+using SGF.MODELO.Seguridad;
 
 namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 {
@@ -21,6 +22,8 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+        private Permiso permisoDeUsuario;
+
         public formGrupos()
         {
             InitializeComponent();
@@ -32,7 +35,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             {
                 cargarLista();
                 cargarFiltros();
-                uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
+                cargarPermisos();
             }
             catch (Exception ex)
             {
@@ -40,16 +43,29 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             }
         }
 
+        private void cargarPermisos()
+        {
+            permisoDeUsuario = new Permiso();
+            uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones, permisoDeUsuario);
+        }
+
         // Alta de Grupo
         private void btnNuevoP_Click(object sender, EventArgs e)
         {
-            using (var modal = new mdGrupo())
+            if (permisoDeUsuario.Alta)
             {
-                var resultado = modal.ShowDialog();
-                if (resultado == DialogResult.OK)
+                using (var modal = new mdGrupo())
                 {
-                    cargarLista();
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        cargarLista();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         // Modificación de Grupo
@@ -60,58 +76,68 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
 
         private void dgvGrupos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            abrirModalModificar();
+            if (e.RowIndex >= 0)
+            {
+                abrirModalModificar();
+            }
         }
 
         private void abrirModalModificar()
         {
             try
             {
-                if (dgvGrupos.CurrentCell != null)
+                if (permisoDeUsuario.Modificar)
                 {
-                    int filaIndex = dgvGrupos.CurrentCell.RowIndex;
-                    int grupoID = Convert.ToInt32(dgvGrupos.Rows[filaIndex].Cells["dgvcID"].Value);
-                    if (grupoID > 0)
+                    if (dgvGrupos.CurrentCell != null)
                     {
-                        if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID() && grupoID != 1)
+                        int filaIndex = dgvGrupos.CurrentCell.RowIndex;
+                        int grupoID = Convert.ToInt32(dgvGrupos.Rows[filaIndex].Cells["dgvcID"].Value);
+                        if (grupoID > 0)
                         {
-                            MessageBox.Show("No puede modificar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        // El unico que puede modificar el grupo Administradores es el usuario Admin
-                        if (grupoID == 1 && lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID() != 1)
-                        {
-                            MessageBox.Show("No puede modificar el grupo de Administradores", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        using (var modal = new mdGrupo(true, grupoID))
-                        {
-                            var resultado = modal.ShowDialog();
-                            if (resultado == DialogResult.OK)
+                            if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID() && grupoID != 1)
                             {
-                                if (grupoID == 1)
-                                {
-                                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin modifico el grupo Administradores.");
-                                    MessageBox.Show("Se cerrará la sesión para aplicar los cambios.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    // Obtenemos la instancia del formulario principal que es el padre de todos y luego cerramos la sesión
-                                    // haciendo uso de su función encargada de cerrar la sesión.
-                                    formMain formMain = (formMain)Application.OpenForms["formMain"];
-                                    formMain.Cerrar_Sesion();
-                                }
-                                else
-                                {
-                                    cargarLista();
+                                MessageBox.Show("No puede modificar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
 
+                            // El unico que puede modificar el grupo Administradores es el usuario Admin
+                            if (grupoID == 1 && lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID() != 1)
+                            {
+                                MessageBox.Show("No puede modificar el grupo de Administradores", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
+                            using (var modal = new mdGrupo(true, grupoID))
+                            {
+                                var resultado = modal.ShowDialog();
+                                if (resultado == DialogResult.OK)
+                                {
+                                    if (grupoID == 1)
+                                    {
+                                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin modifico el grupo Administradores.");
+                                        MessageBox.Show("Se cerrará la sesión para aplicar los cambios.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        // Obtenemos la instancia del formulario principal que es el padre de todos y luego cerramos la sesión
+                                        // haciendo uso de su función encargada de cerrar la sesión.
+                                        formMain formMain = (formMain)Application.OpenForms["formMain"];
+                                        formMain.Cerrar_Sesion();
+                                    }
+                                    else
+                                    {
+                                        cargarLista();
+
+                                    }
                                 }
                             }
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("Seleccione un grupo para modificar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione un grupo para modificar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -139,86 +165,93 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         {
             try
             {
-                // Verificar si hay celdas seleccionadas
-                if (dgvGrupos.SelectedCells.Count == 0)
+                if (permisoDeUsuario.Baja)
                 {
-                    MessageBox.Show("Seleccione por lo menos un grupo para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                List<Operacion> gruposAEliminar = new List<Operacion>();
-
-                DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar los grupos seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (resultado != DialogResult.Yes)
-                    return;
-
-                gruposAEliminar.Clear();
-
-                // Recorrer celdas seleccionadas
-                foreach (DataGridViewCell celda in dgvGrupos.SelectedCells)
-                {
-                    int grupoID = Convert.ToInt32(dgvGrupos.Rows[celda.RowIndex].Cells["dgvcID"].Value);
-                    string nombreGrupo = dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value.ToString();
-                    string operacion = string.Empty;
-                    // Comprobar si no se está por eliminar el grupo al que pertenece el usuario en sesión
-                    if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
+                    // Verificar si hay celdas seleccionadas
+                    if (dgvGrupos.SelectedCells.Count == 0)
                     {
-                        MessageBox.Show("No puede eliminar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else if (grupoID == 1)
-                    {
-                        MessageBox.Show("No puede eliminar al grupo Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Seleccione por lo menos un grupo para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
 
-                    // Comprobar si el grupo tiene usuarios asignados
-                    if (lGrupo.GrupoTieneUsuarios(grupoID))
+                    List<Operacion> gruposAEliminar = new List<Operacion>();
+
+                    DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar los grupos seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resultado != DialogResult.Yes)
+                        return;
+
+                    gruposAEliminar.Clear();
+
+                    // Recorrer celdas seleccionadas
+                    foreach (DataGridViewCell celda in dgvGrupos.SelectedCells)
                     {
-                        DialogResult respuesta = MessageBox.Show($"El grupo seleccionado: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) tiene usuarios asignados, ¿desea asignar a los usuarios de este grupo como sin grupo?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                        if (DialogResult.Yes == respuesta)
+                        int grupoID = Convert.ToInt32(dgvGrupos.Rows[celda.RowIndex].Cells["dgvcID"].Value);
+                        string nombreGrupo = dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value.ToString();
+                        string operacion = string.Empty;
+                        // Comprobar si no se está por eliminar el grupo al que pertenece el usuario en sesión
+                        if (grupoID == lSesion.UsuarioEnSesion().Usuario.ObtenerGrupoID())
                         {
-                            operacion = "AsignarUsuariosSinGrupo";
+                            MessageBox.Show("No puede eliminar el grupo al que pertenece.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
                         }
-                        else if (DialogResult.No == respuesta)
+                        else if (grupoID == 1)
                         {
-                            respuesta = MessageBox.Show($"¿Desea eliminar el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) y los usuarios asignados a este?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                            MessageBox.Show("No puede eliminar al grupo Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        // Comprobar si el grupo tiene usuarios asignados
+                        if (lGrupo.GrupoTieneUsuarios(grupoID))
+                        {
+                            DialogResult respuesta = MessageBox.Show($"El grupo seleccionado: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) tiene usuarios asignados, ¿desea asignar a los usuarios de este grupo como sin grupo?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                             if (DialogResult.Yes == respuesta)
                             {
-                                operacion = "EliminarGrupoYUsuarios";
+                                operacion = "AsignarUsuariosSinGrupo";
+                            }
+                            else if (DialogResult.No == respuesta)
+                            {
+                                respuesta = MessageBox.Show($"¿Desea eliminar el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} ) y los usuarios asignados a este?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                if (DialogResult.Yes == respuesta)
+                                {
+                                    operacion = "EliminarGrupoYUsuarios";
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"Operación cancelada para el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                    return;
+                                }
                             }
                             else
                             {
                                 MessageBox.Show($"Operación cancelada para el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                                return;
                             }
                         }
                         else
                         {
-                            MessageBox.Show($"Operación cancelada para el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            operacion = "EliminarGrupo";
                         }
+                        gruposAEliminar.Add(new Operacion { ID = grupoID, Nombre = nombreGrupo, NombreOperacion = operacion });
                     }
-                    else
+                    int gruposEliminados = 0;
+
+                    foreach (var grupo in gruposAEliminar)
                     {
-                        operacion = "EliminarGrupo";
+                        if (lGrupo.BajaGrupo(grupo))
+                            gruposEliminados++;
+                        else
+                            MessageBox.Show($"No se pudo eliminar el grupo con ID: ( {grupo.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    gruposAEliminar.Add(new Operacion { ID = grupoID, Nombre = nombreGrupo, NombreOperacion = operacion });
-                }
-                int gruposEliminados = 0;
 
-                foreach (var grupo in gruposAEliminar)
-                {
-                    if (lGrupo.BajaGrupo(grupo))
-                        gruposEliminados++;
-                    else
-                        MessageBox.Show($"No se pudo eliminar el grupo con ID: ( {grupo.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (gruposEliminados > 0)
+                    {
+                        MessageBox.Show(gruposEliminados > 1 ? "Grupos eliminados con éxito." : "Grupo eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargarLista();
+                    }
                 }
-
-                if (gruposEliminados > 0)
+                else
                 {
-                    MessageBox.Show(gruposEliminados > 1 ? "Grupos eliminados con éxito." : "Grupo eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    cargarLista();
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -230,7 +263,23 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
         // Exportar a Excel
         private void btnExportarP_Click(object sender, EventArgs e)
         {
-            uiUtilidades.ExportarDataGridViewAExcel(dgvGrupos, "Lista de Grupos", "Informe de Grupos");
+            try
+            {
+                if (permisoDeUsuario.Exportar)
+                {
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvGrupos, "Lista de Grupos", "Informe de Grupos");
+                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de grupos.");
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de grupos.");
+            }
         }
 
         // Manejo de Filtros

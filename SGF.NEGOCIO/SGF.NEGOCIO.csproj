@@ -47,6 +47,7 @@
     <Compile Include="Negocio\CategoriaBLL.cs" />
     <Compile Include="Negocio\ProductoBLL.cs" />
     <Compile Include="Negocio\ProveedorBLL.cs" />
+    <Compile Include="Negocio\RegistroBLL.cs" />
     <Compile Include="Seguridad\AccionBLL.cs" />
     <Compile Include="Seguridad\AuditoriaBLL.cs" />
     <Compile Include="Seguridad\GrupoBLL.cs" />

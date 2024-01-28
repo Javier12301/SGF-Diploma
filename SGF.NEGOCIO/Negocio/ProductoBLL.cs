@@ -23,9 +23,38 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Conteo de productos
+        public int ConteoProductos()
+        {
+            int conteo = ProductoDAO.ConteoProductosD();
+            return conteo;
+        }
+
         // Alta
+        public bool AltaProducto(Producto oProducto)
+        {
+            if (oProducto != null)
+            {
+                return ProductoDAO.AltaProductoD(oProducto);
+            }
+            else
+            {
+                throw new ArgumentNullException("Se ha producido un error: el campo de productos no puede estár vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
+            }
+        }
 
         // Modificar
+        public bool ModificarProducto(Producto oProducto)
+        {
+            if(oProducto != null)
+            {
+                return ProductoDAO.ModificarProductoD(oProducto);
+            }
+            else
+            {
+                throw new ArgumentNullException("Se ha producido un error: el campo de productos no puede estár vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
+            }
+        }
 
         // Baja
         public bool BajaProducto(int productoID)
@@ -40,6 +69,20 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Obtener producto por ID
+        public Producto ObtenerProductoPorID(int productoID)
+        {
+            Producto oProducto = ProductoDAO.ObtenerProductoPorIDD(productoID);
+            if(oProducto != null)
+            {
+                return oProducto;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el producto. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
         public List<Categoria> ObtenerCategoriasExistentes()
         {
             List<Categoria> listaCategorias = ProductoDAO.CategoriasExistentes();
@@ -51,6 +94,18 @@ namespace SGF.NEGOCIO.Negocio
             {
                 throw new Exception("Ocurrió un error al intentar obtener las categorías existentes. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
             }
+        }
+
+        public bool ExisteCodigo(string codigo)
+        {
+            bool existeCodigo = ProductoDAO.ExisteCodigoD(codigo);
+            return existeCodigo;
+        }
+
+        public bool ExisteProducto(string nombre)
+        {
+            bool existeProducto = ProductoDAO.ExisteProductoD(nombre);
+            return existeProducto;
         }
 
     }

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-        public void cargarPermisos(string nombreFormulario, FlowLayoutPanel flpContenedorBotones)
+        public void cargarPermisos(string nombreFormulario, FlowLayoutPanel flpContenedorBotones, Permiso permisoDeUsuario = null)
         {
             List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
 
@@ -67,9 +68,16 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                         control.Visible = tienePermiso;
                     }
                 }
+                if(permisoDeUsuario != null)
+                {
+                    permisoDeUsuario.Alta = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Alta");
+                    permisoDeUsuario.Modificar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Modificar");
+                    permisoDeUsuario.Baja = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Baja");
+                    permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
+                    permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
+                }
             }
         }
-
 
         public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja)
         {
@@ -320,23 +328,50 @@ namespace SGF.PRESENTACION.UtilidadesComunes
 
 
         // Verificar precio y costo ingresado, el costo no debe ser mayor al precio
-        public bool VerificarPrecioyCosto(TextBoxBase precio, TextBoxBase costo, ErrorProvider mensajeError)
+        public bool VerificarPrecioyCosto(TextBoxBase costo, TextBoxBase precio, ErrorProvider mensajeError)
         {
             decimal costoDecimal = decimal.Parse(costo.Text);
             decimal precioDecimal = decimal.Parse(precio.Text);
 
-            if (costoDecimal > precioDecimal)
+            if (precioDecimal >= costoDecimal)
             {
                 mensajeError.SetError(precio, "");
                 return true;
             }
             else
             {
-                mensajeError.SetError(precio, "El precio ingresado debe ser mayor al costo.");
+                mensajeError.SetError(precio, "El precio debe ser mayor a costo ( Precio >= Costo )");
                 return false;
             }
         }
 
+        // Manejo de Textbox con Formato Moneda
+        public void TextboxMoneda_KeyPress(TextBox textbox, KeyPressEventArgs e, ErrorProvider error)
+        {
+            // Formato regional de Argnetina
+            if (e.KeyChar == '.')
+            {
+                e.Handled = true;
+                SendKeys.Send(",");
+            }
+
+            // Solo puede haber una coma en el textbox
+            if (e.KeyChar == ',')
+            {
+                if (textbox.Text.Contains(","))
+                {
+                    error.SetError(textbox, "Solo puede haber una coma en el campo.");
+                    e.Handled = true;
+                }
+            }
+        }
+
+        public void TextboxMoneda_Leave(TextBox textbox, EventArgs e)
+        {
+            // Formato regional de Argentina
+            // 1.000,00
+            textbox.Text = string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(textbox.Text));
+        }
 
         // Solo numeros
         public void SoloNumero(KeyPressEventArgs e)

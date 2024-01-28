@@ -34,11 +34,11 @@ namespace SGF.NEGOCIO.Seguridad
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", $"Se dio de alta con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", $"Se dio de alta con éxito al grupo: {oGrupo.Nombre}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de alta con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de alta con éxito al grupo: {oGrupo.Nombre}");
                     }
                     return true;
                 }
@@ -73,11 +73,11 @@ namespace SGF.NEGOCIO.Seguridad
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con éxito al grupo: {oGrupo.Nombre}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con exito al grupo: {oGrupo.Nombre}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con éxito al grupo: {oGrupo.Nombre}");
                     }
                     return true;
                 }

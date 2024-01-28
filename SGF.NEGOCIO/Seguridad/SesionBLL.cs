@@ -37,7 +37,7 @@ namespace SGF.NEGOCIO.Seguridad
 
         public void Logout()
         {
-            AuditoriaBLL.RegistrarMovimiento("Sesión cerrada", UsuarioEnSesion().Usuario.NombreUsuario, "Sesión cerrada con exito");
+            AuditoriaBLL.RegistrarMovimiento("Sesión cerrada", UsuarioEnSesion().Usuario.NombreUsuario, "Sesión cerrada con éxito");
             Sesion.CerrarSesion();
         }
     }

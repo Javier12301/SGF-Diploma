@@ -56,11 +56,34 @@
             this.tsmiProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNombreCategoria = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcVencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcTipoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcPrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcPrecioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcRefrigerado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvcReceta = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.negocio = new SGF.PRESENTACION.Negocio();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblEstado = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.flpVencimiento = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.chkVencimiento = new System.Windows.Forms.CheckBox();
             this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -92,45 +115,22 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.cmbFiltroTipoProducto = new System.Windows.Forms.ToolStripComboBox();
-            this.flpVencimiento = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpFin = new System.Windows.Forms.DateTimePicker();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcVencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcTipoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcPrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcPrecioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcRefrigerado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvcReceta = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.negocio = new SGF.PRESENTACION.Negocio();
             this.productoTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.ProductoTableAdapter();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.flpContenedorBotones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-            this.bindingNavigator1.SuspendLayout();
             this.flpVencimiento.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
+            this.flpContenedorBotones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -429,7 +429,117 @@
             this.dgvProductos.Size = new System.Drawing.Size(1073, 216);
             this.dgvProductos.TabIndex = 110;
             this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvProductos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducto_CellDoubleClick);
             this.dgvProductos.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellEnter);
+            this.dgvProductos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProductos_KeyDown);
+            // 
+            // dgvcID
+            // 
+            this.dgvcID.DataPropertyName = "ProductoID";
+            this.dgvcID.HeaderText = "ID";
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            // 
+            // dgvcCodigo
+            // 
+            this.dgvcCodigo.DataPropertyName = "CodigoBarras";
+            this.dgvcCodigo.HeaderText = "Código";
+            this.dgvcCodigo.Name = "dgvcCodigo";
+            this.dgvcCodigo.ReadOnly = true;
+            // 
+            // dgvcNombre
+            // 
+            this.dgvcNombre.DataPropertyName = "Nombre";
+            this.dgvcNombre.HeaderText = "Nombre";
+            this.dgvcNombre.Name = "dgvcNombre";
+            this.dgvcNombre.ReadOnly = true;
+            // 
+            // dgvcProveedor
+            // 
+            this.dgvcProveedor.DataPropertyName = "Proveedor";
+            this.dgvcProveedor.HeaderText = "Proveedor";
+            this.dgvcProveedor.Name = "dgvcProveedor";
+            this.dgvcProveedor.ReadOnly = true;
+            // 
+            // dgvcCategoria
+            // 
+            this.dgvcCategoria.DataPropertyName = "Categoria";
+            this.dgvcCategoria.HeaderText = "Categoria";
+            this.dgvcCategoria.Name = "dgvcCategoria";
+            this.dgvcCategoria.ReadOnly = true;
+            // 
+            // dgvcStock
+            // 
+            this.dgvcStock.DataPropertyName = "Stock";
+            this.dgvcStock.HeaderText = "Stock";
+            this.dgvcStock.Name = "dgvcStock";
+            this.dgvcStock.ReadOnly = true;
+            // 
+            // dgvcLote
+            // 
+            this.dgvcLote.DataPropertyName = "NumeroLote";
+            this.dgvcLote.HeaderText = "Lote";
+            this.dgvcLote.Name = "dgvcLote";
+            this.dgvcLote.ReadOnly = true;
+            // 
+            // dgvcVencimiento
+            // 
+            this.dgvcVencimiento.DataPropertyName = "FechaVencimiento";
+            this.dgvcVencimiento.HeaderText = "Vencimiento";
+            this.dgvcVencimiento.Name = "dgvcVencimiento";
+            this.dgvcVencimiento.ReadOnly = true;
+            // 
+            // dgvcTipoProducto
+            // 
+            this.dgvcTipoProducto.DataPropertyName = "TipoProducto";
+            this.dgvcTipoProducto.HeaderText = "Tipo Producto";
+            this.dgvcTipoProducto.Name = "dgvcTipoProducto";
+            this.dgvcTipoProducto.ReadOnly = true;
+            // 
+            // dgvcPrecioVenta
+            // 
+            this.dgvcPrecioVenta.DataPropertyName = "PrecioVenta";
+            this.dgvcPrecioVenta.HeaderText = "Precio venta";
+            this.dgvcPrecioVenta.Name = "dgvcPrecioVenta";
+            this.dgvcPrecioVenta.ReadOnly = true;
+            // 
+            // dgvcPrecioCompra
+            // 
+            this.dgvcPrecioCompra.DataPropertyName = "PrecioCompra";
+            this.dgvcPrecioCompra.HeaderText = "Precio compra";
+            this.dgvcPrecioCompra.Name = "dgvcPrecioCompra";
+            this.dgvcPrecioCompra.ReadOnly = true;
+            // 
+            // dgvcRefrigerado
+            // 
+            this.dgvcRefrigerado.DataPropertyName = "Refrigerado";
+            this.dgvcRefrigerado.HeaderText = "Refrigerado";
+            this.dgvcRefrigerado.Name = "dgvcRefrigerado";
+            this.dgvcRefrigerado.ReadOnly = true;
+            // 
+            // dgvcReceta
+            // 
+            this.dgvcReceta.DataPropertyName = "BajoReceta";
+            this.dgvcReceta.HeaderText = "Receta";
+            this.dgvcReceta.Name = "dgvcReceta";
+            this.dgvcReceta.ReadOnly = true;
+            // 
+            // dgvcEstado
+            // 
+            this.dgvcEstado.DataPropertyName = "Estado";
+            this.dgvcEstado.HeaderText = "Estado";
+            this.dgvcEstado.Name = "dgvcEstado";
+            this.dgvcEstado.ReadOnly = true;
+            // 
+            // productoBindingSource
+            // 
+            this.productoBindingSource.DataMember = "Producto";
+            this.productoBindingSource.DataSource = this.negocio;
+            // 
+            // negocio
+            // 
+            this.negocio.DataSetName = "Negocio";
+            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panel2
             // 
@@ -495,6 +605,74 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1073, 54);
             this.panel4.TabIndex = 107;
+            // 
+            // flpVencimiento
+            // 
+            this.flpVencimiento.Controls.Add(this.panel6);
+            this.flpVencimiento.Controls.Add(this.panel7);
+            this.flpVencimiento.Location = new System.Drawing.Point(192, 5);
+            this.flpVencimiento.Name = "flpVencimiento";
+            this.flpVencimiento.Size = new System.Drawing.Size(347, 43);
+            this.flpVencimiento.TabIndex = 100;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Controls.Add(this.dtpInicio);
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(167, 35);
+            this.panel6.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Desde";
+            // 
+            // dtpInicio
+            // 
+            this.dtpInicio.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInicio.Location = new System.Drawing.Point(55, 7);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(103, 23);
+            this.dtpInicio.TabIndex = 5;
+            this.dtpInicio.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.label5);
+            this.panel7.Controls.Add(this.dtpFin);
+            this.panel7.Location = new System.Drawing.Point(176, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(167, 35);
+            this.panel7.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 10);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 17);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Hasta";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dtpFin
+            // 
+            this.dtpFin.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFin.Location = new System.Drawing.Point(52, 7);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(103, 23);
+            this.dtpFin.TabIndex = 7;
+            this.dtpFin.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
             // 
             // chkVencimiento
             // 
@@ -890,182 +1068,6 @@
             this.cmbFiltroTipoProducto.Size = new System.Drawing.Size(160, 49);
             this.cmbFiltroTipoProducto.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelecteIndexChanged);
             // 
-            // flpVencimiento
-            // 
-            this.flpVencimiento.Controls.Add(this.panel6);
-            this.flpVencimiento.Controls.Add(this.panel7);
-            this.flpVencimiento.Location = new System.Drawing.Point(192, 5);
-            this.flpVencimiento.Name = "flpVencimiento";
-            this.flpVencimiento.Size = new System.Drawing.Size(347, 43);
-            this.flpVencimiento.TabIndex = 100;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.dtpInicio);
-            this.panel6.Location = new System.Drawing.Point(3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(167, 35);
-            this.panel6.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 17);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Desde";
-            // 
-            // dtpInicio
-            // 
-            this.dtpInicio.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new System.Drawing.Point(55, 7);
-            this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new System.Drawing.Size(103, 23);
-            this.dtpInicio.TabIndex = 5;
-            this.dtpInicio.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.label5);
-            this.panel7.Controls.Add(this.dtpFin);
-            this.panel7.Location = new System.Drawing.Point(176, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(167, 35);
-            this.panel7.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 17);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Hasta";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dtpFin
-            // 
-            this.dtpFin.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFin.Location = new System.Drawing.Point(52, 7);
-            this.dtpFin.Name = "dtpFin";
-            this.dtpFin.Size = new System.Drawing.Size(103, 23);
-            this.dtpFin.TabIndex = 7;
-            this.dtpFin.ValueChanged += new System.EventHandler(this.dtp_ValueChanged);
-            // 
-            // dgvcID
-            // 
-            this.dgvcID.DataPropertyName = "ProductoID";
-            this.dgvcID.HeaderText = "ID";
-            this.dgvcID.Name = "dgvcID";
-            this.dgvcID.ReadOnly = true;
-            // 
-            // dgvcCodigo
-            // 
-            this.dgvcCodigo.DataPropertyName = "CodigoBarras";
-            this.dgvcCodigo.HeaderText = "Código";
-            this.dgvcCodigo.Name = "dgvcCodigo";
-            this.dgvcCodigo.ReadOnly = true;
-            // 
-            // dgvcNombre
-            // 
-            this.dgvcNombre.DataPropertyName = "Nombre";
-            this.dgvcNombre.HeaderText = "Nombre";
-            this.dgvcNombre.Name = "dgvcNombre";
-            this.dgvcNombre.ReadOnly = true;
-            // 
-            // dgvcProveedor
-            // 
-            this.dgvcProveedor.DataPropertyName = "Proveedor";
-            this.dgvcProveedor.HeaderText = "Proveedor";
-            this.dgvcProveedor.Name = "dgvcProveedor";
-            this.dgvcProveedor.ReadOnly = true;
-            // 
-            // dgvcCategoria
-            // 
-            this.dgvcCategoria.DataPropertyName = "Categoria";
-            this.dgvcCategoria.HeaderText = "Categoria";
-            this.dgvcCategoria.Name = "dgvcCategoria";
-            this.dgvcCategoria.ReadOnly = true;
-            // 
-            // dgvcStock
-            // 
-            this.dgvcStock.DataPropertyName = "Stock";
-            this.dgvcStock.HeaderText = "Stock";
-            this.dgvcStock.Name = "dgvcStock";
-            this.dgvcStock.ReadOnly = true;
-            // 
-            // dgvcLote
-            // 
-            this.dgvcLote.DataPropertyName = "NumeroLote";
-            this.dgvcLote.HeaderText = "Lote";
-            this.dgvcLote.Name = "dgvcLote";
-            this.dgvcLote.ReadOnly = true;
-            // 
-            // dgvcVencimiento
-            // 
-            this.dgvcVencimiento.DataPropertyName = "FechaVencimiento";
-            this.dgvcVencimiento.HeaderText = "Vencimiento";
-            this.dgvcVencimiento.Name = "dgvcVencimiento";
-            this.dgvcVencimiento.ReadOnly = true;
-            // 
-            // dgvcTipoProducto
-            // 
-            this.dgvcTipoProducto.DataPropertyName = "TipoProducto";
-            this.dgvcTipoProducto.HeaderText = "Tipo Producto";
-            this.dgvcTipoProducto.Name = "dgvcTipoProducto";
-            this.dgvcTipoProducto.ReadOnly = true;
-            // 
-            // dgvcPrecioVenta
-            // 
-            this.dgvcPrecioVenta.DataPropertyName = "PrecioVenta";
-            this.dgvcPrecioVenta.HeaderText = "Precio venta";
-            this.dgvcPrecioVenta.Name = "dgvcPrecioVenta";
-            this.dgvcPrecioVenta.ReadOnly = true;
-            // 
-            // dgvcPrecioCompra
-            // 
-            this.dgvcPrecioCompra.DataPropertyName = "PrecioCompra";
-            this.dgvcPrecioCompra.HeaderText = "Precio compra";
-            this.dgvcPrecioCompra.Name = "dgvcPrecioCompra";
-            this.dgvcPrecioCompra.ReadOnly = true;
-            // 
-            // dgvcRefrigerado
-            // 
-            this.dgvcRefrigerado.DataPropertyName = "Refrigerado";
-            this.dgvcRefrigerado.HeaderText = "Refrigerado";
-            this.dgvcRefrigerado.Name = "dgvcRefrigerado";
-            this.dgvcRefrigerado.ReadOnly = true;
-            // 
-            // dgvcReceta
-            // 
-            this.dgvcReceta.DataPropertyName = "BajoReceta";
-            this.dgvcReceta.HeaderText = "Receta";
-            this.dgvcReceta.Name = "dgvcReceta";
-            this.dgvcReceta.ReadOnly = true;
-            // 
-            // dgvcEstado
-            // 
-            this.dgvcEstado.DataPropertyName = "Estado";
-            this.dgvcEstado.HeaderText = "Estado";
-            this.dgvcEstado.Name = "dgvcEstado";
-            this.dgvcEstado.ReadOnly = true;
-            // 
-            // productoBindingSource
-            // 
-            this.productoBindingSource.DataMember = "Producto";
-            this.productoBindingSource.DataSource = this.negocio;
-            // 
-            // negocio
-            // 
-            this.negocio.DataSetName = "Negocio";
-            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // productoTableAdapter
             // 
             this.productoTableAdapter.ClearBeforeFill = true;
@@ -1086,22 +1088,22 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.flpContenedorBotones.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
-            this.bindingNavigator1.ResumeLayout(false);
-            this.bindingNavigator1.PerformLayout();
             this.flpVencimiento.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
+            this.flpContenedorBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.bindingNavigator1.ResumeLayout(false);
+            this.bindingNavigator1.PerformLayout();
             this.ResumeLayout(false);
 
         }

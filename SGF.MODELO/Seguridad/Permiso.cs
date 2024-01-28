@@ -14,6 +14,16 @@ namespace SGF.MODELO.Seguridad
         public Modulo Modulo { get; set; }
         public bool Permitido { get; set; }
 
+        // Permisos Alta, Modificar y Baja //
+        // Este modelo será utilizado para manejo de interfaz//
+        // No son valores de base de datos //
+        public bool Alta { get; set; }
+        public bool Modificar { get; set; }
+        public bool Baja { get; set; }
+        public bool Importar { get; set; }
+        public bool Exportar { get; set; }
+
+
         public string ObtenerNombre()
         {
             return this.Modulo.Descripcion + @" - " + this.Accion.Descripcion;

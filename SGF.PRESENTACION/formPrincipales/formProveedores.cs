@@ -17,6 +17,8 @@ namespace SGF.PRESENTACION.formPrincipales
     {
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+        private Permiso permisosDeUsuario;
+
         public formProveedores()
         {
             InitializeComponent();
@@ -24,8 +26,19 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void formProveedores_Load(object sender, EventArgs e)
         {
-            uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
+            cargarPermisos();
         }
 
+        private void cargarPermisos()
+        {
+            permisosDeUsuario = new Permiso();
+            // NO OLVIDARSE DE CAMBIAR LA FUNCIÓN A TODOS LOS FORMS
+            uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones, permisosDeUsuario);
+        }
+
+        private void btnNuevoP_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         List<Auditoria> listaAuditoria;
+        private Permiso permisoDeUsuario;
+
         public formAuditoria()
         {
             InitializeComponent();
@@ -29,8 +31,14 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones);
             cargarLista();
             cargarFiltros();
+            cargarPermisos();
         }
 
+        private void cargarPermisos()
+        {
+            permisoDeUsuario = new Permiso();
+            uiUtilidades.cargarPermisos(this.GetType().Name, flpContenedorBotones, permisoDeUsuario);
+        }
 
         // Manejo de filtros
         private void cargarLista()
@@ -136,8 +144,15 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         {
             try
             {
-                uiUtilidades.ExportarDataGridViewAExcel(dgvAuditoria, "Lista Auditoria", "Informe de Auditoria");
-                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con exito la lista de auditoria.");
+                if (permisoDeUsuario.Exportar)
+                {
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvAuditoria, "Lista Auditoria", "Informe de Auditoria");
+                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de auditoria.");
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para exportar la lista de auditoria.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
