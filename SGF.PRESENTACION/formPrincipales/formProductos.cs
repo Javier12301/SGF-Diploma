@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Irony;
 using SGF.NEGOCIO.Negocio;
 using SGF.PRESENTACION.UtilidadesComunes;
+using SGF.PRESENTACION.formModales.formImportar;
 
 namespace SGF.PRESENTACION.formPrincipales
 {
@@ -34,11 +35,17 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void formProductos_Load(object sender, EventArgs e)
         {
-            cargarLista();
-            cargarPermisos();
-            cargarFiltros();
-            tsmiID.Checked = false;
-            chkVencimiento.Checked = false;
+            try
+            {
+                cargarLista();
+                cargarPermisos();
+                cargarFiltros();
+                tsmiID.Checked = false;
+                chkVencimiento.Checked = false;
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cargarPermisos()
@@ -97,10 +104,12 @@ namespace SGF.PRESENTACION.formPrincipales
         // Alta
         private void btnNuevoP_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (permisosDeUsuario.Alta)
             {
                 using (var modal = new mdProductos())
                 {
+                    Cursor.Current = Cursors.Default;
                     var resultado = modal.ShowDialog();
                     if (resultado == DialogResult.OK)
                     {
@@ -131,6 +140,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void abrirModalModificar()
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (permisosDeUsuario.Modificar)
@@ -166,6 +176,10 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         // Baja
@@ -185,6 +199,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void bajaProducto()
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (permisosDeUsuario.Baja)
@@ -246,14 +261,20 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void btnCategorias_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (btnCategorias.Enabled)
             {
                 using (var modal = new mdCategorias())
                 {
+                    Cursor.Current = Cursors.Default;
                     var resultado = modal.ShowDialog();
                     if (resultado == DialogResult.OK)
                     {
@@ -267,10 +288,17 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             try
             {
-                DialogResult respuesta = MessageBox.Show("¿Desea importar los productos desde un archivo de Excel?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult respuesta = MessageBox.Show("¿Desea abrir el módulo de importación de productos?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if(respuesta == DialogResult.Yes)
                 {
-                    MessageBox.Show("Se creará una planilla de Excel con el formato necesario para importar los productos. Por favor, complete la planilla con los datos de los productos deseados cumpliendo con el formato indicado.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    using(var modal = new mdImportarProductos())
+                    {
+                        var resultado = modal.ShowDialog();
+                        if(resultado == DialogResult.OK)
+                        {
+                            cargarLista();
+                        }
+                    }
                 }
             }
             catch (Exception ex)

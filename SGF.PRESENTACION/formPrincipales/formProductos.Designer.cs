@@ -752,6 +752,8 @@
             // 
             // flpContenedorBotones
             // 
+            this.flpContenedorBotones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpContenedorBotones.Controls.Add(this.btnNuevoP);
@@ -763,7 +765,7 @@
             this.flpContenedorBotones.Location = new System.Drawing.Point(0, 4);
             this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
             this.flpContenedorBotones.Name = "flpContenedorBotones";
-            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 81);
+            this.flpContenedorBotones.Size = new System.Drawing.Size(840, 81);
             this.flpContenedorBotones.TabIndex = 106;
             // 
             // btnNuevoP
@@ -967,7 +969,6 @@
             this.bnpNumeroItem.AccessibleName = "Posición";
             this.bnpNumeroItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.bnpNumeroItem.AutoSize = false;
-            this.bnpNumeroItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bnpNumeroItem.Name = "bnpNumeroItem";
             this.bnpNumeroItem.Size = new System.Drawing.Size(65, 23);
             this.bnpNumeroItem.Text = "0";

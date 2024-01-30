@@ -48,8 +48,27 @@ namespace SGF.DATOS.Negocio
                     {
                         cmd.Parameters.AddWithValue("@codigoBarras", oProducto.Codigo);
                         cmd.Parameters.AddWithValue("@nombre", oProducto.Nombre);
-                        cmd.Parameters.AddWithValue("@categoriaID", oProducto.Categoria.CategoriaID);
-                        cmd.Parameters.AddWithValue("@proveedorID", oProducto.Proveedor.ProveedorID);
+                        // Comprobar si existe la categoría si es null se lanzará un throw exception
+                        if(oProducto.Categoria == null && oProducto.Proveedor == null)
+                        {
+                            throw new Exception("La categoría y el proveedor ingresados no existen.");
+                        }
+                        if(oProducto.Categoria != null)
+                        {
+                            cmd.Parameters.AddWithValue("@categoriaID", oProducto.Categoria.CategoriaID);
+                        }
+                        else
+                        {
+                            throw new Exception("La categoría ingresada no existe.");
+                        }
+                        if(oProducto.Proveedor != null)
+                        {
+                            cmd.Parameters.AddWithValue("@proveedorID", oProducto.Proveedor.ProveedorID);
+                        }
+                        else
+                        {
+                            throw new Exception("El proveedor ingresado no existe.");
+                        }
                         cmd.Parameters.AddWithValue("@precioCompra", oProducto.PrecioCompra);
                         cmd.Parameters.AddWithValue("@precioVenta", oProducto.PrecioVenta);
                         cmd.Parameters.AddWithValue("@numeroLote", oProducto.NumeroLote);
@@ -73,9 +92,9 @@ namespace SGF.DATOS.Negocio
                         alta = filasAfectadas > 0;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new Exception("Se ha producido un error al intentar registrar el nuevo producto. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                    throw new Exception(ex.Message);
                 }
             }
             return alta;

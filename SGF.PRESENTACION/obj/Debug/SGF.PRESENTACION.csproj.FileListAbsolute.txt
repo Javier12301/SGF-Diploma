@@ -60,3 +60,10 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formPrincipales.formHijos.formAuditoria.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.formImportar.mdImportarProductos.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.pdb
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.xml
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.DataSet.xml

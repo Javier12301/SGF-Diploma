@@ -9998,12 +9998,50 @@ SELECT ProveedorID, RazonSocial, TipoDocumento, Documento, Direccion, TelefonoPr
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ProveedorID, RazonSocial, TipoDocumento, Documento, Direccion, TelefonoPro" +
-                "veedor, Correo, Estado FROM dbo.Proveedor";
+                "veedor, Correo, Estado FROM dbo.Proveedor\r\nWHERE ProveedorID > 0";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT 
+    Proveedor.ProveedorID, 
+    Proveedor.RazonSocial, 
+    Proveedor.TipoDocumento, 
+    Proveedor.Documento, 
+    Proveedor.Direccion, 
+    Proveedor.TelefonoProveedor, 
+    Proveedor.Correo, 
+    Proveedor.Estado
+FROM 
+    Proveedor
+WHERE
+    Proveedor.ProveedorID > 0 -- Agregamos la nueva condición
+    AND (
+        (@FiltroBuscar = 'Todo' AND (
+            Proveedor.RazonSocial LIKE '%' + @Buscar + '%' OR
+            Proveedor.Documento LIKE '%' + @Buscar + '%' OR
+            Proveedor.Direccion LIKE '%' + @Buscar + '%' OR
+            Proveedor.TelefonoProveedor LIKE '%' + @Buscar + '%'
+        ))
+        OR (@FiltroBuscar = 'Razón social' AND Proveedor.RazonSocial LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Documento' AND Proveedor.Documento LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Dirección' AND Proveedor.Direccion LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Teléfono' AND Proveedor.TelefonoProveedor LIKE '%' + @Buscar + '%')
+    )
+    AND (@FiltroTipoDocumento = 'Todos' OR Proveedor.TipoDocumento = @FiltroTipoDocumento)
+    AND (
+        @FiltroEstado = 'Todos' OR 
+        (Proveedor.Estado = 1 AND @FiltroEstado = 'Activo') OR 
+        (Proveedor.Estado = 0 AND @FiltroEstado = 'Inactivo')
+    )";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroBuscar", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Buscar", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "RazonSocial", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroTipoDocumento", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "TipoDocumento", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroEstado", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10025,6 +10063,78 @@ SELECT ProveedorID, RazonSocial, TipoDocumento, Documento, Direccion, TelefonoPr
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual Negocio.ProveedorDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            Negocio.ProveedorDataTable dataTable = new Negocio.ProveedorDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int Filtrar(Negocio.ProveedorDataTable dataTable, string FiltroBuscar, string Buscar, string FiltroTipoDocumento, string FiltroEstado) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((FiltroBuscar == null)) {
+                throw new global::System.ArgumentNullException("FiltroBuscar");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroBuscar));
+            }
+            if ((Buscar == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(Buscar));
+            }
+            if ((FiltroTipoDocumento == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroTipoDocumento));
+            }
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(FiltroEstado));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual Negocio.ProveedorDataTable GetDataBy(string FiltroBuscar, string Buscar, string FiltroTipoDocumento, string FiltroEstado) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((FiltroBuscar == null)) {
+                throw new global::System.ArgumentNullException("FiltroBuscar");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroBuscar));
+            }
+            if ((Buscar == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(Buscar));
+            }
+            if ((FiltroTipoDocumento == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroTipoDocumento));
+            }
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(FiltroEstado));
+            }
             Negocio.ProveedorDataTable dataTable = new Negocio.ProveedorDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

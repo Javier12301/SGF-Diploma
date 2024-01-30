@@ -234,6 +234,50 @@ WHERE
     );
 GO
 
+-- Filtrar Proveedores
+-- FILTRAR PROVEEDOR
+DECLARE @FiltroBuscar NVARCHAR(50) = 'Todo';
+DECLARE @Buscar NVARCHAR(255) = '';
+DECLARE @FiltroEstado NVARCHAR(50) = 'Activo';
+DECLARE @FiltroTipoDocumento NVARCHAR(50) = 'CUIT';
+
+SELECT 
+    Proveedor.ProveedorID, 
+    Proveedor.RazonSocial, 
+    Proveedor.TipoDocumento, 
+    Proveedor.Documento, 
+    Proveedor.Direccion, 
+    Proveedor.TelefonoProveedor, 
+    Proveedor.Correo, 
+    Proveedor.Estado
+FROM 
+    Proveedor
+WHERE
+    Proveedor.ProveedorID > 0 -- Agregamos la nueva condición
+    AND (
+        (@FiltroBuscar = 'Todo' AND (
+            Proveedor.RazonSocial LIKE '%' + @Buscar + '%' OR
+            Proveedor.Documento LIKE '%' + @Buscar + '%' OR
+            Proveedor.Direccion LIKE '%' + @Buscar + '%' OR
+            Proveedor.TelefonoProveedor LIKE '%' + @Buscar + '%'
+        ))
+        OR (@FiltroBuscar = 'Razón social' AND Proveedor.RazonSocial LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Documento' AND Proveedor.Documento LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Dirección' AND Proveedor.Direccion LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscar = 'Teléfono' AND Proveedor.TelefonoProveedor LIKE '%' + @Buscar + '%')
+    )
+    AND (@FiltroTipoDocumento = 'Todos' OR Proveedor.TipoDocumento = @FiltroTipoDocumento)
+    AND (
+        @FiltroEstado = 'Todos' OR 
+        (Proveedor.Estado = 1 AND @FiltroEstado = 'Activo') OR 
+        (Proveedor.Estado = 0 AND @FiltroEstado = 'Inactivo')
+    )
+GO
+
+DELETE Proveedor
+WHERE ProveedorID = 5
+
+
 
 
 

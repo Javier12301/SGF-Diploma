@@ -99,6 +99,7 @@ namespace SGF.PRESENTACION.formPrincipales
         // Abrir Formularios dentro del panel padre
         private void abrirFormularioHijo(Form formularioHijo, ToolStripButton btnSender)
         {
+            Cursor.Current = Cursors.WaitCursor;
             // Resaltamos el botón activado
             activarBoton(btnSender);
 
@@ -119,6 +120,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
             // Abrimos el formulario
             formularioHijo.Show();
+            Cursor.Current = Cursors.Default;
         }
 
         // Configuramos la barra de navegación

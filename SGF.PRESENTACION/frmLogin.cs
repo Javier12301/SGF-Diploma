@@ -82,7 +82,9 @@ namespace SGF.PRESENTACION
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             IniciarSesion();
+            Cursor.Current = Cursors.Default;
         }
 
 

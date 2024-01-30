@@ -38,16 +38,19 @@ namespace SGF.PRESENTACION.formModales
 
         private void mdCategorias_Load(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             cargarEstado();
             cargarPermiso();
             cargarLista();
             cargarFiltro();
+            Cursor.Current = Cursors.Default;
         }
 
 
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (!modificandoCategoria)
@@ -62,6 +65,10 @@ namespace SGF.PRESENTACION.formModales
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
         }
 

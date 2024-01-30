@@ -52,6 +52,8 @@ namespace SGF.DATOS.Negocio
             return listaProveedores;
         }
 
+        
+
         // Obtener por ID
     }
 }

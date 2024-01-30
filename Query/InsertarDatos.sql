@@ -100,7 +100,6 @@ VALUES
     ('Alta', 5),
     ('Modificar', 5),
     ('Baja', 5),
-    ('Importar', 5),
     ('Exportar', 5);
 
 -- Insertar las acciones para el módulo formInventario
@@ -228,6 +227,21 @@ INSERT INTO Categoria (Nombre, Descripcion, Estado) VALUES
 INSERT INTO Proveedor (RazonSocial, TipoDocumento, Documento, Direccion, TelefonoProveedor, Correo, Estado) VALUES
 ('Farmacia XYZ', 'CUIT', '30-12345678-9', 'Calle 123', '123-456789', 'info@farmaciaxyz.com', 1),
 ('Distribuidora ABC', 'CUIT', '30-87654321-0', 'Avenida Principal', '987-654321', 'info@distribuidoraabc.com', 1);
+
+INSERT INTO Proveedor (RazonSocial, TipoDocumento, Documento, Direccion, TelefonoProveedor, Correo, Estado)
+VALUES 
+    ('Distribuidora LBL', 'CUIT', '30-87654321-0', 'Principal', '93387-654321', 'info@distribuidoraabc.com', 1),
+    ('Distribuidora XYZ', 'CUIL', '20-12345678-9', 'Centro', '91123-456789', 'info@distribuidoraxyz.com', 1),
+    ('Distribuidora ABC', 'DNI', '34567890', 'Calle 123', '93555-123456', 'info@distribuidora123.com', 1),
+    ('Distribuidora QWE', 'PASAPORTE', 'AB123456', 'Avenida XYZ', '94444-555555', 'info@distribuidoraqwe.com', 1),
+    ('Distribuidora 123', 'CUIL', '27-98765432-1', 'Calle Principal', '97777-888888', 'info@distribuidora456.com', 1);
+GO
+
+UPDATE Proveedor
+SET Estado = 0
+WHERE ProveedorID = 7
+
+
 
 -- Insertar Medicamentos
 INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES

@@ -1,6 +1,8 @@
 use FarmaciaDatos
 GO
-SELECT * FROM Registros
+
+
+
 
 -- BASE DE DATOS DE PRODUCTOS
 
@@ -27,6 +29,7 @@ CREATE TABLE Proveedor (
     Correo VARCHAR(50),
     Estado BIT DEFAULT 1,
 );
+
 
 SET IDENTITY_INSERT Proveedor ON;
 INSERT INTO Proveedor (ProveedorID, RazonSocial, TipoDocumento, Documento, Direccion, TelefonoProveedor, Correo, Estado)
@@ -80,6 +83,14 @@ CREATE TABLE Producto (
 GO
 
 
+
+SELECT        P.ProductoID, P.CodigoBarras, P.Nombre, C.Nombre AS Categoria, Pr.RazonSocial AS Proveedor, P.PrecioCompra, P.PrecioVenta, COALESCE (P.NumeroLote, '-') AS NumeroLote, CASE WHEN P.FechaVencimiento IS NULL 
+                         THEN '-' ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23) END AS FechaVencimiento, P.Refrigerado, P.BajoReceta, P.Stock, P.CantidadMinima, P.TipoProducto, P.Estado
+FROM            Producto AS P INNER JOIN
+                         Categoria AS C ON P.CategoriaID = C.CategoriaID INNER JOIN
+                         Proveedor AS Pr ON P.ProveedorID = Pr.ProveedorID
+
+
 --Registros de movimientos en el sistema
 CREATE TABLE Registro (
 	RegistrosID INT IDENTITY(1,1) PRIMARY KEY,
@@ -95,7 +106,8 @@ CREATE TABLE Registro (
 GO
 
 
-SELECT * FROM Registros
+SELECT * FROM Producto
+SELECT * FROM Registro
 
 -- Compras / Entrada de Inventario
 CREATE TABLE Compra (

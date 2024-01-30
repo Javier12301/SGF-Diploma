@@ -1,6 +1,8 @@
 USE FarmaciaDatos
 GO
 
+SELECT * FROM Proveedor
+
 CREATE TABLE Grupo (
     GrupoID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(255),

@@ -79,6 +79,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (!modificandoProducto)
@@ -93,6 +94,10 @@ namespace SGF.PRESENTACION.formModales
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
         }
 

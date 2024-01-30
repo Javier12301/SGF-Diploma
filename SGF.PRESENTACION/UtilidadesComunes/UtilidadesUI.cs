@@ -4,6 +4,7 @@ using FontAwesome.Sharp;
 using Guna.UI.WinForms;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.Recursos.Planillas;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -81,6 +82,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
 
         public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (dgv.Rows.Count < 1)
             {
                 MessageBox.Show("No hay datos para exportar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -131,9 +133,13 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     {
                         throw new Exception("Ocurrió un error al exportar los datos, por favor contacte al administrador para solucionar este error.");
                     }
-
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
                 }
             }
+            Cursor.Current = Cursors.Default;
         }
 
         // Función modular, se necesitará fontawesome y un textbox guna
