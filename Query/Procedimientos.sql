@@ -274,21 +274,20 @@ WHERE
     )
 GO
 
-DELETE Proveedor
-WHERE ProveedorID = 5
+-- Fill Detalle_Compra
+SELECT DC.*, P.RazonSocial AS NombreProveedor
+FROM Detalle_Compra DC
+JOIN Compra C ON DC.CompraID = C.CompraID
+JOIN Proveedor P ON C.ProveedorID = P.ProveedorID;
 
+-- Filtrar Detalle_Compra
+DECLARE @Buscar VARCHAR(50) = 'far'; -- Reemplaza 'ValorABuscar' con el valor que estás buscando
 
-
-
-
-
-
-SELECT DISTINCT Movimiento, NombreUsuario FROM Auditoria
-
-SELECT * FROM Modulo m
-inner join Accion op on m.ModuloID = op.ModuloID
-
-
+SELECT DC.*, P.RazonSocial AS NombreProveedor
+FROM Detalle_Compra DC
+JOIN Compra C ON DC.CompraID = C.CompraID
+JOIN Proveedor P ON C.ProveedorID = P.ProveedorID
+WHERE P.RazonSocial LIKE '%' + @Buscar + '%'
 
 
 

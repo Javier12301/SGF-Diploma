@@ -82,15 +82,6 @@ CREATE TABLE Producto (
 );
 GO
 
-
-
-SELECT        P.ProductoID, P.CodigoBarras, P.Nombre, C.Nombre AS Categoria, Pr.RazonSocial AS Proveedor, P.PrecioCompra, P.PrecioVenta, COALESCE (P.NumeroLote, '-') AS NumeroLote, CASE WHEN P.FechaVencimiento IS NULL 
-                         THEN '-' ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23) END AS FechaVencimiento, P.Refrigerado, P.BajoReceta, P.Stock, P.CantidadMinima, P.TipoProducto, P.Estado
-FROM            Producto AS P INNER JOIN
-                         Categoria AS C ON P.CategoriaID = C.CategoriaID INNER JOIN
-                         Proveedor AS Pr ON P.ProveedorID = Pr.ProveedorID
-
-
 --Registros de movimientos en el sistema
 CREATE TABLE Registro (
 	RegistrosID INT IDENTITY(1,1) PRIMARY KEY,
@@ -114,12 +105,29 @@ CREATE TABLE Compra (
     CompraID INT IDENTITY PRIMARY KEY,
     UsuarioID INT REFERENCES USUARIO(UsuarioID),
     ProveedorID INT REFERENCES PROVEEDOR(ProveedorID),
-    TipoDocumento VARCHAR(50),
+    Factura VARCHAR(50),
     NumeroDocumento VARCHAR(50),
     MontoTotal DECIMAL(10,2),
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
+
+SELECT * FROM Compra
+
+INSERT INTO Compra (UsuarioID, ProveedorID, Factura, NumeroDocumento, MontoTotal)
+VALUES 
+(1, 1, 'Factura1', 'Doc1', 100.00),
+(1, 2, 'Factura2', 'Doc2', 200.00),
+(1, 2, 'Factura3', 'Doc3', 300.00),
+(1, 1, 'Factura4', 'Doc4', 400.00);
+
+INSERT INTO Detalle_Compra (CompraID, ProductoID, PrecioCompra, PrecioVenta, Cantidad, MontoTotal)
+VALUES 
+(1, 1, 10.00, 20.00, 5, 50.00),
+(2, 2, 15.00, 30.00, 4, 60.00),
+(3, 6, 20.00, 40.00, 3, 60.00),
+(4, 8, 25.00, 50.00, 2, 50.00);
+
 
 CREATE TABLE Detalle_Compra (
     DetalleCompraID INT IDENTITY PRIMARY KEY,
@@ -132,6 +140,9 @@ CREATE TABLE Detalle_Compra (
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
+
+
+
 
 CREATE TABLE Venta (
     VentaID INT IDENTITY PRIMARY KEY,

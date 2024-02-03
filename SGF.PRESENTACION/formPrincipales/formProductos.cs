@@ -206,7 +206,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 {
                     if (dgvProductos.SelectedCells.Count == 0)
                     {
-                        MessageBox.Show("Seleccione por lo menos un producto para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Seleccione por lo menos un producto de la lista antes de intentar darlo de baja.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -229,7 +229,7 @@ namespace SGF.PRESENTACION.formPrincipales
                         else
                         {
                             MessageBox.Show("Seleccione un producto válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            continue;
                         }
                     }
 

@@ -32,24 +32,24 @@
             this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnContraseña = new System.Windows.Forms.Button();
-            this.btnOjo = new FontAwesome.Sharp.IconButton();
-            this.icoCandado = new FontAwesome.Sharp.IconPictureBox();
-            this.icoUsuario = new FontAwesome.Sharp.IconPictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtContraseñaG = new Guna.UI.WinForms.GunaLineTextBox();
             this.txtUsuarioG = new Guna.UI.WinForms.GunaLineTextBox();
-            this.pbLogoEmpresa = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNombreEmpresa = new System.Windows.Forms.Label();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
+            this.btnOjo = new FontAwesome.Sharp.IconButton();
+            this.icoCandado = new FontAwesome.Sharp.IconPictureBox();
+            this.icoUsuario = new FontAwesome.Sharp.IconPictureBox();
+            this.pbLogoEmpresa = new System.Windows.Forms.PictureBox();
             this.pnlPrincipal.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.pnlControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icoUsuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoEmpresa)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.pnlControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlPrincipal
@@ -108,6 +108,120 @@
             this.btnContraseña.UseVisualStyleBackColor = false;
             this.btnContraseña.Click += new System.EventHandler(this.btnContraseña_Click);
             // 
+            // btnLogin
+            // 
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.btnLogin.ForeColor = System.Drawing.Color.White;
+            this.btnLogin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnLogin.Location = new System.Drawing.Point(43, 331);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(225, 37);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "Iniciar Sesión";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // txtContraseñaG
+            // 
+            this.txtContraseñaG.BackColor = System.Drawing.Color.White;
+            this.txtContraseñaG.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtContraseñaG.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(142)))), ((int)(((byte)(209)))));
+            this.txtContraseñaG.Font = new System.Drawing.Font("Roboto", 9F);
+            this.txtContraseñaG.LineColor = System.Drawing.Color.Gainsboro;
+            this.txtContraseñaG.Location = new System.Drawing.Point(43, 265);
+            this.txtContraseñaG.Name = "txtContraseñaG";
+            this.txtContraseñaG.PasswordChar = '\0';
+            this.txtContraseñaG.Size = new System.Drawing.Size(225, 29);
+            this.txtContraseñaG.TabIndex = 2;
+            this.txtContraseñaG.Text = "Reloj12301";
+            this.txtContraseñaG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
+            this.txtContraseñaG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
+            // 
+            // txtUsuarioG
+            // 
+            this.txtUsuarioG.BackColor = System.Drawing.Color.White;
+            this.txtUsuarioG.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsuarioG.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(142)))), ((int)(((byte)(209)))));
+            this.txtUsuarioG.Font = new System.Drawing.Font("Roboto", 9F);
+            this.txtUsuarioG.LineColor = System.Drawing.Color.Gainsboro;
+            this.txtUsuarioG.Location = new System.Drawing.Point(43, 219);
+            this.txtUsuarioG.Name = "txtUsuarioG";
+            this.txtUsuarioG.PasswordChar = '\0';
+            this.txtUsuarioG.Size = new System.Drawing.Size(247, 29);
+            this.txtUsuarioG.TabIndex = 1;
+            this.txtUsuarioG.Text = "Admin";
+            this.txtUsuarioG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
+            this.txtUsuarioG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.lblNombreEmpresa);
+            this.panel1.Location = new System.Drawing.Point(63, 159);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(177, 48);
+            this.panel1.TabIndex = 0;
+            // 
+            // lblNombreEmpresa
+            // 
+            this.lblNombreEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblNombreEmpresa.AutoEllipsis = true;
+            this.lblNombreEmpresa.Font = new System.Drawing.Font("Roboto Medium", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblNombreEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblNombreEmpresa.Location = new System.Drawing.Point(6, 2);
+            this.lblNombreEmpresa.MaximumSize = new System.Drawing.Size(188, 60);
+            this.lblNombreEmpresa.Name = "lblNombreEmpresa";
+            this.lblNombreEmpresa.Size = new System.Drawing.Size(165, 34);
+            this.lblNombreEmpresa.TabIndex = 0;
+            this.lblNombreEmpresa.Text = "Sistema de gestión farmacéutico";
+            this.lblNombreEmpresa.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pnlControl
+            // 
+            this.pnlControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.pnlControl.Controls.Add(this.gControlCerrar);
+            this.pnlControl.Controls.Add(this.lblNombreForm);
+            this.pnlControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlControl.Location = new System.Drawing.Point(0, 0);
+            this.pnlControl.Name = "pnlControl";
+            this.pnlControl.Size = new System.Drawing.Size(302, 38);
+            this.pnlControl.TabIndex = 0;
+            this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            // 
+            // gControlCerrar
+            // 
+            this.gControlCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gControlCerrar.AnimationHoverSpeed = 0.07F;
+            this.gControlCerrar.AnimationSpeed = 0.03F;
+            this.gControlCerrar.IconColor = System.Drawing.Color.White;
+            this.gControlCerrar.IconSize = 15F;
+            this.gControlCerrar.Location = new System.Drawing.Point(250, 0);
+            this.gControlCerrar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gControlCerrar.Name = "gControlCerrar";
+            this.gControlCerrar.OnHoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.gControlCerrar.OnHoverIconColor = System.Drawing.Color.White;
+            this.gControlCerrar.OnPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.gControlCerrar.Size = new System.Drawing.Size(52, 38);
+            this.gControlCerrar.TabIndex = 0;
+            // 
+            // lblNombreForm
+            // 
+            this.lblNombreForm.AutoSize = true;
+            this.lblNombreForm.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.lblNombreForm.ForeColor = System.Drawing.Color.White;
+            this.lblNombreForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblNombreForm.Location = new System.Drawing.Point(5, 12);
+            this.lblNombreForm.Name = "lblNombreForm";
+            this.lblNombreForm.Size = new System.Drawing.Size(84, 15);
+            this.lblNombreForm.TabIndex = 0;
+            this.lblNombreForm.Text = "Iniciar Sesión";
+            this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            // 
             // btnOjo
             // 
             this.btnOjo.FlatAppearance.BorderSize = 0;
@@ -157,53 +271,6 @@
             this.icoUsuario.TabIndex = 25;
             this.icoUsuario.TabStop = false;
             // 
-            // btnLogin
-            // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnLogin.Location = new System.Drawing.Point(43, 331);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(225, 37);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Iniciar Sesión";
-            this.btnLogin.UseVisualStyleBackColor = false;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // txtContraseñaG
-            // 
-            this.txtContraseñaG.BackColor = System.Drawing.Color.White;
-            this.txtContraseñaG.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtContraseñaG.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(142)))), ((int)(((byte)(209)))));
-            this.txtContraseñaG.Font = new System.Drawing.Font("Roboto", 9F);
-            this.txtContraseñaG.LineColor = System.Drawing.Color.Gainsboro;
-            this.txtContraseñaG.Location = new System.Drawing.Point(43, 265);
-            this.txtContraseñaG.Name = "txtContraseñaG";
-            this.txtContraseñaG.PasswordChar = '\0';
-            this.txtContraseñaG.Size = new System.Drawing.Size(225, 29);
-            this.txtContraseñaG.TabIndex = 2;
-            this.txtContraseñaG.Text = "Reloj12301";
-            this.txtContraseñaG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
-            this.txtContraseñaG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
-            // 
-            // txtUsuarioG
-            // 
-            this.txtUsuarioG.BackColor = System.Drawing.Color.White;
-            this.txtUsuarioG.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtUsuarioG.FocusedLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(142)))), ((int)(((byte)(209)))));
-            this.txtUsuarioG.Font = new System.Drawing.Font("Roboto", 9F);
-            this.txtUsuarioG.LineColor = System.Drawing.Color.Gainsboro;
-            this.txtUsuarioG.Location = new System.Drawing.Point(43, 219);
-            this.txtUsuarioG.Name = "txtUsuarioG";
-            this.txtUsuarioG.PasswordChar = '\0';
-            this.txtUsuarioG.Size = new System.Drawing.Size(247, 29);
-            this.txtUsuarioG.TabIndex = 1;
-            this.txtUsuarioG.Text = "Admin";
-            this.txtUsuarioG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
-            this.txtUsuarioG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
-            // 
             // pbLogoEmpresa
             // 
             this.pbLogoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -216,73 +283,6 @@
             this.pbLogoEmpresa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbLogoEmpresa.TabIndex = 12;
             this.pbLogoEmpresa.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.lblNombreEmpresa);
-            this.panel1.Location = new System.Drawing.Point(63, 159);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(177, 48);
-            this.panel1.TabIndex = 11;
-            // 
-            // lblNombreEmpresa
-            // 
-            this.lblNombreEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.lblNombreEmpresa.AutoEllipsis = true;
-            this.lblNombreEmpresa.Font = new System.Drawing.Font("Roboto Medium", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblNombreEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblNombreEmpresa.Location = new System.Drawing.Point(6, 2);
-            this.lblNombreEmpresa.MaximumSize = new System.Drawing.Size(188, 60);
-            this.lblNombreEmpresa.Name = "lblNombreEmpresa";
-            this.lblNombreEmpresa.Size = new System.Drawing.Size(165, 34);
-            this.lblNombreEmpresa.TabIndex = 0;
-            this.lblNombreEmpresa.Text = "Sistema de gestión farmacéutico";
-            this.lblNombreEmpresa.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // pnlControl
-            // 
-            this.pnlControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.pnlControl.Controls.Add(this.gControlCerrar);
-            this.pnlControl.Controls.Add(this.lblNombreForm);
-            this.pnlControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlControl.Location = new System.Drawing.Point(0, 0);
-            this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(302, 38);
-            this.pnlControl.TabIndex = 1;
-            this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
-            this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
-            // 
-            // gControlCerrar
-            // 
-            this.gControlCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gControlCerrar.AnimationHoverSpeed = 0.07F;
-            this.gControlCerrar.AnimationSpeed = 0.03F;
-            this.gControlCerrar.IconColor = System.Drawing.Color.White;
-            this.gControlCerrar.IconSize = 15F;
-            this.gControlCerrar.Location = new System.Drawing.Point(250, 0);
-            this.gControlCerrar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gControlCerrar.Name = "gControlCerrar";
-            this.gControlCerrar.OnHoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
-            this.gControlCerrar.OnHoverIconColor = System.Drawing.Color.White;
-            this.gControlCerrar.OnPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.gControlCerrar.Size = new System.Drawing.Size(52, 38);
-            this.gControlCerrar.TabIndex = 2;
-            // 
-            // lblNombreForm
-            // 
-            this.lblNombreForm.AutoSize = true;
-            this.lblNombreForm.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.lblNombreForm.ForeColor = System.Drawing.Color.White;
-            this.lblNombreForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblNombreForm.Location = new System.Drawing.Point(5, 12);
-            this.lblNombreForm.Name = "lblNombreForm";
-            this.lblNombreForm.Size = new System.Drawing.Size(84, 15);
-            this.lblNombreForm.TabIndex = 0;
-            this.lblNombreForm.Text = "Iniciar Sesión";
-            this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
-            this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
             // 
             // frmLogin
             // 
@@ -297,12 +297,12 @@
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.pnlPrincipal.ResumeLayout(false);
             this.pnlPrincipal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.icoUsuario)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogoEmpresa)).EndInit();
             this.panel1.ResumeLayout(false);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icoUsuario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogoEmpresa)).EndInit();
             this.ResumeLayout(false);
 
         }

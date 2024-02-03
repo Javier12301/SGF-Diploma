@@ -3,6 +3,7 @@ using SGF.MODELO;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales.Seguridad;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -160,11 +161,11 @@ namespace SGF.PRESENTACION.formModales
                     if (emailExiste)
                         errorProvider.SetError(lblEmail, "El correo electrónico ingresado ya se encuentra en uso.");
 
-                    if(usuarioExiste || emailExiste)
+                    if (usuarioExiste || emailExiste)
                     {
                         MessageBox.Show("El usuario o el correo electrónico ingresado ya se encuentra en uso.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-                    }                                       
+                    }
 
                     bool resultado = lUsuario.AltaUsuario(usuario);
 
@@ -217,11 +218,11 @@ namespace SGF.PRESENTACION.formModales
                 bool usuarioExiste = false;
 
                 // Se verifica si el usuario realizo una modificación en el nombre de usuario o en el email
-                if(oUsuario.NombreUsuario != usuario.NombreUsuario)
+                if (oUsuario.NombreUsuario != usuario.NombreUsuario)
                 {
                     // esto significa que si se modifico el nombre de usuario, entonces hay que verificar si ya existe
                     usuarioExiste = lUsuario.ExisteUsuario(usuario.NombreUsuario);
-                    if(usuarioExiste)
+                    if (usuarioExiste)
                         errorProvider.SetError(lblUsuario, "El Usuario ingresado ya se encuentra en uso.");
                 }
 
@@ -229,7 +230,7 @@ namespace SGF.PRESENTACION.formModales
                 {
                     // esto significa que si se modifico el email, entonces hay que verificar si ya existe
                     emailExiste = lUsuario.ExisteEmail(usuario.Email);
-                    if(emailExiste)
+                    if (emailExiste)
                         errorProvider.SetError(lblEmail, "El correo electrónico ingresado ya se encuentra en uso.");
                 }
 
@@ -251,7 +252,7 @@ namespace SGF.PRESENTACION.formModales
                 {
                     MessageBox.Show("Error al modificar el usuario. Por favor, inténtelo de nuevo.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
+
             }
             else
             {
@@ -278,7 +279,35 @@ namespace SGF.PRESENTACION.formModales
         // Manejo de Interfaz
         private void chkCambiarContraseña_CheckedChanged(object sender, EventArgs e)
         {
-            alternarPanelesContraseña(chkCambiarContraseña.Checked);
+            if (modificandoUsuario && oUsuario.UsuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID() && chkCambiarContraseña.Checked)
+            {
+                // Deberá confirmar su identidad para poder cambiar la contraseña
+                using (var modal = new formConfirmarContraseña())
+                {
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        bool credencialConfirmada = modal.contraseñaConfirmada;
+                        if (credencialConfirmada)
+                        {
+                            alternarPanelesContraseña(chkCambiarContraseña.Checked);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo confirmar su identidad, por favor, inténtelo de nuevo.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            chkCambiarContraseña.Checked = false;
+                        }
+                    }
+                    else
+                    {
+                        chkCambiarContraseña.Checked = false;
+                    }
+                }
+            }
+            else
+            {
+                alternarPanelesContraseña(chkCambiarContraseña.Checked);
+            }
         }
 
         private void alternarPanelesContraseña(bool mostrarPanel)
@@ -312,9 +341,9 @@ namespace SGF.PRESENTACION.formModales
                 txtContraseña.Text = oUsuario.Contraseña;
                 txtContraseñaConfirmar.Text = oUsuario.Contraseña;
                 chkEstado.Checked = oUsuario.Estado;
-                if(oUsuario.UsuarioID == lSesion.UsuarioEnSesion().Usuario.UsuarioID)
+                if (oUsuario.UsuarioID == lSesion.UsuarioEnSesion().Usuario.UsuarioID)
                 {
-                    if(oUsuario.UsuarioID == 1)
+                    if (oUsuario.UsuarioID == 1)
                     {
                         txtNombreUsuario.Enabled = false;
                     }

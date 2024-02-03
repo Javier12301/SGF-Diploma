@@ -76,6 +76,8 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     permisoDeUsuario.Baja = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Baja");
                     permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
                     permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
+                    permisoDeUsuario.EntradaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Entrada");
+                    permisoDeUsuario.SalidaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Salida");
                 }
             }
         }
@@ -121,6 +123,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                             hoja.Column(columnasTotales).Width = 15;
 
                             wb.SaveAs(savefile.FileName);
+                            AuditoriaBLL.RegistrarMovimiento("Exportar", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Archivo excel con nombre ({nombreArchivo}) fue exportado con éxito.");
                             MessageBox.Show("Datos exportados correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -198,6 +201,47 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             foreach (ComboBox combobox in comboboxes)
             {
                 combobox.SelectedIndex = 0;
+            }
+        }
+
+        public void Combobox_ShortcutSiguienteIndex(ComboBox combobox, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (combobox.SelectedIndex == combobox.Items.Count - 1)
+                {
+                    combobox.SelectedIndex = 0;
+                }
+                else
+                {
+                    combobox.SelectedIndex++;
+                }
+            }
+        }
+
+        // Verificar número de telefono
+        // ingresar caracteres numericos y permitir guiones
+        public void TextboxTelefono(KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar == '-')
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
 
@@ -350,6 +394,8 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                 return false;
             }
         }
+
+        
 
         // Manejo de Textbox con Formato Moneda
         public void TextboxMoneda_KeyPress(TextBox textbox, KeyPressEventArgs e, ErrorProvider error)

@@ -166,6 +166,12 @@
     <Compile Include="formModales\mdCategorias.Designer.cs">
       <DependentUpon>mdCategorias.cs</DependentUpon>
     </Compile>
+    <Compile Include="formModales\mdEntradaInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdEntradaInventario.Designer.cs">
+      <DependentUpon>mdEntradaInventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="formModales\mdGrupo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,28 +184,46 @@
     <Compile Include="formModales\mdProductos.Designer.cs">
       <DependentUpon>mdProductos.cs</DependentUpon>
     </Compile>
+    <Compile Include="formModales\mdProveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdProveedores.Designer.cs">
+      <DependentUpon>mdProveedores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdRegistrarCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdRegistrarCompra.Designer.cs">
+      <DependentUpon>mdRegistrarCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="formModales\mdUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formModales\mdUsuario.Designer.cs">
       <DependentUpon>mdUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formAuditoria.cs">
+    <Compile Include="formModales\Seguridad\formConfirmarContraseña.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formAuditoria.Designer.cs">
+    <Compile Include="formModales\Seguridad\formConfirmarContraseña.Designer.cs">
+      <DependentUpon>formConfirmarContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\Seguridad\formAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\Seguridad\formAuditoria.Designer.cs">
       <DependentUpon>formAuditoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formGrupos.cs">
+    <Compile Include="formPrincipales\formHijos\Seguridad\formGrupos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formGrupos.Designer.cs">
+    <Compile Include="formPrincipales\formHijos\Seguridad\formGrupos.Designer.cs">
       <DependentUpon>formGrupos.cs</DependentUpon>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formUsuarios.cs">
+    <Compile Include="formPrincipales\formHijos\Seguridad\formUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formPrincipales\formHijos\formUsuarios.Designer.cs">
+    <Compile Include="formPrincipales\formHijos\Seguridad\formUsuarios.Designer.cs">
       <DependentUpon>formUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="formPrincipales\formInventario.cs">
@@ -292,22 +316,34 @@
     <EmbeddedResource Include="formModales\mdCategorias.resx">
       <DependentUpon>mdCategorias.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdEntradaInventario.resx">
+      <DependentUpon>mdEntradaInventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdGrupo.resx">
       <DependentUpon>mdGrupo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdProductos.resx">
       <DependentUpon>mdProductos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdProveedores.resx">
+      <DependentUpon>mdProveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdRegistrarCompra.resx">
+      <DependentUpon>mdRegistrarCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdUsuario.resx">
       <DependentUpon>mdUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formPrincipales\formHijos\formAuditoria.resx">
+    <EmbeddedResource Include="formModales\Seguridad\formConfirmarContraseña.resx">
+      <DependentUpon>formConfirmarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formHijos\Seguridad\formAuditoria.resx">
       <DependentUpon>formAuditoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formPrincipales\formHijos\formGrupos.resx">
+    <EmbeddedResource Include="formPrincipales\formHijos\Seguridad\formGrupos.resx">
       <DependentUpon>formGrupos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formPrincipales\formHijos\formUsuarios.resx">
+    <EmbeddedResource Include="formPrincipales\formHijos\Seguridad\formUsuarios.resx">
       <DependentUpon>formUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formInventario.resx">

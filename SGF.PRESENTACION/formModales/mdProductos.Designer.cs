@@ -128,9 +128,9 @@
             this.rbMedicamento.AutoSize = true;
             this.rbMedicamento.Location = new System.Drawing.Point(173, 6);
             this.rbMedicamento.Name = "rbMedicamento";
-            this.rbMedicamento.Size = new System.Drawing.Size(99, 18);
+            this.rbMedicamento.Size = new System.Drawing.Size(105, 18);
             this.rbMedicamento.TabIndex = 32;
-            this.rbMedicamento.Text = "Medicamento";
+            this.rbMedicamento.Text = "Medicamentos";
             this.rbMedicamento.UseVisualStyleBackColor = true;
             this.rbMedicamento.CheckedChanged += new System.EventHandler(this.rbMedicamento_CheckedChanged);
             // 
@@ -164,7 +164,7 @@
             this.btnLimpiar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnLimpiar.Location = new System.Drawing.Point(199, 426);
+            this.btnLimpiar.Location = new System.Drawing.Point(203, 426);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(104, 31);
             this.btnLimpiar.TabIndex = 28;
@@ -181,7 +181,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(93, 426);
+            this.btnCancelar.Location = new System.Drawing.Point(98, 426);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(104, 31);
             this.btnCancelar.TabIndex = 29;
@@ -198,7 +198,7 @@
             this.btnGuardar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGuardar.Location = new System.Drawing.Point(305, 426);
+            this.btnGuardar.Location = new System.Drawing.Point(310, 426);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(103, 31);
             this.btnGuardar.TabIndex = 27;
@@ -338,10 +338,11 @@
             this.chkVencimiento.Location = new System.Drawing.Point(102, 22);
             this.chkVencimiento.Name = "chkVencimiento";
             this.chkVencimiento.Size = new System.Drawing.Size(88, 17);
-            this.chkVencimiento.TabIndex = 15;
+            this.chkVencimiento.TabIndex = 14;
             this.chkVencimiento.Text = "Vencimiento";
             this.chkVencimiento.UseVisualStyleBackColor = true;
             this.chkVencimiento.CheckedChanged += new System.EventHandler(this.chkVencimiento_CheckedChanged);
+            this.chkVencimiento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkbox_pressed);
             // 
             // chkBajoReceta
             // 
@@ -350,9 +351,10 @@
             this.chkBajoReceta.Location = new System.Drawing.Point(14, 39);
             this.chkBajoReceta.Name = "chkBajoReceta";
             this.chkBajoReceta.Size = new System.Drawing.Size(86, 17);
-            this.chkBajoReceta.TabIndex = 14;
+            this.chkBajoReceta.TabIndex = 15;
             this.chkBajoReceta.Text = "Bajo Receta";
             this.chkBajoReceta.UseVisualStyleBackColor = true;
+            this.chkBajoReceta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkbox_pressed);
             // 
             // chkRefrigeado
             // 
@@ -364,6 +366,7 @@
             this.chkRefrigeado.TabIndex = 13;
             this.chkRefrigeado.Text = "Refrigerado";
             this.chkRefrigeado.UseVisualStyleBackColor = true;
+            this.chkRefrigeado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkbox_pressed);
             // 
             // label11
             // 
@@ -415,12 +418,15 @@
             // 
             // cmbCategoria
             // 
+            this.cmbCategoria.DropDownHeight = 80;
             this.cmbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategoria.FormattingEnabled = true;
+            this.cmbCategoria.IntegralHeight = false;
             this.cmbCategoria.Location = new System.Drawing.Point(8, 26);
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(178, 22);
             this.cmbCategoria.TabIndex = 16;
+            this.cmbCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbSiguienteIndex_Enter);
             // 
             // lblCategoria
             // 
@@ -443,12 +449,15 @@
             // 
             // cmbProveedor
             // 
+            this.cmbProveedor.DropDownHeight = 80;
             this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProveedor.FormattingEnabled = true;
+            this.cmbProveedor.IntegralHeight = false;
             this.cmbProveedor.Location = new System.Drawing.Point(8, 26);
             this.cmbProveedor.Name = "cmbProveedor";
             this.cmbProveedor.Size = new System.Drawing.Size(178, 22);
             this.cmbProveedor.TabIndex = 18;
+            this.cmbProveedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbSiguienteIndex_Enter);
             // 
             // lblProveedor
             // 
@@ -595,6 +604,7 @@
             this.chkEstado.TabIndex = 26;
             this.chkEstado.Text = "Activo";
             this.chkEstado.UseVisualStyleBackColor = false;
+            this.chkEstado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkbox_pressed);
             // 
             // pnlControl
             // 

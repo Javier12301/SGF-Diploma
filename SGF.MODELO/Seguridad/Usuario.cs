@@ -48,6 +48,12 @@ namespace SGF.MODELO
             return NombreUsuario;
         }
 
+        public string ObtenerContraseña()
+        {
+            // Clave encriptada
+            return Contraseña;
+        }
+
         public string ObtenerNombreyApellido()
         {
             return $"{Nombre} {Apellido}";

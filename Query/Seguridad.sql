@@ -15,6 +15,7 @@ VALUES (0, 'N/A', 0);
 SET IDENTITY_INSERT Grupo OFF;
 GO
 
+
 CREATE TABLE Usuario (
     UsuarioID INT IDENTITY(1,1) PRIMARY KEY,
     NombreUsuario NVARCHAR(255),
@@ -60,6 +61,7 @@ CREATE TABLE Auditoria (
 GO
 
 SELECT * FROM Auditoria
+SELECT * FROM Registro
 
 
 -- Modulos

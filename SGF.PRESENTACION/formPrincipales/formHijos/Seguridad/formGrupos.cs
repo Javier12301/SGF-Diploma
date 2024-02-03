@@ -219,12 +219,13 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                                 else
                                 {
                                     MessageBox.Show($"Operación cancelada para el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                                    return;
+                                    continue;
                                 }
                             }
                             else
                             {
                                 MessageBox.Show($"Operación cancelada para el grupo: ( {dgvGrupos.Rows[celda.RowIndex].Cells["dgvcNombre"].Value} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                continue;
                             }
                         }
                         else
@@ -240,7 +241,10 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                         if (lGrupo.BajaGrupo(grupo))
                             gruposEliminados++;
                         else
+                        {
                             MessageBox.Show($"No se pudo eliminar el grupo con ID: ( {grupo.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
                     }
 
                     if (gruposEliminados > 0)
@@ -275,7 +279,8 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                     MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de grupos.");

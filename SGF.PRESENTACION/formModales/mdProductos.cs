@@ -48,6 +48,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void mdProductos_Load(object sender, EventArgs e)
         {
+            txtCodigo.Select();
             try
             {
                 cargarCombobox();
@@ -90,6 +91,7 @@ namespace SGF.PRESENTACION.formModales
                 {
                     modificarProducto();
                 }
+                txtCodigo.Select();
             }
             catch (Exception ex)
             {
@@ -102,7 +104,7 @@ namespace SGF.PRESENTACION.formModales
         }
 
         // Manejo de responsabilidades
-        public bool ValidarCampos()
+        private bool ValidarCampos()
         {
             bool camposValidos = true;
 
@@ -283,7 +285,7 @@ namespace SGF.PRESENTACION.formModales
                 if(resultado)
                 {
                     cantidadDespues = lProducto.ConteoProductos();
-                    RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Productos", $"Se modificó con éxito el producto: {producto.Nombre}");
+                    RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Productos", $"Se modificó con éxito el producto: {producto.Nombre} cuya ID es: {oProducto.ProductoID}");
                     MessageBox.Show("El producto fue modificado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DialogResult = DialogResult.OK;
                     this.Close();
@@ -302,10 +304,15 @@ namespace SGF.PRESENTACION.formModales
             {
                 uiUtilidades.LimpiarTextbox(txtCodigo, txtNombre, txtLote);
                 uiUtilidades.LimpiarCombobox(cmbCategoria, cmbProveedor);
+                chkBajoReceta.Checked = false;
+                chkRefrigeado.Checked = false;
+                chkVencimiento.Checked = false;
+                rbProductoGeneral.Checked = true;
                 txtCosto.Text = "0";
                 txtPrecio.Text = "0";
                 txtStock.Text = "0";
                 txtCantidadMinima.Text = "0";
+                txtCodigo.Select();
             }
         }
 
@@ -357,6 +364,13 @@ namespace SGF.PRESENTACION.formModales
             }
             cmbProveedor.SelectedIndex = 0;
         }
+
+        private void cmbSiguienteIndex_Enter(object sender, KeyPressEventArgs e)
+        {
+            ComboBox combobox = (ComboBox)sender;
+            uiUtilidades.Combobox_ShortcutSiguienteIndex(combobox, e);
+        }
+       
 
         // Manejo de Interfaz
 
@@ -425,6 +439,16 @@ namespace SGF.PRESENTACION.formModales
                 DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        private void checkbox_pressed(object sender, KeyPressEventArgs e)
+        {
+            CheckBox checkbox = (CheckBox)sender;
+            // si se presiona enter, se cambia el estado del checkbox
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                checkbox.Checked = !checkbox.Checked;
+            }   
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

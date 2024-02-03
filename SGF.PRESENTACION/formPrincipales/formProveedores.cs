@@ -1,6 +1,8 @@
-﻿using SGF.MODELO.Seguridad;
+﻿using SGF.MODELO;
+using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,9 @@ namespace SGF.PRESENTACION.formPrincipales
         private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private Permiso permisosDeUsuario;
+
+        int cantidadAntes { get; set; }
+        int cantidadDespues { get; set; }
 
         public formProveedores()
         {
@@ -50,18 +55,195 @@ namespace SGF.PRESENTACION.formPrincipales
         // Alta
         private void btnNuevoP_Click(object sender, EventArgs e)
         {
-
+            Cursor.Current = Cursors.WaitCursor;
+            if (permisosDeUsuario.Alta)
+            {
+                using (var modal = new mdProveedores())
+                {
+                    Cursor.Current = Cursors.Default;
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        cargarLista();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         // Modificación
         private void btnModificarP_Click(object sender, EventArgs e)
         {
+            abrirModalModificar();
+        }
+
+        private void dgvProveedores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                abrirModalModificar();
+            }
+        }
+
+        private void abrirModalModificar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                if (permisosDeUsuario.Modificar)
+                {
+                    if (dgvProveedores.CurrentCell != null)
+                    {
+                        int filaIndex = dgvProveedores.CurrentCell.RowIndex;
+                        int proveedorID = int.Parse(dgvProveedores.Rows[filaIndex].Cells["dgvcID"].Value.ToString());
+                        if (proveedorID > 0)
+                        {
+                            using (var modal = new mdProveedores(true, proveedorID))
+                            {
+                                var resultado = modal.ShowDialog();
+                                if (resultado == DialogResult.OK)
+                                {
+                                    cargarLista();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se ha seleccionado ningún proveedor. Por favor, seleccione un proveedor de la lista e inténtelo de nuevo.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
 
         }
+
         // Baja
         private void btnEliminarP_Click(object sender, EventArgs e)
         {
+            bajaProveedor();
+        }
 
+        private void dgvProveedores_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                bajaProveedor();
+            }
+        }
+
+        private void bajaProveedor()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                if (permisosDeUsuario.Baja)
+                {
+                    if (dgvProveedores.SelectedCells.Count == 0)
+                    {
+                        MessageBox.Show("Seleccione por lo menos un proveedor de la lista antes de intentar darlo de baja.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    List<Operacion> proveedorAEliminar = new List<Operacion>();
+                    DialogResult resultado = MessageBox.Show("¿Estás seguro que desea eliminar los proveedores seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resultado != DialogResult.Yes)
+                        return;
+
+                    proveedorAEliminar.Clear();
+
+                    foreach(DataGridViewCell celda in dgvProveedores.SelectedCells)
+                    {
+                        int proveedorID = Convert.ToInt32(dgvProveedores.Rows[celda.RowIndex].Cells["dgvcID"].Value);
+                        string nombreProveedor = dgvProveedores.Rows[celda.RowIndex].Cells["dgvcRazonSocial"].Value.ToString();
+                        string operacion = string.Empty;
+                        DialogResult respuesta;
+
+                        if(proveedorID > 0)
+                        {
+                            if (lProveedor.ProveedorTieneProductos(proveedorID))
+                            {
+                                respuesta = MessageBox.Show($"El proveedor seleccionado: ({nombreProveedor}) tiene productos asignados, ¿desea asignar a los productos de este proveedor como sin proveedor?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                if(DialogResult.Yes == respuesta)
+                                {
+                                    operacion = "AsignarProductosSinProveedor";
+                                }else if(DialogResult.No == respuesta)
+                                {
+                                    respuesta = MessageBox.Show($"¿Desea eliminar el proveedor: ({nombreProveedor}) y los productos asignados a este?", "Sistema", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                    if(DialogResult.Yes == respuesta)
+                                    {
+                                        operacion = "EliminarProveedorYProductos";
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show($"Operación cancelada para el proveedor: ({nombreProveedor})", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"Operación cancelada para el proveedor: ( {nombreProveedor} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                operacion = "EliminarProveedor";
+                            }
+                            proveedorAEliminar.Add(new Operacion { ID = proveedorID, Nombre = nombreProveedor, NombreOperacion = operacion });
+                        }
+                        else
+                        {
+                            MessageBox.Show("Seleccione un proveedor válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
+                    }
+
+                    cantidadAntes = lProveedor.ConteoProveedores();
+                    int proveedorEliminados = 0;
+
+                    foreach(var proveedor in proveedorAEliminar)
+                    {
+                        if(lProveedor.BajaProveedor(proveedor))
+                            proveedorEliminados++;
+                        else
+                        {
+                            MessageBox.Show($"No se pudo eliminar el proveedor con ID: ( {proveedor.ID} )", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            continue;
+                        }
+                    }
+
+                    if(proveedorEliminados > 0)
+                    {
+                        cantidadDespues = lProveedor.ConteoProveedores();
+                        RegistroBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), proveedorEliminados, cantidadAntes, cantidadDespues, "Proveedores", "Se eliminaron proveedores del sistema.");
+                        MessageBox.Show(proveedorEliminados > 1 ? "Proveedores eliminados con éxito." : "Proveedor eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargarLista();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Exportar
@@ -237,5 +419,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 }
             }
         }
+
+
     }
 }

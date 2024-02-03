@@ -38,6 +38,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void mdCategorias_Load(object sender, EventArgs e)
         {
+            txtNombre.Select();
             Cursor.Current = Cursors.WaitCursor;
             cargarEstado();
             cargarPermiso();
@@ -61,6 +62,7 @@ namespace SGF.PRESENTACION.formModales
                 {
                     modificarCategoria();
                 }
+                txtNombre.Select();
             }
             catch (Exception ex)
             {

@@ -67,3 +67,7 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.xml
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.DataSet.pdb
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ExcelDataReader.DataSet.xml
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdProveedores.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Seguridad.formConfirmarContraseña.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdEntradaInventario.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdRegistrarCompra.resources

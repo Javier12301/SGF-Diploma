@@ -29,12 +29,40 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formProveedores));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formProveedores));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.tsMostrar = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsdMostrar = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsMenuProveedor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiID = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRazonSocial = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTipoDocumento = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDocumento = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDireccion = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTelefono = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCorreo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEstado = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvProveedores = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.proveedorBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.negocio = new SGF.PRESENTACION.Negocio();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnBuscar = new FontAwesome.Sharp.IconButton();
             this.txtBuscar = new System.Windows.Forms.TextBox();
@@ -59,49 +87,21 @@
             this.cmbFiltroEstado = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.tsMostrar = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsdMostrar = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsMenuProveedor = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiID = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRazonSocial = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTipoDocumento = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDocumento = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDireccion = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiTelefono = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCorreo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEstado = new System.Windows.Forms.ToolStripMenuItem();
-            this.dgvProveedores = new System.Windows.Forms.DataGridView();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbFiltroTipoDocumento = new System.Windows.Forms.ToolStripComboBox();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcRazonSocial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDireccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcTelefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcCorreo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcEstado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.proveedorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.negocio = new SGF.PRESENTACION.Negocio();
             this.proveedorTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.ProveedorTableAdapter();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblEstado = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.flpContenedorBotones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-            this.bindingNavigator1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tsMostrar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.proveedorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.flpContenedorBotones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.bindingNavigator1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -116,6 +116,325 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1081, 448);
             this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.LightGray;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Location = new System.Drawing.Point(883, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(194, 81);
+            this.panel2.TabIndex = 112;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.lblEstado);
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Location = new System.Drawing.Point(4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(184, 71);
+            this.panel3.TabIndex = 7;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEstado.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
+            this.lblEstado.Location = new System.Drawing.Point(37, 38);
+            this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(109, 18);
+            this.lblEstado.TabIndex = 1;
+            this.lblEstado.Text = "--------";
+            this.lblEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(68, 9);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Estado";
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.tsMostrar);
+            this.panel5.Controls.Add(this.dgvProveedores);
+            this.panel5.Location = new System.Drawing.Point(5, 149);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1073, 247);
+            this.panel5.TabIndex = 111;
+            // 
+            // tsMostrar
+            // 
+            this.tsMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
+            this.tsMostrar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMostrar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.tsdMostrar});
+            this.tsMostrar.Location = new System.Drawing.Point(0, 0);
+            this.tsMostrar.Name = "tsMostrar";
+            this.tsMostrar.Size = new System.Drawing.Size(1073, 25);
+            this.tsMostrar.TabIndex = 111;
+            this.tsMostrar.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsdMostrar
+            // 
+            this.tsdMostrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsMenuProveedor});
+            this.tsdMostrar.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold);
+            this.tsdMostrar.ForeColor = System.Drawing.Color.White;
+            this.tsdMostrar.Image = global::SGF.PRESENTACION.Properties.Resources.checkList_Blanco;
+            this.tsdMostrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsdMostrar.Name = "tsdMostrar";
+            this.tsdMostrar.Size = new System.Drawing.Size(151, 22);
+            this.tsdMostrar.Text = "Mostrar Columnas";
+            this.tsdMostrar.DropDownClosed += new System.EventHandler(this.tsdMostrar_DropDownClosed);
+            this.tsdMostrar.DropDownOpened += new System.EventHandler(this.tsdMostrar_DropDownOpened);
+            // 
+            // tsMenuProveedor
+            // 
+            this.tsMenuProveedor.Checked = true;
+            this.tsMenuProveedor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsMenuProveedor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiID,
+            this.tsmiRazonSocial,
+            this.tsmiTipoDocumento,
+            this.tsmiDocumento,
+            this.tsmiDireccion,
+            this.tsmiTelefono,
+            this.tsmiCorreo,
+            this.tsmiEstado});
+            this.tsMenuProveedor.Name = "tsMenuProveedor";
+            this.tsMenuProveedor.Size = new System.Drawing.Size(152, 22);
+            this.tsMenuProveedor.Text = "Proveedores";
+            this.tsMenuProveedor.CheckedChanged += new System.EventHandler(this.tsmiMenu_CheckChanged);
+            this.tsMenuProveedor.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiID
+            // 
+            this.tsmiID.Checked = true;
+            this.tsmiID.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiID.Name = "tsmiID";
+            this.tsmiID.Size = new System.Drawing.Size(178, 22);
+            this.tsmiID.Text = "ID";
+            this.tsmiID.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiID.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiRazonSocial
+            // 
+            this.tsmiRazonSocial.Checked = true;
+            this.tsmiRazonSocial.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiRazonSocial.Name = "tsmiRazonSocial";
+            this.tsmiRazonSocial.Size = new System.Drawing.Size(178, 22);
+            this.tsmiRazonSocial.Text = "Razón Social";
+            this.tsmiRazonSocial.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiRazonSocial.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiTipoDocumento
+            // 
+            this.tsmiTipoDocumento.Checked = true;
+            this.tsmiTipoDocumento.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiTipoDocumento.Name = "tsmiTipoDocumento";
+            this.tsmiTipoDocumento.Size = new System.Drawing.Size(178, 22);
+            this.tsmiTipoDocumento.Text = "Tipo documento";
+            this.tsmiTipoDocumento.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiTipoDocumento.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiDocumento
+            // 
+            this.tsmiDocumento.Checked = true;
+            this.tsmiDocumento.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiDocumento.Name = "tsmiDocumento";
+            this.tsmiDocumento.Size = new System.Drawing.Size(178, 22);
+            this.tsmiDocumento.Text = "Documento";
+            this.tsmiDocumento.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiDocumento.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiDireccion
+            // 
+            this.tsmiDireccion.Checked = true;
+            this.tsmiDireccion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiDireccion.Name = "tsmiDireccion";
+            this.tsmiDireccion.Size = new System.Drawing.Size(178, 22);
+            this.tsmiDireccion.Text = "Dirección";
+            this.tsmiDireccion.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiDireccion.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiTelefono
+            // 
+            this.tsmiTelefono.Checked = true;
+            this.tsmiTelefono.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiTelefono.Name = "tsmiTelefono";
+            this.tsmiTelefono.Size = new System.Drawing.Size(178, 22);
+            this.tsmiTelefono.Text = "Teléfono";
+            this.tsmiTelefono.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiTelefono.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiCorreo
+            // 
+            this.tsmiCorreo.Checked = true;
+            this.tsmiCorreo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiCorreo.Name = "tsmiCorreo";
+            this.tsmiCorreo.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCorreo.Text = "Correo";
+            this.tsmiCorreo.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiCorreo.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // tsmiEstado
+            // 
+            this.tsmiEstado.Checked = true;
+            this.tsmiEstado.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsmiEstado.Name = "tsmiEstado";
+            this.tsmiEstado.Size = new System.Drawing.Size(178, 22);
+            this.tsmiEstado.Text = "Estado";
+            this.tsmiEstado.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
+            this.tsmiEstado.Click += new System.EventHandler(this.tsmiButtons_Click);
+            // 
+            // dgvProveedores
+            // 
+            this.dgvProveedores.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvProveedores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvProveedores.AutoGenerateColumns = false;
+            this.dgvProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProveedores.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvProveedores.ColumnHeadersHeight = 40;
+            this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvcID,
+            this.dgvcRazonSocial,
+            this.dgvcTipoDocumento,
+            this.dgvcDocumento,
+            this.dgvcDireccion,
+            this.dgvcTelefono,
+            this.dgvcCorreo,
+            this.dgvcEstado});
+            this.dgvProveedores.DataSource = this.proveedorBindingSource;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvProveedores.GridColor = System.Drawing.Color.White;
+            this.dgvProveedores.Location = new System.Drawing.Point(0, 28);
+            this.dgvProveedores.Name = "dgvProveedores";
+            this.dgvProveedores.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProveedores.RowHeadersVisible = false;
+            this.dgvProveedores.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProveedores.Size = new System.Drawing.Size(1073, 216);
+            this.dgvProveedores.TabIndex = 110;
+            this.dgvProveedores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellEnter);
+            this.dgvProveedores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellDoubleClick);
+            this.dgvProveedores.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellEnter);
+            this.dgvProveedores.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvProveedores_KeyDown);
+            // 
+            // dgvcID
+            // 
+            this.dgvcID.DataPropertyName = "ProveedorID";
+            this.dgvcID.FillWeight = 40F;
+            this.dgvcID.HeaderText = "ID";
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            // 
+            // dgvcRazonSocial
+            // 
+            this.dgvcRazonSocial.DataPropertyName = "RazonSocial";
+            this.dgvcRazonSocial.HeaderText = "Razon Social";
+            this.dgvcRazonSocial.Name = "dgvcRazonSocial";
+            this.dgvcRazonSocial.ReadOnly = true;
+            // 
+            // dgvcTipoDocumento
+            // 
+            this.dgvcTipoDocumento.DataPropertyName = "TipoDocumento";
+            this.dgvcTipoDocumento.HeaderText = "Tipo Documento";
+            this.dgvcTipoDocumento.Name = "dgvcTipoDocumento";
+            this.dgvcTipoDocumento.ReadOnly = true;
+            // 
+            // dgvcDocumento
+            // 
+            this.dgvcDocumento.DataPropertyName = "Documento";
+            this.dgvcDocumento.HeaderText = "Documento";
+            this.dgvcDocumento.Name = "dgvcDocumento";
+            this.dgvcDocumento.ReadOnly = true;
+            // 
+            // dgvcDireccion
+            // 
+            this.dgvcDireccion.DataPropertyName = "Direccion";
+            this.dgvcDireccion.HeaderText = "Dirección";
+            this.dgvcDireccion.Name = "dgvcDireccion";
+            this.dgvcDireccion.ReadOnly = true;
+            // 
+            // dgvcTelefono
+            // 
+            this.dgvcTelefono.DataPropertyName = "TelefonoProveedor";
+            this.dgvcTelefono.HeaderText = "Teléfono";
+            this.dgvcTelefono.Name = "dgvcTelefono";
+            this.dgvcTelefono.ReadOnly = true;
+            // 
+            // dgvcCorreo
+            // 
+            this.dgvcCorreo.DataPropertyName = "Correo";
+            this.dgvcCorreo.HeaderText = "Correo";
+            this.dgvcCorreo.Name = "dgvcCorreo";
+            this.dgvcCorreo.ReadOnly = true;
+            // 
+            // dgvcEstado
+            // 
+            this.dgvcEstado.DataPropertyName = "Estado";
+            this.dgvcEstado.FillWeight = 50F;
+            this.dgvcEstado.HeaderText = "Estado";
+            this.dgvcEstado.Name = "dgvcEstado";
+            this.dgvcEstado.ReadOnly = true;
+            // 
+            // proveedorBindingSource
+            // 
+            this.proveedorBindingSource.DataMember = "Proveedor";
+            this.proveedorBindingSource.DataSource = this.negocio;
+            // 
+            // negocio
+            // 
+            this.negocio.DataSetName = "Negocio";
+            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // panel4
             // 
@@ -431,208 +750,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 49);
             // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Controls.Add(this.tsMostrar);
-            this.panel5.Controls.Add(this.dgvProveedores);
-            this.panel5.Location = new System.Drawing.Point(5, 149);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1073, 247);
-            this.panel5.TabIndex = 111;
-            // 
-            // tsMostrar
-            // 
-            this.tsMostrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
-            this.tsMostrar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsMostrar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.tsdMostrar});
-            this.tsMostrar.Location = new System.Drawing.Point(0, 0);
-            this.tsMostrar.Name = "tsMostrar";
-            this.tsMostrar.Size = new System.Drawing.Size(1073, 25);
-            this.tsMostrar.TabIndex = 111;
-            this.tsMostrar.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsdMostrar
-            // 
-            this.tsdMostrar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsMenuProveedor});
-            this.tsdMostrar.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold);
-            this.tsdMostrar.ForeColor = System.Drawing.Color.White;
-            this.tsdMostrar.Image = global::SGF.PRESENTACION.Properties.Resources.checkList_Blanco;
-            this.tsdMostrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsdMostrar.Name = "tsdMostrar";
-            this.tsdMostrar.Size = new System.Drawing.Size(151, 22);
-            this.tsdMostrar.Text = "Mostrar Columnas";
-            this.tsdMostrar.DropDownClosed += new System.EventHandler(this.tsdMostrar_DropDownClosed);
-            this.tsdMostrar.DropDownOpened += new System.EventHandler(this.tsdMostrar_DropDownOpened);
-            // 
-            // tsMenuProveedor
-            // 
-            this.tsMenuProveedor.Checked = true;
-            this.tsMenuProveedor.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsMenuProveedor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiID,
-            this.tsmiRazonSocial,
-            this.tsmiTipoDocumento,
-            this.tsmiDocumento,
-            this.tsmiDireccion,
-            this.tsmiTelefono,
-            this.tsmiCorreo,
-            this.tsmiEstado});
-            this.tsMenuProveedor.Name = "tsMenuProveedor";
-            this.tsMenuProveedor.Size = new System.Drawing.Size(152, 22);
-            this.tsMenuProveedor.Text = "Proveedores";
-            this.tsMenuProveedor.CheckedChanged += new System.EventHandler(this.tsmiMenu_CheckChanged);
-            this.tsMenuProveedor.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiID
-            // 
-            this.tsmiID.Checked = true;
-            this.tsmiID.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiID.Name = "tsmiID";
-            this.tsmiID.Size = new System.Drawing.Size(178, 22);
-            this.tsmiID.Text = "ID";
-            this.tsmiID.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiID.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiRazonSocial
-            // 
-            this.tsmiRazonSocial.Checked = true;
-            this.tsmiRazonSocial.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiRazonSocial.Name = "tsmiRazonSocial";
-            this.tsmiRazonSocial.Size = new System.Drawing.Size(178, 22);
-            this.tsmiRazonSocial.Text = "Razón Social";
-            this.tsmiRazonSocial.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiRazonSocial.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiTipoDocumento
-            // 
-            this.tsmiTipoDocumento.Checked = true;
-            this.tsmiTipoDocumento.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiTipoDocumento.Name = "tsmiTipoDocumento";
-            this.tsmiTipoDocumento.Size = new System.Drawing.Size(178, 22);
-            this.tsmiTipoDocumento.Text = "Tipo documento";
-            this.tsmiTipoDocumento.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiTipoDocumento.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiDocumento
-            // 
-            this.tsmiDocumento.Checked = true;
-            this.tsmiDocumento.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiDocumento.Name = "tsmiDocumento";
-            this.tsmiDocumento.Size = new System.Drawing.Size(178, 22);
-            this.tsmiDocumento.Text = "Documento";
-            this.tsmiDocumento.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiDocumento.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiDireccion
-            // 
-            this.tsmiDireccion.Checked = true;
-            this.tsmiDireccion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiDireccion.Name = "tsmiDireccion";
-            this.tsmiDireccion.Size = new System.Drawing.Size(178, 22);
-            this.tsmiDireccion.Text = "Dirección";
-            this.tsmiDireccion.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiDireccion.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiTelefono
-            // 
-            this.tsmiTelefono.Checked = true;
-            this.tsmiTelefono.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiTelefono.Name = "tsmiTelefono";
-            this.tsmiTelefono.Size = new System.Drawing.Size(178, 22);
-            this.tsmiTelefono.Text = "Teléfono";
-            this.tsmiTelefono.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiTelefono.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiCorreo
-            // 
-            this.tsmiCorreo.Checked = true;
-            this.tsmiCorreo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiCorreo.Name = "tsmiCorreo";
-            this.tsmiCorreo.Size = new System.Drawing.Size(178, 22);
-            this.tsmiCorreo.Text = "Correo";
-            this.tsmiCorreo.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiCorreo.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // tsmiEstado
-            // 
-            this.tsmiEstado.Checked = true;
-            this.tsmiEstado.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsmiEstado.Name = "tsmiEstado";
-            this.tsmiEstado.Size = new System.Drawing.Size(178, 22);
-            this.tsmiEstado.Text = "Estado";
-            this.tsmiEstado.CheckedChanged += new System.EventHandler(this.tsmi_CheckedChanged);
-            this.tsmiEstado.Click += new System.EventHandler(this.tsmiButtons_Click);
-            // 
-            // dgvProveedores
-            // 
-            this.dgvProveedores.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProveedores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvProveedores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvProveedores.AutoGenerateColumns = false;
-            this.dgvProveedores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProveedores.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvProveedores.ColumnHeadersHeight = 40;
-            this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvProveedores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvcID,
-            this.dgvcRazonSocial,
-            this.dgvcTipoDocumento,
-            this.dgvcDocumento,
-            this.dgvcDireccion,
-            this.dgvcTelefono,
-            this.dgvcCorreo,
-            this.dgvcEstado});
-            this.dgvProveedores.DataSource = this.proveedorBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvProveedores.GridColor = System.Drawing.Color.White;
-            this.dgvProveedores.Location = new System.Drawing.Point(0, 28);
-            this.dgvProveedores.Name = "dgvProveedores";
-            this.dgvProveedores.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProveedores.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvProveedores.RowHeadersVisible = false;
-            this.dgvProveedores.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProveedores.Size = new System.Drawing.Size(1073, 216);
-            this.dgvProveedores.TabIndex = 110;
-            this.dgvProveedores.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellEnter);
-            this.dgvProveedores.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProveedores_CellEnter);
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -648,124 +765,9 @@
             this.cmbFiltroTipoDocumento.Size = new System.Drawing.Size(160, 49);
             this.cmbFiltroTipoDocumento.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroBuscar_SelectedIndexChanged);
             // 
-            // dgvcID
-            // 
-            this.dgvcID.DataPropertyName = "ProveedorID";
-            this.dgvcID.FillWeight = 40F;
-            this.dgvcID.HeaderText = "ID";
-            this.dgvcID.Name = "dgvcID";
-            this.dgvcID.ReadOnly = true;
-            // 
-            // dgvcRazonSocial
-            // 
-            this.dgvcRazonSocial.DataPropertyName = "RazonSocial";
-            this.dgvcRazonSocial.HeaderText = "Razon Social";
-            this.dgvcRazonSocial.Name = "dgvcRazonSocial";
-            this.dgvcRazonSocial.ReadOnly = true;
-            // 
-            // dgvcTipoDocumento
-            // 
-            this.dgvcTipoDocumento.DataPropertyName = "TipoDocumento";
-            this.dgvcTipoDocumento.HeaderText = "Tipo Documento";
-            this.dgvcTipoDocumento.Name = "dgvcTipoDocumento";
-            this.dgvcTipoDocumento.ReadOnly = true;
-            // 
-            // dgvcDocumento
-            // 
-            this.dgvcDocumento.DataPropertyName = "Documento";
-            this.dgvcDocumento.HeaderText = "Documento";
-            this.dgvcDocumento.Name = "dgvcDocumento";
-            this.dgvcDocumento.ReadOnly = true;
-            // 
-            // dgvcDireccion
-            // 
-            this.dgvcDireccion.DataPropertyName = "Direccion";
-            this.dgvcDireccion.HeaderText = "Dirección";
-            this.dgvcDireccion.Name = "dgvcDireccion";
-            this.dgvcDireccion.ReadOnly = true;
-            // 
-            // dgvcTelefono
-            // 
-            this.dgvcTelefono.DataPropertyName = "TelefonoProveedor";
-            this.dgvcTelefono.HeaderText = "Teléfono";
-            this.dgvcTelefono.Name = "dgvcTelefono";
-            this.dgvcTelefono.ReadOnly = true;
-            // 
-            // dgvcCorreo
-            // 
-            this.dgvcCorreo.DataPropertyName = "Correo";
-            this.dgvcCorreo.HeaderText = "Correo";
-            this.dgvcCorreo.Name = "dgvcCorreo";
-            this.dgvcCorreo.ReadOnly = true;
-            // 
-            // dgvcEstado
-            // 
-            this.dgvcEstado.DataPropertyName = "Estado";
-            this.dgvcEstado.FillWeight = 50F;
-            this.dgvcEstado.HeaderText = "Estado";
-            this.dgvcEstado.Name = "dgvcEstado";
-            this.dgvcEstado.ReadOnly = true;
-            // 
-            // proveedorBindingSource
-            // 
-            this.proveedorBindingSource.DataMember = "Proveedor";
-            this.proveedorBindingSource.DataSource = this.negocio;
-            // 
-            // negocio
-            // 
-            this.negocio.DataSetName = "Negocio";
-            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // proveedorTableAdapter
             // 
             this.proveedorTableAdapter.ClearBeforeFill = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.LightGray;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(883, 4);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 81);
-            this.panel2.TabIndex = 112;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.lblEstado);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(4, 4);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(184, 71);
-            this.panel3.TabIndex = 7;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblEstado.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
-            this.lblEstado.Location = new System.Drawing.Point(37, 38);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(109, 18);
-            this.lblEstado.TabIndex = 1;
-            this.lblEstado.Text = "--------";
-            this.lblEstado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(68, 9);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Estado";
             // 
             // formProveedores
             // 
@@ -778,12 +780,9 @@
             this.Text = "formProveedores";
             this.Load += new System.EventHandler(this.formProveedores_Load);
             this.panel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.flpContenedorBotones.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
-            this.bindingNavigator1.ResumeLayout(false);
-            this.bindingNavigator1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.tsMostrar.ResumeLayout(false);
@@ -791,9 +790,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.proveedorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.flpContenedorBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.bindingNavigator1.ResumeLayout(false);
+            this.bindingNavigator1.PerformLayout();
             this.ResumeLayout(false);
 
         }
