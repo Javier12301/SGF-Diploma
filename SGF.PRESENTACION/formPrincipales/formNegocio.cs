@@ -1,0 +1,442 @@
+﻿using SGF.MODELO.Negocio;
+using SGF.NEGOCIO.Negocio;
+using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales.modalesBuscadores;
+using SGF.PRESENTACION.UtilidadesComunes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SGF.PRESENTACION.formPrincipales
+{
+    public partial class formNegocio : Form
+    {
+        //Controladora
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+
+
+        private Moneda monedaSeleccionada { get; set; }
+        NegocioModelo datosDeNegocio { get; set; }
+
+
+        public formNegocio()
+        {
+            InitializeComponent();
+            monedaSeleccionada = null;
+            datosDeNegocio = lNegocio.ObtenerDatosDelNegocio();
+        }
+
+        private void formNegocio_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                chkOtroDocumento.Checked = false;
+                cargarCombobox();
+                cargarDatosNegocio();
+                
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Manejo de Responsabilidades
+        private bool ValidarCampos()
+        {
+            bool camposValidos = true;
+
+            // Datos del negocio
+            camposValidos &= uiUtilidades.VerificarTextbox(txtNombreNegocio, errorProvider, lblNombreNegocio);
+            camposValidos &= uiUtilidades.VerificarTextbox(txtDireccionNegocio, errorProvider, lblDireccionNegocio);
+            if (string.IsNullOrEmpty(txtDireccionNegocio.Text))
+                txtDireccionNegocio.Text = "-";
+            if(string.IsNullOrEmpty(txtTelefonoNegocio.Text))
+                txtTelefonoNegocio.Text = "-";
+            if(string.IsNullOrEmpty(txtCorreoNegocio.Text))
+                txtCorreoNegocio.Text = "-";
+
+            // Datos personales
+            if (chkOtroDocumento.Checked)
+                camposValidos &= uiUtilidades.VerificarTextbox(txtOtroDocumento, errorProvider, lblTipoDocumento);
+            else
+                camposValidos &= uiUtilidades.VerificarCombobox(cmbTipoDocumento, errorProvider, lblTipoDocumento);
+
+            camposValidos &= uiUtilidades.VerificarTextbox(txtDocumentoDueño, errorProvider, lblDocumento);
+            
+            // Monedas
+            camposValidos &= uiUtilidades.VerificarTextbox(txtNombreMoneda, errorProvider, lblNombreMoneda);
+            camposValidos &= uiUtilidades.VerificarTextbox(txtSimboloMoneda, errorProvider, lblSimboloMoneda);
+
+            // Impuestos
+            if (rbImpuestoSi.Checked)
+            {
+                camposValidos &= uiUtilidades.VerificarTextbox(txtNombreImpuesto, errorProvider, lblAbreviacion);
+                camposValidos &= uiUtilidades.VerificarTextbox(txtPorcentajeImpuesto, errorProvider, lblPorcentaje);
+            }
+
+            return camposValidos;
+        }
+
+        private NegocioModelo CrearNegocioModificado()
+        {
+            NegocioModelo negocio = new NegocioModelo
+            {
+                Logo = datosDeNegocio.Logo,
+                Nombre = txtNombreNegocio.Text,
+                Direccion = txtDireccionNegocio.Text,
+                Telefono = txtTelefonoNegocio.Text,
+                Correo = txtCorreoNegocio.Text,
+                TipoDocumento = chkOtroDocumento.Checked ? txtOtroDocumento.Text : cmbTipoDocumento.SelectedItem.ToString(),
+                Documento = txtDocumentoDueño.Text
+            };
+            // Monedas
+            if (monedaSeleccionada == null)
+            {
+                bool monedaExiste = lNegocio.ExisteMoneda(txtNombreMoneda.Text);
+                if (monedaExiste)
+                {
+                    monedaSeleccionada = lNegocio.ObtenerMonedaPorNombre(txtNombreMoneda.Text);
+                }
+                else if (altaMoneda())
+                {
+                    monedaSeleccionada = lNegocio.ObtenerMonedaPorNombre(txtNombreMoneda.Text);
+                }
+                else
+                {
+                    // moneda default id 1
+                    monedaSeleccionada = lNegocio.ObtenerMonedaPorID(1);
+                }
+            }
+            negocio.moneda = monedaSeleccionada;
+
+            // Impuestos
+            Impuesto impuesto = rbImpuestoSi.Checked ? new Impuesto
+            {
+                Nombre = txtNombreImpuesto.Text,
+                Porcentaje = Convert.ToDecimal(txtPorcentajeImpuesto.Text)
+            } : lNegocio.ObtenerImpuestoPorID(1);
+
+            if (rbImpuestoSi.Checked)
+            {
+                lNegocio.ModificarImpuesto(impuesto);
+            }
+            negocio.impuesto = impuesto;
+
+            return negocio;
+        }
+
+
+        // Alta moneda
+        private bool altaMoneda()
+        {
+            Moneda moneda = new Moneda
+            {
+                Nombre = txtNombreMoneda.Text,
+                Simbolo = txtSimboloMoneda.Text,
+                Posicion = rbAntes.Checked ? "Antes" : "Después"
+            };
+            bool resultado = lNegocio.AltaMoneda(moneda);
+            return resultado;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (ValidarCampos())
+            {
+                NegocioModelo oNegocio = CrearNegocioModificado();
+                bool resultado = lNegocio.ModificarNegocio(oNegocio);
+                if (resultado)
+                {
+                    MessageBox.Show("Negocio modificado correctamente", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrió un error al modificar el negocio, contacte con el administrador del sistema si este error persiste.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void cargarCombobox()
+        {
+            cmbTipoDocumento.Items.Add("Seleccione una opción...");
+            // utilizar la lista de proveedores, e insertar los tipos de documentos existentes
+            cmbTipoDocumento.Items.Add("DNI");
+            cmbTipoDocumento.Items.Add("CUIL");
+            cmbTipoDocumento.Items.Add("CUIT");
+            if (!cmbTipoDocumento.Items.Contains(datosDeNegocio.TipoDocumento))
+            {
+                cmbTipoDocumento.Items.Add(datosDeNegocio.TipoDocumento);
+            }
+            cmbTipoDocumento.SelectedIndex = 0;
+        }
+
+        // Convertir byte[] a Image
+        private Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            if (byteArrayIn != null)
+            {
+                Image returnImage = null;
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream(byteArrayIn);
+                    returnImage = Image.FromStream(ms);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return returnImage;
+            }
+            else
+            {
+                return Properties.Resources.farmaciaLogo;
+            }
+        }
+
+        // Convertir Image a byte[]
+        private byte[] imageToByteArray(Image imageIn)
+        {
+            if (imageIn != null)
+            {
+                byte[] byteArray = null;
+                try
+                {
+                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    byteArray = ms.ToArray();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                return byteArray;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private void cargarDatosNegocio()
+        {
+            if(datosDeNegocio != null)
+            {
+                Moneda moneda = lNegocio.ObtenerMonedaPorID(datosDeNegocio.moneda.MonedaID);
+                Impuesto impuesto = lNegocio.ObtenerImpuestoPorID(datosDeNegocio.impuesto.ImpuestoID);
+                
+                // Cargar Datos de negocio
+                if(datosDeNegocio.Logo == null)
+                {
+                    pbLogo.Image = Properties.Resources.farmaciaLogo;
+                }
+                else
+                {
+                    pbLogo.Image = byteArrayToImage(datosDeNegocio.Logo);
+                }
+
+                txtNombreNegocio.Text = datosDeNegocio.Nombre;
+                txtDireccionNegocio.Text = datosDeNegocio.Direccion;
+                txtTelefonoNegocio.Text = datosDeNegocio.Telefono;
+                txtCorreoNegocio.Text = datosDeNegocio.Correo;
+
+                // Datos personales
+                cmbTipoDocumento.SelectedItem = datosDeNegocio.TipoDocumento;
+                txtDocumentoDueño.Text = datosDeNegocio.Documento;
+
+                // Monedas
+                txtNombreMoneda.Text = moneda.Nombre;
+                txtSimboloMoneda.Text = moneda.Simbolo;
+                if (moneda.Posicion == "Antes")
+                    rbAntes.Checked = true;
+                else
+                    rbDespues.Checked = true;
+
+                // Impuestos
+                if (datosDeNegocio.Impuestos)
+                    rbImpuestoSi.Checked = true;
+                else
+                    rbImpuestoNo.Checked = true;
+                txtNombreImpuesto.Text = impuesto.Nombre;
+                txtPorcentajeImpuesto.Text = impuesto.Porcentaje.ToString();
+
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al obtener los datos del negocio, contacte con el administrador del sistema si este error persiste.");
+            }
+        }
+
+        private void btnBuscarMoneda_Click(object sender, EventArgs e)
+        {
+            using(var modal = new mdBuscarMoneda())
+            {
+                DialogResult resultado = modal.ShowDialog();
+                if(resultado == DialogResult.OK)
+                {
+                    if(modal.monedaSeleccionada != null)
+                    {
+                        txtNombreMoneda.Text = modal.monedaSeleccionada.Nombre;
+                        txtSimboloMoneda.Text = modal.monedaSeleccionada.Simbolo;
+                        monedaSeleccionada = modal.monedaSeleccionada;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se seleccionó ninguna moneda", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+
+        }
+
+        private Point mousePosicion;
+        private void pnlTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mousePosicion = e.Location;
+            }
+        }
+
+        private void pnlTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                int deltaX = e.X - mousePosicion.X;
+                int deltaY = e.Y - mousePosicion.Y;
+                this.Location = new Point(this.Location.X + deltaX, this.Location.Y + deltaY);
+            }
+        }
+
+        private void radioButtos_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            string simboloMoneda = string.IsNullOrEmpty(txtSimboloMoneda.Text) ? "$" : txtSimboloMoneda.Text;
+            if (rb.Name == rbDespues.Name)
+            {
+                // mostrar ejemplo de posición
+                lblMuestraMoneda.Text = "543.21 " + simboloMoneda;
+            }
+            else
+            {
+                lblMuestraMoneda.Text = simboloMoneda + " 543.21";
+            }
+        }
+
+        private void btnEliminarImagen_Click(object sender, EventArgs e)
+        {
+            // Eliminar imagen
+            if(datosDeNegocio.Logo != null)
+            {
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la imagen?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    pbLogo.Image = Properties.Resources.farmaciaLogo;
+                    datosDeNegocio.Logo = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay ninguna imagen para eliminar", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void AbrirImagen()
+        {
+            OpenFileDialog abrir = new OpenFileDialog();
+            abrir.Filter = "Archivo de imagen|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+            abrir.Title = "Seleccione una imagen";
+            abrir.ShowDialog();
+
+            if (!string.IsNullOrEmpty(abrir.FileName))
+            {
+                pbLogo.Image = Image.FromFile(abrir.FileName);
+                datosDeNegocio.Logo = imageToByteArray(pbLogo.Image);
+            }
+        }
+
+        private void pbLogo_Click(object sender, EventArgs e)
+        {
+            // abrir savefiledialog para seleccionar imagen
+            try
+            {
+                if (datosDeNegocio.Logo != null)
+                {
+                    DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cambiar la imagen?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        AbrirImagen();
+                    }
+                }
+                else
+                {
+                    AbrirImagen();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Tipo de documento
+
+        private void chkOtroDocumento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkOtroDocumento.Checked)
+            {
+                cmbTipoDocumento.Enabled = false;
+                cmbTipoDocumento.Visible = false;
+
+                txtOtroDocumento.Enabled = true;
+                txtOtroDocumento.Visible = true;
+                txtOtroDocumento.Focus();
+            }
+            else
+            {
+                cmbTipoDocumento.Enabled = true;
+                cmbTipoDocumento.Visible = true;
+                cmbTipoDocumento.Focus();
+
+                txtOtroDocumento.Enabled = false;
+                txtOtroDocumento.Visible = false;
+            }
+        }
+
+        // Impuestos
+        private void radioButtonsImpuestos_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            if (rb.Name == rbImpuestoSi.Name)
+            {
+                pnlNombreDeImpuesto.Enabled = true;
+                txtNombreImpuesto.Enabled = true;
+                txtPorcentajeImpuesto.Enabled = true;
+            }
+            else
+            {
+                pnlNombreDeImpuesto.Enabled = false;
+                txtNombreImpuesto.Enabled = false;
+                txtPorcentajeImpuesto.Enabled = false;
+            }
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show("¿Desea salir del formulario?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (respuesta == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+    }
+}

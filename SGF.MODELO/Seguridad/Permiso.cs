@@ -23,6 +23,7 @@ namespace SGF.MODELO.Seguridad
         public bool Importar { get; set; }
         public bool Exportar { get; set; }
         public bool Imprimir { get; set; }
+        public bool Cancelar { get; set; }
         public bool EntradaMasiva { get; set; }
         public bool SalidaMasiva { get; set; }
 

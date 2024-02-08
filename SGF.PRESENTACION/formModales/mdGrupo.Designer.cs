@@ -405,7 +405,8 @@
             this.lbAccionesInventario.FormattingEnabled = true;
             this.lbAccionesInventario.ItemHeight = 19;
             this.lbAccionesInventario.Items.AddRange(new object[] {
-            "INVENTARIO"});
+            "INVENTARIO",
+            "DETALLES ENTRADA/SALIDA"});
             this.lbAccionesInventario.Location = new System.Drawing.Point(6, 10);
             this.lbAccionesInventario.Name = "lbAccionesInventario";
             this.lbAccionesInventario.Size = new System.Drawing.Size(338, 213);

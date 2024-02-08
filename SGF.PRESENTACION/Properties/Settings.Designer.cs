@@ -12,7 +12,7 @@ namespace SGF.PRESENTACION.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -30,6 +30,17 @@ namespace SGF.PRESENTACION.Properties {
         public string FarmaciaDatosConexionTableAdapter {
             get {
                 return ((string)(this["FarmaciaDatosConexionTableAdapter"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=FarmaciaDatos;User ID=Javier12301;Password=" +
+            "Reloj12301;TrustServerCertificate=True")]
+        public string ConexDataTable {
+            get {
+                return ((string)(this["ConexDataTable"]));
             }
         }
     }

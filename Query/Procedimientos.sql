@@ -2,7 +2,7 @@ use FarmaciaDatos
 Go
 
 
-SELECT * FROM Proveedor
+SELECT * FROM Producto
 
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
@@ -289,8 +289,49 @@ JOIN Compra C ON DC.CompraID = C.CompraID
 JOIN Proveedor P ON C.ProveedorID = P.ProveedorID
 WHERE P.RazonSocial LIKE '%' + @Buscar + '%'
 
+-- Filtro Detalle_Compra
+DECLARE @FiltroCompraID INT = 1; -- Reemplaza 1 con el ID de compra que estás buscando
+
+SELECT 
+    P.CodigoBarras,
+    P.Nombre AS 'Nombre de Producto',
+    DC.Cantidad AS 'Cantidad Comprada',
+    DC.PrecioCompra AS 'Precio de Compra',
+    DC.Cantidad * DC.PrecioCompra AS 'Sub Total'
+FROM 
+    Detalle_Compra DC
+    INNER JOIN Producto P ON DC.ProductoID = P.ProductoID
+WHERE 
+    DC.CompraID = @FiltroCompraID;
 
 
+-- Tabla Compra
+DECLARE @FiltroBuscar VARCHAR(50) = '';
+SELECT 
+    C.CompraID, 
+    Pr.RazonSocial AS Proveedor, 
+    C.Factura, 
+    C.FechaCompra, 
+    SUM(DC.Cantidad) AS CantidadTotalProductos, 
+    SUM(DC.Cantidad * DC.PrecioCompra) AS PrecioTotal
+FROM 
+    Compra C
+    INNER JOIN Proveedor Pr ON C.ProveedorID = Pr.ProveedorID
+    INNER JOIN Detalle_Compra DC ON C.CompraID = DC.CompraID
+WHERE 
+    Pr.RazonSocial LIKE '%' + @FiltroBuscar + '%'
+GROUP BY 
+    C.CompraID, 
+    Pr.RazonSocial, 
+    C.Factura,
+    C.FechaCompra;
+GO
+
+
+-- Filtro Moneda
+DECLARE @FiltroBuscar VARCHAR(60) = ''
+SELECT * FROM Moneda
+    WHERE Nombre LIKE '%' + @FiltroBuscar + '%';
 
 -- Cantidad de usuarios en un grupo
 DECLARE @grupoID INT = 5

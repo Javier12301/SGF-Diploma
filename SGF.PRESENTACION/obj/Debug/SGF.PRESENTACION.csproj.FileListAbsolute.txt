@@ -71,3 +71,13 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Seguridad.formConfirmarContraseña.resources
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdEntradaInventario.resources
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdRegistrarCompra.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdCompraProducto.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.modalesBuscadores.mdBuscarProducto.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdDetalleCompraEntrada.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\itextsharp.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\itextsharp.xmlworker.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\itextsharp.xml
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formPrincipales.formNegocio.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdMoneda.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.modalesBuscadores.mdBuscarMoneda.resources

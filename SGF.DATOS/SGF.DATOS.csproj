@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="ConexionSGF.cs" />
     <Compile Include="Negocio\CategoriaDAO.cs" />
+    <Compile Include="Negocio\CompraDAO.cs" />
+    <Compile Include="Negocio\NegocioDAO.cs" />
     <Compile Include="Negocio\ProductoDAO.cs" />
     <Compile Include="Negocio\ProveedorDAO.cs" />
     <Compile Include="Negocio\RegistroDAO.cs" />

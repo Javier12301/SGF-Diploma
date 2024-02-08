@@ -76,6 +76,8 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     permisoDeUsuario.Baja = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Baja");
                     permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
                     permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
+                    permisoDeUsuario.Imprimir = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Imprimir");
+                    permisoDeUsuario.Cancelar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Cancelar");
                     permisoDeUsuario.EntradaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Entrada");
                     permisoDeUsuario.SalidaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Salida");
                 }
@@ -395,12 +397,13 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-        
+
 
         // Manejo de Textbox con Formato Moneda
         public void TextboxMoneda_KeyPress(TextBox textbox, KeyPressEventArgs e, ErrorProvider error)
         {
-            // Formato regional de Argnetina
+            error.SetError(textbox, "");
+            // Formato regional de Argentina
             if (e.KeyChar == '.')
             {
                 e.Handled = true;
@@ -416,13 +419,24 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     e.Handled = true;
                 }
             }
+
+            // Solo permite números y control keys (como backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == '.' || e.KeyChar == ','))
+            {
+                error.SetError(textbox, "Solo se permiten números en este campo.");
+                e.Handled = true;
+            }
         }
+
 
         public void TextboxMoneda_Leave(TextBox textbox, EventArgs e)
         {
             // Formato regional de Argentina
             // 1.000,00
+            if(string.IsNullOrEmpty(textbox.Text))
+                textbox.Text = "0.00";
             textbox.Text = string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(textbox.Text));
+
         }
 
         // Solo numeros

@@ -28,28 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pnlPrincipal = new System.Windows.Forms.Panel();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnContraseña = new System.Windows.Forms.Button();
+            this.btnOjo = new FontAwesome.Sharp.IconButton();
+            this.icoCandado = new FontAwesome.Sharp.IconPictureBox();
+            this.icoUsuario = new FontAwesome.Sharp.IconPictureBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtContraseñaG = new Guna.UI.WinForms.GunaLineTextBox();
             this.txtUsuarioG = new Guna.UI.WinForms.GunaLineTextBox();
+            this.pbLogoEmpresa = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblNombreEmpresa = new System.Windows.Forms.Label();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
-            this.btnOjo = new FontAwesome.Sharp.IconButton();
-            this.icoCandado = new FontAwesome.Sharp.IconPictureBox();
-            this.icoUsuario = new FontAwesome.Sharp.IconPictureBox();
-            this.pbLogoEmpresa = new System.Windows.Forms.PictureBox();
             this.pnlPrincipal.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.pnlControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icoUsuario)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoEmpresa)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.pnlControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlPrincipal
@@ -108,6 +107,55 @@
             this.btnContraseña.UseVisualStyleBackColor = false;
             this.btnContraseña.Click += new System.EventHandler(this.btnContraseña_Click);
             // 
+            // btnOjo
+            // 
+            this.btnOjo.FlatAppearance.BorderSize = 0;
+            this.btnOjo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnOjo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnOjo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOjo.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            this.btnOjo.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.btnOjo.IconFont = FontAwesome.Sharp.IconFont.Regular;
+            this.btnOjo.IconSize = 29;
+            this.btnOjo.Location = new System.Drawing.Point(269, 267);
+            this.btnOjo.Name = "btnOjo";
+            this.btnOjo.Size = new System.Drawing.Size(29, 27);
+            this.btnOjo.TabIndex = 3;
+            this.btnOjo.UseVisualStyleBackColor = true;
+            this.btnOjo.Click += new System.EventHandler(this.btnOjo_Click);
+            this.btnOjo.MouseEnter += new System.EventHandler(this.btnOjo_MouseEnter);
+            this.btnOjo.MouseLeave += new System.EventHandler(this.btnOjo_MouseLeave);
+            // 
+            // icoCandado
+            // 
+            this.icoCandado.BackColor = System.Drawing.Color.White;
+            this.icoCandado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.icoCandado.IconChar = FontAwesome.Sharp.IconChar.Lock;
+            this.icoCandado.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.icoCandado.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.icoCandado.IconSize = 29;
+            this.icoCandado.Location = new System.Drawing.Point(8, 265);
+            this.icoCandado.Name = "icoCandado";
+            this.icoCandado.Size = new System.Drawing.Size(29, 29);
+            this.icoCandado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.icoCandado.TabIndex = 26;
+            this.icoCandado.TabStop = false;
+            // 
+            // icoUsuario
+            // 
+            this.icoUsuario.BackColor = System.Drawing.Color.White;
+            this.icoUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.icoUsuario.IconChar = FontAwesome.Sharp.IconChar.User;
+            this.icoUsuario.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
+            this.icoUsuario.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.icoUsuario.IconSize = 29;
+            this.icoUsuario.Location = new System.Drawing.Point(8, 219);
+            this.icoUsuario.Name = "icoUsuario";
+            this.icoUsuario.Size = new System.Drawing.Size(29, 29);
+            this.icoUsuario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.icoUsuario.TabIndex = 25;
+            this.icoUsuario.TabStop = false;
+            // 
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
@@ -154,6 +202,19 @@
             this.txtUsuarioG.Text = "Admin";
             this.txtUsuarioG.Enter += new System.EventHandler(this.txtCredenciales_Enter);
             this.txtUsuarioG.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredenciales_KeyPress);
+            // 
+            // pbLogoEmpresa
+            // 
+            this.pbLogoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLogoEmpresa.Image = global::SGF.PRESENTACION.Properties.Resources.farmaciaLogo;
+            this.pbLogoEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pbLogoEmpresa.Location = new System.Drawing.Point(80, 44);
+            this.pbLogoEmpresa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pbLogoEmpresa.Name = "pbLogoEmpresa";
+            this.pbLogoEmpresa.Size = new System.Drawing.Size(136, 109);
+            this.pbLogoEmpresa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLogoEmpresa.TabIndex = 12;
+            this.pbLogoEmpresa.TabStop = false;
             // 
             // panel1
             // 
@@ -222,68 +283,6 @@
             this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
             this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
             // 
-            // btnOjo
-            // 
-            this.btnOjo.FlatAppearance.BorderSize = 0;
-            this.btnOjo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnOjo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnOjo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOjo.IconChar = FontAwesome.Sharp.IconChar.Eye;
-            this.btnOjo.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.btnOjo.IconFont = FontAwesome.Sharp.IconFont.Regular;
-            this.btnOjo.IconSize = 29;
-            this.btnOjo.Location = new System.Drawing.Point(269, 267);
-            this.btnOjo.Name = "btnOjo";
-            this.btnOjo.Size = new System.Drawing.Size(29, 27);
-            this.btnOjo.TabIndex = 3;
-            this.btnOjo.UseVisualStyleBackColor = true;
-            this.btnOjo.Click += new System.EventHandler(this.btnOjo_Click);
-            this.btnOjo.MouseEnter += new System.EventHandler(this.btnOjo_MouseEnter);
-            this.btnOjo.MouseLeave += new System.EventHandler(this.btnOjo_MouseLeave);
-            // 
-            // icoCandado
-            // 
-            this.icoCandado.BackColor = System.Drawing.Color.White;
-            this.icoCandado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.icoCandado.IconChar = FontAwesome.Sharp.IconChar.Lock;
-            this.icoCandado.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.icoCandado.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.icoCandado.IconSize = 29;
-            this.icoCandado.Location = new System.Drawing.Point(8, 265);
-            this.icoCandado.Name = "icoCandado";
-            this.icoCandado.Size = new System.Drawing.Size(29, 29);
-            this.icoCandado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.icoCandado.TabIndex = 26;
-            this.icoCandado.TabStop = false;
-            // 
-            // icoUsuario
-            // 
-            this.icoUsuario.BackColor = System.Drawing.Color.White;
-            this.icoUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.icoUsuario.IconChar = FontAwesome.Sharp.IconChar.User;
-            this.icoUsuario.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(139)))), ((int)(((byte)(208)))));
-            this.icoUsuario.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.icoUsuario.IconSize = 29;
-            this.icoUsuario.Location = new System.Drawing.Point(8, 219);
-            this.icoUsuario.Name = "icoUsuario";
-            this.icoUsuario.Size = new System.Drawing.Size(29, 29);
-            this.icoUsuario.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.icoUsuario.TabIndex = 25;
-            this.icoUsuario.TabStop = false;
-            // 
-            // pbLogoEmpresa
-            // 
-            this.pbLogoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLogoEmpresa.Image = ((System.Drawing.Image)(resources.GetObject("pbLogoEmpresa.Image")));
-            this.pbLogoEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pbLogoEmpresa.Location = new System.Drawing.Point(80, 44);
-            this.pbLogoEmpresa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pbLogoEmpresa.Name = "pbLogoEmpresa";
-            this.pbLogoEmpresa.Size = new System.Drawing.Size(136, 109);
-            this.pbLogoEmpresa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogoEmpresa.TabIndex = 12;
-            this.pbLogoEmpresa.TabStop = false;
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,12 +296,12 @@
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.pnlPrincipal.ResumeLayout(false);
             this.pnlPrincipal.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.pnlControl.ResumeLayout(false);
-            this.pnlControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icoUsuario)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogoEmpresa)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.pnlControl.ResumeLayout(false);
+            this.pnlControl.PerformLayout();
             this.ResumeLayout(false);
 
         }

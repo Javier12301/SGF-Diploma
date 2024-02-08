@@ -464,6 +464,11 @@ namespace SGF.PRESENTACION.formModales
             {
                 ActualizarPermisos("formInventario", flpPermisosInventario);
             }
+            else if(lbAccionesInventario.SelectedItem.ToString() == "DETALLES ENTRADA/SALIDA")
+            {
+                ActualizarPermisos("formDetallesInventario", flpPermisosInventario);
+            }
+            
         }
 
         private void tpRegistros_Abierto()

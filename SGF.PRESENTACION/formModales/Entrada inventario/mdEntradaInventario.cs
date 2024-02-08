@@ -1,4 +1,6 @@
-﻿using SGF.MODELO.Seguridad;
+﻿using SGF.MODELO.Negocio;
+using SGF.MODELO.Seguridad;
+using SGF.NEGOCIO.Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,9 @@ namespace SGF.PRESENTACION.formModales
 {
     public partial class mdEntradaInventario : Form
     {
+        // Controladora
+        private CompraBLL lCompra = CompraBLL.ObtenerInstancia;
+
         Permiso permisoDeUsuario;
         public mdEntradaInventario(Permiso permisos)
         {
@@ -51,10 +56,10 @@ namespace SGF.PRESENTACION.formModales
                 filtrarLista();
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            }
         }
 
         // Alta de entrada de inventario
@@ -80,7 +85,34 @@ namespace SGF.PRESENTACION.formModales
         // Ver detalles
         private void btnDetalles_Click(object sender, EventArgs e)
         {
+            // verificar si hay tablas en el datagridview 
+            if (dgvCompras.Rows.Count > 0)
+            {
+                // verificar si hay una fila seleccionada
+                if (dgvCompras.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Debe seleccionar una compra realizada de la lista para ver los detalles.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
+                // obtener el id de la compra seleccionada
+                int compraID = Convert.ToInt32(dgvCompras.Rows[dgvCompras.CurrentRow.Index].Cells["dgvcID"].Value);
+                Compra compra = lCompra.ObtenerCompraPorID(compraID);
+                using (var modal = new mdDetalleCompraEntrada(compra))
+                {
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        filtrarLista();
+                    }
+                }
+
+
+            }
+            else
+            {
+                MessageBox.Show("No hay datos por mostrar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Exportar a Excel
@@ -91,14 +123,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void filtrarLista()
         {
-            if(txtBusqueda.Text != string.Empty)
-            {
-                this.detalle_CompraTableAdapter.Filtrar(this.negocio.Detalle_Compra, txtBusqueda.Text);
-            }
-            else
-            {
-                this.detalle_CompraTableAdapter.Fill(this.negocio.Detalle_Compra);
-            }
+            this.compraTableAdapter.Fill(this.negocio.Compra, txtBusqueda.Text);
         }
 
         // Filtrar lista
@@ -115,12 +140,8 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cancelar la operación?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(respuesta == DialogResult.Yes)
-            {
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
     }

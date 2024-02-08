@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="CorreoService.cs" />
     <Compile Include="Negocio\CategoriaBLL.cs" />
+    <Compile Include="Negocio\CompraBLL.cs" />
+    <Compile Include="Negocio\NegocioBLL.cs" />
     <Compile Include="Negocio\ProductoBLL.cs" />
     <Compile Include="Negocio\ProveedorBLL.cs" />
     <Compile Include="Negocio\RegistroBLL.cs" />

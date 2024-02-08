@@ -173,7 +173,14 @@ namespace SGF.PRESENTACION.formPrincipales
                     case "Perfiles":
                         abrirFormularioHijo(new formPerfiles(), btnAjustes);
                         break;
-                    
+                    case "Negocio":
+                        using(var formNegocio = new formNegocio())
+                        {
+                            formNegocio.ShowDialog();
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
         }

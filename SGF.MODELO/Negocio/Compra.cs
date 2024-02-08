@@ -13,6 +13,7 @@ namespace SGF.MODELO.Negocio
         public Usuario usuario { get; set; }
         public Proveedor proveedor { get; set; }
         public string Factura { get; set; }
-
+        public DateTime FechaCompra { get; set; }
+        public bool Estado { get; set; }
     }
 }

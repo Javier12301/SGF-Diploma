@@ -13,6 +13,7 @@ namespace SGF.NEGOCIO.Negocio
     {
         // Singleton de cProducto
         private static ProductoBLL _instancia = null;
+
         private ProductoBLL() { }
         public static ProductoBLL ObtenerInstancia
         {
@@ -75,6 +76,7 @@ namespace SGF.NEGOCIO.Negocio
         public Producto ObtenerProductoPorID(int productoID)
         {
             Producto oProducto = ProductoDAO.ObtenerProductoPorIDD(productoID);
+
             if(oProducto != null)
             {
                 return oProducto;

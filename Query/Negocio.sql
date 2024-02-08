@@ -2,10 +2,7 @@ use FarmaciaDatos
 GO
 
 
-
-
 -- BASE DE DATOS DE PRODUCTOS
-
 CREATE TABLE Categoria (
     CategoriaID INT IDENTITY PRIMARY KEY,
     Nombre NVARCHAR(255),
@@ -96,37 +93,15 @@ CREATE TABLE Registro (
 );
 GO
 
-
-SELECT * FROM Producto
-SELECT * FROM Registro
-
--- Compras / Entrada de Inventario
 CREATE TABLE Compra (
     CompraID INT IDENTITY PRIMARY KEY,
     UsuarioID INT REFERENCES USUARIO(UsuarioID),
     ProveedorID INT REFERENCES PROVEEDOR(ProveedorID),
     Factura VARCHAR(50),
-    NumeroDocumento VARCHAR(50),
-    MontoTotal DECIMAL(10,2),
-    FechaRegistro DATETIME DEFAULT GETDATE()
+    FechaCompra DATETIME DEFAULT GETDATE(),
+	Estado BIT
 );
 GO
-
-SELECT * FROM Compra
-
-INSERT INTO Compra (UsuarioID, ProveedorID, Factura, NumeroDocumento, MontoTotal)
-VALUES 
-(1, 1, 'Factura1', 'Doc1', 100.00),
-(1, 2, 'Factura2', 'Doc2', 200.00),
-(1, 2, 'Factura3', 'Doc3', 300.00),
-(1, 1, 'Factura4', 'Doc4', 400.00);
-
-INSERT INTO Detalle_Compra (CompraID, ProductoID, PrecioCompra, PrecioVenta, Cantidad, MontoTotal)
-VALUES 
-(1, 1, 10.00, 20.00, 5, 50.00),
-(2, 2, 15.00, 30.00, 4, 60.00),
-(3, 6, 20.00, 40.00, 3, 60.00),
-(4, 8, 25.00, 50.00, 2, 50.00);
 
 
 CREATE TABLE Detalle_Compra (
@@ -134,13 +109,10 @@ CREATE TABLE Detalle_Compra (
     CompraID INT REFERENCES COMPRA(CompraID),
     ProductoID INT REFERENCES PRODUCTO(ProductoID),
     PrecioCompra DECIMAL(10,2) DEFAULT 0,
-    PrecioVenta DECIMAL(10,2) DEFAULT 0,
     Cantidad INT,
-    MontoTotal DECIMAL(10,2),
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
-
 
 
 
@@ -169,3 +141,36 @@ CREATE TABLE Detalle_Venta (
 );
 GO
 
+
+CREATE TABLE Moneda(
+	MonedaID INT IDENTITY PRIMARY KEY,
+	Nombre VARCHAR(60),
+	Simbolo VARCHAR(60),
+	-- Antes o Después
+	Posicion VARCHAR(20)
+);
+GO
+
+CREATE TABLE Impuesto(
+	ImpuestoID INT IDENTITY PRIMARY KEY,
+	Nombre VARCHAR(60),
+	Porcentaje DECIMAL(10,2)
+);
+GO
+
+CREATE TABLE Negocio(
+	NegocioID INT IDENTITY PRIMARY KEY,
+	Nombre VARCHAR(60),
+    TipoDocumento VARCHAR(60) DEFAULT 'DNI',
+	Documento VARCHAR(60),
+	Direccion VARCHAR(60),
+	Telefono VARCHAR(60),
+	Correo VARCHAR(60),
+	Impuestos BIT,
+	Logo VARBINARY(max) NULL,
+    MonedaID INT FOREIGN KEY REFERENCES Moneda(MonedaID),
+    ImpuestoID INT FOREIGN KEY REFERENCES Impuesto(ImpuestoID)
+);
+GO
+
+SELECT * FROM Negocio
