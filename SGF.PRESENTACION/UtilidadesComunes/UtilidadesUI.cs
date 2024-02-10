@@ -1,18 +1,15 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Office2016.Drawing.Charts;
 using FontAwesome.Sharp;
 using Guna.UI.WinForms;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
-using SGF.PRESENTACION.Recursos.Planillas;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SGF.PRESENTACION.UtilidadesComunes
@@ -35,6 +32,86 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                 return _instancia;
             }
         }
+
+        // Manejo de módulo de negocio
+        // Convertir imagen a byte[]
+        public byte[] ImageToByteArray(Image imageIN)
+        {
+            if (imageIN != null)
+            {
+                byte[] byteArray = null;
+                try
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        imageIN.Save(ms, imageIN.RawFormat);
+                        byteArray = ms.ToArray();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                return byteArray;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            if (byteArrayIn != null)
+            {
+                Image returnImage;
+                using (MemoryStream ms = new MemoryStream(byteArrayIn))
+                {
+                    returnImage = Image.FromStream(ms);
+                }
+                return returnImage;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Image LogoPorDefecto()
+        {
+            return Properties.Resources.farmaciaLogo;
+        }
+
+        public System.Drawing.Icon ByteArrayToIcon(byte[] byteArray)
+        {
+            using (var ms = new MemoryStream(byteArray))
+            {
+                // Crea una imagen a partir del array de bytes
+                var img = Image.FromStream(ms);
+
+                // Ajusta la imagen para que tenga un tamaño adecuado para un icono
+                var bmp = new Bitmap(img, new Size(32, 32));
+
+                // Convierte la imagen ajustada en un icono
+                return System.Drawing.Icon.FromHandle(bmp.GetHicon());
+            }
+        }
+
+        // Transformar imagen a icono
+        public System.Drawing.Icon ImageToIcon(Image image)
+        {
+            if (image == null)
+            {
+                throw new ArgumentNullException("image", "La imagen no puede ser nula.");
+            }
+
+            using (Bitmap bitmap = new Bitmap(image))
+            {
+                IntPtr Hicon = bitmap.GetHicon();
+                return System.Drawing.Icon.FromHandle(Hicon);
+            }
+        }
+        // FIN Manejo de módulo de negocio
 
         public void cargarPermisos(string nombreFormulario, FlowLayoutPanel flpContenedorBotones, Permiso permisoDeUsuario = null)
         {
@@ -69,7 +146,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                         control.Visible = tienePermiso;
                     }
                 }
-                if(permisoDeUsuario != null)
+                if (permisoDeUsuario != null)
                 {
                     permisoDeUsuario.Alta = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Alta");
                     permisoDeUsuario.Modificar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Modificar");
@@ -355,7 +432,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                 return false;
             }
         }
-        
+
         public bool VerificarFormatoMoneda(TextBoxBase textbox, ErrorProvider mensajeError)
         {
             if (decimal.TryParse(textbox.Text, out decimal valor))
@@ -433,7 +510,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
         {
             // Formato regional de Argentina
             // 1.000,00
-            if(string.IsNullOrEmpty(textbox.Text))
+            if (string.IsNullOrEmpty(textbox.Text))
                 textbox.Text = "0.00";
             textbox.Text = string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(textbox.Text));
 

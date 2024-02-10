@@ -1,8 +1,11 @@
 ﻿using SGF.MODELO;
+using SGF.MODELO.Negocio;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO;
+using SGF.NEGOCIO.Negocio;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formModales;
+using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,8 +22,13 @@ namespace SGF.PRESENTACION.formPrincipales
     {
         private Form formularioActivo;
         private ToolStripButton botonActivo;
+
+        // Controladoras
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+
         // Usuario que inicio sesión      
         public formMain()
         {
@@ -30,7 +38,30 @@ namespace SGF.PRESENTACION.formPrincipales
         // Función para cargar el usuario que inicio sesión
         private void formMain_Load(object sender, EventArgs e)
         {
-            cargarSesion();
+            try
+            {
+                cargarNegocio();
+                cargarSesion();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cargarNegocio()
+        {
+            NegocioModelo negocio = lNegocio.NegocioEnSesion().DatosDelNegocio;
+            if(negocio.Logo != null)
+            {
+                // cambiar icono del formulario
+                this.Icon = uiUtilidades.ByteArrayToIcon(negocio.Logo);
+            }
+            else
+            {
+                this.Icon = uiUtilidades.ImageToIcon(uiUtilidades.LogoPorDefecto());
+            }
+            this.Text = negocio.Nombre;
         }
 
         private void cargarSesion()
@@ -177,6 +208,7 @@ namespace SGF.PRESENTACION.formPrincipales
                         using(var formNegocio = new formNegocio())
                         {
                             formNegocio.ShowDialog();
+                            cargarNegocio();
                         }
                         break;
                     default:

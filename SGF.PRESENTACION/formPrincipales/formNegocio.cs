@@ -24,14 +24,14 @@ namespace SGF.PRESENTACION.formPrincipales
 
 
         private Moneda monedaSeleccionada { get; set; }
-        NegocioModelo datosDeNegocio { get; set; }
+        private NegocioModelo negocioDatos { get; set; }
 
 
         public formNegocio()
         {
             InitializeComponent();
             monedaSeleccionada = null;
-            datosDeNegocio = lNegocio.ObtenerDatosDelNegocio();
+            negocioDatos = lNegocio.NegocioEnSesion().DatosDelNegocio;
         }
 
         private void formNegocio_Load(object sender, EventArgs e)
@@ -41,9 +41,8 @@ namespace SGF.PRESENTACION.formPrincipales
                 chkOtroDocumento.Checked = false;
                 cargarCombobox();
                 cargarDatosNegocio();
-                
-
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -59,9 +58,9 @@ namespace SGF.PRESENTACION.formPrincipales
             camposValidos &= uiUtilidades.VerificarTextbox(txtDireccionNegocio, errorProvider, lblDireccionNegocio);
             if (string.IsNullOrEmpty(txtDireccionNegocio.Text))
                 txtDireccionNegocio.Text = "-";
-            if(string.IsNullOrEmpty(txtTelefonoNegocio.Text))
+            if (string.IsNullOrEmpty(txtTelefonoNegocio.Text))
                 txtTelefonoNegocio.Text = "-";
-            if(string.IsNullOrEmpty(txtCorreoNegocio.Text))
+            if (string.IsNullOrEmpty(txtCorreoNegocio.Text))
                 txtCorreoNegocio.Text = "-";
 
             // Datos personales
@@ -71,7 +70,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 camposValidos &= uiUtilidades.VerificarCombobox(cmbTipoDocumento, errorProvider, lblTipoDocumento);
 
             camposValidos &= uiUtilidades.VerificarTextbox(txtDocumentoDueño, errorProvider, lblDocumento);
-            
+
             // Monedas
             camposValidos &= uiUtilidades.VerificarTextbox(txtNombreMoneda, errorProvider, lblNombreMoneda);
             camposValidos &= uiUtilidades.VerificarTextbox(txtSimboloMoneda, errorProvider, lblSimboloMoneda);
@@ -88,16 +87,16 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private NegocioModelo CrearNegocioModificado()
         {
-            NegocioModelo negocio = new NegocioModelo
-            {
-                Logo = datosDeNegocio.Logo,
-                Nombre = txtNombreNegocio.Text,
-                Direccion = txtDireccionNegocio.Text,
-                Telefono = txtTelefonoNegocio.Text,
-                Correo = txtCorreoNegocio.Text,
-                TipoDocumento = chkOtroDocumento.Checked ? txtOtroDocumento.Text : cmbTipoDocumento.SelectedItem.ToString(),
-                Documento = txtDocumentoDueño.Text
-            };
+            NegocioModelo negocio = new NegocioModelo();
+
+            negocio.Logo = negocioDatos.Logo;
+            negocio.Nombre = txtNombreNegocio.Text;
+            negocio.Direccion = txtDireccionNegocio.Text;
+            negocio.Telefono = txtTelefonoNegocio.Text;
+            negocio.Correo = txtCorreoNegocio.Text;
+            negocio.TipoDocumento = chkOtroDocumento.Checked ? txtOtroDocumento.Text : cmbTipoDocumento.SelectedItem.ToString();
+            negocio.Documento = txtDocumentoDueño.Text;
+
             // Monedas
             if (monedaSeleccionada == null)
             {
@@ -116,7 +115,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     monedaSeleccionada = lNegocio.ObtenerMonedaPorID(1);
                 }
             }
-            negocio.moneda = monedaSeleccionada;
+            negocio.Moneda = monedaSeleccionada;
 
             // Impuestos
             Impuesto impuesto = rbImpuestoSi.Checked ? new Impuesto
@@ -129,7 +128,7 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 lNegocio.ModificarImpuesto(impuesto);
             }
-            negocio.impuesto = impuesto;
+            negocio.Impuesto = impuesto;
 
             return negocio;
         }
@@ -156,10 +155,12 @@ namespace SGF.PRESENTACION.formPrincipales
                 bool resultado = lNegocio.ModificarNegocio(oNegocio);
                 if (resultado)
                 {
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se modificarón con éxito los datos del negocio.");
                     MessageBox.Show("Negocio modificado correctamente", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar los datos del negocio.");
                     MessageBox.Show("Ocurrió un error al modificar el negocio, contacte con el administrador del sistema si este error persiste.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -172,85 +173,38 @@ namespace SGF.PRESENTACION.formPrincipales
             cmbTipoDocumento.Items.Add("DNI");
             cmbTipoDocumento.Items.Add("CUIL");
             cmbTipoDocumento.Items.Add("CUIT");
-            if (!cmbTipoDocumento.Items.Contains(datosDeNegocio.TipoDocumento))
+            if (!cmbTipoDocumento.Items.Contains(negocioDatos.TipoDocumento))
             {
-                cmbTipoDocumento.Items.Add(datosDeNegocio.TipoDocumento);
+                cmbTipoDocumento.Items.Add(negocioDatos.TipoDocumento);
             }
             cmbTipoDocumento.SelectedIndex = 0;
         }
 
-        // Convertir byte[] a Image
-        private Image byteArrayToImage(byte[] byteArrayIn)
-        {
-            if (byteArrayIn != null)
-            {
-                Image returnImage = null;
-                try
-                {
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream(byteArrayIn);
-                    returnImage = Image.FromStream(ms);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return returnImage;
-            }
-            else
-            {
-                return Properties.Resources.farmaciaLogo;
-            }
-        }
-
-        // Convertir Image a byte[]
-        private byte[] imageToByteArray(Image imageIn)
-        {
-            if (imageIn != null)
-            {
-                byte[] byteArray = null;
-                try
-                {
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream();
-                    imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                    byteArray = ms.ToArray();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                return byteArray;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         private void cargarDatosNegocio()
         {
-            if(datosDeNegocio != null)
+            if (negocioDatos != null)
             {
-                Moneda moneda = lNegocio.ObtenerMonedaPorID(datosDeNegocio.moneda.MonedaID);
-                Impuesto impuesto = lNegocio.ObtenerImpuestoPorID(datosDeNegocio.impuesto.ImpuestoID);
-                
+                Moneda moneda = lNegocio.ObtenerMonedaPorID(negocioDatos.Moneda.MonedaID);
+                Impuesto impuesto = lNegocio.ObtenerImpuestoPorID(negocioDatos.Impuesto.ImpuestoID);
+
                 // Cargar Datos de negocio
-                if(datosDeNegocio.Logo == null)
+                if (negocioDatos.Logo == null)
                 {
-                    pbLogo.Image = Properties.Resources.farmaciaLogo;
+                    pbLogo.Image = uiUtilidades.LogoPorDefecto();
                 }
                 else
                 {
-                    pbLogo.Image = byteArrayToImage(datosDeNegocio.Logo);
+                    pbLogo.Image = uiUtilidades.ByteArrayToImage(negocioDatos.Logo);
                 }
 
-                txtNombreNegocio.Text = datosDeNegocio.Nombre;
-                txtDireccionNegocio.Text = datosDeNegocio.Direccion;
-                txtTelefonoNegocio.Text = datosDeNegocio.Telefono;
-                txtCorreoNegocio.Text = datosDeNegocio.Correo;
+                txtNombreNegocio.Text = negocioDatos.Nombre;
+                txtDireccionNegocio.Text = negocioDatos.Direccion;
+                txtTelefonoNegocio.Text = negocioDatos.Telefono;
+                txtCorreoNegocio.Text = negocioDatos.Correo;
 
                 // Datos personales
-                cmbTipoDocumento.SelectedItem = datosDeNegocio.TipoDocumento;
-                txtDocumentoDueño.Text = datosDeNegocio.Documento;
+                cmbTipoDocumento.SelectedItem = negocioDatos.TipoDocumento;
+                txtDocumentoDueño.Text = negocioDatos.Documento;
 
                 // Monedas
                 txtNombreMoneda.Text = moneda.Nombre;
@@ -261,7 +215,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     rbDespues.Checked = true;
 
                 // Impuestos
-                if (datosDeNegocio.Impuestos)
+                if (negocioDatos.Impuestos)
                     rbImpuestoSi.Checked = true;
                 else
                     rbImpuestoNo.Checked = true;
@@ -277,12 +231,12 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnBuscarMoneda_Click(object sender, EventArgs e)
         {
-            using(var modal = new mdBuscarMoneda())
+            using (var modal = new mdBuscarMoneda())
             {
                 DialogResult resultado = modal.ShowDialog();
-                if(resultado == DialogResult.OK)
+                if (resultado == DialogResult.OK)
                 {
-                    if(modal.monedaSeleccionada != null)
+                    if (modal.monedaSeleccionada != null)
                     {
                         txtNombreMoneda.Text = modal.monedaSeleccionada.Nombre;
                         txtSimboloMoneda.Text = modal.monedaSeleccionada.Simbolo;
@@ -334,13 +288,13 @@ namespace SGF.PRESENTACION.formPrincipales
         private void btnEliminarImagen_Click(object sender, EventArgs e)
         {
             // Eliminar imagen
-            if(datosDeNegocio.Logo != null)
+            if (negocioDatos.Logo != null)
             {
                 DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar la imagen?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (respuesta == DialogResult.Yes)
                 {
-                    pbLogo.Image = Properties.Resources.farmaciaLogo;
-                    datosDeNegocio.Logo = null;
+                    pbLogo.Image = uiUtilidades.LogoPorDefecto();
+                    negocioDatos.Logo = null;
                 }
             }
             else
@@ -359,7 +313,7 @@ namespace SGF.PRESENTACION.formPrincipales
             if (!string.IsNullOrEmpty(abrir.FileName))
             {
                 pbLogo.Image = Image.FromFile(abrir.FileName);
-                datosDeNegocio.Logo = imageToByteArray(pbLogo.Image);
+                negocioDatos.Logo = uiUtilidades.ImageToByteArray(pbLogo.Image);
             }
         }
 
@@ -368,7 +322,7 @@ namespace SGF.PRESENTACION.formPrincipales
             // abrir savefiledialog para seleccionar imagen
             try
             {
-                if (datosDeNegocio.Logo != null)
+                if (negocioDatos.Logo != null)
                 {
                     DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cambiar la imagen?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.Yes)
@@ -381,7 +335,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     AbrirImagen();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -18,27 +18,50 @@ using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formPrincipales;
 using System.Drawing.Text;
 using Microsoft.VisualBasic.Devices;
+using SGF.NEGOCIO.Negocio;
+using SGF.MODELO.Negocio;
 
 namespace SGF.PRESENTACION
 {
     public partial class frmLogin : Form
     {
+        // Controladoras
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
-        private bool contraseñaVisible { get; set; }
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private GrupoBLL lGrupo = GrupoBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+
+        private bool contraseñaVisible { get; set; }
+        
         public frmLogin()
         {
             InitializeComponent();
+            lNegocio.CargarDatos();
             contraseñaVisible = false;
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+            cargarNegocio();
             txtUsuarioG.Select();
             alternarVisibilidadContraseña();
         }
+
+        private void cargarNegocio()
+        {
+            NegocioModelo negocio = lNegocio.NegocioEnSesion().DatosDelNegocio;
+            if(negocio.Logo != null)
+            {
+                pbLogoEmpresa.Image = uiUtilidades.ByteArrayToImage(negocio.Logo);
+            }
+            else
+            {
+                pbLogoEmpresa.Image = uiUtilidades.LogoPorDefecto();
+            }
+            lblNombreEmpresa.Text = negocio.Nombre;
+        }
+
 
         private void btnOjo_Click(object sender, EventArgs e)
         {
@@ -115,7 +138,6 @@ namespace SGF.PRESENTACION
                                 {
                                     // Iniciar sesión utilizando el SessionManager
                                     lSesion.Login(oUsuario);
-
                                     // Registrar auditoria (si lo deseas)
                                     abrirFormMain();
                                 }
@@ -150,6 +172,10 @@ namespace SGF.PRESENTACION
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cargarNegocio();
             }
         }
 

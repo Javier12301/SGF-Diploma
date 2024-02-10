@@ -195,7 +195,7 @@ namespace SGF.PRESENTACION.formModales
                         Compra compra = new Compra();
                         compra.usuario = lSesion.UsuarioEnSesion().Usuario;
                         compra.proveedor = proveedorSeleccionado;
-                        compra.Factura = cmbTipoDeDocumento.Text;
+                        compra.TipoComprobante = cmbTipoDeDocumento.Text;
                         compra.FechaCompra = dtpFecha.Value;
 
 

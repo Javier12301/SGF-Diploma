@@ -72,9 +72,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvImportar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvImportar.Location = new System.Drawing.Point(12, 85);
+            this.dgvImportar.Location = new System.Drawing.Point(3, 85);
             this.dgvImportar.Name = "dgvImportar";
-            this.dgvImportar.Size = new System.Drawing.Size(588, 227);
+            this.dgvImportar.Size = new System.Drawing.Size(606, 227);
             this.dgvImportar.TabIndex = 3;
             // 
             // panel2
@@ -252,6 +252,7 @@
             this.ClientSize = new System.Drawing.Size(612, 355);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MinimumSize = new System.Drawing.Size(540, 394);
             this.Name = "mdImportarProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importar productos";

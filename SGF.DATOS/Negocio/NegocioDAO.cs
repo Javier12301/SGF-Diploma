@@ -349,11 +349,11 @@ namespace SGF.DATOS.Negocio
                                     oNegocio.Logo = (byte[])reader["Logo"];
                                 }
                                 
-                                oNegocio.moneda = new Moneda();
-                                oNegocio.moneda.MonedaID = Convert.ToInt32(reader["MonedaID"]);
+                                oNegocio.Moneda = new Moneda();
+                                oNegocio.Moneda.MonedaID = Convert.ToInt32(reader["MonedaID"]);
 
-                                oNegocio.impuesto = new Impuesto();
-                                oNegocio.impuesto.ImpuestoID = Convert.ToInt32(reader["ImpuestoID"]);
+                                oNegocio.Impuesto = new Impuesto();
+                                oNegocio.Impuesto.ImpuestoID = Convert.ToInt32(reader["ImpuestoID"]);
                             }
                         }
                     }
@@ -394,8 +394,8 @@ namespace SGF.DATOS.Negocio
                             cmd.Parameters.Add("@Logo", SqlDbType.VarBinary, -1);
                             cmd.Parameters["@Logo"].Value = DBNull.Value;
                         }
-                        cmd.Parameters.AddWithValue("@MonedaID", negocio.moneda.MonedaID);
-                        cmd.Parameters.AddWithValue("@ImpuestoID", negocio.impuesto != null ? negocio.impuesto.ImpuestoID : 1); // Impuesto por defecto es 1
+                        cmd.Parameters.AddWithValue("@MonedaID", negocio.Moneda.MonedaID);
+                        cmd.Parameters.AddWithValue("@ImpuestoID", negocio.Impuesto != null ? negocio.Impuesto.ImpuestoID : 1); // Impuesto por defecto es 1
                         cmd.Parameters.AddWithValue("@NegocioID", 1);
                         oContexto.Open();
                         int filasAfectadas = cmd.ExecuteNonQuery();

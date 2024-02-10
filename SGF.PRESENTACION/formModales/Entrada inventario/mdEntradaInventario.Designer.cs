@@ -42,6 +42,12 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCompras = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcFechaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadTotalProductos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcPrecioTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compraBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.negocio = new SGF.PRESENTACION.Negocio();
             this.flpContenedor = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,12 +55,6 @@
             this.btnDetalles = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
             this.compraTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.CompraTableAdapter();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcFechaCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcFactura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadTotalProductos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcPrecioTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -106,6 +106,7 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBuscar.BackColor = System.Drawing.Color.White;
             this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -125,6 +126,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold);
             this.label4.Location = new System.Drawing.Point(238, 8);
@@ -135,6 +137,7 @@
             // 
             // txtBusqueda
             // 
+            this.txtBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBusqueda.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBusqueda.Location = new System.Drawing.Point(318, 4);
             this.txtBusqueda.Name = "txtBusqueda";
@@ -221,6 +224,48 @@
             this.dgvCompras.Size = new System.Drawing.Size(568, 267);
             this.dgvCompras.TabIndex = 111;
             // 
+            // dgvcID
+            // 
+            this.dgvcID.DataPropertyName = "CompraID";
+            this.dgvcID.HeaderText = "Folio";
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            // 
+            // dgvcFechaCompra
+            // 
+            this.dgvcFechaCompra.DataPropertyName = "FechaCompra";
+            this.dgvcFechaCompra.HeaderText = "Fecha de compra";
+            this.dgvcFechaCompra.Name = "dgvcFechaCompra";
+            this.dgvcFechaCompra.ReadOnly = true;
+            // 
+            // dgvcFactura
+            // 
+            this.dgvcFactura.DataPropertyName = "Factura";
+            this.dgvcFactura.HeaderText = "Documento";
+            this.dgvcFactura.Name = "dgvcFactura";
+            this.dgvcFactura.ReadOnly = true;
+            // 
+            // dgvcProveedor
+            // 
+            this.dgvcProveedor.DataPropertyName = "Proveedor";
+            this.dgvcProveedor.HeaderText = "Proveedor";
+            this.dgvcProveedor.Name = "dgvcProveedor";
+            this.dgvcProveedor.ReadOnly = true;
+            // 
+            // CantidadTotalProductos
+            // 
+            this.CantidadTotalProductos.DataPropertyName = "CantidadTotalProductos";
+            this.CantidadTotalProductos.HeaderText = "Cantidad total";
+            this.CantidadTotalProductos.Name = "CantidadTotalProductos";
+            this.CantidadTotalProductos.ReadOnly = true;
+            // 
+            // dgvcPrecioTotal
+            // 
+            this.dgvcPrecioTotal.DataPropertyName = "PrecioTotal";
+            this.dgvcPrecioTotal.HeaderText = "Precio Total";
+            this.dgvcPrecioTotal.Name = "dgvcPrecioTotal";
+            this.dgvcPrecioTotal.ReadOnly = true;
+            // 
             // compraBindingSource
             // 
             this.compraBindingSource.DataMember = "Compra";
@@ -303,55 +348,13 @@
             // 
             this.compraTableAdapter.ClearBeforeFill = true;
             // 
-            // dgvcID
-            // 
-            this.dgvcID.DataPropertyName = "CompraID";
-            this.dgvcID.HeaderText = "Folio";
-            this.dgvcID.Name = "dgvcID";
-            this.dgvcID.ReadOnly = true;
-            // 
-            // dgvcFechaCompra
-            // 
-            this.dgvcFechaCompra.DataPropertyName = "FechaCompra";
-            this.dgvcFechaCompra.HeaderText = "Fecha de compra";
-            this.dgvcFechaCompra.Name = "dgvcFechaCompra";
-            this.dgvcFechaCompra.ReadOnly = true;
-            // 
-            // dgvcFactura
-            // 
-            this.dgvcFactura.DataPropertyName = "Factura";
-            this.dgvcFactura.HeaderText = "Documento";
-            this.dgvcFactura.Name = "dgvcFactura";
-            this.dgvcFactura.ReadOnly = true;
-            // 
-            // dgvcProveedor
-            // 
-            this.dgvcProveedor.DataPropertyName = "Proveedor";
-            this.dgvcProveedor.HeaderText = "Proveedor";
-            this.dgvcProveedor.Name = "dgvcProveedor";
-            this.dgvcProveedor.ReadOnly = true;
-            // 
-            // CantidadTotalProductos
-            // 
-            this.CantidadTotalProductos.DataPropertyName = "CantidadTotalProductos";
-            this.CantidadTotalProductos.HeaderText = "Cantidad total";
-            this.CantidadTotalProductos.Name = "CantidadTotalProductos";
-            this.CantidadTotalProductos.ReadOnly = true;
-            // 
-            // dgvcPrecioTotal
-            // 
-            this.dgvcPrecioTotal.DataPropertyName = "PrecioTotal";
-            this.dgvcPrecioTotal.HeaderText = "Precio Total";
-            this.dgvcPrecioTotal.Name = "dgvcPrecioTotal";
-            this.dgvcPrecioTotal.ReadOnly = true;
-            // 
             // mdEntradaInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(581, 422);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MinimumSize = new System.Drawing.Size(528, 461);
             this.Name = "mdEntradaInventario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entrada a inventario";

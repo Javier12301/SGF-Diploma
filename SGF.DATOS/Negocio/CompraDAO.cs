@@ -58,7 +58,7 @@ namespace SGF.DATOS.Negocio
                     {
                         cmd.Parameters.AddWithValue("@UsuarioID", oCompra.usuario.UsuarioID);
                         cmd.Parameters.AddWithValue("@ProveedorID", oCompra.proveedor.ProveedorID);
-                        cmd.Parameters.AddWithValue("@Factura", oCompra.Factura);
+                        cmd.Parameters.AddWithValue("@Factura", oCompra.TipoComprobante);
                         cmd.Parameters.AddWithValue("@FechaCompra", oCompra.FechaCompra);
                         cmd.Parameters.AddWithValue("@Estado", true);
                         oContexto.Open();
@@ -116,7 +116,7 @@ namespace SGF.DATOS.Negocio
                                 oCompra.CompraID = Convert.ToInt32(reader["CompraID"]);
                                 oCompra.usuario.UsuarioID = Convert.ToInt32(reader["UsuarioID"]);
                                 oCompra.proveedor.ProveedorID = Convert.ToInt32(reader["ProveedorID"]);
-                                oCompra.Factura = reader["Factura"].ToString();
+                                oCompra.TipoComprobante = reader["Factura"].ToString();
                                 oCompra.FechaCompra = Convert.ToDateTime(reader["FechaCompra"]);
                                 oCompra.Estado = Convert.ToBoolean(reader["Estado"]);
                             }

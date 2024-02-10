@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SGF.MODELO.Negocio
+﻿namespace SGF.MODELO.Negocio
 {
     public class NegocioModelo
     {
@@ -17,7 +11,7 @@ namespace SGF.MODELO.Negocio
         public string Correo { get; set; }
         public bool Impuestos { get; set; }
         public byte[] Logo { get; set; }
-        public Moneda moneda { get; set; }
-        public Impuesto impuesto { get; set; }
+        public Moneda Moneda { get; set; }
+        public Impuesto Impuesto { get; set; }
     }
 }

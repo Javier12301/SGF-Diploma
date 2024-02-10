@@ -48,6 +48,7 @@
     <Compile Include="Negocio\Impuesto.cs" />
     <Compile Include="Negocio\Moneda.cs" />
     <Compile Include="Negocio\NegocioModelo.cs" />
+    <Compile Include="Negocio\NegocioSesion.cs" />
     <Compile Include="Negocio\Producto.cs" />
     <Compile Include="Negocio\Proveedor.cs" />
     <Compile Include="Negocio\Registro.cs" />

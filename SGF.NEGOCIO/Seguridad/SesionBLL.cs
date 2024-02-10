@@ -25,8 +25,8 @@ namespace SGF.NEGOCIO.Seguridad
 
         public Sesion UsuarioEnSesion()
         {
-            Sesion _sessionON = Sesion.ObtenerInstancia;
-            return _sessionON;
+            Sesion _sesionON = Sesion.ObtenerInstancia;
+            return _sesionON;
         }
 
         public void Login(Usuario usuario)

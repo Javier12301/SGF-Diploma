@@ -79,10 +79,9 @@ namespace SGF.PRESENTACION.formModales
             if (ValidarCampos())
             {
                 Moneda moneda = CrearMonedaModificada();
-                bool monedaExiste = false;
-                if(monedaAmodificar.Nombre != moneda.Nombre)
+                if (monedaAmodificar.Nombre != moneda.Nombre)
                 {
-                    monedaExiste = lNegocio.ExisteMoneda(moneda.Nombre);
+                    bool monedaExiste = lNegocio.ExisteMoneda(moneda.Nombre);
                     if (monedaExiste)
                     {
                         errorProvider.SetError(lblNombre, "Ya existe una moneda con este nombre");

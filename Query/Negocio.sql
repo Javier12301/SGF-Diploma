@@ -1,7 +1,6 @@
 use FarmaciaDatos
 GO
 
-
 -- BASE DE DATOS DE PRODUCTOS
 CREATE TABLE Categoria (
     CategoriaID INT IDENTITY PRIMARY KEY,

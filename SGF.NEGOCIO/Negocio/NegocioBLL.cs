@@ -11,16 +11,74 @@ namespace SGF.NEGOCIO.Negocio
     public class NegocioBLL
     {
         private static NegocioBLL _instancia = null;
-        private NegocioBLL() { }
+        private NegocioBLL()
+        {
+        }
+
         public static NegocioBLL ObtenerInstancia
         {
             get
             {
                 if (_instancia == null)
+                {
                     _instancia = new NegocioBLL();
+                }
                 return _instancia;
             }
         }
+
+        // Manejo de datos del negocio
+        // Cargar datos del negocio
+        public void CargarDatos()
+        {
+            // Crear sesion y una vez creada no se podrá cargar más los datos del negocio
+            NegocioModelo negocio = NegocioDAO.ObtenerDatosDelNegocioD();
+            negocio.Moneda = ObtenerMonedaPorID(negocio.Moneda.MonedaID);
+            negocio.Impuesto = ObtenerImpuestoPorID(negocio.Impuesto.ImpuestoID);
+            NegocioSesion.CargarDatos(negocio);
+        }
+
+        private void ModificarNegocioEnSesion(NegocioModelo negocio)
+        {
+            NegocioSesion negocioSesion = NegocioSesion.ObtenerInstancia;
+            if(negocioSesion.DatosDelNegocio != null)
+            {
+                NegocioSesion.ModificarDatos(negocio);
+            }
+            else
+            {
+                throw new Exception("No se han cargado los datos del negocio, contacte con el administrador del sistema para solucionar este error.");
+            }
+        }
+
+        // Modificar datos del negocio
+        public bool ModificarNegocio(NegocioModelo negocio)
+        {
+            if (negocio != null)
+            {
+                if (NegocioDAO.ModificarNegocioD(negocio))
+                {
+                    // Modificar los datos del negocio en sesión
+                    ModificarNegocioEnSesion(negocio);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar modificar los datos del negocio, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.");
+            }
+        }
+
+        public NegocioSesion NegocioEnSesion()
+        {
+            NegocioSesion _negocioSesion = NegocioSesion.ObtenerInstancia;
+            return _negocioSesion;
+        }
+        // fin de manejo de datos del negocio
 
         // Conteo de monedas
         public int ConteoMonedas()
@@ -34,7 +92,7 @@ namespace SGF.NEGOCIO.Negocio
             if (!string.IsNullOrEmpty(nombre))
             {
                 return NegocioDAO.ExisteMonedaD(nombre);
-            }           
+            }
             else
             {
                 throw new Exception("No se puede verificar la existencia de la moneda porque no se ha proporcionado un nombre.");
@@ -45,7 +103,7 @@ namespace SGF.NEGOCIO.Negocio
         public List<Moneda> ObtenerMonedasDisponibles()
         {
             List<Moneda> listaMonedas = NegocioDAO.ObtenerMonedasDisponibles();
-            if(listaMonedas != null)
+            if (listaMonedas != null)
             {
                 return listaMonedas;
             }
@@ -58,7 +116,7 @@ namespace SGF.NEGOCIO.Negocio
         // Alta Moneda
         public bool AltaMoneda(Moneda oMoneda)
         {
-            if(oMoneda != null)
+            if (oMoneda != null)
             {
                 return NegocioDAO.AltaMonedaD(oMoneda);
             }
@@ -71,7 +129,7 @@ namespace SGF.NEGOCIO.Negocio
         // Modificar Moneda
         public bool ModificarMoneda(Moneda oMoneda)
         {
-            if(oMoneda != null)
+            if (oMoneda != null)
             {
                 return NegocioDAO.ModificarMonedaD(oMoneda);
             }
@@ -84,7 +142,7 @@ namespace SGF.NEGOCIO.Negocio
         // Eliminar Moneda
         public bool EliminarMoneda(int monedaID)
         {
-            if(monedaID > 0)
+            if (monedaID > 0)
             {
                 return NegocioDAO.BajaMonedaD(monedaID);
             }
@@ -97,7 +155,7 @@ namespace SGF.NEGOCIO.Negocio
         // Obtener moneda por ID
         public Moneda ObtenerMonedaPorID(int monedaID)
         {
-            if(monedaID > 0)
+            if (monedaID > 0)
             {
                 return NegocioDAO.ObtenerMonedaPorIDD(monedaID);
             }
@@ -110,10 +168,10 @@ namespace SGF.NEGOCIO.Negocio
         // Obtener moneda por nombre
         public Moneda ObtenerMonedaPorNombre(string nombre)
         {
-            if(!string.IsNullOrEmpty(nombre))
+            if (!string.IsNullOrEmpty(nombre))
             {
                 Moneda oMoneda = NegocioDAO.ObtenerMonedaPorNombre(nombre);
-                if(oMoneda != null)
+                if (oMoneda != null)
                 {
                     return oMoneda;
                 }
@@ -131,12 +189,12 @@ namespace SGF.NEGOCIO.Negocio
         // ID de moneda en uso
         public bool MonedaEnUso(int monedaID)
         {
-            if(monedaID > 0)
+            if (monedaID > 0)
             {
                 MODELO.Negocio.NegocioModelo oNegocio = NegocioDAO.ObtenerDatosDelNegocioD();
-                if(oNegocio != null)
+                if (oNegocio != null)
                 {
-                    if(oNegocio.moneda.MonedaID == monedaID)
+                    if (oNegocio.Moneda.MonedaID == monedaID)
                         return true;
                     else
                         return false;
@@ -156,7 +214,7 @@ namespace SGF.NEGOCIO.Negocio
         // Obtener impuesto por ID
         public Impuesto ObtenerImpuestoPorID(int impuestoID)
         {
-            if(impuestoID > 0)
+            if (impuestoID > 0)
             {
                 return NegocioDAO.ObtenerImpuestoPorIDD(impuestoID);
             }
@@ -169,7 +227,7 @@ namespace SGF.NEGOCIO.Negocio
         // Modificar impuesto
         public bool ModificarImpuesto(Impuesto oImpuesto)
         {
-            if(oImpuesto != null)
+            if (oImpuesto != null)
             {
                 return NegocioDAO.ModificarImpuestoD(oImpuesto);
             }
@@ -178,35 +236,6 @@ namespace SGF.NEGOCIO.Negocio
                 throw new Exception("Ocurrió un error al intentar modificar el impuesto, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.");
             }
         }
-
-        // Obtener datos del negocio
-        public NegocioModelo ObtenerDatosDelNegocio()
-        {
-            NegocioModelo oNegocio = NegocioDAO.ObtenerDatosDelNegocioD();
-            if(oNegocio != null)
-            {
-                return oNegocio;
-            }
-            else
-            {
-                throw new Exception("Ocurrió un error al intentar obtener los datos del negocio, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.");
-            }
-
-        }
-
-        
-
-        // Modificar datos del negocio
-        public bool ModificarNegocio(NegocioModelo negocio)
-        {
-            if(negocio != null)
-            {
-                return NegocioDAO.ModificarNegocioD(negocio);
-            }
-            else
-            {
-                throw new Exception("Ocurrió un error al intentar modificar los datos del negocio, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.");
-            }
-        }
+       
     }
 }

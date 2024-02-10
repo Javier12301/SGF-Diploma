@@ -1,7 +1,9 @@
 ﻿using ClosedXML.Excel;
 using ExcelDataReader;
+using SGF.MODELO.Negocio;
 using SGF.NEGOCIO.Negocio;
 using SGF.PRESENTACION.Recursos.Planillas;
+using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +23,8 @@ namespace SGF.PRESENTACION.formModales.formImportar
         private CategoriaBLL lCategoria = CategoriaBLL.ObtenerInstancia;
         private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
 
         // los dataset almancenan número de tablas, columnas y filas
         private DataSet dtsProductos;
@@ -35,6 +39,29 @@ namespace SGF.PRESENTACION.formModales.formImportar
             dtsProductos = new DataSet();
             listaProveedores = lProveedor.ListaProveedores();
             listaCategorias = lCategoria.ListarCategorias();
+        }
+
+        private void mdImportarProductos_Load(object sender, EventArgs e)
+        {
+            cargarNegocio();
+            DiseñoInicial();
+            this.productoTableAdapter.Fill(this.negocio.Producto);
+            crearPlanilla();
+        }
+
+        private void cargarNegocio()
+        {
+            NegocioModelo negocio = lNegocio.NegocioEnSesion().DatosDelNegocio;
+            if (negocio.Logo != null)
+            {
+                // cambiar icono del formulario
+                this.Icon = uiUtilidades.ByteArrayToIcon(negocio.Logo);
+            }
+            else
+            {
+                // cambiar icono del formulario
+                this.Icon = uiUtilidades.ImageToIcon(uiUtilidades.LogoPorDefecto());
+            }
         }
 
         // Manejo de responsabilidades
@@ -167,12 +194,7 @@ namespace SGF.PRESENTACION.formModales.formImportar
 
 
 
-        private void mdImportarProductos_Load(object sender, EventArgs e)
-        {
-            DiseñoInicial();
-            this.productoTableAdapter.Fill(this.negocio.Producto);
-            crearPlanilla();
-        }
+       
 
         private void btnPlanilla_Click(object sender, EventArgs e)
         {

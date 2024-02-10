@@ -1,6 +1,7 @@
 ﻿using SGF.MODELO.Negocio;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
+using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,8 @@ namespace SGF.PRESENTACION.formModales
     {
         // Controladora
         private CompraBLL lCompra = CompraBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+        private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
 
         Permiso permisoDeUsuario;
         public mdEntradaInventario(Permiso permisos)
@@ -35,6 +38,7 @@ namespace SGF.PRESENTACION.formModales
             btnDetalles.Visible = false;
             try
             {
+                cargarNegocio();
                 if (permisoDeUsuario.EntradaMasiva)
                 {
                     btnNuevo.Enabled = true;
@@ -59,6 +63,20 @@ namespace SGF.PRESENTACION.formModales
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cargarNegocio()
+        {
+            NegocioModelo negocio = lNegocio.NegocioEnSesion().DatosDelNegocio;
+            if (negocio.Logo != null)
+            {
+                // cambiar icono del formulario
+                this.Icon = uiUtilidades.ByteArrayToIcon(negocio.Logo);
+            }
+            else
+            {
+                this.Icon = uiUtilidades.ImageToIcon(uiUtilidades.LogoPorDefecto());
             }
         }
 

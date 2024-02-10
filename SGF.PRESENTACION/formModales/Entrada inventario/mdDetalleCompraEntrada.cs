@@ -27,6 +27,9 @@ namespace SGF.PRESENTACION.formModales
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+
+        private NegocioModelo NegocioDatos { get; set; }
 
         private Permiso permisosDeUsuario;
         private Compra oCompra { get; set; }
@@ -35,6 +38,7 @@ namespace SGF.PRESENTACION.formModales
         {
             InitializeComponent();
             oCompra = compra;
+            NegocioDatos = lNegocio.NegocioEnSesion().DatosDelNegocio;
             permisosDeUsuario = new Permiso();
         }
 
@@ -42,6 +46,7 @@ namespace SGF.PRESENTACION.formModales
         {
             try
             {
+                cargarNegocio();
                 uiUtilidades.cargarPermisos("formDetallesInventario", flpContenedorBotones, permisosDeUsuario);
                 if (oCompra != null && oCompra.CompraID > 0)
                 {
@@ -58,6 +63,18 @@ namespace SGF.PRESENTACION.formModales
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cargarNegocio()
+        {
+            if (NegocioDatos.Logo != null)
+            {
+                this.Icon = uiUtilidades.ByteArrayToIcon(NegocioDatos.Logo);
+            }
+            else
+            {
+                this.Icon = uiUtilidades.ImageToIcon(uiUtilidades.LogoPorDefecto());
             }
         }
 
@@ -87,29 +104,107 @@ namespace SGF.PRESENTACION.formModales
                 txtFolio.Text = compra.CompraID.ToString();
                 txtFecha.Text = compra.FechaCompra.ToString("dd/MM/yyyy");
                 txtProveedor.Text = compra.proveedor.RazonSocial;
+                txtDocumento.Text = compra.proveedor.Documento;
+                txtTipoComprobante.Text = compra.TipoComprobante;
                 txtUsuario.Text = compra.usuario.NombreUsuario;
             }
 
+        }
+
+        private string crearReporteDeImpresion(string paginaHTML)
+        {
+            // Información de negocio
+            paginaHTML = paginaHTML.Replace("@NombreNegocio", NegocioDatos.Nombre);
+            paginaHTML = paginaHTML.Replace("@DireccionNegocio", NegocioDatos.Direccion);
+            paginaHTML = paginaHTML.Replace("@TelefonoNegocio", NegocioDatos.Telefono);
+            paginaHTML = paginaHTML.Replace("@EmailNegocio", NegocioDatos.Correo);
+
+            // Información del usuario que realizo compra
+            // @Nombre @Apellido
+            paginaHTML = paginaHTML.Replace("@NombreyApellido", oCompra.usuario.ObtenerNombreyApellido());
+            paginaHTML = paginaHTML.Replace("@TipoDocumentoUsuario", NegocioDatos.TipoDocumento);
+            paginaHTML = paginaHTML.Replace("@DocumentoUsuario", NegocioDatos.Documento);
+
+            // Detalles de la compra
+            paginaHTML = paginaHTML.Replace("@TipodeComprobante", txtTipoComprobante.Text);
+            paginaHTML = paginaHTML.Replace("@FolioCompra", txtFolio.Text);
+            paginaHTML = paginaHTML.Replace("@ProveedorCompra", txtProveedor.Text);
+            paginaHTML = paginaHTML.Replace("@DocumentoProveedor", txtDocumento.Text);
+            paginaHTML = paginaHTML.Replace("@FechaCompra", txtFecha.Text);
+
+            // Se remplazará esto porque ocurre un error de lectura por el acento.
+            paginaHTML = paginaHTML.Replace("@ColumnaCodigo", "Código");
+
+            StringBuilder filas = new StringBuilder();
+            decimal total = 0;
+            foreach(DataGridViewRow row in dgvDetallesCompras.Rows)
+            {
+                filas.Append("<tr>");
+                filas.Append("<td>" + row.Cells["dgvcCodigo"].Value.ToString() + "</td>");
+                filas.Append("<td>" + row.Cells["dgvcProducto"].Value.ToString() + "</td>");
+                filas.Append("<td>" + row.Cells["dgvcCantidadComprada"].Value.ToString() + "</td>");
+                filas.Append("<td>" + row.Cells["dgvcPrecioCompra"].Value.ToString() + "</td>");
+                filas.Append("<td>" + row.Cells["dgvcSubTotal"].Value.ToString() + "</td>");
+                filas.Append("</tr>");
+                total += decimal.Parse(row.Cells["dgvcSubTotal"].Value.ToString());
+            }
+            // transformar moneda usando los datos establecido del negocio
+            string moneda = string.Empty;
+            if(NegocioDatos.Moneda.Posicion == "Antes")
+            {
+                moneda = NegocioDatos.Moneda.Simbolo + " " + total.ToString("N2");
+            }
+            else
+            {
+                moneda = total.ToString("N2") + " " + NegocioDatos.Moneda.Simbolo;
+            }
+            paginaHTML = paginaHTML.Replace("@FILAS", filas.ToString());
+            paginaHTML = paginaHTML.Replace("@TOTAL", moneda);
+
+            return paginaHTML;
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             if (permisosDeUsuario.Imprimir)
             {
-                if(dgvDetallesCompras.Rows.Count > 0)
+                if (dgvDetallesCompras.Rows.Count > 0)
                 {
                     SaveFileDialog guardar = new SaveFileDialog();
                     guardar.Filter = "Archivo PDF|*.pdf";
                     guardar.FileName = "Detalle de compra, folio " + oCompra.CompraID + ".pdf";
-                    guardar.ShowDialog();
+                    string paginaHTML = Properties.Resources.plantillaDetalle_Compras;
+                    paginaHTML = crearReporteDeImpresion(paginaHTML);
 
-                    string paginaHTML;
+                    if (guardar.ShowDialog() == DialogResult.OK)
+                    {
+                        try
+                        {
+                            using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
+                            {
+                                Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
+                                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                                pdfDoc.Open();
+                                pdfDoc.Add(new Phrase(""));
+                                using (StringReader sr = new StringReader(paginaHTML))
+                                {
+                                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                                }
+                                pdfDoc.Close();
+                                stream.Close();
+                            }
+                            MessageBox.Show("El archivo se ha guardado correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
                 else
                 {
                     MessageBox.Show("No hay datos para imprimir.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
             else
             {
