@@ -191,7 +191,6 @@
             this.bnpNumeroItem.AccessibleName = "Posición";
             this.bnpNumeroItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.bnpNumeroItem.AutoSize = false;
-            this.bnpNumeroItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bnpNumeroItem.Name = "bnpNumeroItem";
             this.bnpNumeroItem.Size = new System.Drawing.Size(65, 23);
             this.bnpNumeroItem.Text = "0";

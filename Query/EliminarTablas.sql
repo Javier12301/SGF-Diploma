@@ -21,6 +21,19 @@ DROP TABLE IF EXISTS Usuario;
 DROP TABLE IF EXISTS Grupo;
 
 
+DROP TABLE IF EXISTS Detalle_Salida;
+
+-- Eliminar la tabla VENTA
+DROP TABLE IF EXISTS SalidaInventario;
+
+DROP TABLE IF EXISTS Negocio;
+
+DROP TABLE IF EXISTS Moneda;
+
+DROP TABLE IF EXISTS Registro;
+
+DROP TABLE IF EXISTS Impuesto;
+
 -- Eliminar la tabla DETALLE_VENTA
 DROP TABLE IF EXISTS Detalle_Venta;
 

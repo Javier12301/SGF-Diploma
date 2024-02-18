@@ -160,5 +160,10 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
                 AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de usuarios.");
             }
         }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

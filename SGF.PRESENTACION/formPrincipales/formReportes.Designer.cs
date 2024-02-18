@@ -78,8 +78,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flpContenedorBotones.Controls.Add(this.btnExistencias);
             this.flpContenedorBotones.Controls.Add(this.btnEntradas);
+            this.flpContenedorBotones.Controls.Add(this.btnExistencias);
             this.flpContenedorBotones.Controls.Add(this.btnSalidas);
             this.flpContenedorBotones.Location = new System.Drawing.Point(0, 6);
             this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
@@ -96,7 +96,7 @@
             this.btnExistencias.ForeColor = System.Drawing.Color.Black;
             this.btnExistencias.Image = ((System.Drawing.Image)(resources.GetObject("btnExistencias.Image")));
             this.btnExistencias.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExistencias.Location = new System.Drawing.Point(3, 3);
+            this.btnExistencias.Location = new System.Drawing.Point(127, 3);
             this.btnExistencias.Name = "btnExistencias";
             this.btnExistencias.Size = new System.Drawing.Size(118, 73);
             this.btnExistencias.TabIndex = 18;
@@ -104,6 +104,7 @@
             this.btnExistencias.Text = "Ventas";
             this.btnExistencias.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExistencias.UseVisualStyleBackColor = false;
+            this.btnExistencias.Click += new System.EventHandler(this.btnExistencias_Click);
             // 
             // btnEntradas
             // 
@@ -114,7 +115,7 @@
             this.btnEntradas.ForeColor = System.Drawing.Color.Black;
             this.btnEntradas.Image = ((System.Drawing.Image)(resources.GetObject("btnEntradas.Image")));
             this.btnEntradas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEntradas.Location = new System.Drawing.Point(127, 3);
+            this.btnEntradas.Location = new System.Drawing.Point(3, 3);
             this.btnEntradas.Name = "btnEntradas";
             this.btnEntradas.Size = new System.Drawing.Size(118, 73);
             this.btnEntradas.TabIndex = 15;
@@ -122,6 +123,7 @@
             this.btnEntradas.Text = "Inventario";
             this.btnEntradas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEntradas.UseVisualStyleBackColor = false;
+            this.btnEntradas.Click += new System.EventHandler(this.btnEntradas_Click);
             // 
             // btnSalidas
             // 
@@ -140,6 +142,7 @@
             this.btnSalidas.Text = "Clientes";
             this.btnSalidas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalidas.UseVisualStyleBackColor = false;
+            this.btnSalidas.Click += new System.EventHandler(this.btnSalidas_Click);
             // 
             // formReportes
             // 

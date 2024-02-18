@@ -2,28 +2,16 @@ use FarmaciaDatos
 go
 
 -- Grupo Principal
-SELECT * FROM Grupo
-
 INSERT INTO Grupo(Nombre, Estado)
 VALUES ('Administrador', 1);
 
 INSERT INTO Grupo(Nombre, Estado)
 VALUES ('Gestor de inventario', 1)
 
--- Grupos de prueba
-INSERT INTO Grupo(Nombre, Estado)
-VALUES ('Tester2', 0)
 
-INSERT INTO Grupo(Nombre, Estado)
-VALUES ('Tester', 0)
+INSERT INTO Usuario (NombreUsuario, Contraseña, Nombre, Apellido, Email, DNI, GrupoID, Estado)
+VALUES ('Admin', 'd460dfcbf4789d0b8652dbf847b15ab1b58ca70d96869efd186f7fc08d4a7b47', 'Admin', '-', 'javierramirez1230123@gmail.com', NULL, 1, 1);
 
--- Insertar el usuario Admin
-INSERT INTO Usuario(NombreUsuario, Contraseña, Nombre, Apellido, Email, DNI, GrupoID, Estado)
-VALUES ('Admin', 'D460DFCBF4789D0B8652DBF847B15AB1B58CA70D96869EFD186F7FC08D4A7B47', 'admin', 'admin', 'javierramirez1230123@gmail.com', 12345678, 1, 1);
-
-INSERT INTO Usuario(NombreUsuario, Contraseña, Nombre, Apellido, Email, DNI, GrupoID, Estado)
-VALUES ('Javier12301', 'D460DFCBF4789D0B8652DBF847B15AB1B58CA70D96869EFD186F7FC08D4A7B47', 'Javi', 'Ramirez', 'javieralejandro12301@gmail.com', 12345678, 2, 1);
--- Insertar el módulo formProductos
 -- Insertar módulos
 INSERT INTO Modulo(Descripcion)
 VALUES 
@@ -105,7 +93,8 @@ VALUES
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
     ('Generar registro', 8),
-    ('Exportar', 8);
+    ('Exportar', 8),
+	('Baja', 8);
 
 -- Insertar las acciones para el módulo formReportes
 INSERT INTO Accion(Descripcion, ModuloID)
@@ -186,23 +175,44 @@ WHERE ModuloID NOT IN
     (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros')
     AND ModuloID NOT IN
     (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes');
--- Insertar para el grupo Empleados
--- Obtén el ID del usuario 'Javier12301'
-DECLARE @UsuarioID INT;
-SELECT @UsuarioID = UsuarioID FROM Usuario WHERE NombreUsuario = 'Javier12301';
 
--- Obtén el ID del módulo 'formProductos'
-DECLARE @ModuloID INT;
-SELECT @ModuloID = ModuloID FROM Modulo WHERE Descripcion = 'formProductos';
 
--- Inserta los permisos para las acciones 'Alta', 'Baja' y 'Exportar'
-INSERT INTO Permiso (GrupoID, AccionID, Permitido)
-SELECT @UsuarioID, AccionID, 1
-FROM Accion
-WHERE ModuloID = @ModuloID AND Descripcion IN ('Alta', 'Baja', 'Exportar');
-go
 
-select * from Grupo
+-- Insertar Compra y Detalles
+INSERT INTO Compra (UsuarioID, ProveedorID, Factura, Estado)
+VALUES 
+(1, 1, 'Boleta', 1),
+(1, 2, 'Boleta', 1),
+(1, 2, 'Factura', 1),
+(1, 1, 'Factura', 1);
+
+INSERT INTO Detalle_Compra (CompraID, ProductoID, PrecioCompra, Cantidad)
+VALUES 
+(1, 1, 10.00, 5),
+(2, 2, 15.00, 4),
+(3, 6, 20.00, 3),
+(4, 8, 25.00, 2);
+
+-- NEGOCIO INSERTAR DATOS
+-- Insertar Monedas
+INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Peso Argentino', '$', 'Antes');
+INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Dólar', '$', 'Antes');
+INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Euro', '€', 'Antes');
+GO
+
+-- Insertar Impuestos
+INSERT INTO Impuesto (Nombre, Porcentaje) VALUES ('IVA', 21);
+GO
+
+-- Insertar datos de negocio
+INSERT INTO Negocio (Nombre, TipoDocumento, Documento, Direccion, Telefono, Correo, Impuestos, MonedaID, ImpuestoID) 
+VALUES ('Sistema de gestión farmacéutica', 'CUIT/CUIL', '20-44608055-6', 'Hertz 4237', '3855219032', 'javi@gmail.com', 0, 1, 1);
+GO
+
+
+--- --- --- ---- --- ---- FIN DE INSERCIÓN DE DATOS UTILES -- --- --- --- 
+
+
 
 -- INSERTAR DATOS PARA PRODUCTOS, CATEGORÍA Y PROVEEDOR PARA TESTEAR SISTEMA
 -- Insertar Categorías
@@ -239,35 +249,4 @@ INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioComp
 
 INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
 ('55553', 'Penicilina', 3, 1, 0.75, 1.50, 'LoteAB00', '2027-01-01', 0, 0, 200, 20, 'Medicamentos', 1);
-
--- Insertar Compra y Detalles
-INSERT INTO Compra (UsuarioID, ProveedorID, Factura, Estado)
-VALUES 
-(1, 1, 'Boleta', 1),
-(1, 2, 'Boleta', 1),
-(1, 2, 'Factura', 1),
-(1, 1, 'Factura', 1);
-
-INSERT INTO Detalle_Compra (CompraID, ProductoID, PrecioCompra, Cantidad)
-VALUES 
-(1, 1, 10.00, 5),
-(2, 2, 15.00, 4),
-(3, 6, 20.00, 3),
-(4, 8, 25.00, 2);
-
--- NEGOCIO INSERTAR DATOS
--- Insertar Monedas
-INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Peso Argentino', '$', 'Antes');
-INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Dólar', '$', 'Antes');
-INSERT INTO Moneda (Nombre, Simbolo, Posicion) VALUES ('Euro', '€', 'Antes');
-GO
-
--- Insertar Impuestos
-INSERT INTO Impuesto (Nombre, Porcentaje) VALUES ('IVA', 21);
-GO
-
--- Insertar datos de negocio
-INSERT INTO Negocio (Nombre, TipoDocumento, Documento, Direccion, Telefono, Correo, Impuestos, MonedaID, ImpuestoID) 
-VALUES ('Sistema de gestión farmacéutica', 'CUIT/CUIL', '-', '-', '-', '-', 0, 1, 1);
-GO
 

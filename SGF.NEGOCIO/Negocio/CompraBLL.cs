@@ -39,6 +39,38 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Cancelar Compra y devolver productos
+        public bool CancelarCompra(int compraID)
+        {
+            if (compraID > 0)
+            {
+                List<int> productosID = CompraDAO.ObtenerProductosIDPorCompraID(compraID);
+                List<Producto> listaProductos = new List<Producto>();
+                ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
+                foreach(int productoID in productosID)
+                {
+                    Producto producto = lProducto.ObtenerProductoPorID(productoID);
+                    listaProductos.Add(producto);
+                }
+
+                // Una vez obtenido, se procede a devolver los productos usando la cantidad comprada que sale en el detalle de compra
+                foreach(Producto producto in listaProductos)
+                {
+                    int cantidad = CompraDAO.ObtenerCantidadProductosComprados(producto.ProductoID, compraID);
+                    // los productos pueden quedar como negativos si es que se realizo ventas o salidas de inventario con ellos.
+                    producto.Stock -= cantidad;
+                    lProducto.ModificarProducto(producto);
+                }
+
+                // Finalmente se cancela la compra
+                return CompraDAO.CancelarCompraD(compraID);
+            }
+            else
+            {
+                throw new ArgumentNullException("Se ha producido un error: el campo de compras no puede estár vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
+            }
+        }
+
         // Obtener Folio
         public int ObtenerFolio()
         {

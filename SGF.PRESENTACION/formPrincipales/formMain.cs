@@ -175,6 +175,16 @@ namespace SGF.PRESENTACION.formPrincipales
             abrirFormularioHijo(new formInventario(), btnInventario);
         }
 
+        private void btnRegistro_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new formRegistros(), btnRegistro);
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new formReportes(), btnReportes);
+        }
+
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             Cerrar_Sesion();
@@ -222,6 +232,6 @@ namespace SGF.PRESENTACION.formPrincipales
             txtFechayHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-       
+        
     }
 }

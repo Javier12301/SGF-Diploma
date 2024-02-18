@@ -206,7 +206,7 @@
             // pbLogoEmpresa
             // 
             this.pbLogoEmpresa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLogoEmpresa.Image = global::SGF.PRESENTACION.Properties.Resources.farmaciaLogo;
+            this.pbLogoEmpresa.Image = global::SGF.PRESENTACION.Properties.Resources.logoDefault;
             this.pbLogoEmpresa.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pbLogoEmpresa.Location = new System.Drawing.Point(80, 44);
             this.pbLogoEmpresa.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

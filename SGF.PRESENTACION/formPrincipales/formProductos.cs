@@ -279,6 +279,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     if (resultado == DialogResult.OK)
                     {
                         cargarLista();
+                        cargarFiltros();
                     }
                 }
             }
@@ -367,25 +368,35 @@ namespace SGF.PRESENTACION.formPrincipales
         private void cargarFiltros()
         {
             // Filtro de buscar por
-            cmbFiltroBuscar.Items.Add("Todo");
-            cmbFiltroBuscar.Items.Add("Código");
-            cmbFiltroBuscar.Items.Add("Nombre");
-            cmbFiltroBuscar.Items.Add("Proveedor");
-            cmbFiltroBuscar.Items.Add("Lote");
-            cmbFiltroBuscar.SelectedIndex = 0;
+            // comprobar si el combobox tiene items, si no tiene cargarlos
+            if(cmbFiltroBuscar.Items.Count == 0)
+            {
+                cmbFiltroBuscar.Items.Add("Todo");
+                cmbFiltroBuscar.Items.Add("Código");
+                cmbFiltroBuscar.Items.Add("Nombre");
+                cmbFiltroBuscar.Items.Add("Proveedor");
+                cmbFiltroBuscar.Items.Add("Lote");
+                cmbFiltroBuscar.SelectedIndex = 0;
+            }
 
             // Filtro fecha de vencimiento
             dtpInicio.Value = DateTime.Now.AddYears(-2);
             dtpFin.Value = DateTime.Now.AddYears(5);
 
             // Filtro estado
-            cmbFiltroEstado.Items.Add("Todos");
-            cmbFiltroEstado.Items.Add("Activo");
-            cmbFiltroEstado.Items.Add("Inactivo");
-            cmbFiltroEstado.SelectedIndex = 0;
+            if(cmbFiltroEstado.Items.Count == 0)
+            {
+                cmbFiltroEstado.Items.Add("Todos");
+                cmbFiltroEstado.Items.Add("Activo");
+                cmbFiltroEstado.Items.Add("Inactivo");
+                cmbFiltroEstado.SelectedIndex = 0;
+            }
 
             // Filtro Categoría
+            if(cmbFiltroCategoria.Items.Count == 0)
+            {
             cmbFiltroCategoria.Items.Add("Todos");
+            }
             // Obtener las categorías existentes referenciada en la tabla Producto
             List<Categoria> listaCategorias = lProducto.ObtenerCategoriasExistentes();
             foreach (var categoria in listaCategorias)
@@ -399,11 +410,13 @@ namespace SGF.PRESENTACION.formPrincipales
             cmbFiltroCategoria.SelectedIndex = 0;
 
             // Filtro tipo de productos
-            cmbFiltroTipoProducto.Items.Add("Todos");
-            cmbFiltroTipoProducto.Items.Add("Producto general");
-            cmbFiltroTipoProducto.Items.Add("Medicamentos");
-            cmbFiltroTipoProducto.SelectedIndex = 0;
-
+            if(cmbFiltroTipoProducto.Items.Count == 0)
+            {
+                cmbFiltroTipoProducto.Items.Add("Todos");
+                cmbFiltroTipoProducto.Items.Add("Producto general");
+                cmbFiltroTipoProducto.Items.Add("Medicamentos");
+                cmbFiltroTipoProducto.SelectedIndex = 0;
+            }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

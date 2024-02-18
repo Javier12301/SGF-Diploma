@@ -13,11 +13,8 @@ using SGF.PRESENTACION.UtilidadesComunes;
 using SGF.NEGOCIO;
 using SGF.MODELO;
 using SGF.PRESENTACION.frmModales.Seguridad;
-using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formPrincipales;
-using System.Drawing.Text;
-using Microsoft.VisualBasic.Devices;
 using SGF.NEGOCIO.Negocio;
 using SGF.MODELO.Negocio;
 
@@ -246,7 +243,5 @@ namespace SGF.PRESENTACION
                 this.Location = new Point(this.Location.X + deltaX, this.Location.Y + deltaY);
             }
         }
-
-
     }
 }

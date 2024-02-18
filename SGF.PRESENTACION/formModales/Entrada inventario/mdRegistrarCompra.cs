@@ -23,12 +23,11 @@ namespace SGF.PRESENTACION.formModales
         private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
+        private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
 
+        private NegocioModelo NegocioDatos { get; set; }
         private Proveedor proveedorSeleccionado { get; set; }
-
-
         private List<Producto> productosSeleccionados { get; set; }
-
         List<Proveedor> listaProveedores { get; set; }
 
         public mdRegistrarCompra()
@@ -36,6 +35,7 @@ namespace SGF.PRESENTACION.formModales
             InitializeComponent();
             listaProveedores = new List<Proveedor>();
             productosSeleccionados = new List<Producto>();
+            NegocioDatos = lNegocio.NegocioEnSesion().DatosDelNegocio;
         }
 
         private void mdRegistrarCompra_Load(object sender, EventArgs e)
@@ -67,6 +67,7 @@ namespace SGF.PRESENTACION.formModales
                             {
                                 Producto producto = new Producto();
                                 producto = modal.productoSeleccionado;
+                                int cantidadComprada = modal.cantidadComprada;
 
                                 DataGridViewRow existeFila = dgvProductos.Rows
                                     .Cast<DataGridViewRow>()
@@ -83,20 +84,14 @@ namespace SGF.PRESENTACION.formModales
                                     {
                                         existeFila.Cells["dgvcPrecioCompra"].Value = producto.PrecioCompra;
                                     }
-                                    existeFila.Cells["dgvcCantidad"].Value = cantidadExistente + producto.Stock;
-                                    existeFila.Cells["dgvcSubTotal"].Value = (cantidadExistente + producto.Stock) * producto.PrecioCompra;
-
-                                    // modificar lista una vez que se modifica la tabla
-                                    productosSeleccionados.FirstOrDefault(prod => prod.ProductoID == producto.ProductoID).Stock = cantidadExistente + producto.Stock;
-                                    productosSeleccionados.FirstOrDefault(prod => prod.ProductoID == producto.ProductoID).PrecioCompra = producto.PrecioCompra;
+                                    existeFila.Cells["dgvcCantidad"].Value = cantidadExistente + cantidadComprada;
+                                    existeFila.Cells["dgvcSubTotal"].Value = (cantidadExistente + cantidadComprada) * producto.PrecioCompra;
                                 }
                                 else
                                 {
                                     // significa que no existe el producto en la lista
-                                    decimal subTotal = producto.PrecioCompra * producto.Stock;
-                                    dgvProductos.Rows.Add(producto.ProductoID, producto.Nombre, producto.Stock, producto.PrecioCompra, subTotal);
-
-                                    // Agregar el producto a la lista solo si no existe en el DataGridView
+                                    decimal subTotal = producto.PrecioCompra * cantidadComprada;
+                                    dgvProductos.Rows.Add(producto.ProductoID, producto.Nombre, cantidadComprada, producto.PrecioCompra, subTotal);
                                     productosSeleccionados.Add(producto);
                                 }
                                 // calcular total
@@ -116,7 +111,6 @@ namespace SGF.PRESENTACION.formModales
                 MessageBox.Show("Seleccione un proveedor para agregar productos", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -179,16 +173,23 @@ namespace SGF.PRESENTACION.formModales
                         dtDetalleCompra.Columns.Add("dgvcCantidad", typeof(int));
                         dtDetalleCompra.Columns.Add("dgvcPrecioCompra", typeof(decimal));
 
-                        foreach(DataGridViewRow fila in dgvProductos.Rows)
+                        foreach (DataGridViewRow fila in dgvProductos.Rows)
                         {
                             dtDetalleCompra.Rows.Add(
                                 new object[]
                                 {
-                                    Convert.ToInt32(fila.Cells["dgvcID"].Value),
-                                    fila.Cells["dgvcNombre"].Value.ToString(),
-                                    Convert.ToInt32(fila.Cells["dgvcCantidad"].Value),
-                                    Convert.ToDecimal(fila.Cells["dgvcPrecioCompra"].Value)
+                            Convert.ToInt32(fila.Cells["dgvcID"].Value),
+                            fila.Cells["dgvcNombre"].Value.ToString(),
+                            Convert.ToInt32(fila.Cells["dgvcCantidad"].Value),
+                            Convert.ToDecimal(fila.Cells["dgvcPrecioCompra"].Value)
                                 });
+                            foreach (Producto producto in productosSeleccionados)
+                            {
+                                if (producto.ProductoID == Convert.ToInt32(fila.Cells["dgvcID"].Value))
+                                {
+                                    producto.Stock += Convert.ToInt32(fila.Cells["dgvcCantidad"].Value);
+                                }
+                            }
                         }
 
                         // Compra
@@ -198,13 +199,28 @@ namespace SGF.PRESENTACION.formModales
                         compra.TipoComprobante = cmbTipoDeDocumento.Text;
                         compra.FechaCompra = dtpFecha.Value;
 
-
                         if (lCompra.RegistrarCompra(compra, dtDetalleCompra))
                         {
                             // modificar los productos seleccionados
+
                             foreach (Producto producto in productosSeleccionados)
                             {
-                                lProducto.ModificarProducto(producto);
+                                // Ecuación -> Cantidad Antes (x) + Cantidad Comprada (y) = Cantidad Después (z)
+                                int cantidadAntes = lProducto.ObtenerExistencias(producto.ProductoID);
+                                try
+                                {
+                                    if (lProducto.ModificarProducto(producto))
+                                    {
+                                        int cantidadDespues = lProducto.ObtenerExistencias(producto.ProductoID);
+                                        int cantidadComprada = cantidadDespues - cantidadAntes;
+                                        RegistroBLL.RegistrarMovimiento("Entrada de inventario", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), cantidadComprada, cantidadAntes, cantidadDespues, "Inventario", $"Entrada de inventario del producto: {producto.Nombre}");
+                                    }                   
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show($"No se pudo actualizar el stock del producto: {producto.Nombre} el cual tiene ID: {producto.ProductoID}, contacte con el administrador del sistema para solucionar este problema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    continue;
+                                }
                             }
                             MessageBox.Show("La compra se ha registrado correctamente", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
@@ -225,17 +241,19 @@ namespace SGF.PRESENTACION.formModales
                     MessageBox.Show("Seleccione un proveedor para registrar la compra", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+
         private void calcularTotal()
         {
             if (dgvProductos.Rows.Count == 0)
             {
-                txtTotal.Text = "0,00";
+                txtTotal.Text = uiUtilidades.FormatearMoneda(0, NegocioDatos);
             }
             else
             {
@@ -248,7 +266,7 @@ namespace SGF.PRESENTACION.formModales
                         total += valor;
                     }
                 }
-                txtTotal.Text = total.ToString();
+                txtTotal.Text = uiUtilidades.FormatearMoneda(total, NegocioDatos);
             }
         }
 
@@ -283,12 +301,7 @@ namespace SGF.PRESENTACION.formModales
             cmbTipoDeDocumento.Items.Add("Factura");
             cmbTipoDeDocumento.Items.Add("Boleta");
             cmbTipoDeDocumento.SelectedIndex = 0;
-            txtTotal.Text = "0.00";
-        }
-
-        private void txtTotal_TextChanged(object sender, EventArgs e)
-        {
-            txtTotal.Text = string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(txtTotal.Text));
+            calcularTotal();
         }
 
         private Point mousePosicion;
@@ -332,6 +345,6 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-        
+
     }
 }

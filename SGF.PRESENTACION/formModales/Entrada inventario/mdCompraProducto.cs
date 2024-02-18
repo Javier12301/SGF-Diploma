@@ -16,18 +16,24 @@ namespace SGF.PRESENTACION.formModales
     public partial class mdCompraProducto : Form
     {
         private CategoriaBLL lCategoria = CategoriaBLL.ObtenerInstancia;
+        private ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
+
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
 
         private List<Categoria> listaCategoria { get; set; }
+        
 
         private Proveedor proveedorSeleccionado { get; set; }
         private Categoria categoriaSeleccionada { get; set; }
         public Producto productoSeleccionado { get; set; }
+        public int cantidadComprada { get; set; }
+
 
         public mdCompraProducto(Proveedor proveedor)
         {
             InitializeComponent();
-            listaCategoria = new List<Categoria>();
+            cantidadComprada = 0;
+            listaCategoria = lCategoria.ListarCategorias();
             proveedorSeleccionado = proveedor;
             productoSeleccionado = new Producto();
         }
@@ -36,7 +42,6 @@ namespace SGF.PRESENTACION.formModales
         {
             try
             {
-                listaCategoria = lCategoria.ListarCategorias();
                 cargarCombobox();
             }
             catch (Exception ex)
@@ -112,13 +117,13 @@ namespace SGF.PRESENTACION.formModales
         {
             if (ValidarCampos())
             {
-                if(productoSeleccionado != null && productoSeleccionado.Categoria != null && productoSeleccionado.Proveedor != null)
+                if (productoSeleccionado != null && productoSeleccionado.Categoria != null && productoSeleccionado.Proveedor != null)
                 {
-                    if(productoSeleccionado.PrecioCompra != Convert.ToDecimal(txtPrecio.Text))
+                    if (productoSeleccionado.PrecioCompra != Convert.ToDecimal(txtPrecio.Text))
                     {
                         decimal precioCompra = Convert.ToDecimal(txtPrecio.Text);
                         decimal precioVenta = productoSeleccionado.PrecioVenta;
-                        if(precioCompra > precioVenta)
+                        if (precioCompra > precioVenta)
                         {
                             // Precio de compra mayor al precio de venta, es un error
                             errorProvider.SetError(txtPrecio, $"El precio de compra no puede ser mayor al precio de venta el cual es: {productoSeleccionado.PrecioVenta}");
@@ -126,6 +131,14 @@ namespace SGF.PRESENTACION.formModales
                             return;
                         }
                     }
+                    // la cantidad debe ser mayor a 0
+                    if(Convert.ToInt32(txtCantidad.Text) <= 0)
+                    {
+                        errorProvider.SetError(txtCantidad, "La cantidad debe ser mayor a 0.");
+                        MessageBox.Show("La cantidad debe ser mayor a 0.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     if (productoSeleccionado.CantidadMinima != 0)
                     {
                         if (productoSeleccionado.CantidadMinima > Convert.ToInt32(txtCantidad.Text))
@@ -135,7 +148,7 @@ namespace SGF.PRESENTACION.formModales
                             return;
                         }
                     }
-                    productoSeleccionado.Stock += Convert.ToInt32(txtCantidad.Text);
+                    cantidadComprada = Convert.ToInt32(txtCantidad.Text);
                     productoSeleccionado.PrecioCompra = Convert.ToDecimal(txtPrecio.Text);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -154,7 +167,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnbuscar_Click(object sender, EventArgs e)
         {
-            if(proveedorSeleccionado != null)
+            if (proveedorSeleccionado != null)
             {
                 if (cmbCategoria.SelectedIndex > 0)
                 {
@@ -181,7 +194,6 @@ namespace SGF.PRESENTACION.formModales
                     {
                         MessageBox.Show("La categoría seleccionada no tiene productos registrados, por favor seleccione otra categoría.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-
                 }
                 else
                 {
@@ -231,16 +243,28 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (txtNombre.Text != string.Empty || txtCodigo.Text != string.Empty)
+            {
+                DialogResult respuesta = MessageBox.Show("¿Seguro que desea cancelar la operación?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (respuesta == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
         }
 
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(productoSeleccionado != null && productoSeleccionado.Categoria != null)
+            if (productoSeleccionado != null && productoSeleccionado.Categoria != null)
             {
                 DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cambiar de categoría? Si lo hace perderá el producto seleccionado.", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if(DialogResult.Yes == respuesta)
+                if (DialogResult.Yes == respuesta)
                 {
                     productoSeleccionado = new Producto();
                     txtNombre.Text = string.Empty;
@@ -258,7 +282,7 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-        
+
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -268,6 +292,90 @@ namespace SGF.PRESENTACION.formModales
         private void txtPrecio_Leave(object sender, EventArgs e)
         {
             uiUtilidades.TextboxMoneda_Leave(txtPrecio, e);
+        }
+
+        private void txtCodigo_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private Producto BuscarProductoPorCodigo(string codigo)
+        {
+            // logica de verificar si proveedorSeleccionado es null y etc
+            if (proveedorSeleccionado != null)
+            {
+                Producto producto = lProducto.ObtenerProductoPorCodigo(codigo);
+                // verificar si el producto tiene el mismo proveedor
+                if (producto != null)
+                {
+                    if (proveedorSeleccionado.ProveedorID == producto.Proveedor.ProveedorID)
+                    {
+                        categoriaSeleccionada = listaCategoria.FirstOrDefault(cat => cat.CategoriaID == producto.Categoria.CategoriaID);
+                        cmbCategoria.SelectedItem = categoriaSeleccionada.Nombre;
+
+                        productoSeleccionado = producto;
+                        productoSeleccionado.Categoria = categoriaSeleccionada;
+                        productoSeleccionado.Proveedor = proveedorSeleccionado;
+                        txtNombre.Text = productoSeleccionado.Nombre;
+                        txtPrecio.Text = productoSeleccionado.PrecioCompra.ToString();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El producto seleccionado no pertenece al proveedor seleccionado, por favor seleccione otro producto.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se ha seleccionado un proveedor, por favor seleccione uno.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                return null;
+            }
+            return productoSeleccionado;
+        }
+
+        private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // si presiona enter se buscará el producto usando el código
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(txtCodigo.Text))
+                {
+                    Producto producto = BuscarProductoPorCodigo(txtCodigo.Text);
+                    if (producto != null)
+                    {
+                        txtCantidad.Focus();
+                    }
+                }
+            }
+        }
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                productoSeleccionado = new Producto();
+                txtNombre.Text = string.Empty;
+                txtPrecio.Text = string.Empty;
+                txtCantidad.Text = string.Empty;
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtCodigo.Text))
+            {
+                Producto producto = BuscarProductoPorCodigo(txtCodigo.Text);
+                if (producto != null)
+                {
+                    txtCantidad.Focus();
+                }
+            }
         }
     }
 }

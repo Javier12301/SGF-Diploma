@@ -2,7 +2,7 @@ use FarmaciaDatos
 Go
 
 
-SELECT * FROM Producto
+SELECT * FROM Registro
 
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
@@ -280,7 +280,7 @@ FROM Detalle_Compra DC
 JOIN Compra C ON DC.CompraID = C.CompraID
 JOIN Proveedor P ON C.ProveedorID = P.ProveedorID;
 
--- Filtrar Detalle_Compra
+-- Filtrar Compra
 DECLARE @Buscar VARCHAR(50) = 'far'; -- Reemplaza 'ValorABuscar' con el valor que estás buscando
 
 SELECT DC.*, P.RazonSocial AS NombreProveedor
@@ -305,8 +305,11 @@ WHERE
     DC.CompraID = @FiltroCompraID;
 
 
+SELECT Cantidad FROM Detalle_Compra WHERE CompraID = 1 AND ProductoID = 2
+
 -- Tabla Compra
 DECLARE @FiltroBuscar VARCHAR(50) = '';
+DECLARE @FiltroEstado VARCHAR(50) = 'Cancelado';
 SELECT 
     C.CompraID, 
     Pr.RazonSocial AS Proveedor, 
@@ -320,18 +323,117 @@ FROM
     INNER JOIN Detalle_Compra DC ON C.CompraID = DC.CompraID
 WHERE 
     Pr.RazonSocial LIKE '%' + @FiltroBuscar + '%'
+    AND (
+        @FiltroEstado = 'Todos' OR 
+        (C.Estado = 1 AND @FiltroEstado = 'Activo') OR 
+        (C.Estado = 0 AND @FiltroEstado = 'Cancelado')
+    )
 GROUP BY 
     C.CompraID, 
     Pr.RazonSocial, 
     C.Factura,
     C.FechaCompra;
-GO
-
 
 -- Filtro Moneda
 DECLARE @FiltroBuscar VARCHAR(60) = ''
 SELECT * FROM Moneda
     WHERE Nombre LIKE '%' + @FiltroBuscar + '%';
+
+
+-- Filtro Salida
+DECLARE @FechaInicio DATETIME, @FechaFinal DATETIME;
+
+-- Aquí puedes establecer las fechas que desees para tus variables
+SET @FechaInicio = '2024-02-15';
+SET @FechaFinal = '2025-02-20';
+
+SELECT 
+    S.SalidaID, 
+    U.Nombre AS Usuario, 
+    S.FechaSalida, 
+    SUM(DS.Cantidad) AS CantidadTotalProductos, 
+    S.Observaciones
+FROM 
+    SalidaInventario S
+    INNER JOIN Usuario U ON S.UsuarioID = U.UsuarioID
+    INNER JOIN Detalle_Salida DS ON S.SalidaID = DS.SalidaID
+WHERE 
+    (@FechaInicio IS NULL OR S.FechaSalida >= @FechaInicio)
+    AND (@FechaFinal IS NULL OR S.FechaSalida <= @FechaFinal)
+GROUP BY 
+    S.SalidaID, 
+    U.Nombre, 
+    S.FechaSalida,
+    S.Observaciones;
+
+DECLARE @SalidaID INT, @FiltroBuscarPor VARCHAR(10), @Buscar VARCHAR(50);
+SET @SalidaID = 1; 
+SET @FiltroBuscarPor = 'Código'; -- 
+SET @Buscar = ''; 
+
+SELECT 
+    DS.DetalleSalidaID,
+    P.CodigoBarras,
+    P.Nombre AS NombreProducto,
+    Pr.RazonSocial AS Proveedor,
+    C.Nombre AS Categoria,
+    DS.Cantidad
+FROM 
+    Detalle_Salida DS
+    INNER JOIN Producto P ON DS.ProductoID = P.ProductoID
+    INNER JOIN Proveedor Pr ON P.ProveedorID = Pr.ProveedorID
+    INNER JOIN Categoria C ON P.CategoriaID = C.CategoriaID
+WHERE 
+    DS.SalidaID = @SalidaID
+    AND (
+        @FiltroBuscarPor = 'Todo' AND (
+            P.CodigoBarras LIKE '%' + @Buscar + '%' OR
+            P.Nombre LIKE '%' + @Buscar + '%' OR
+            Pr.RazonSocial LIKE '%' + @Buscar + '%' OR
+            C.Nombre LIKE '%' + @Buscar + '%'
+        )
+		OR (@FiltroBuscarPor = 'Código' AND P.CodigoBarras LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Nombre' AND P.Nombre LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Proveedor' AND Pr.RazonSocial LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Categoría' AND C.Nombre LIKE '%' + @Buscar + '%')
+    );
+
+
+-- Filtro de Registro
+SELECT 
+    R.RegistrosID, 
+    R.FechayHora, 
+    R.Movimiento, 
+    R.NombreUsuario, 
+    R.Cantidad, 
+    R.CantidadAntes, 
+    R.CantidadDespues, 
+    R.Modulo, 
+    R.Descripcion 
+FROM 
+    dbo.Registro R
+WHERE
+    (
+        (@FiltroBuscarPor = 'Todo' AND (
+            R.Movimiento LIKE '%' + @Buscar + '%' OR
+            R.NombreUsuario LIKE '%' + @Buscar + '%' OR
+            R.Modulo LIKE '%' + @Buscar + '%' OR
+            R.Descripcion LIKE '%' + @Buscar + '%'
+        ))
+        OR (@FiltroBuscarPor = 'Módulo' AND R.Modulo LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Descripción' AND R.Descripcion LIKE '%' + @Buscar + '%')
+    )
+    AND (@FiltroMovimiento = 'Todos' OR R.Movimiento = @FiltroMovimiento)
+    AND (@FiltroUsuario = 'Todos' OR R.NombreUsuario = @FiltroUsuario)
+    AND (
+        (@FechaDesde IS NULL OR R.FechayHora >= @FechaDesde)
+        AND (@FechaHasta IS NULL OR R.FechayHora <= @FechaHasta)
+    );
+
+	s
+
+
+
 
 -- Cantidad de usuarios en un grupo
 DECLARE @grupoID INT = 5

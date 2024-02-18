@@ -1,6 +1,10 @@
 ﻿using ClosedXML.Excel;
 using FontAwesome.Sharp;
 using Guna.UI.WinForms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using SGF.MODELO.Negocio;
 using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
 using System;
@@ -33,9 +37,54 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
+        public void HtmlToPdf(string htmlContent, string outputPath, NegocioModelo NegocioDatos)
+        {
+            using (FileStream stream = new FileStream(outputPath, FileMode.Create))
+            {
+                using (Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25))
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+                    pdfDoc.Add(new Phrase(""));
+                    System.Drawing.Image logo;
+                    if (NegocioDatos.Logo != null)
+                    {
+                        string logoFileName = "logo.png";
+                        string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SGF.PRESENTACION", "Recursos", "Logo negocio");
+                        string path = Path.Combine(directoryPath, logoFileName);
+                        // si el directorio no existe, poner el logo por defecto para evitar errores
+                        if (!File.Exists(path))
+                        {
+                            logo = Properties.Resources.logoDefault;
+                        }
+                        else
+                        {
+                            logo = System.Drawing.Image.FromFile(path);
+                        }
+                    }
+                    else
+                    {
+                        logo = Properties.Resources.logoDefault;
+                    }
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(logo, System.Drawing.Imaging.ImageFormat.Png);
+                    img.ScaleToFit(80, 60);
+                    img.Alignment = iTextSharp.text.Image.UNDERLYING;
+                    img.SetAbsolutePosition(pdfDoc.LeftMargin, pdfDoc.Top - 60);
+                    pdfDoc.Add(img);
+
+                    using (StringReader sr = new StringReader(htmlContent))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
+                }
+            }
+        }
+
+
+
         // Manejo de módulo de negocio
         // Convertir imagen a byte[]
-        public byte[] ImageToByteArray(Image imageIN)
+        public byte[] ImageToByteArray(System.Drawing.Image imageIN)
         {
             if (imageIN != null)
             {
@@ -60,14 +109,14 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-        public Image ByteArrayToImage(byte[] byteArrayIn)
+        public System.Drawing.Image ByteArrayToImage(byte[] byteArrayIn)
         {
             if (byteArrayIn != null)
             {
-                Image returnImage;
+                System.Drawing.Image returnImage;
                 using (MemoryStream ms = new MemoryStream(byteArrayIn))
                 {
-                    returnImage = Image.FromStream(ms);
+                    returnImage = System.Drawing.Image.FromStream(ms);
                 }
                 return returnImage;
             }
@@ -77,9 +126,9 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-        public Image LogoPorDefecto()
+        public System.Drawing.Image LogoPorDefecto()
         {
-            return Properties.Resources.farmaciaLogo;
+            return Properties.Resources.logoDefault;
         }
 
         public System.Drawing.Icon ByteArrayToIcon(byte[] byteArray)
@@ -87,9 +136,9 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             using (var ms = new MemoryStream(byteArray))
             {
                 // Crea una imagen a partir del array de bytes
-                var img = Image.FromStream(ms);
+                var img = System.Drawing.Image.FromStream(ms);
 
-                // Ajusta la imagen para que tenga un tamaño adecuado para un icono
+                // Ajusta la System.Drawing.Imagen para que tenga un tamaño adecuado para un icono
                 var bmp = new Bitmap(img, new Size(32, 32));
 
                 // Convierte la imagen ajustada en un icono
@@ -98,7 +147,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
         }
 
         // Transformar imagen a icono
-        public System.Drawing.Icon ImageToIcon(Image image)
+        public System.Drawing.Icon ImageToIcon(System.Drawing.Image image)
         {
             if (image == null)
             {
@@ -157,6 +206,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     permisoDeUsuario.Cancelar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Cancelar");
                     permisoDeUsuario.EntradaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Entrada");
                     permisoDeUsuario.SalidaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Salida");
+                    permisoDeUsuario.GenerarRegistro = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Generar registro");
                 }
             }
         }
@@ -474,7 +524,19 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-
+        public string FormatearMoneda(decimal numeroMoneda, NegocioModelo NegocioDatos)
+        {
+            string moneda = string.Empty;
+            if (NegocioDatos.Moneda.Posicion == "Antes")
+            {
+                moneda = NegocioDatos.Moneda.Simbolo + " " + numeroMoneda.ToString("N2");
+            }
+            else
+            {
+                moneda = numeroMoneda.ToString("N2") + " " + NegocioDatos.Moneda.Simbolo;
+            }
+            return moneda;
+        }
 
         // Manejo de Textbox con Formato Moneda
         public void TextboxMoneda_KeyPress(TextBox textbox, KeyPressEventArgs e, ErrorProvider error)

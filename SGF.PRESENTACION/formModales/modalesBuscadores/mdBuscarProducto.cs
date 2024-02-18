@@ -15,15 +15,23 @@ namespace SGF.PRESENTACION.formModales.modalesBuscadores
     {
         private ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
 
-        private Proveedor filtroProveedor;
-        private Categoria filtroCategoria;
+        private string filtroProveedor;
+        private string filtroCategoria;
         public Producto productoSeleccionado;
 
         public mdBuscarProducto(Proveedor proveedorSeleccionado, Categoria categoriaSeleccionada)
         {
             InitializeComponent();
-            filtroProveedor = proveedorSeleccionado;
-            filtroCategoria = categoriaSeleccionada;
+            if (proveedorSeleccionado == null)
+                filtroProveedor = "Todos";
+            else
+                filtroProveedor = proveedorSeleccionado.RazonSocial;
+
+            if(categoriaSeleccionada == null)
+                filtroCategoria = "Todos";
+            else
+                filtroCategoria = categoriaSeleccionada.Nombre;
+      
             productoSeleccionado = new Producto();
         }
 
@@ -89,7 +97,7 @@ namespace SGF.PRESENTACION.formModales.modalesBuscadores
 
         private void filtrarTabla()
         {
-            this.productoTableAdapter.FiltrarBuscarProducto(this.negocio.Producto, cmbFiltroBuscar.Text, txtBuscar.Text, filtroProveedor.RazonSocial, "Todos", filtroCategoria.Nombre, "Activo", null, null);
+            this.productoTableAdapter.FiltrarBuscarProducto(this.negocio.Producto, cmbFiltroBuscar.Text, txtBuscar.Text, filtroProveedor, "Todos", filtroCategoria, "Activo", null, null);
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)

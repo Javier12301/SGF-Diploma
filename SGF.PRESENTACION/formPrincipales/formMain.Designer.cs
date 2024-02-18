@@ -227,6 +227,7 @@
             this.btnRegistro.Text = "Registros";
             this.btnRegistro.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRegistro.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnRegistro.Click += new System.EventHandler(this.btnRegistro_Click);
             // 
             // btnReportes
             // 
@@ -242,6 +243,7 @@
             this.btnReportes.Text = "Reportes";
             this.btnReportes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnReportes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnAjustes
             // 

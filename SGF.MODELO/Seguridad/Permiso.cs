@@ -26,6 +26,8 @@ namespace SGF.MODELO.Seguridad
         public bool Cancelar { get; set; }
         public bool EntradaMasiva { get; set; }
         public bool SalidaMasiva { get; set; }
+        public bool GenerarReporte { get; set; }
+        public bool GenerarRegistro { get; set; }
 
 
 

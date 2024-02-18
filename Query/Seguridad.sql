@@ -1,8 +1,6 @@
 USE FarmaciaDatos
 GO
 
-SELECT * FROM Proveedor
-
 CREATE TABLE Grupo (
     GrupoID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(255),
@@ -60,10 +58,6 @@ CREATE TABLE Auditoria (
 );
 GO
 
-SELECT * FROM Auditoria
-SELECT * FROM Registro
-
-
 -- Modulos
 DECLARE @GrupoID INT = 6
 SELECT DISTINCT M.Descripcion FROM Permiso p
@@ -82,12 +76,3 @@ join Accion op on op.AccionID = p.AccionID
 join Modulo M on M.ModuloID = op.ModuloID
 WHERE Gr.GrupoID = @GrupoID AND M.Descripcion = @moduloDescripcion AND p.Permitido = 1
 GO
-
-SELECT * FROM Auditoria
-
-
-select * from Accion
-where ModuloID = 14
-
-SELECT * FROM Grupo
-

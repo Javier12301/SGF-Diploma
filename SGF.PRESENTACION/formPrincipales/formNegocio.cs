@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private Moneda monedaSeleccionada { get; set; }
         private NegocioModelo negocioDatos { get; set; }
+        private bool logoModificado = false;
 
 
         public formNegocio()
@@ -115,6 +117,12 @@ namespace SGF.PRESENTACION.formPrincipales
                     monedaSeleccionada = lNegocio.ObtenerMonedaPorID(1);
                 }
             }
+            if(rbAntes.Checked)
+                monedaSeleccionada.Posicion = "Antes";
+            else
+                monedaSeleccionada.Posicion = "Después";
+            monedaSeleccionada.Simbolo = txtSimboloMoneda.Text;
+            lNegocio.ModificarMoneda(monedaSeleccionada);
             negocio.Moneda = monedaSeleccionada;
 
             // Impuestos
@@ -151,11 +159,15 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             if (ValidarCampos())
             {
+                if (logoModificado)
+                    GuardarImagen();
                 NegocioModelo oNegocio = CrearNegocioModificado();
                 bool resultado = lNegocio.ModificarNegocio(oNegocio);
                 if (resultado)
                 {
                     AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se modificarón con éxito los datos del negocio.");
+                    
+
                     MessageBox.Show("Negocio modificado correctamente", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -241,6 +253,8 @@ namespace SGF.PRESENTACION.formPrincipales
                         txtNombreMoneda.Text = modal.monedaSeleccionada.Nombre;
                         txtSimboloMoneda.Text = modal.monedaSeleccionada.Simbolo;
                         monedaSeleccionada = modal.monedaSeleccionada;
+                        // posicion de moneda radiobuttons 
+                        lblMuestraMoneda_Formato();
                     }
                     else
                     {
@@ -272,17 +286,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void radioButtos_CheckedChanged(object sender, EventArgs e)
         {
-            RadioButton rb = (RadioButton)sender;
-            string simboloMoneda = string.IsNullOrEmpty(txtSimboloMoneda.Text) ? "$" : txtSimboloMoneda.Text;
-            if (rb.Name == rbDespues.Name)
-            {
-                // mostrar ejemplo de posición
-                lblMuestraMoneda.Text = "543.21 " + simboloMoneda;
-            }
-            else
-            {
-                lblMuestraMoneda.Text = simboloMoneda + " 543.21";
-            }
+            lblMuestraMoneda_Formato();
         }
 
         private void btnEliminarImagen_Click(object sender, EventArgs e)
@@ -294,7 +298,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 if (respuesta == DialogResult.Yes)
                 {
                     pbLogo.Image = uiUtilidades.LogoPorDefecto();
-                    negocioDatos.Logo = null;
+                    logoModificado = true;
                 }
             }
             else
@@ -313,7 +317,24 @@ namespace SGF.PRESENTACION.formPrincipales
             if (!string.IsNullOrEmpty(abrir.FileName))
             {
                 pbLogo.Image = Image.FromFile(abrir.FileName);
+                logoModificado = true;
+            }
+        }
+
+        private void GuardarImagen()
+        {
+            try
+            {
+                string logoFileName = "logo.png";
+                string directoryPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SGF.PRESENTACION", "Recursos", "Logo negocio");
+                Directory.CreateDirectory(directoryPath);
+                string path = System.IO.Path.Combine(directoryPath, logoFileName);
+                pbLogo.Image.Save(path);
                 negocioDatos.Logo = uiUtilidades.ImageToByteArray(pbLogo.Image);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -327,6 +348,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cambiar la imagen?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.Yes)
                     {
+                        logoModificado = true;
                         AbrirImagen();
                     }
                 }
@@ -337,7 +359,7 @@ namespace SGF.PRESENTACION.formPrincipales
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message + "contacte con el administrador del sistema si el error persiste.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -391,6 +413,25 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 this.Close();
             }
+        }
+
+        private void lblMuestraMoneda_Formato()
+        {
+            // cada vez que se activa un evento, este deberá cambiar según el formato de la moneda
+            string simboLoMoneda = string.IsNullOrEmpty(txtSimboloMoneda.Text) ? "$" : txtSimboloMoneda.Text;
+            if (rbAntes.Checked)
+            {
+                lblMuestraMoneda.Text = txtSimboloMoneda.Text + " 543.21";
+            }
+            else
+            {
+                lblMuestraMoneda.Text = "543.21 " + txtSimboloMoneda.Text;
+            }
+        }
+
+        private void txtSimboloMoneda_TextChanged(object sender, EventArgs e)
+        {
+            lblMuestraMoneda_Formato();
         }
     }
 }

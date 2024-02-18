@@ -24,6 +24,13 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Conteo de registros
+        public static int ConteoRegistros()
+        {
+            int conteo = RegistroDAO.ConteoRegistrosD();
+            return conteo;
+        }
+
         public static void RegistrarMovimiento(string movimiento, string NombreUsuario, int cantidad, int cantidadAntes, int cantidadDespues, string modulo,string descripcion)
         {
             // Registramos la auditoria
@@ -35,5 +42,30 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        public static List<Registro> ListarRegistros()
+        {
+            List<Registro> listaRegistro = RegistroDAO.ListarRegistrosD();
+            if(listaRegistro != null)
+            {
+                return listaRegistro;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error inesperado al intentar listar los registros, contactar con el administrador del sistema si el error persiste.");
+            }
+        }
+
+        // baja registro
+        public static bool BajaRegistro(int idRegistro)
+        {
+            if (idRegistro > 0)
+            {
+                return RegistroDAO.BajaRegistroD(idRegistro);
+            }
+            else
+            {
+                throw new ArgumentNullException("Se ha producido un error: el campo de registros no puede estár vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
+            }
+        }
     }
 }

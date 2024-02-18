@@ -498,7 +498,7 @@
             this.lbAccionesReportes.FormattingEnabled = true;
             this.lbAccionesReportes.ItemHeight = 19;
             this.lbAccionesReportes.Items.AddRange(new object[] {
-            "REPORTES ",
+            "REPORTES",
             "REPORTES DE INVENTARIO",
             "REPORTES DE VENTAS",
             "REPORTES DE CLIENTES"});

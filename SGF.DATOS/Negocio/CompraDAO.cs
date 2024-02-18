@@ -77,7 +77,7 @@ namespace SGF.DATOS.Negocio
                                 cmdDetalle.Parameters.AddWithValue("@ProductoID", fila["dgvcID"]);
                                 cmdDetalle.Parameters.AddWithValue("@PrecioCompra", fila["dgvcPrecioCompra"]);
                                 cmdDetalle.Parameters.AddWithValue("@Cantidad", fila["dgvcCantidad"]);
-                                cmdDetalle.Parameters.AddWithValue("@FechaRegistro", DateTime.Now);
+                                cmdDetalle.Parameters.AddWithValue("@FechaRegistro", oCompra.FechaCompra);
                                 resultado = cmdDetalle.ExecuteNonQuery() > 0;
                             }
                         }
@@ -87,6 +87,93 @@ namespace SGF.DATOS.Negocio
                 catch (Exception)
                 {
                     throw new Exception("Ocurrió un error al intentar registrar la compra, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return resultado;
+        }
+
+        // Obtener Productos por ObtenerProductosIDPorCompraID
+        public static List<int> ObtenerProductosIDPorCompraID(int compraID)
+        {
+            List<int> productosID = new List<int>();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT ProductoID FROM Detalle_Compra WHERE CompraID = @CompraID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@CompraID", compraID);
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                productosID.Add(Convert.ToInt32(reader["ProductoID"]));
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener los productos de la compra, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return productosID;
+        } 
+
+        // Obtener cantidad de productos comprados usando ID de producto y ID de compra
+        public static int ObtenerCantidadProductosComprados(int productoID, int compraID)
+        {
+            int cantidad = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT Cantidad FROM Detalle_Compra WHERE CompraID = @CompraID AND ProductoID = @ProductoID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@CompraID", compraID);
+                        cmd.Parameters.AddWithValue("@ProductoID", productoID);
+                        oContexto.Open();
+                        object result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value)
+                        {
+                            cantidad = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener la cantidad de productos comprados, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return cantidad;
+        }
+
+        // Cancelar compra, poniendo el estado en false
+        public static bool CancelarCompraD(int compraID)
+        {
+            bool resultado = false;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("UPDATE Compra SET Estado = @Estado WHERE CompraID = @CompraID");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@Estado", false);
+                        cmd.Parameters.AddWithValue("@CompraID", compraID);
+                        oContexto.Open();
+                        resultado = cmd.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar cancelar la compra, contacte con el administrador del sistema si este error persiste.");
                 }
             }
             return resultado;

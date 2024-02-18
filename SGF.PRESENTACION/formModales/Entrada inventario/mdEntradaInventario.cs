@@ -30,12 +30,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void mdEntradaInventario_Load(object sender, EventArgs e)
         {
-            btnNuevo.Enabled = false;
-            btnNuevo.Visible = false;
-            btnDetalles.Enabled = false;
-            btnDetalles.Visible = false;
-            btnExportar.Enabled = false;
-            btnDetalles.Visible = false;
+            cargarCombobox();          
             try
             {
                 cargarNegocio();
@@ -64,6 +59,14 @@ namespace SGF.PRESENTACION.formModales
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cargarCombobox()
+        {
+            cmbFiltroEstado.Items.Add("Activo");
+            cmbFiltroEstado.Items.Add("Cancelado");
+            cmbFiltroEstado.Items.Add("Todos");
+            cmbFiltroEstado.SelectedIndex = 0;
         }
 
         private void cargarNegocio()
@@ -136,12 +139,12 @@ namespace SGF.PRESENTACION.formModales
         // Exportar a Excel
         private void btnExportar_Click(object sender, EventArgs e)
         {
-
+            uiUtilidades.ExportarDataGridViewAExcel(dgvCompras, "Compras realizadas", "Lista de compras realizadas");
         }
 
         private void filtrarLista()
         {
-            this.compraTableAdapter.Fill(this.negocio.Compra, txtBusqueda.Text);
+            this.compraTableAdapter.Fill(this.negocio.Compra, txtBusqueda.Text, cmbFiltroEstado.Text);
         }
 
         // Filtrar lista
@@ -162,5 +165,38 @@ namespace SGF.PRESENTACION.formModales
             this.Close();
         }
 
+        private void cmbFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtrarLista();
+        }
+
+        private void dgvCompras_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // verificar si hay tablas en el datagridview 
+            if (dgvCompras.Rows.Count > 0)
+            {
+                // verificar si hay una fila seleccionada
+                if (dgvCompras.SelectedCells.Count == 0)
+                {
+                    MessageBox.Show("Debe seleccionar una compra realizada de la lista para ver los detalles.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // obtener el id de la compra seleccionada
+                int compraID = Convert.ToInt32(dgvCompras.Rows[dgvCompras.CurrentRow.Index].Cells["dgvcID"].Value);
+                Compra compra = lCompra.ObtenerCompraPorID(compraID);
+                using (var modal = new mdDetalleCompraEntrada(compra))
+                {
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        filtrarLista();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos por mostrar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

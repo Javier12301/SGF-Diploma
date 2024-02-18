@@ -32,6 +32,13 @@ namespace SGF.NEGOCIO.Negocio
             return conteo;
         }
 
+        // Obtener existencias
+        public int ObtenerExistencias(int productoID)
+        {
+            int existencias = ProductoDAO.ObtenerExistenciasD(productoID);
+            return existencias;
+        }
+
         // Alta
         public bool AltaProducto(Producto oProducto)
         {
@@ -85,6 +92,14 @@ namespace SGF.NEGOCIO.Negocio
             {
                 throw new Exception("Ocurrió un error al intentar obtener el producto. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
             }
+        }
+
+        // Obtener producto usando código barras
+        public Producto ObtenerProductoPorCodigo(string codigo)
+        {
+            Producto oProducto = ProductoDAO.ObtenerProductoPorCodigoD(codigo);
+            // se manejará por interfaz si es null
+            return oProducto;
         }
 
         public List<Categoria> ObtenerCategoriasExistentes()

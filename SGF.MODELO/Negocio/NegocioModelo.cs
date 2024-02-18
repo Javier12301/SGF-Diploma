@@ -13,5 +13,7 @@
         public byte[] Logo { get; set; }
         public Moneda Moneda { get; set; }
         public Impuesto Impuesto { get; set; }
+
+        
     }
 }

@@ -98,15 +98,17 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                         int usuarioID = Convert.ToInt32(dgvUsuario.Rows[filaIndex].Cells["dgvcID"].Value);
                         if (usuarioID > 0)
                         {
+                            
+                            // No se puede modificar su propio usuario en esta ventana, utilices el módulo de Mis Datos.
+                            if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
+                            {
+                                MessageBox.Show("No puede modificar su propio usuario en esta ventana, utilice el módulo de \"Mis datos\".", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+
                             if (usuarioID == 1)
                             {
                                 MessageBox.Show("No puede modificar el usuario Admin.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            // No se puede modificar su propio usuario
-                            if (usuarioID == lSesion.UsuarioEnSesion().Usuario.ObtenerUsuarioID())
-                            {
-                                MessageBox.Show("No puede modificar su propio usuario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                 return;
                             }
 

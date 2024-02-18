@@ -63,6 +63,7 @@
             this.lblTipoDocumento = new System.Windows.Forms.Label();
             this.txtDocumentoDueño = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
+            this.cmbTipoDocumento = new System.Windows.Forms.ComboBox();
             this.txtOtroDocumento = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.txtCorreoNegocio = new System.Windows.Forms.TextBox();
@@ -79,7 +80,6 @@
             this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbTipoDocumento = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -376,6 +376,7 @@
             this.txtSimboloMoneda.Name = "txtSimboloMoneda";
             this.txtSimboloMoneda.Size = new System.Drawing.Size(178, 23);
             this.txtSimboloMoneda.TabIndex = 6;
+            this.txtSimboloMoneda.TextChanged += new System.EventHandler(this.txtSimboloMoneda_TextChanged);
             // 
             // lblSimboloMoneda
             // 
@@ -491,6 +492,19 @@
             this.lblDocumento.Size = new System.Drawing.Size(77, 14);
             this.lblDocumento.TabIndex = 5;
             this.lblDocumento.Text = "Documento *";
+            // 
+            // cmbTipoDocumento
+            // 
+            this.cmbTipoDocumento.DropDownHeight = 80;
+            this.cmbTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTipoDocumento.DropDownWidth = 145;
+            this.cmbTipoDocumento.FormattingEnabled = true;
+            this.cmbTipoDocumento.IntegralHeight = false;
+            this.cmbTipoDocumento.ItemHeight = 16;
+            this.cmbTipoDocumento.Location = new System.Drawing.Point(7, 36);
+            this.cmbTipoDocumento.Name = "cmbTipoDocumento";
+            this.cmbTipoDocumento.Size = new System.Drawing.Size(102, 24);
+            this.cmbTipoDocumento.TabIndex = 11;
             // 
             // txtOtroDocumento
             // 
@@ -656,19 +670,6 @@
             // 
             this.errorProvider.BlinkRate = 300;
             this.errorProvider.ContainerControl = this;
-            // 
-            // cmbTipoDocumento
-            // 
-            this.cmbTipoDocumento.DropDownHeight = 80;
-            this.cmbTipoDocumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoDocumento.DropDownWidth = 145;
-            this.cmbTipoDocumento.FormattingEnabled = true;
-            this.cmbTipoDocumento.IntegralHeight = false;
-            this.cmbTipoDocumento.ItemHeight = 16;
-            this.cmbTipoDocumento.Location = new System.Drawing.Point(7, 36);
-            this.cmbTipoDocumento.Name = "cmbTipoDocumento";
-            this.cmbTipoDocumento.Size = new System.Drawing.Size(102, 24);
-            this.cmbTipoDocumento.TabIndex = 11;
             // 
             // formNegocio
             // 

@@ -12,10 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
 using System.IO;
+using System.Drawing.Imaging;
+using iTextSharp.tool.xml.html;
 
 
 namespace SGF.PRESENTACION.formModales
@@ -28,6 +27,7 @@ namespace SGF.PRESENTACION.formModales
         private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private UsuarioBLL lUsuario = UsuarioBLL.ObtenerInstancia;
         private NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
+        private CompraBLL lCompra = CompraBLL.ObtenerInstancia;
 
         private NegocioModelo NegocioDatos { get; set; }
 
@@ -88,9 +88,9 @@ namespace SGF.PRESENTACION.formModales
                     decimal total = 0;
                     foreach (DataGridViewRow row in dgvDetallesCompras.Rows)
                     {
-                        total += Convert.ToDecimal(row.Cells[4].Value);
+                        total += Convert.ToDecimal(row.Cells["dgvcSubTotal"].Value);
                     }
-                    txtTotal.Text = total.ToString("C2");
+                    txtTotal.Text = uiUtilidades.FormatearMoneda(total, NegocioDatos);
                 }
             }
         }
@@ -106,38 +106,39 @@ namespace SGF.PRESENTACION.formModales
                 txtProveedor.Text = compra.proveedor.RazonSocial;
                 txtDocumento.Text = compra.proveedor.Documento;
                 txtTipoComprobante.Text = compra.TipoComprobante;
-                txtUsuario.Text = compra.usuario.NombreUsuario;
+                txtUsuario.Text = compra.usuario.ObtenerNombreUsuario();
+                pbCancelado.Visible = !compra.Estado;
             }
 
         }
 
-        private string crearReporteDeImpresion(string paginaHTML)
+        private string modificarPlantilla(string html)
         {
-            // Información de negocio
-            paginaHTML = paginaHTML.Replace("@NombreNegocio", NegocioDatos.Nombre);
-            paginaHTML = paginaHTML.Replace("@DireccionNegocio", NegocioDatos.Direccion);
-            paginaHTML = paginaHTML.Replace("@TelefonoNegocio", NegocioDatos.Telefono);
-            paginaHTML = paginaHTML.Replace("@EmailNegocio", NegocioDatos.Correo);
+            // Información de Negocio
+            html = html.Replace("@NombreNegocio", NegocioDatos.Nombre);
+            html = html.Replace("@TipoDocumentoNegocio", NegocioDatos.TipoDocumento);
+            html = html.Replace("@TipoMovimiento", "Detalle de compra");
+            html = html.Replace("@DocumentoNegocio", NegocioDatos.Documento);
+            html = html.Replace("@DireccionNegocio", NegocioDatos.Direccion);
+            html = html.Replace("@TelefonoNegocio", NegocioDatos.Telefono);
 
             // Información del usuario que realizo compra
-            // @Nombre @Apellido
-            paginaHTML = paginaHTML.Replace("@NombreyApellido", oCompra.usuario.ObtenerNombreyApellido());
-            paginaHTML = paginaHTML.Replace("@TipoDocumentoUsuario", NegocioDatos.TipoDocumento);
-            paginaHTML = paginaHTML.Replace("@DocumentoUsuario", NegocioDatos.Documento);
+            html = html.Replace("@NombreApellidoUsuario", oCompra.usuario.ObtenerNombreyApellido());
+            html = html.Replace("@DocumentoUsuario", oCompra.usuario.DNI);
+
+            // Información de la entrada de inventario
+            html = html.Replace("@TipoComprobante", oCompra.TipoComprobante);
+            html = html.Replace("@NumeroFolio", oCompra.CompraID.ToString());
 
             // Detalles de la compra
-            paginaHTML = paginaHTML.Replace("@TipodeComprobante", txtTipoComprobante.Text);
-            paginaHTML = paginaHTML.Replace("@FolioCompra", txtFolio.Text);
-            paginaHTML = paginaHTML.Replace("@ProveedorCompra", txtProveedor.Text);
-            paginaHTML = paginaHTML.Replace("@DocumentoProveedor", txtDocumento.Text);
-            paginaHTML = paginaHTML.Replace("@FechaCompra", txtFecha.Text);
-
-            // Se remplazará esto porque ocurre un error de lectura por el acento.
-            paginaHTML = paginaHTML.Replace("@ColumnaCodigo", "Código");
+            html = html.Replace("@NombreProveedor", oCompra.proveedor.RazonSocial);
+            html = html.Replace("@TipoDocumentoProveedor", oCompra.proveedor.TipoDocumento);
+            html = html.Replace("@DocumentoProveedor", oCompra.proveedor.Documento);
+            html = html.Replace("@Fecha", oCompra.FechaCompra.ToString("dd/MM/yyyy"));
 
             StringBuilder filas = new StringBuilder();
             decimal total = 0;
-            foreach(DataGridViewRow row in dgvDetallesCompras.Rows)
+            foreach (DataGridViewRow row in dgvDetallesCompras.Rows)
             {
                 filas.Append("<tr>");
                 filas.Append("<td>" + row.Cells["dgvcCodigo"].Value.ToString() + "</td>");
@@ -149,66 +150,57 @@ namespace SGF.PRESENTACION.formModales
                 total += decimal.Parse(row.Cells["dgvcSubTotal"].Value.ToString());
             }
             // transformar moneda usando los datos establecido del negocio
-            string moneda = string.Empty;
-            if(NegocioDatos.Moneda.Posicion == "Antes")
-            {
-                moneda = NegocioDatos.Moneda.Simbolo + " " + total.ToString("N2");
-            }
-            else
-            {
-                moneda = total.ToString("N2") + " " + NegocioDatos.Moneda.Simbolo;
-            }
-            paginaHTML = paginaHTML.Replace("@FILAS", filas.ToString());
-            paginaHTML = paginaHTML.Replace("@TOTAL", moneda);
+            string moneda = uiUtilidades.FormatearMoneda(total, NegocioDatos);
+            html = html.Replace("@FILAS", filas.ToString());
+            html = html.Replace("@Total", moneda);
 
-            return paginaHTML;
+            return html;
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            if (permisosDeUsuario.Imprimir)
+            try
             {
-                if (dgvDetallesCompras.Rows.Count > 0)
+                if (permisosDeUsuario.Imprimir)
                 {
-                    SaveFileDialog guardar = new SaveFileDialog();
-                    guardar.Filter = "Archivo PDF|*.pdf";
-                    guardar.FileName = "Detalle de compra, folio " + oCompra.CompraID + ".pdf";
-                    string paginaHTML = Properties.Resources.plantillaDetalle_Compras;
-                    paginaHTML = crearReporteDeImpresion(paginaHTML);
-
-                    if (guardar.ShowDialog() == DialogResult.OK)
+                    if(dgvDetallesCompras.Rows.Count > 0)
                     {
-                        try
+                        SaveFileDialog guardar = new SaveFileDialog();
+                        guardar.Filter = "Archivo PDF|*.pdf";
+                        guardar.FileName = "Detalle de compra " + oCompra.CompraID + ".pdf";
+                        string paginaHTML = string.Empty;
+                        if (oCompra.Estado)
                         {
-                            using (FileStream stream = new FileStream(guardar.FileName, FileMode.Create))
-                            {
-                                Document pdfDoc = new Document(PageSize.A4, 25, 25, 25, 25);
-                                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                                pdfDoc.Open();
-                                pdfDoc.Add(new Phrase(""));
-                                using (StringReader sr = new StringReader(paginaHTML))
-                                {
-                                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                                }
-                                pdfDoc.Close();
-                                stream.Close();
-                            }
-                            MessageBox.Show("El archivo se ha guardado correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            guardar.FileName = "Detalle de compra " + oCompra.CompraID + ".pdf";
+                            paginaHTML = Properties.Resources.detalle_compra;
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            guardar.FileName = "Detalle de compra " + oCompra.CompraID + " (Cancelada).pdf";
                         }
+                        paginaHTML = modificarPlantilla(paginaHTML);
+
+                        if(guardar.ShowDialog() == DialogResult.OK)
+                        {
+                            Cursor.Current = Cursors.WaitCursor;
+                            uiUtilidades.HtmlToPdf(paginaHTML, guardar.FileName, NegocioDatos);
+                            MessageBox.Show("El archivo PDF se ha guardado correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay datos para imprimir.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("No hay datos para imprimir.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No tiene permiso para realizar esta acción, si cree que esto es un error contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No tiene permiso para realizar esta acción, si cree que esto es un error contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -216,7 +208,29 @@ namespace SGF.PRESENTACION.formModales
         {
             if (permisosDeUsuario.Cancelar)
             {
-
+                // Cancelar un detalle de compra, provoca que se elimine el stock de los productos comprados
+                // la compra quedará como estado cancelada.
+                if (oCompra != null)
+                {
+                    if (MessageBox.Show("¿Está seguro de cancelar la compra?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (lCompra.CancelarCompra(oCompra.CompraID))
+                        {
+                            pbCancelado.Visible = true;
+                            MessageBox.Show("La compra ha sido cancelada.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrió un error al cancelar la compra, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Ocurrió un error al intentar cancelar la compra, por favor intente de nuevo y si el problema persiste contacte con el administrador del sistema.");
+                }
             }
             else
             {
@@ -241,7 +255,7 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.OK;
         }
 
         private void printDatagrid_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

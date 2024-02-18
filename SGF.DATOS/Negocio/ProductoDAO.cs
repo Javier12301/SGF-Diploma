@@ -33,6 +33,30 @@ namespace SGF.DATOS.Negocio
             return conteo;
         }
 
+        // obtener existencias de un producto por ID
+        public static int ObtenerExistenciasD(int productoID)
+        {
+            int existencias = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT Stock FROM Producto WHERE ProductoID = @productoID";
+                    using(SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@productoID", productoID);
+                        oContexto.Open();
+                        existencias = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Se ha producido un error al intentar obtener las existencias del producto. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+                }
+            }
+            return existencias;
+        }
+
         // Alta
         public static bool AltaProductoD(Producto oProducto)
         {
@@ -229,6 +253,63 @@ namespace SGF.DATOS.Negocio
                 }
             }
             return oProducto;
+        }
+
+        // obtener producto por código
+        public static Producto ObtenerProductoPorCodigoD(string codigo)
+        {
+            Producto oProducto = null;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT * FROM Producto");
+                    query.AppendLine("WHERE CodigoBarras = @codigo");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@codigo", codigo);
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                oProducto = new Producto();
+                                oProducto.ProductoID = Convert.ToInt32(reader["ProductoID"]);
+                                oProducto.Codigo = reader["CodigoBarras"].ToString();
+                                oProducto.Nombre = reader["Nombre"].ToString();
+                                oProducto.Categoria = new Categoria();
+                                oProducto.Categoria.CategoriaID = Convert.ToInt32(reader["CategoriaID"]);
+                                oProducto.Proveedor = new Proveedor();
+                                oProducto.Proveedor.ProveedorID = Convert.ToInt32(reader["ProveedorID"]);
+                                oProducto.PrecioCompra = Convert.ToDecimal(reader["PrecioCompra"]);
+                                oProducto.PrecioVenta = Convert.ToDecimal(reader["PrecioVenta"]);
+                                oProducto.NumeroLote = reader["NumeroLote"].ToString();
+                                if (reader["FechaVencimiento"] != DBNull.Value)
+                                {
+                                    oProducto.FechaVencimiento = Convert.ToDateTime(reader["FechaVencimiento"]);
+                                }
+                                else
+                                {
+                                    oProducto.FechaVencimiento = null;
+                                }
+                                oProducto.Refrigerado = Convert.ToBoolean(reader["Refrigerado"]);
+                                oProducto.Receta = Convert.ToBoolean(reader["BajoReceta"]);
+                                oProducto.Stock = Convert.ToInt32(reader["Stock"]);
+                                oProducto.CantidadMinima = Convert.ToInt32(reader["CantidadMinima"]);
+                                oProducto.TipoProducto = reader["TipoProducto"].ToString();
+                                oProducto.Estado = Convert.ToBoolean(reader["Estado"]);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el producto, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return oProducto;
+
         }
 
         public static List<Categoria> CategoriasExistentes()

@@ -1,7 +1,9 @@
-﻿using SGF.MODELO.Seguridad;
+﻿using SGF.MODELO.Negocio;
+using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formModales;
+using SGF.PRESENTACION.formModales.Salida_inventario;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -72,7 +74,17 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             if (permisoDeUsuario.SalidaMasiva)
             {
-
+                if (permisoDeUsuario.SalidaMasiva)
+                {
+                    using(var modal = new mdSalidaInventario(permisoDeUsuario))
+                    {
+                        var resultado = modal.ShowDialog();
+                        if(resultado == DialogResult.OK)
+                        {
+                            filtrarLista();
+                        }
+                    }
+                }
             }
             else
             {

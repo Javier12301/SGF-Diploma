@@ -123,11 +123,14 @@
   <metadata name="negocio.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="negocio.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnImprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAfFJREFUSEvtl81LInEchwe22963/6T/oejarVsQtewpIbQXRHcvqZuLZbC7lU3i
+        DAAACwwBP0AiyAAAAfFJREFUSEvtl81LInEchwe22963/6T/oejarVsQtewpIbQXRHcvqZuLZbC7lU3i
         FBNr28uWqdDLZFFZhm4FnSKpWyUVXTp86zONMY3KjPPrFfrAAwPO73nAg+Nwpdb1e7TGMzBWywIcis74
         YlLy6DR3QSzAoeiML7G5c0iMg0PRGd972MzKDjdavQsxaVM5bn5wwKVoC1dvcX9s8wTav/rFbmB1DWVd
         wgaJUpYJOODKe9FAS47a7faKb35xMTyfpr+L/+9pDWTIPZtjAg61Ew206urED9wXu69qeGr1Wn0DsPJ7

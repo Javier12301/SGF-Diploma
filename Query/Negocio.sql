@@ -33,6 +33,7 @@ VALUES (0, 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 0);
 SET IDENTITY_INSERT Proveedor OFF;
 GO
 
+
 CREATE TABLE Cliente (
     ClienteID INT IDENTITY PRIMARY KEY,
     TipoDocumento VARCHAR(50) DEFAULT 'DNI',
@@ -92,28 +93,45 @@ CREATE TABLE Registro (
 );
 GO
 
+-- Entrada de inventario
 CREATE TABLE Compra (
     CompraID INT IDENTITY PRIMARY KEY,
-    UsuarioID INT REFERENCES USUARIO(UsuarioID),
-    ProveedorID INT REFERENCES PROVEEDOR(ProveedorID),
+    UsuarioID INT REFERENCES Usuario(UsuarioID),
+    ProveedorID INT REFERENCES Proveedor(ProveedorID),
     Factura VARCHAR(50),
     FechaCompra DATETIME DEFAULT GETDATE(),
 	Estado BIT
 );
 GO
 
-
 CREATE TABLE Detalle_Compra (
     DetalleCompraID INT IDENTITY PRIMARY KEY,
-    CompraID INT REFERENCES COMPRA(CompraID),
-    ProductoID INT REFERENCES PRODUCTO(ProductoID),
+    CompraID INT REFERENCES Compra(CompraID),
+    ProductoID INT REFERENCES Producto(ProductoID),
     PrecioCompra DECIMAL(10,2) DEFAULT 0,
     Cantidad INT,
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
-
+-- Salida de inventario, quizas por caducidad de productos u otro.
+CREATE TABLE SalidaInventario (
+    SalidaID INT IDENTITY PRIMARY KEY,
+    UsuarioID INT REFERENCES Usuario(UsuarioID),
+    FechaSalida DATETIME DEFAULT GETDATE(),
+    Observaciones VARCHAR(255),
+	Estado BIT
+);
+GO
+	   
+CREATE TABLE Detalle_Salida (
+    DetalleSalidaID INT IDENTITY PRIMARY KEY,
+    SalidaID INT REFERENCES SalidaInventario(SalidaID),
+    ProductoID INT REFERENCES Producto(ProductoID),
+    Cantidad INT,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+GO
 
 CREATE TABLE Venta (
     VentaID INT IDENTITY PRIMARY KEY,
@@ -150,6 +168,9 @@ CREATE TABLE Moneda(
 );
 GO
 
+SELECT * FROM Moneda
+
+
 CREATE TABLE Impuesto(
 	ImpuestoID INT IDENTITY PRIMARY KEY,
 	Nombre VARCHAR(60),
@@ -160,7 +181,7 @@ GO
 CREATE TABLE Negocio(
 	NegocioID INT IDENTITY PRIMARY KEY,
 	Nombre VARCHAR(60),
-    TipoDocumento VARCHAR(60) DEFAULT 'DNI',
+    TipoDocumento VARCHAR(60) DEFAULT 'CUIT',
 	Documento VARCHAR(60),
 	Direccion VARCHAR(60),
 	Telefono VARCHAR(60),
@@ -171,5 +192,3 @@ CREATE TABLE Negocio(
     ImpuestoID INT FOREIGN KEY REFERENCES Impuesto(ImpuestoID)
 );
 GO
-
-SELECT * FROM Negocio

@@ -63,6 +63,16 @@ namespace SGF.PRESENTACION.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cancelado_imagen {
+            get {
+                object obj = ResourceManager.GetObject("cancelado_imagen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap checkList_Blanco {
             get {
                 object obj = ResourceManager.GetObject("checkList_Blanco", resourceCulture);
@@ -81,6 +91,104 @@ namespace SGF.PRESENTACION.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Detalle Compra&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///        table.border th {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        table.border td {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table style=&quot;width:100%&quot;&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;td style=&quot;width:20% [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string detalle_compra {
+            get {
+                return ResourceManager.GetString("detalle_compra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///  &lt;title&gt;Detalle Salida&lt;/title&gt;
+        ///  &lt;style&gt;
+        ///    table.border {
+        ///      border-collapse: collapse;
+        ///    }
+        ///
+        ///    table.border th {
+        ///      padding: 5px;
+        ///      border: 1px solid black;
+        ///    }
+        ///
+        ///    table.border td {
+        ///      padding: 5px;
+        ///      border: 1px solid black;
+        ///    }
+        ///  &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///  &lt;table style=&quot;width:100%&quot;&gt;
+        ///    &lt;tr&gt;
+        ///      &lt;td style=&quot;width:20%&quot;&gt;&lt;/td&gt;
+        ///      &lt;td style=&quot;width:60%&quot; align=&quot;center&quot; valign=&quot;top&quot;&gt;
+        ///                &lt;table&gt;
+        ///       [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string detalle_salida {
+            get {
+                return ResourceManager.GetString("detalle_salida", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Detalle Salida&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///        table.border th {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        table.border td {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        #cancelado {
+        ///            position: relative;
+        ///            width: 100%;
+        ///            text-align: ce [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string detalle_salida_cancelado {
+            get {
+                return ResourceManager.GetString("detalle_salida_cancelado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap eliminar_boton_15 {
@@ -93,9 +201,19 @@ namespace SGF.PRESENTACION.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap farmaciaLogo {
+        internal static System.Drawing.Bitmap logoDefault {
             get {
-                object obj = ResourceManager.GetObject("farmaciaLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("logoDefault", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logoFarmacia {
+            get {
+                object obj = ResourceManager.GetObject("logoFarmacia", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -107,37 +225,6 @@ namespace SGF.PRESENTACION.Properties {
             get {
                 object obj = ResourceManager.GetObject("modificar-boton-15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
-        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
-        ///&lt;head&gt;
-        ///    &lt;title&gt;Title of the document&lt;/title&gt;
-        ///    &lt;style&gt;
-        ///        table.border {
-        ///            border-collapse: collapse;
-        ///        }
-        ///
-        ///            table.border th {
-        ///                padding: 5px;
-        ///                border: 1px solid black;
-        ///            }
-        ///
-        ///            table.border td {
-        ///                padding: 5px;
-        ///                border: 1px solid black;
-        ///            }
-        ///    &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///    &lt;table style=&quot;width:100%&quot;&gt;
-        ///        [resto de la cadena truncado]&quot;;.
-        /// </summary>
-        internal static string plantillaDetalle_Compras {
-            get {
-                return ResourceManager.GetString("plantillaDetalle_Compras", resourceCulture);
             }
         }
     }
