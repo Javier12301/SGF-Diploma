@@ -203,6 +203,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
                     permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
                     permisoDeUsuario.Imprimir = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Imprimir");
+                    permisoDeUsuario.Grafico = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Gráfico");
                     permisoDeUsuario.Cancelar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Cancelar");
                     permisoDeUsuario.EntradaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Entrada");
                     permisoDeUsuario.SalidaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Salida");

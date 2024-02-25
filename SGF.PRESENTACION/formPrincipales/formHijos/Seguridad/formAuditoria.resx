@@ -117,14 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="bindingNavigator1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="auditoriaReporteResumenMovimientosPorAñoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
+  <metadata name="reportes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>688, 17</value>
   </metadata>
   <metadata name="auditoriaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>340, 17</value>
   </metadata>
   <metadata name="farmaciaDatosDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>170, 17</value>
+  </metadata>
+  <metadata name="bindingNavigator1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="bnpUltimoItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -185,7 +191,23 @@
         SordK9sOetP3qCZmPz8iFyn8MsXE/AFl/UCZIE7AewAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnGrafico.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAbJJREFUSEvtlMFKw0AQhqOI6M0nkIK3nnoySzaQnES0JfUNfATfIJ6FbLyJ4MEX
+        kAgeircefQQPiuILeBRPdf7NbtxsY9tgehDzw7A7s5n5OrtDnVat/pYmzoqb+BdM+BPT3ISfqi+WqBx+
+        uVRwEAcbLOG3LPH3VUjG3JSPlgbuxt11V/A7VfyTCT6wYrA3rI2BZVfC6krwD+r+wfBHLGGbePNaYDcN
+        Oq7wrwBRIakpKMEkVPsKWuTFzqqXej25nyd+zrfp3Z7zwv49fjniU1dJZwDsCm+vgKuYLFRH6JS6eCmK
+        k8kO0mALaylmADBgGLRGoHTVT8U+4e/f8TL0J/Wz6BV2mEUnKjSt0vXmFldMaekqqeiQ7Bomi1jqZ8MJ
+        jMDVw1UFVUfld7XeDwV1cRUqaSaYCq3RyD9qaNXoA4a4fb2/AkPGVBadLiIbPMiiY8Swwp8Lhrwzbwfr
+        QRb16MMQqzwwNLg5YnpgsLfB5I8VaAx/IbCWnWyKYqFRLERB7avz5sBmMllzYPUuY/3xrGSy5sB1ksla
+        cAuuBZYF9KH976PPyMIoizraV/uFc+H/RznOF9Rbv656YK96AAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="auditoriaTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>518, 17</value>
+  </metadata>
+  <metadata name="auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>395, 54</value>
   </metadata>
 </root>

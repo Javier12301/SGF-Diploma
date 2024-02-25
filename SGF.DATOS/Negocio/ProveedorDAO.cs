@@ -318,9 +318,6 @@ namespace SGF.DATOS.Negocio
             return oProveedor;
 
         }
-
-
-
         // Obtener por ID
     }
 }

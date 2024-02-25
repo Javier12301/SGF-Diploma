@@ -89,5 +89,32 @@ namespace SGF.NEGOCIO.Negocio
                 throw new ArgumentNullException("Se ha producido un error: el campo de compras no puede estár vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
             }
         }
+
+        // Listar cantidad comprada por proveedor
+        public DataTable ListarCantidadCompradaPorProveedor()
+        {
+            DataTable dt = CompraDAO.ListarCantidadCompradaD();
+            if (dt != null)
+            {
+                return dt;
+            }
+            else
+            {
+                throw new Exception("Se ha producido un error al listar el reporte, contacte con el administrador para que solucione este problema.");
+            }
+        }      
+
+        public DataTable ListarGastoTotal()
+        {
+            DataTable dt = CompraDAO.ListarGastoTotalD();
+            if (dt != null)
+            {
+                return dt;
+            }
+            else
+            {
+                throw new Exception("Se ha producido un error al listar el reporte, contacte con el administrador para que solucione este problema.");
+            }
+        }
     }
 }

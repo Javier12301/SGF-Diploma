@@ -1,5 +1,6 @@
 ﻿using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Inventario;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -72,6 +73,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void abrirFormularioHijo(Form formularioHijo, Button btnSender)
         {
+            Cursor.Current = Cursors.WaitCursor;
             // Resaltamos el botón activado
             activarBoton(btnSender);
 
@@ -92,12 +94,13 @@ namespace SGF.PRESENTACION.formPrincipales
 
             // Abrimos el formulario
             formularioHijo.Show();
+            Cursor.Current = Cursors.Default;
         }
 
 
         private void btnEntradas_Click(object sender, EventArgs e)
         {
-
+            abrirFormularioHijo(new formReporteInventario(), btnInventario);
         }
 
         private void btnExistencias_Click(object sender, EventArgs e)

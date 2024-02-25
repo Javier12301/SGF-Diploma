@@ -37,6 +37,7 @@
             this.tHorayFecha = new System.Windows.Forms.Timer(this.components);
             this.tsSuperior = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnPrincipal = new System.Windows.Forms.ToolStripButton();
             this.btnVentas = new System.Windows.Forms.ToolStripButton();
             this.btnProductos = new System.Windows.Forms.ToolStripButton();
             this.btnProveedor = new System.Windows.Forms.ToolStripButton();
@@ -130,6 +131,7 @@
             this.tsSuperior.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsSuperior.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
+            this.btnPrincipal,
             this.btnVentas,
             this.btnProductos,
             this.btnProveedor,
@@ -148,6 +150,22 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
+            // 
+            // btnPrincipal
+            // 
+            this.btnPrincipal.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrincipal.ForeColor = System.Drawing.Color.Black;
+            this.btnPrincipal.Image = ((System.Drawing.Image)(resources.GetObject("btnPrincipal.Image")));
+            this.btnPrincipal.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnPrincipal.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnPrincipal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPrincipal.Name = "btnPrincipal";
+            this.btnPrincipal.Size = new System.Drawing.Size(67, 51);
+            this.btnPrincipal.Tag = "Dashboard";
+            this.btnPrincipal.Text = "Principal";
+            this.btnPrincipal.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPrincipal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnPrincipal.Click += new System.EventHandler(this.btnPrincipal_Click);
             // 
             // btnVentas
             // 
@@ -379,5 +397,6 @@
         private System.Windows.Forms.ToolStripButton btnReportes;
         private System.Windows.Forms.ToolStripButton btnAjustes;
         private System.Windows.Forms.ToolStripButton btnLogOut;
+        private System.Windows.Forms.ToolStripButton btnPrincipal;
     }
 }

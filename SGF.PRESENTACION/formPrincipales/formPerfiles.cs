@@ -95,6 +95,7 @@ namespace SGF.PRESENTACION.formPrincipales
         private void abrirFormularioHijo(Form formularioHijo, Button btnSender)
         {
             // Resaltamos el botón activado
+            Cursor.Current = Cursors.WaitCursor;
             activarBoton(btnSender);
 
             // Si hay un formulario abierto, lo cerramos
@@ -114,6 +115,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
             // Abrimos el formulario
             formularioHijo.Show();
+            Cursor.Current = Cursors.Default;
         }
 
         private void btnUsuarios_Click(object sender, EventArgs e)

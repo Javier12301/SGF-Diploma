@@ -20,10 +20,12 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         List<Auditoria> listaAuditoria;
         private Permiso permisoDeUsuario;
 
+        private bool graficoActivo { get; set; }
         public formAuditoria()
         {
             InitializeComponent();
             listaAuditoria = new List<Auditoria>();
+            graficoActivo = false;
         }
 
         private void formAuditoria_Load(object sender, EventArgs e)
@@ -32,6 +34,33 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             cargarLista();
             cargarFiltros();
             cargarPermisos();
+            AlternarContainer();
+        }
+
+        private void AlternarContainer()
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                if (graficoActivo)
+                {
+                    tlpContainer.ColumnCount = 2;
+                    filtrarGrafico();
+                }
+                else
+                {
+                    tlpContainer.ColumnCount = 1;
+                }
+                graficoActivo = !graficoActivo;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void cargarPermisos()
@@ -43,7 +72,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         // Manejo de filtros
         private void cargarLista()
         {
-            if(txtBuscar.Text != string.Empty || cmbFiltroBuscar.SelectedIndex > 0 || cmbFiltroMovimiento.SelectedIndex > 0 || cmbFiltroUsuario.SelectedIndex > 0 )
+            if (txtBuscar.Text != string.Empty || cmbFiltroBuscar.SelectedIndex > 0 || cmbFiltroMovimiento.SelectedIndex > 0 || cmbFiltroUsuario.SelectedIndex > 0)
             {
                 filtrarLista();
             }
@@ -51,17 +80,38 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             {
                 this.auditoriaTableAdapter.Fill(this.farmaciaDatosDataSet.Auditoria);
             }
+            filtrarGrafico();
         }
 
         private void filtrarLista()
         {
-            if(cmbFiltroBuscar.SelectedIndex == 0 && cmbFiltroMovimiento.SelectedIndex == 0 && cmbFiltroUsuario.SelectedIndex == 0 && string.IsNullOrEmpty(txtBuscar.Text))
+            if (cmbFiltroBuscar.SelectedIndex == 0 && cmbFiltroMovimiento.SelectedIndex == 0 && cmbFiltroUsuario.SelectedIndex == 0 && string.IsNullOrEmpty(txtBuscar.Text))
             {
                 this.auditoriaTableAdapter.Fill(this.farmaciaDatosDataSet.Auditoria);
             }
             else
             {
                 this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
+            }
+            filtrarGrafico();
+        }
+
+
+        private void filtrarGrafico()
+        {
+            
+            this.auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter.Fill(this.reportes.Auditoria_Reporte_ResumenMovimientos_PorAño, cmbFiltroUsuario.Text, dtpInicio.Value, dtpFin.Value);
+        }
+
+        private void btnGrafico_Click(object sender, EventArgs e)
+        {
+            if (permisoDeUsuario.Grafico)
+            {
+                AlternarContainer();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos para ver el gráfico de auditoria.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -88,10 +138,10 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
 
             // Filtro de movimiento
             cmbFiltroMovimiento.Items.Add("Todos");
-            foreach(var lista in listaAuditoria)
+            foreach (var lista in listaAuditoria)
             {
                 // Comprobar que no exista el movimiento en el combobox
-                if(!cmbFiltroMovimiento.Items.Contains(lista.Movimiento))
+                if (!cmbFiltroMovimiento.Items.Contains(lista.Movimiento))
                 {
                     cmbFiltroMovimiento.Items.Add(lista.Movimiento);
                 }
@@ -100,16 +150,16 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
 
             // Filtro de Nombre Usuario
             cmbFiltroUsuario.Items.Add("Todos");
-            foreach(var lista in listaAuditoria)
+            foreach (var lista in listaAuditoria)
             {
                 // Comprobar que no exista el movimiento en el combobox
-                if(!cmbFiltroUsuario.Items.Contains(lista.NombreUsuario))
+                if (!cmbFiltroUsuario.Items.Contains(lista.NombreUsuario))
                 {
                     cmbFiltroUsuario.Items.Add(lista.NombreUsuario);
                 }
             }
             cmbFiltroUsuario.SelectedIndex = 0;
-            
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -134,7 +184,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
 
         private void dtpFin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar == (char)Keys.Enter)
             {
                 this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
             }
@@ -159,11 +209,6 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de usuarios.");
             }
-        }
-
-        private void btnBuscar_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -42,6 +42,7 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 cargarNegocio();
                 cargarSesion();
+                abrirFormularioHijo(new formDashboard(), btnPrincipal);
             }
             catch(Exception ex)
             {
@@ -93,6 +94,8 @@ namespace SGF.PRESENTACION.formPrincipales
             }
             btnLogOut.Enabled = true;
             btnLogOut.Visible = true;
+            btnPrincipal.Enabled = true;
+            btnPrincipal.Visible = true;
         }
 
 
@@ -155,6 +158,11 @@ namespace SGF.PRESENTACION.formPrincipales
         }
 
         // Configuramos la barra de navegación
+        private void btnPrincipal_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new formDashboard(), btnPrincipal);
+        }
+
         private void btnVentas_Click(object sender, EventArgs e)
         {
             abrirFormularioHijo(new formVentas(), btnVentas);

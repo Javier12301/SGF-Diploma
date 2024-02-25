@@ -190,13 +190,13 @@ namespace SGF.PRESENTACION.formModales.Salida_inventario
             decimal total = 0;
             foreach (DataGridViewRow row in dgvDetallesSalidas.Rows)
             {
-                filas.Append("<tr>");
-                filas.Append("<td>" + row.Cells["dgvcCodigoBarras"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcNombreProducto"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcProveedor"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcCategoria"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcCantidad"].Value.ToString() + "</td>");
-                filas.Append("</tr>");
+                filas.AppendLine("<tr>");
+                filas.AppendLine("<td>" + row.Cells["dgvcCodigoBarras"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcNombreProducto"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcProveedor"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcCategoria"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcCantidad"].Value.ToString() + "</td>");
+                filas.AppendLine("</tr>");
                 total += int.Parse(row.Cells["dgvcCantidad"].Value.ToString());
             }
 

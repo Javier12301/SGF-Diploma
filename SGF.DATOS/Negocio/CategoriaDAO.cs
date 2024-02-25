@@ -391,5 +391,30 @@ namespace SGF.DATOS.Negocio
             }
             return oCategoria;
         }
+
+        // Obtener categorías que tienen productos asignados
+        public static int ConteoCategoriasConProductosD()
+        {
+            int conteo = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(DISTINCT C.CategoriaID) FROM Categoria C");
+                    query.AppendLine("LEFT JOIN Producto P ON C.CategoriaID = P.CategoriaID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        conteo = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el conteo de categorías con productos asignados, contactar con el administrador del sistema si el error persiste.");
+                }
+            }
+            return conteo;
+        }
     }
 }

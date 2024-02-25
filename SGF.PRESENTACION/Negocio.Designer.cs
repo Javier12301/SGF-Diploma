@@ -11118,7 +11118,7 @@ SELECT DetalleVentaID, VentaID, ProductoID, PrecioVenta, Cantidad, SubTotal, Fec
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = @"SELECT 
@@ -11212,6 +11212,52 @@ FROM
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroEstado", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaDesde", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaVencimiento", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaHasta", global::System.Data.SqlDbType.Date, 3, global::System.Data.ParameterDirection.Input, 0, 0, "FechaVencimiento", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = @"SELECT 
+    P.ProductoID, 
+    P.CodigoBarras, 
+    P.Nombre, 
+    C.Nombre AS Categoria, 
+    Pr.RazonSocial AS Proveedor, 
+    P.PrecioCompra, 
+    P.PrecioVenta, 
+    COALESCE(P.NumeroLote, '-') AS NumeroLote, 
+    CASE 
+        WHEN P.FechaVencimiento IS NULL THEN '-'
+        ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23)
+    END AS FechaVencimiento,
+    P.Refrigerado, 
+    P.BajoReceta, 
+    P.Stock, 
+    P.CantidadMinima, 
+    P.TipoProducto, 
+    P.Estado 
+FROM 
+    dbo.Producto P
+    INNER JOIN dbo.Categoria C ON P.CategoriaID = C.CategoriaID
+    INNER JOIN dbo.Proveedor Pr ON P.ProveedorID = Pr.ProveedorID
+WHERE
+    (@FiltroTipoProducto = 'Todos' OR P.TipoProducto = @FiltroTipoProducto)
+    AND (@FiltroCategoria = 'Todos' OR C.Nombre = @FiltroCategoria)
+    AND (@FiltroProveedor = 'Todos' OR Pr.RazonSocial = @FiltroProveedor)
+    AND (
+        @FiltroEstado = 'Todos' OR 
+        (P.Estado = 1 AND @FiltroEstado = 'Activo') OR 
+        (P.Estado = 0 AND @FiltroEstado = 'Inactivo')
+    )
+    AND (
+        @FiltroExistencias = 'Todos' OR 
+        (@FiltroExistencias = 'Con existencia' AND P.Stock > 0) OR 
+        (@FiltroExistencias = 'Sin existencia' AND P.Stock <= 0)
+    );
+";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroTipoProducto", global::System.Data.SqlDbType.VarChar, 20, global::System.Data.ParameterDirection.Input, 0, 0, "TipoProducto", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroCategoria", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "Categoria", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroProveedor", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Proveedor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroEstado", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroExistencias", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11460,6 +11506,90 @@ FROM
             }
             else {
                 this.Adapter.SelectCommand.Parameters[7].Value = ((string)(FechaHasta));
+            }
+            Negocio.ProductoDataTable dataTable = new Negocio.ProductoDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FiltrarReporteExistencia(Negocio.ProductoDataTable dataTable, string FiltroTipoProducto, string FiltroCategoria, string FiltroProveedor, string FiltroEstado, string FiltroExistencias) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((FiltroTipoProducto == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroTipoProducto));
+            }
+            if ((FiltroCategoria == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FiltroCategoria));
+            }
+            if ((FiltroProveedor == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroProveedor));
+            }
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(FiltroEstado));
+            }
+            if ((FiltroExistencias == null)) {
+                throw new global::System.ArgumentNullException("FiltroExistencias");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((string)(FiltroExistencias));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual Negocio.ProductoDataTable GetDataBy2(string FiltroTipoProducto, string FiltroCategoria, string FiltroProveedor, string FiltroEstado, string FiltroExistencias) {
+            this.Adapter.SelectCommand = this.CommandCollection[3];
+            if ((FiltroTipoProducto == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroTipoProducto));
+            }
+            if ((FiltroCategoria == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(FiltroCategoria));
+            }
+            if ((FiltroProveedor == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(FiltroProveedor));
+            }
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[3].Value = ((string)(FiltroEstado));
+            }
+            if ((FiltroExistencias == null)) {
+                throw new global::System.ArgumentNullException("FiltroExistencias");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[4].Value = ((string)(FiltroExistencias));
             }
             Negocio.ProductoDataTable dataTable = new Negocio.ProductoDataTable();
             this.Adapter.Fill(dataTable);

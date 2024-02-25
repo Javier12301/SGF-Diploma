@@ -115,6 +115,19 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        public List<Proveedor> ObtenerProveedoresExistentes()
+        {
+            List<Proveedor> listaProveedores = ProductoDAO.ProveedoresExistentes();
+            if(listaProveedores != null)
+            {
+                return listaProveedores;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener los proveedores existentes. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
         public bool ExisteCodigo(string codigo)
         {
             bool existeCodigo = ProductoDAO.ExisteCodigoD(codigo);
@@ -125,6 +138,12 @@ namespace SGF.NEGOCIO.Negocio
         {
             bool existeProducto = ProductoDAO.ExisteProductoD(nombre);
             return existeProducto;
+        }
+
+        public int ExistenciaDeProducto(string tipoProducto)
+        {
+            int existencia = ProductoDAO.ExistenciaProductosPorTipoProductoD(tipoProducto);
+            return existencia;
         }
 
     }

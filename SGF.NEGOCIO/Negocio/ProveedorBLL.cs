@@ -159,5 +159,20 @@ namespace SGF.NEGOCIO.Negocio
                 throw new Exception("Ocurrió un error al intentar obtener el proveedor. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
             }
         }
+
+        // conteo de compras realizadas usando controladora proveedor a manejo de datos de CompraDao
+        public int ConteoComprasRealizadas(bool estado)
+        {
+            int estadoCompra = estado ? 1 : 0;
+            int conteo = CompraDAO.ConteoComprasRealizadasD(estadoCompra);
+            if (conteo >= 0)
+            {
+                return conteo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el conteo de compras realizadas. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
     }
 }

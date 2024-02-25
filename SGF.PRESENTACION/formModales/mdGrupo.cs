@@ -590,6 +590,13 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show("¿Está seguro que desea salir del formulario? Los cambios no guardados se perderán.", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (respuesta == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }

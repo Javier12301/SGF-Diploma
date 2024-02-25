@@ -167,5 +167,14 @@ namespace SGF.NEGOCIO.Negocio
                 throw new Exception("Ocurrió un error inesperado al intentar obtener la categoría, contactar con el administrador del sistema si el error persiste.");
             }
         }
+
+        // Conteo categoria con productos
+        public int ConteoCategoriasConProductos()
+        {
+            int conteo = CategoriaDAO.ConteoCategoriasConProductosD();
+            return conteo;
+        }
+
+
     }
 }

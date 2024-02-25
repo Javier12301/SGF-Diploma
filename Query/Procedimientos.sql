@@ -1,8 +1,31 @@
 use FarmaciaDatos
 Go
 
+-- Dashboard
+SELECT 
+    ProductoID,
+    CodigoBarras,
+    Nombre,
+    CategoriaID,
+    ProveedorID,
+    PrecioCompra,
+    PrecioVenta,
+    NumeroLote,
+    FechaVencimiento,
+    Refrigerado,
+    BajoReceta,
+    Stock,
+    CantidadMinima,
+    TipoProducto,
+    Estado
+FROM 
+    Producto
+WHERE 
+    Estado = 1
+    AND FechaVencimiento BETWEEN GETDATE() AND DATEADD(MONTH, 5, GETDATE()) 
+ORDER BY 
+    FechaVencimiento ASC;
 
-SELECT * FROM Registro
 
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
@@ -104,11 +127,11 @@ GO
 
 -- Filtrar Auditoria
 DECLARE @FiltroUsuario NVARCHAR(255) = 'Todos'; 
-DECLARE @FiltroMovimiento NVARCHAR(255) = 'Alta'; 
+DECLARE @FiltroMovimiento NVARCHAR(255) = 'Todos'; 
 DECLARE @FiltroBuscar NVARCHAR(255) = 'Todo'; 
 DECLARE @Buscar NVARCHAR(255) = ''; 
-DECLARE @FechaInicio DATE = '2022-01-09'; 
-DECLARE @FechaFin DATE = '2024 /01 /15'; 
+DECLARE @FechaInicio DATE = '2022/01/09'; 
+DECLARE @FechaFin DATE = '2024/03/15'; 
 
 SELECT *
 FROM Auditoria
@@ -399,6 +422,7 @@ WHERE
     );
 
 
+
 -- Filtro de Registro
 SELECT 
     R.RegistrosID, 
@@ -524,51 +548,60 @@ WHERE M.Descripcion = @modulo;
 
 
 SELECT * FROM Modulo
-WHERE Descripcion = 'formUsuarios'
+WHERE Descripcion = 'formUsuarios';
+
+-- REPORTES
+-- Productos con Mayor Cantidad
+SELECT TOP (@Filas)
+    Producto.ProductoID,
+    Producto.CodigoBarras AS Codigo,
+    Producto.NumeroLote AS Lote,
+    Categoria.Nombre AS Categoria,
+    Proveedor.RazonSocial AS Proveedor,
+    Producto.Nombre, 
+    Producto.Stock AS Cantidad,
+    Producto.CantidadMinima
+FROM 
+    Producto
+INNER JOIN
+    Categoria ON Producto.CategoriaID = Categoria.CategoriaID
+INNER JOIN
+    Proveedor ON Producto.ProveedorID = Proveedor.ProveedorID
+ORDER BY 
+    Cantidad DESC;
+
+-- Productos más comprados
+SELECT 
+    Producto.Nombre,
+    SUM(Detalle_Compra.Cantidad) AS CantidadComprada
+FROM 
+    Producto
+INNER JOIN
+    Detalle_Compra ON Producto.ProductoID = Detalle_Compra.ProductoID
+GROUP BY 
+    Producto.Nombre;
 
 
--- 
+DECLARE @FiltroUsuario NVARCHAR(255) = 'Admin'; -- Reemplaza 'Todos' con el nombre de usuario que quieras filtrar
+DECLARE @FechaInicio DATE = '2022-01-09'; 
+DECLARE @FechaFin DATE = '2024-02-20'; 
 
-
-
--- Obtener los permisos 
---CREATE PROC mds_ObtenerPermisos(
---@UsuarioID int
---)
---as
---begin
---SELECT 
---    (
---        SELECT vistaMenu.NombreModulo,
---            (
---                SELECT op.Descripcion
---                FROM Permiso p
---                JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
---                JOIN Accion op ON op.AccionID = p.AccionID
---                JOIN Modulo M ON M.ModuloID = op.ModuloID
---                JOIN Usuario U ON U.GrupoID = p.GrupoID AND p.Permitido = 1
---                WHERE U.UsuarioID = us.UsuarioID AND op.ModuloID = vistaMenu.ModuloID
---                FOR XML PATH ('Accion'), TYPE
---            ) AS 'DetalleAcciones' 
---        FROM
---        (
---            SELECT DISTINCT M.* 
---            FROM Permiso p
---            JOIN Grupo Gr ON Gr.GrupoID = p.GrupoID
---            JOIN Accion op ON op.AccionID = p.AccionID
---            JOIN Modulo M ON M.ModuloID = op.ModuloID
---            JOIN Usuario U ON U.GrupoID = p.GrupoID AND p.Permitido = 1
---            WHERE U.UsuarioID = us.UsuarioID
---        ) AS vistaMenu
---        FOR XML PATH ('Modulo'), TYPE
---    ) AS 'DetalleModulo'
---FROM Usuario us
---WHERE us.UsuarioID = 1
---FOR XML PATH(''), ROOT('Permiso')
---end
-
---exec mds_ObtenerPermisos 1
---go
-
-
-
+SELECT
+    Movimiento,
+    COUNT(*) as Cantidad
+FROM 
+    Auditoria
+WHERE
+    (
+        (@FiltroUsuario = 'Todos' OR NombreUsuario = @FiltroUsuario)
+    )
+    AND
+    (
+        (@FechaInicio IS NULL OR FechayHora >= @FechaInicio)
+        AND
+        (@FechaFin IS NULL OR FechayHora <= @FechaFin)
+    )
+GROUP BY 
+    Movimiento
+ORDER BY 
+    Cantidad DESC;

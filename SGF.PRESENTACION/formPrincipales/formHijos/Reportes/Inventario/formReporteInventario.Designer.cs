@@ -30,25 +30,34 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formReporteInventario));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlPadreReporteInventario = new System.Windows.Forms.Panel();
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnExistencias = new System.Windows.Forms.Button();
-            this.btnModificarP = new System.Windows.Forms.Button();
-            this.btnEliminarP = new System.Windows.Forms.Button();
-            this.btnExportarP = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnEntradas = new System.Windows.Forms.Button();
+            this.btnMedicamentos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.pnlPadreReporteInventario);
             this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1081, 360);
             this.panel1.TabIndex = 1;
+            // 
+            // pnlPadreReporteInventario
+            // 
+            this.pnlPadreReporteInventario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPadreReporteInventario.Location = new System.Drawing.Point(0, 70);
+            this.pnlPadreReporteInventario.Name = "pnlPadreReporteInventario";
+            this.pnlPadreReporteInventario.Size = new System.Drawing.Size(1081, 290);
+            this.pnlPadreReporteInventario.TabIndex = 108;
             // 
             // flpContenedorBotones
             // 
@@ -57,13 +66,12 @@
             this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpContenedorBotones.Controls.Add(this.btnExistencias);
-            this.flpContenedorBotones.Controls.Add(this.btnModificarP);
-            this.flpContenedorBotones.Controls.Add(this.btnEliminarP);
-            this.flpContenedorBotones.Controls.Add(this.btnExportarP);
+            this.flpContenedorBotones.Controls.Add(this.btnEntradas);
+            this.flpContenedorBotones.Controls.Add(this.btnMedicamentos);
             this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
             this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
             this.flpContenedorBotones.Name = "flpContenedorBotones";
-            this.flpContenedorBotones.Size = new System.Drawing.Size(833, 68);
+            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 62);
             this.flpContenedorBotones.TabIndex = 107;
             // 
             // btnExistencias
@@ -78,77 +86,52 @@
             this.btnExistencias.Location = new System.Drawing.Point(4, 4);
             this.btnExistencias.Margin = new System.Windows.Forms.Padding(4);
             this.btnExistencias.Name = "btnExistencias";
-            this.btnExistencias.Size = new System.Drawing.Size(112, 57);
+            this.btnExistencias.Size = new System.Drawing.Size(118, 54);
             this.btnExistencias.TabIndex = 9;
             this.btnExistencias.Tag = "Existencias de inventario";
             this.btnExistencias.Text = "Existencias";
             this.btnExistencias.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnExistencias.UseVisualStyleBackColor = false;
+            this.btnExistencias.Click += new System.EventHandler(this.btnExistencias_Click);
             // 
-            // btnModificarP
+            // btnEntradas
             // 
-            this.btnModificarP.BackColor = System.Drawing.Color.White;
-            this.btnModificarP.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnModificarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificarP.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificarP.ForeColor = System.Drawing.Color.Black;
-            this.btnModificarP.Image = ((System.Drawing.Image)(resources.GetObject("btnModificarP.Image")));
-            this.btnModificarP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnModificarP.Location = new System.Drawing.Point(124, 4);
-            this.btnModificarP.Margin = new System.Windows.Forms.Padding(4);
-            this.btnModificarP.Name = "btnModificarP";
-            this.btnModificarP.Size = new System.Drawing.Size(132, 57);
-            this.btnModificarP.TabIndex = 10;
-            this.btnModificarP.Tag = "Modificar";
-            this.btnModificarP.Text = "Entradas de inventario";
-            this.btnModificarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnModificarP.UseVisualStyleBackColor = false;
+            this.btnEntradas.BackColor = System.Drawing.Color.White;
+            this.btnEntradas.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntradas.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntradas.ForeColor = System.Drawing.Color.Black;
+            this.btnEntradas.Image = ((System.Drawing.Image)(resources.GetObject("btnEntradas.Image")));
+            this.btnEntradas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnEntradas.Location = new System.Drawing.Point(130, 4);
+            this.btnEntradas.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEntradas.Name = "btnEntradas";
+            this.btnEntradas.Size = new System.Drawing.Size(133, 54);
+            this.btnEntradas.TabIndex = 10;
+            this.btnEntradas.Tag = "Resumen de inventario";
+            this.btnEntradas.Text = "Resumen de inventario";
+            this.btnEntradas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnEntradas.UseVisualStyleBackColor = false;
+            this.btnEntradas.Click += new System.EventHandler(this.btnModificarP_Click);
             // 
-            // btnEliminarP
+            // btnMedicamentos
             // 
-            this.btnEliminarP.BackColor = System.Drawing.Color.White;
-            this.btnEliminarP.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnEliminarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarP.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminarP.ForeColor = System.Drawing.Color.Black;
-            this.btnEliminarP.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminarP.Image")));
-            this.btnEliminarP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEliminarP.Location = new System.Drawing.Point(264, 4);
-            this.btnEliminarP.Margin = new System.Windows.Forms.Padding(4);
-            this.btnEliminarP.Name = "btnEliminarP";
-            this.btnEliminarP.Size = new System.Drawing.Size(132, 57);
-            this.btnEliminarP.TabIndex = 13;
-            this.btnEliminarP.Tag = "Baja";
-            this.btnEliminarP.Text = "Salidas de inventario";
-            this.btnEliminarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnEliminarP.UseVisualStyleBackColor = false;
-            // 
-            // btnExportarP
-            // 
-            this.btnExportarP.BackColor = System.Drawing.Color.White;
-            this.btnExportarP.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnExportarP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportarP.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportarP.ForeColor = System.Drawing.Color.Black;
-            this.btnExportarP.Image = ((System.Drawing.Image)(resources.GetObject("btnExportarP.Image")));
-            this.btnExportarP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExportarP.Location = new System.Drawing.Point(404, 4);
-            this.btnExportarP.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportarP.Name = "btnExportarP";
-            this.btnExportarP.Size = new System.Drawing.Size(148, 57);
-            this.btnExportarP.TabIndex = 14;
-            this.btnExportarP.Tag = "Exportar";
-            this.btnExportarP.Text = "Medicamentos";
-            this.btnExportarP.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportarP.UseVisualStyleBackColor = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 73);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1081, 287);
-            this.panel2.TabIndex = 108;
+            this.btnMedicamentos.BackColor = System.Drawing.Color.White;
+            this.btnMedicamentos.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnMedicamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMedicamentos.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMedicamentos.ForeColor = System.Drawing.Color.Black;
+            this.btnMedicamentos.Image = ((System.Drawing.Image)(resources.GetObject("btnMedicamentos.Image")));
+            this.btnMedicamentos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnMedicamentos.Location = new System.Drawing.Point(271, 4);
+            this.btnMedicamentos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnMedicamentos.Name = "btnMedicamentos";
+            this.btnMedicamentos.Size = new System.Drawing.Size(118, 54);
+            this.btnMedicamentos.TabIndex = 14;
+            this.btnMedicamentos.Tag = "Medicamentos por vencer";
+            this.btnMedicamentos.Text = "Medicamentos";
+            this.btnMedicamentos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnMedicamentos.UseVisualStyleBackColor = false;
             // 
             // formReporteInventario
             // 
@@ -159,6 +142,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formReporteInventario";
             this.Text = "formReporteInventario";
+            this.Load += new System.EventHandler(this.formReporteInventario_Load);
             this.panel1.ResumeLayout(false);
             this.flpContenedorBotones.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -170,9 +154,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnExistencias;
-        private System.Windows.Forms.Button btnModificarP;
-        private System.Windows.Forms.Button btnEliminarP;
-        private System.Windows.Forms.Button btnExportarP;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnEntradas;
+        private System.Windows.Forms.Button btnMedicamentos;
+        private System.Windows.Forms.Panel pnlPadreReporteInventario;
     }
 }

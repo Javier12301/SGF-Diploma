@@ -346,6 +346,42 @@ namespace SGF.DATOS.Negocio
             return oLista;
         }
 
+        // Obtener proveedores existentes
+        public static List<Proveedor> ProveedoresExistentes()
+        {
+            List<Proveedor> oLista = new List<Proveedor>();
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT DISTINCT ProveedorID,");
+                    query.AppendLine("(SELECT TOP 1 RazonSocial FROM Proveedor WHERE ProveedorID = P.ProveedorID) AS Proveedor");
+                    query.AppendLine("FROM Producto P");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Proveedor oProveedor = new Proveedor();
+                                oProveedor.ProveedorID = Convert.ToInt32(reader["ProveedorID"]);
+                                oProveedor.RazonSocial = reader["Proveedor"].ToString();
+                                oLista.Add(oProveedor);
+                            }
+                        }
+                    }
+                }
+                                
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            return oLista;
+        }
+
         // Existencia de código
         public static bool ExisteCodigoD(string codigo)
         {
@@ -398,5 +434,32 @@ namespace SGF.DATOS.Negocio
             }
             return existe;
         }
+
+        public static int ExistenciaProductosPorTipoProductoD(string tipoProducto)
+        {
+            int existencia = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Producto");
+                    query.AppendLine("WHERE TipoProducto = @tipoProducto");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@tipoProducto", tipoProducto);
+                        oContexto.Open();
+                        existencia = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al verificar si existe el producto, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return existencia;
+        }
+
     }
 }

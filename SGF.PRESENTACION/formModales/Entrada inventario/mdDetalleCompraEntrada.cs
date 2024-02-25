@@ -140,13 +140,13 @@ namespace SGF.PRESENTACION.formModales
             decimal total = 0;
             foreach (DataGridViewRow row in dgvDetallesCompras.Rows)
             {
-                filas.Append("<tr>");
-                filas.Append("<td>" + row.Cells["dgvcCodigo"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcProducto"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcCantidadComprada"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcPrecioCompra"].Value.ToString() + "</td>");
-                filas.Append("<td>" + row.Cells["dgvcSubTotal"].Value.ToString() + "</td>");
-                filas.Append("</tr>");
+                filas.AppendLine("<tr>");
+                filas.AppendLine("<td>" + row.Cells["dgvcCodigo"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcProducto"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcCantidadComprada"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcPrecioCompra"].Value.ToString() + "</td>");
+                filas.AppendLine("<td>" + row.Cells["dgvcSubTotal"].Value.ToString() + "</td>");
+                filas.AppendLine("</tr>");
                 total += decimal.Parse(row.Cells["dgvcSubTotal"].Value.ToString());
             }
             // transformar moneda usando los datos establecido del negocio
@@ -177,6 +177,7 @@ namespace SGF.PRESENTACION.formModales
                         else
                         {
                             guardar.FileName = "Detalle de compra " + oCompra.CompraID + " (Cancelada).pdf";
+                            paginaHTML = Properties.Resources.detalle_compra_cancelado;
                         }
                         paginaHTML = modificarPlantilla(paginaHTML);
 

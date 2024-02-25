@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Reportes" targetNamespace="http://tempuri.org/Reportes.xsd" xmlns:mstns="http://tempuri.org/Reportes.xsd" xmlns="http://tempuri.org/Reportes.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="FarmaciaDatosConexionTableAdapter" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="FarmaciaDatosConexionTableAdapter (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SGF.PRESENTACION.Properties.Settings.GlobalReference.Default.FarmaciaDatosConexionTableAdapter" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Producto_Reporte_VencimientoTempranoTableAdapter" GeneratorDataComponentClassName="Producto_Reporte_VencimientoTempranoTableAdapter" Name="Producto_Reporte_VencimientoTemprano" UserDataComponentName="Producto_Reporte_VencimientoTempranoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FarmaciaDatosConexionTableAdapter (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT 
+    P.ProductoID, 
+    P.CodigoBarras, 
+    P.Nombre, 
+    C.Nombre AS Categoria, 
+    Pr.RazonSocial AS Proveedor, 
+    P.PrecioCompra, 
+    P.PrecioVenta, 
+    COALESCE(P.NumeroLote, '-') AS NumeroLote, 
+    CASE 
+        WHEN P.FechaVencimiento IS NULL THEN '-'
+        ELSE CONVERT(VARCHAR, P.FechaVencimiento, 23)
+    END AS FechaVencimiento,
+    P.Refrigerado, 
+    P.BajoReceta, 
+    P.Stock, 
+    P.CantidadMinima, 
+    P.TipoProducto, 
+    P.Estado 
+FROM 
+    dbo.Producto P
+    INNER JOIN dbo.Categoria C ON P.CategoriaID = C.CategoriaID
+    INNER JOIN dbo.Proveedor Pr ON P.ProveedorID = Pr.ProveedorID
+WHERE 
+    P.Estado = 1 
+    AND P.FechaVencimiento BETWEEN GETDATE() AND DATEADD(MONTH, 5, GETDATE())
+ORDER BY 
+    P.FechaVencimiento ASC;
+</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProductoID" DataSetColumn="ProductoID" />
+              <Mapping SourceColumn="CodigoBarras" DataSetColumn="CodigoBarras" />
+              <Mapping SourceColumn="Nombre" DataSetColumn="Nombre" />
+              <Mapping SourceColumn="PrecioCompra" DataSetColumn="PrecioCompra" />
+              <Mapping SourceColumn="PrecioVenta" DataSetColumn="PrecioVenta" />
+              <Mapping SourceColumn="NumeroLote" DataSetColumn="NumeroLote" />
+              <Mapping SourceColumn="Refrigerado" DataSetColumn="Refrigerado" />
+              <Mapping SourceColumn="BajoReceta" DataSetColumn="BajoReceta" />
+              <Mapping SourceColumn="Stock" DataSetColumn="Stock" />
+              <Mapping SourceColumn="CantidadMinima" DataSetColumn="CantidadMinima" />
+              <Mapping SourceColumn="TipoProducto" DataSetColumn="TipoProducto" />
+              <Mapping SourceColumn="Estado" DataSetColumn="Estado" />
+              <Mapping SourceColumn="Categoria" DataSetColumn="Categoria" />
+              <Mapping SourceColumn="Proveedor" DataSetColumn="Proveedor" />
+              <Mapping SourceColumn="FechaVencimiento" DataSetColumn="FechaVencimiento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Producto_Reporte_MayorStockTableAdapter" GeneratorDataComponentClassName="Producto_Reporte_MayorStockTableAdapter" Name="Producto_Reporte_MayorStock" UserDataComponentName="Producto_Reporte_MayorStockTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FarmaciaDatosConexionTableAdapter (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT TOP (@Filas)
+    Producto.ProductoID,
+    Producto.CodigoBarras AS Codigo,
+    Producto.NumeroLote AS Lote,
+    Categoria.Nombre AS Categoria,
+    Proveedor.RazonSocial AS Proveedor,
+    Producto.Nombre, 
+    Producto.Stock AS Cantidad,
+    Producto.CantidadMinima
+FROM 
+    Producto
+INNER JOIN
+    Categoria ON Producto.CategoriaID = Categoria.CategoriaID
+INNER JOIN
+    Proveedor ON Producto.ProveedorID = Proveedor.ProveedorID
+ORDER BY 
+    Cantidad DESC;
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Filas" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Int32" Direction="Input" ParameterName="@Filas" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ProductoID" DataSetColumn="ProductoID" />
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Lote" DataSetColumn="Lote" />
+              <Mapping SourceColumn="Categoria" DataSetColumn="Categoria" />
+              <Mapping SourceColumn="Proveedor" DataSetColumn="Proveedor" />
+              <Mapping SourceColumn="Nombre" DataSetColumn="Nombre" />
+              <Mapping SourceColumn="Cantidad" DataSetColumn="Cantidad" />
+              <Mapping SourceColumn="CantidadMinima" DataSetColumn="CantidadMinima" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Producto_Reporte_MasCompradosTableAdapter" GeneratorDataComponentClassName="Producto_Reporte_MasCompradosTableAdapter" Name="Producto_Reporte_MasComprados" UserDataComponentName="Producto_Reporte_MasCompradosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FarmaciaDatosConexionTableAdapter (Settings)" DbObjectName="FarmaciaDatos.dbo.Producto" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT TOP (@Filas)
+    Producto.Nombre,
+    SUM(Detalle_Compra.Cantidad) AS CantidadComprada
+FROM 
+    Producto
+INNER JOIN
+    Detalle_Compra ON Producto.ProductoID = Detalle_Compra.ProductoID
+GROUP BY 
+    Producto.Nombre
+ORDER BY 
+    CantidadComprada DESC;</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Filas" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Int32" Direction="Input" ParameterName="@Filas" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Nombre" DataSetColumn="Nombre" />
+              <Mapping SourceColumn="CantidadComprada" DataSetColumn="CantidadComprada" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter" GeneratorDataComponentClassName="Auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter" Name="Auditoria_Reporte_ResumenMovimientos_PorAño" UserDataComponentName="Auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="FarmaciaDatosConexionTableAdapter (Settings)" DbObjectName="FarmaciaDatos.dbo.Auditoria" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT
+    Movimiento,
+    COUNT(*) as Cantidad
+FROM 
+    Auditoria
+WHERE
+    (
+        (@FiltroUsuario = 'Todos' OR NombreUsuario = @FiltroUsuario)
+    )
+    AND
+    (
+        (@FechaInicio IS NULL OR FechayHora &gt;= @FechaInicio)
+        AND
+        (@FechaFin IS NULL OR FechayHora &lt;= @FechaFin)
+    )
+GROUP BY 
+    Movimiento
+ORDER BY 
+    Cantidad DESC;</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="FiltroUsuario" ColumnName="NombreUsuario" DataSourceName="FarmaciaDatos.dbo.Auditoria" DataTypeServer="nvarchar(255)" DbType="String" Direction="Input" ParameterName="@FiltroUsuario" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="NombreUsuario" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="FechaInicio" ColumnName="FechayHora" DataSourceName="FarmaciaDatos.dbo.Auditoria" DataTypeServer="datetime" DbType="Date" Direction="Input" ParameterName="@FechaInicio" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="FechayHora" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="FechaFin" ColumnName="FechayHora" DataSourceName="FarmaciaDatos.dbo.Auditoria" DataTypeServer="datetime" DbType="Date" Direction="Input" ParameterName="@FechaFin" Precision="0" ProviderType="Date" Scale="0" Size="8" SourceColumn="FechayHora" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Movimiento" DataSetColumn="Movimiento" />
+              <Mapping SourceColumn="Cantidad" DataSetColumn="Cantidad" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Reportes" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Reportes" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="Reportes">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Producto_Reporte_VencimientoTemprano" msprop:Generator_RowEvHandlerName="Producto_Reporte_VencimientoTempranoRowChangeEventHandler" msprop:Generator_RowDeletedName="Producto_Reporte_VencimientoTempranoRowDeleted" msprop:Generator_RowDeletingName="Producto_Reporte_VencimientoTempranoRowDeleting" msprop:Generator_RowEvArgName="Producto_Reporte_VencimientoTempranoRowChangeEvent" msprop:Generator_TablePropName="Producto_Reporte_VencimientoTemprano" msprop:Generator_RowChangedName="Producto_Reporte_VencimientoTempranoRowChanged" msprop:Generator_UserTableName="Producto_Reporte_VencimientoTemprano" msprop:Generator_RowChangingName="Producto_Reporte_VencimientoTempranoRowChanging" msprop:Generator_RowClassName="Producto_Reporte_VencimientoTempranoRow" msprop:Generator_TableClassName="Producto_Reporte_VencimientoTempranoDataTable" msprop:Generator_TableVarName="tableProducto_Reporte_VencimientoTemprano">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductoID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="ProductoIDColumn" msprop:Generator_ColumnPropNameInRow="ProductoID" msprop:Generator_UserColumnName="ProductoID" msprop:Generator_ColumnVarNameInTable="columnProductoID" type="xs:int" />
+              <xs:element name="CodigoBarras" msprop:Generator_ColumnPropNameInTable="CodigoBarrasColumn" msprop:Generator_ColumnPropNameInRow="CodigoBarras" msprop:Generator_UserColumnName="CodigoBarras" msprop:Generator_ColumnVarNameInTable="columnCodigoBarras" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PrecioCompra" msprop:Generator_ColumnPropNameInTable="PrecioCompraColumn" msprop:Generator_ColumnPropNameInRow="PrecioCompra" msprop:Generator_UserColumnName="PrecioCompra" msprop:Generator_ColumnVarNameInTable="columnPrecioCompra" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PrecioVenta" msprop:Generator_ColumnPropNameInTable="PrecioVentaColumn" msprop:Generator_ColumnPropNameInRow="PrecioVenta" msprop:Generator_UserColumnName="PrecioVenta" msprop:Generator_ColumnVarNameInTable="columnPrecioVenta" type="xs:decimal" minOccurs="0" />
+              <xs:element name="NumeroLote" msprop:Generator_ColumnPropNameInTable="NumeroLoteColumn" msprop:Generator_ColumnPropNameInRow="NumeroLote" msprop:Generator_UserColumnName="NumeroLote" msprop:Generator_ColumnVarNameInTable="columnNumeroLote" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Refrigerado" msprop:Generator_ColumnPropNameInTable="RefrigeradoColumn" msprop:Generator_ColumnPropNameInRow="Refrigerado" msprop:Generator_UserColumnName="Refrigerado" msprop:Generator_ColumnVarNameInTable="columnRefrigerado" type="xs:boolean" minOccurs="0" />
+              <xs:element name="BajoReceta" msprop:Generator_ColumnPropNameInTable="BajoRecetaColumn" msprop:Generator_ColumnPropNameInRow="BajoReceta" msprop:Generator_UserColumnName="BajoReceta" msprop:Generator_ColumnVarNameInTable="columnBajoReceta" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Stock" msprop:Generator_ColumnPropNameInTable="StockColumn" msprop:Generator_ColumnPropNameInRow="Stock" msprop:Generator_UserColumnName="Stock" msprop:Generator_ColumnVarNameInTable="columnStock" type="xs:int" minOccurs="0" />
+              <xs:element name="CantidadMinima" msprop:Generator_ColumnPropNameInTable="CantidadMinimaColumn" msprop:Generator_ColumnPropNameInRow="CantidadMinima" msprop:Generator_UserColumnName="CantidadMinima" msprop:Generator_ColumnVarNameInTable="columnCantidadMinima" type="xs:int" minOccurs="0" />
+              <xs:element name="TipoProducto" msprop:Generator_ColumnPropNameInTable="TipoProductoColumn" msprop:Generator_ColumnPropNameInRow="TipoProducto" msprop:Generator_UserColumnName="TipoProducto" msprop:Generator_ColumnVarNameInTable="columnTipoProducto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Estado" msprop:Generator_ColumnPropNameInTable="EstadoColumn" msprop:Generator_ColumnPropNameInRow="Estado" msprop:Generator_UserColumnName="Estado" msprop:Generator_ColumnVarNameInTable="columnEstado" type="xs:boolean" minOccurs="0" />
+              <xs:element name="Categoria" msprop:Generator_ColumnPropNameInTable="CategoriaColumn" msprop:Generator_ColumnPropNameInRow="Categoria" msprop:Generator_UserColumnName="Categoria" msprop:Generator_ColumnVarNameInTable="columnCategoria" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_UserColumnName="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FechaVencimiento" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="FechaVencimientoColumn" msprop:Generator_ColumnPropNameInRow="FechaVencimiento" msprop:Generator_UserColumnName="FechaVencimiento" msprop:Generator_ColumnVarNameInTable="columnFechaVencimiento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Producto_Reporte_MayorStock" msprop:Generator_RowEvHandlerName="Producto_Reporte_MayorStockRowChangeEventHandler" msprop:Generator_RowDeletedName="Producto_Reporte_MayorStockRowDeleted" msprop:Generator_RowDeletingName="Producto_Reporte_MayorStockRowDeleting" msprop:Generator_RowEvArgName="Producto_Reporte_MayorStockRowChangeEvent" msprop:Generator_TablePropName="Producto_Reporte_MayorStock" msprop:Generator_RowChangedName="Producto_Reporte_MayorStockRowChanged" msprop:Generator_UserTableName="Producto_Reporte_MayorStock" msprop:Generator_RowChangingName="Producto_Reporte_MayorStockRowChanging" msprop:Generator_RowClassName="Producto_Reporte_MayorStockRow" msprop:Generator_TableClassName="Producto_Reporte_MayorStockDataTable" msprop:Generator_TableVarName="tableProducto_Reporte_MayorStock">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ProductoID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="ProductoIDColumn" msprop:Generator_ColumnPropNameInRow="ProductoID" msprop:Generator_UserColumnName="ProductoID" msprop:Generator_ColumnVarNameInTable="columnProductoID" type="xs:int" />
+              <xs:element name="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_UserColumnName="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Lote" msprop:Generator_ColumnPropNameInTable="LoteColumn" msprop:Generator_ColumnPropNameInRow="Lote" msprop:Generator_UserColumnName="Lote" msprop:Generator_ColumnVarNameInTable="columnLote" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Categoria" msprop:Generator_ColumnPropNameInTable="CategoriaColumn" msprop:Generator_ColumnPropNameInRow="Categoria" msprop:Generator_UserColumnName="Categoria" msprop:Generator_ColumnVarNameInTable="columnCategoria" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Proveedor" msprop:Generator_ColumnPropNameInTable="ProveedorColumn" msprop:Generator_ColumnPropNameInRow="Proveedor" msprop:Generator_UserColumnName="Proveedor" msprop:Generator_ColumnVarNameInTable="columnProveedor" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cantidad" msprop:Generator_ColumnPropNameInTable="CantidadColumn" msprop:Generator_ColumnPropNameInRow="Cantidad" msprop:Generator_UserColumnName="Cantidad" msprop:Generator_ColumnVarNameInTable="columnCantidad" type="xs:int" minOccurs="0" />
+              <xs:element name="CantidadMinima" msprop:Generator_ColumnPropNameInTable="CantidadMinimaColumn" msprop:Generator_ColumnPropNameInRow="CantidadMinima" msprop:Generator_UserColumnName="CantidadMinima" msprop:Generator_ColumnVarNameInTable="columnCantidadMinima" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Producto_Reporte_MasComprados" msprop:Generator_RowEvHandlerName="Producto_Reporte_MasCompradosRowChangeEventHandler" msprop:Generator_RowDeletedName="Producto_Reporte_MasCompradosRowDeleted" msprop:Generator_RowDeletingName="Producto_Reporte_MasCompradosRowDeleting" msprop:Generator_RowEvArgName="Producto_Reporte_MasCompradosRowChangeEvent" msprop:Generator_TablePropName="Producto_Reporte_MasComprados" msprop:Generator_RowChangedName="Producto_Reporte_MasCompradosRowChanged" msprop:Generator_UserTableName="Producto_Reporte_MasComprados" msprop:Generator_RowChangingName="Producto_Reporte_MasCompradosRowChanging" msprop:Generator_RowClassName="Producto_Reporte_MasCompradosRow" msprop:Generator_TableClassName="Producto_Reporte_MasCompradosDataTable" msprop:Generator_TableVarName="tableProducto_Reporte_MasComprados">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Nombre" msprop:Generator_ColumnPropNameInTable="NombreColumn" msprop:Generator_ColumnPropNameInRow="Nombre" msprop:Generator_UserColumnName="Nombre" msprop:Generator_ColumnVarNameInTable="columnNombre" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CantidadComprada" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInTable="CantidadCompradaColumn" msprop:Generator_ColumnPropNameInRow="CantidadComprada" msprop:Generator_UserColumnName="CantidadComprada" msprop:Generator_ColumnVarNameInTable="columnCantidadComprada" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Auditoria_Reporte_ResumenMovimientos_PorAño" msprop:Generator_RowEvHandlerName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowChangeEventHandler" msprop:Generator_RowDeletedName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowDeleted" msprop:Generator_RowDeletingName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowDeleting" msprop:Generator_RowEvArgName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowChangeEvent" msprop:Generator_TablePropName="Auditoria_Reporte_ResumenMovimientos_PorAño" msprop:Generator_RowChangedName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowChanged" msprop:Generator_UserTableName="Auditoria_Reporte_ResumenMovimientos_PorAño" msprop:Generator_RowChangingName="Auditoria_Reporte_ResumenMovimientos_PorAñoRowChanging" msprop:Generator_RowClassName="Auditoria_Reporte_ResumenMovimientos_PorAñoRow" msprop:Generator_TableClassName="Auditoria_Reporte_ResumenMovimientos_PorAñoDataTable" msprop:Generator_TableVarName="tableAuditoria_Reporte_ResumenMovimientos_PorAño">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Movimiento" msprop:Generator_ColumnPropNameInRow="Movimiento" msprop:Generator_ColumnPropNameInTable="MovimientoColumn" msprop:Generator_ColumnVarNameInTable="columnMovimiento" msprop:Generator_UserColumnName="Movimiento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cantidad" msdata:ReadOnly="true" msprop:Generator_ColumnPropNameInRow="Cantidad" msprop:Generator_ColumnPropNameInTable="CantidadColumn" msprop:Generator_ColumnVarNameInTable="columnCantidad" msprop:Generator_UserColumnName="Cantidad" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Producto_Reporte_VencimientoTemprano" />
+      <xs:field xpath="mstns:ProductoID" />
+    </xs:unique>
+    <xs:unique name="Producto_Reporte_MayorStock_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Producto_Reporte_MayorStock" />
+      <xs:field xpath="mstns:ProductoID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

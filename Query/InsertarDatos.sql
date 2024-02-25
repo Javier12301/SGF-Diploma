@@ -107,24 +107,29 @@ VALUES
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
     ('Existencias de inventario', 10),
-    ('Entradas de inventario', 10),
-    ('Salidas de inventario', 10),
-    ('Medicamentos por vencer', 10),
-    ('Exportar', 10);
+    ('Resumen de inventario', 10),
+    ('Exportar', 10),
+	('Imprimir', 10),
+	('Gráfico', 10);
 
 -- Insertar las acciones para el módulo formReporteVentas
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
     ('Ventas', 11),
     ('Ventas por clientes', 11),
-    ('Exportar', 11);
+    ('Exportar', 11),
+	('Imprimir', 11),
+	('Gráfico', 11);
+
 
 -- Insertar las acciones para el módulo formReporteClientes
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
     ('Pagos de clientes', 12),
     ('Cuentas por cobrar', 12),
-    ('Exportar', 12);
+    ('Exportar', 12),
+	('Imprimir', 12);
+
 
 -- Insertar las acciones para el módulo formAjustes
 INSERT INTO Accion(Descripcion, ModuloID)
@@ -160,7 +165,9 @@ VALUES
 -- Insertar las acciones para el módulo formAuditoria
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES ('Generar auditoria', 17),
+	   ('Gráfico', 17),
        ('Exportar', 17);
+
 
 -- Insertar las acciones para el módulo formMisDatos
 INSERT INTO Accion(Descripcion, ModuloID)

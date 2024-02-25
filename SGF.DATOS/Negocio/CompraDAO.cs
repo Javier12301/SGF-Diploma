@@ -121,7 +121,7 @@ namespace SGF.DATOS.Negocio
                 }
             }
             return productosID;
-        } 
+        }
 
         // Obtener cantidad de productos comprados usando ID de producto y ID de compra
         public static int ObtenerCantidadProductosComprados(int productoID, int compraID)
@@ -217,5 +217,90 @@ namespace SGF.DATOS.Negocio
             }
             return oCompra;
         }
+
+
+        // MANEJO DE DATOS UTILIZADO EN REPORTES
+        public static DataTable ListarCantidadCompradaD()
+        {
+            DataTable dt = new DataTable();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("SP_ReporteInventario_CantidadCompradaProveedor", oContexto))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener la cantidad comprada por proveedor, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return dt;
+        }
+
+        public static DataTable ListarGastoTotalD()
+        {
+            DataTable dt = new DataTable();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("SP_ReporteInventario_GastoTotal", oContexto))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        oContexto.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el gasto total, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return dt;
+        }
+        
+        // FIN MANEJO DE DATOS UTILIZADO EN REPORTES
+        
+        // Conteo de compras realizadas con estado activo
+        public static int ConteoComprasRealizadasD(int estadoCompra)
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(CompraID) FROM Compra WHERE Estado = @estadoCompra");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@estadoCompra", estadoCompra);
+                        oContexto.Open();
+                        object result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value)
+                        {
+                            conteo = Convert.ToInt32(result);
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al obtener el conteo de compras realizadas, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return conteo;
+        }
+
     }
 }

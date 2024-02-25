@@ -148,4 +148,13 @@
   <data name="detalle_compra" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Recursos\Plantillas\Inventario\detalle_compra.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="detalle_compra_cancelado" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\Plantillas\Inventario\detalle_compra_cancelado.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="reporte_existencias_inventario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\Plantillas\Reportes\reporte_existencias_inventario.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="reporte_productos_mayor_stock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Recursos\Plantillas\Reportes\reporte_productos_mayor_stock.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>
