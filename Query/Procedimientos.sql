@@ -1,7 +1,7 @@
 use FarmaciaDatos
 Go
 
--- Dashboard
+-- Dashboard medicamentos por vencer
 SELECT 
     ProductoID,
     CodigoBarras,
@@ -26,7 +26,7 @@ WHERE
 ORDER BY 
     FechaVencimiento ASC;
 
-
+	
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
 FROM Usuario U
@@ -125,9 +125,12 @@ WHERE
     );
 GO
 
--- Filtrar Auditoria
+SELECT * FROM Auditoria WHERE AuditoriaID = 4
+
+
 DECLARE @FiltroUsuario NVARCHAR(255) = 'Todos'; 
 DECLARE @FiltroMovimiento NVARCHAR(255) = 'Todos'; 
+DECLARE @FiltroModulo NVARCHAR(255) = 'Productos ';
 DECLARE @FiltroBuscar NVARCHAR(255) = 'Todo'; 
 DECLARE @Buscar NVARCHAR(255) = ''; 
 DECLARE @FechaInicio DATE = '2022/01/09'; 
@@ -142,6 +145,10 @@ WHERE
     AND
     (
         (@FiltroMovimiento = 'Todos' OR Movimiento = @FiltroMovimiento)
+    )
+    AND
+    (
+        (@FiltroModulo = 'Todos' OR Modulo = @FiltroModulo)
     )
     AND
     (
@@ -582,7 +589,7 @@ GROUP BY
     Producto.Nombre;
 
 
-DECLARE @FiltroUsuario NVARCHAR(255) = 'Admin'; -- Reemplaza 'Todos' con el nombre de usuario que quieras filtrar
+DECLARE @FiltroUsuario NVARCHAR(255) = 'Javier12301'; -- Reemplaza 'Todos' con el nombre de usuario que quieras filtrar
 DECLARE @FechaInicio DATE = '2022-01-09'; 
 DECLARE @FechaFin DATE = '2024-02-20'; 
 
@@ -605,3 +612,32 @@ GROUP BY
     Movimiento
 ORDER BY 
     Cantidad DESC;
+
+
+-- Clientes Filtros
+DECLARE @FiltroBuscarPor NVARCHAR(255) = 'Todos';
+DECLARE @Buscar NVARCHAR(255) = '';
+DECLARE @TipoDocumento NVARCHAR(50) = 'Todos';
+DECLARE @Estado NVARCHAR(50) = 'Todos';
+DECLARE @TipoCliente NVARCHAR(50) = 'Todos';
+
+SELECT C.*, TC.Descripcion AS TipoCliente
+FROM Cliente C
+INNER JOIN TipoCliente TC ON C.TipoClienteID = TC.TipoClienteID
+WHERE
+    (
+        (@FiltroBuscarPor = 'Todos' AND 
+        (
+            C.NombreCompleto LIKE '%' + @Buscar + '%' OR
+            C.Documento LIKE '%' + @Buscar + '%' OR
+            C.Correo LIKE '%' + @Buscar + '%' OR
+            C.Telefono LIKE '%' + @Buscar + '%'
+        ))
+        OR (@FiltroBuscarPor = 'Nombre' AND C.NombreCompleto LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Documento' AND C.Documento LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Correo' AND C.Correo LIKE '%' + @Buscar + '%')
+        OR (@FiltroBuscarPor = 'Telefono' AND C.Telefono LIKE '%' + @Buscar + '%')
+    )
+    AND (@TipoDocumento = 'Todos' OR C.TipoDocumento = @TipoDocumento)
+    AND (@Estado = 'Todos' OR (C.Estado = 1 AND @Estado = 'Activo') OR (C.Estado = 0 AND @Estado = 'Inactivo'))
+    AND (@TipoCliente = 'Todos' OR TC.Descripcion = @TipoCliente);

@@ -16,5 +16,18 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             InitializeComponent();
         }
+
+
+
+        // Formulario de clientes
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formVentas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

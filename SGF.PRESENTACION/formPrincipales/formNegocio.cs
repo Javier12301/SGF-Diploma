@@ -165,14 +165,14 @@ namespace SGF.PRESENTACION.formPrincipales
                 bool resultado = lNegocio.ModificarNegocio(oNegocio);
                 if (resultado)
                 {
-                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se modificarón con éxito los datos del negocio.");
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Negocio",  "Se modificarón con éxito los datos del negocio.");
                     
 
                     MessageBox.Show("Negocio modificado correctamente", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar los datos del negocio.");
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Negocio", "Error al modificar los datos del negocio.");
                     MessageBox.Show("Ocurrió un error al modificar el negocio, contacte con el administrador del sistema si este error persiste.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

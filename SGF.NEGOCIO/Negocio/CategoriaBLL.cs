@@ -11,7 +11,6 @@ namespace SGF.NEGOCIO.Negocio
 {
     public class CategoriaBLL
     {
-        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         // Singleton de cCategoria
         private static CategoriaBLL _instancia = null;
         private CategoriaBLL() { }

@@ -32,12 +32,12 @@ namespace SGF.NEGOCIO.Seguridad
         public void Login(Usuario usuario)
         {
             Sesion.IniciarSesion(usuario);
-            AuditoriaBLL.RegistrarMovimiento("Inicio de sesión", usuario.NombreUsuario, "Inicio de sesión exitoso");
+            AuditoriaBLL.RegistrarMovimiento("Inicio de sesión", usuario.NombreUsuario, "Login/Logout", "Inicio de sesión exitoso");
         }
 
         public void Logout()
         {
-            AuditoriaBLL.RegistrarMovimiento("Sesión cerrada", UsuarioEnSesion().Usuario.NombreUsuario, "Sesión cerrada con éxito");
+            AuditoriaBLL.RegistrarMovimiento("Sesión cerrada", UsuarioEnSesion().Usuario.NombreUsuario,"Login/Logout", "Sesión cerrada con éxito");
             Sesion.CerrarSesion();
         }
     }

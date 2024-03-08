@@ -34,6 +34,7 @@ SET IDENTITY_INSERT Proveedor OFF;
 GO
 
 
+SELECT * FROM Cliente
 CREATE TABLE Cliente (
     ClienteID INT IDENTITY PRIMARY KEY,
     TipoDocumento VARCHAR(50) DEFAULT 'DNI',
@@ -58,6 +59,7 @@ CREATE TABLE TipoCliente (
 INSERT INTO TipoCliente (Descripcion) VALUES ('Consumidor Final');
 INSERT INTO TipoCliente (Descripcion) VALUES ('Jubilados');
 GO
+
 
 
 CREATE TABLE Producto (

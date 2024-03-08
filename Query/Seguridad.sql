@@ -53,10 +53,23 @@ CREATE TABLE Auditoria (
     AuditoriaID INT IDENTITY(1,1) PRIMARY KEY,
     FechayHora DATETIME,
     Movimiento NVARCHAR(255),
+	Modulo NVARCHAR(255),
     NombreUsuario NVARCHAR(255),
-    Descripcion NVARCHAR(255)
+    Descripcion NVARCHAR(255),
+	Detalles VARCHAR(MAX)
 );
 GO
+
+
+DECLARE @moduloDescripcion VARCHAR(50) = 'formCategorias'
+SELECT op.* FROM Accion op
+INNER JOIN Modulo m ON m.ModuloID = op.ModuloID
+WHERE m.Descripcion = @moduloDescripcion
+
+
+
+INSERT INTO Auditoria (FechayHora, Movimiento, Modulo, NombreUsuario, Descripcion, Detalles)
+VALUES (@FechayHora, @Movimiento, @Modulo, @NombreUsuario, @Descripcion, @Detalles);
 
 -- Modulos
 DECLARE @GrupoID INT = 6

@@ -100,7 +100,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 if (permisoDeUsuario.Exportar)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvInventario, "Inventario de productos", "Informe de inventario");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvInventario, "Inventario de productos", "Informe de inventario", "Inventario");
                 }
                 else
                 {

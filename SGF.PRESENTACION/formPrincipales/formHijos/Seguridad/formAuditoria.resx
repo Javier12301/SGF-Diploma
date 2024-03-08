@@ -117,11 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="auditoriaReporteResumenMovimientosPorAñoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
-  </metadata>
-  <metadata name="reportes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>688, 17</value>
+  <metadata name="Modulo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="auditoriaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>340, 17</value>
@@ -173,6 +170,25 @@
         lf8gBXgVDULAwAAA8HbAq6XlmnAAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnDetalles.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAyNJREFUSEvVl/9PEmEcx936pT+uH2zZam0Nyb5o00NzNm0TKPySiqA2K3UmopSC
+        CkgTFBAhjW+iYApyQseXgQioq7XUzD3dc90ZMs8h59r8bK9fPs/zvF88dw+3u4LsMg3wrtoHee9c0udW
+        iF3Cdcx218YwmyZE9U7D0FUV8JkUcbdcuJjZd0q4/TCTjKcvxyDPYhuoBwt9dQR6MQeomh4dee2GA6p3
+        GuqGB8CplR06R4V7mX2Y5ZByzWQ8fZlfP/UYxAgwdlb5jV3V3umO6lSPoGq98HpRQtuO+A2dlXgfjv0D
+        9iZelOzeLrqRbn72xALXEeAZMGvuTY2HjKcvoxixqgX3Qdy/nNrZioJYwAOkA32ha0V3AWRGOfzTpleC
+        TGCPGm8Vil1wHSSJ+ZLEJvBMMp6+8IlWBY8FomvONCX+bJz8rVXJ9iFe5+xB0GM5AewR4xpl1OWwxrPF
+        MJOMp69scXozBNKxYE7sbEUI4YWImXD5xCn8Mr+VtRyjmpaeKqAjf3E8BIbHe4+Z1I6AVbcrJ7YTkfzF
+        SVz8mFOTF3Dt5T9cSp0UbGwsn+idBSNxYHHOZOprCouaSwOzlgmMCh0dlYM77FJatmIYM/H6J+1cG784
+        0d9Y9j0RRt2UGAZHMZQWOIeRWCJtWZG0cRL6bu5uMoquUOJhmQwU3mLRwnjH8G9Byc7LhR0u04IGbKDu
+        E72zYCSOrjotzon+paFe/he1bmiTCp36qAE1dVxakvEw88PV01i63SUoSWUerqB/Ddit87QwenJBwYhM
+        tASlOlEtyBSPjSkA62EFLYyfXBHM9wP/9cm/RH9R4s1IEGColxY458IO13lhJI4HvTafZcoMwd9Gwtnh
+        Z8FIDIXw/mbf41z4r+IU/u4VDgXM2Fd0wT09os5bDC8vFBLSRORbtiibkNcK/OhayvzhFWoQIfs5i/Vi
+        ZH6cz877cEGx+X2nXyW4d0RK8a8RZJ6Mpy+9uKJR21oGxvjFe/J61uF5UXDZhypByRG+W0JKiEVIAxlP
+        X3L5zSvGdoRtEFY26drKO/Jhpp3TgsteQgzi8mKYScaTVVDwB/rXDblPAQytAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnExportar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -204,10 +220,10 @@
         cAuuBZYF9KH976PPyMIoizraV/uFc+H/RznOF9Rbv656YK96AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="reportes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>688, 17</value>
+  </metadata>
   <metadata name="auditoriaTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>518, 17</value>
-  </metadata>
-  <metadata name="auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>395, 54</value>
   </metadata>
 </root>

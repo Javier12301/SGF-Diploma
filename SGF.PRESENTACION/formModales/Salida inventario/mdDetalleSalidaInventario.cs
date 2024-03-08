@@ -210,7 +210,7 @@ namespace SGF.PRESENTACION.formModales.Salida_inventario
         {
             try
             {
-                if (permisoDeUsuario.Imprimir)
+                if (permisoDeUsuario.Exportar)
                 {
                     if (dgvDetallesSalidas.Rows.Count > 0)
                     {

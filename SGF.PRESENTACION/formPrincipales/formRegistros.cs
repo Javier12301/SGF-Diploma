@@ -55,7 +55,7 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 if (permisoDeUsuario.Exportar)
                 {
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvRegistros, "Registro de sistema", "Acciones realizadas en el sistema");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvRegistros, "Registro de sistema", "Acciones realizadas en el sistema", "Registros");
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     if(registrosEliminados > 0)
                     {
                         cantidadDespues = RegistroBLL.ConteoRegistros();
-                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se eliminaron {registrosEliminados} registros del sistema.");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Registros", $"Se eliminaron {registrosEliminados} registros del sistema.");
                         MessageBox.Show(registrosEliminados > 1 ? $"Se eliminaron {registrosEliminados} registros del sistema con éxito." : "Se eliminó un registro del sistema con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         cargarLista();
                     }         

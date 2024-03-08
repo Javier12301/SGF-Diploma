@@ -232,6 +232,9 @@ namespace SGF.PRESENTACION.formModales
                     cantidadDespues = lProducto.ConteoProductos();
                     RegistroBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Productos", $"Se dio de alta con éxito el producto: {producto.Nombre}");
                     MessageBox.Show("El producto fue dado de alta con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    producto = lProducto.ObtenerProductoPorCodigo(producto.Codigo);
+                    string jsonProducto = uiUtilidades.SerializaryCrearJSON(producto);
+                    AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Productos", $"Se dió de alta con éxito el producto {producto.Nombre}", jsonProducto);
                     DialogResult respuesta = MessageBox.Show("¿Desea seguir agregando productos?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.No)
                     {
@@ -287,6 +290,8 @@ namespace SGF.PRESENTACION.formModales
                     cantidadDespues = lProducto.ConteoProductos();
                     RegistroBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), 1, cantidadAntes, cantidadDespues, "Productos", $"Se modificó con éxito el producto: {producto.Nombre} cuya ID es: {oProducto.ProductoID}");
                     MessageBox.Show("El producto fue modificado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string jsonProducto = uiUtilidades.SerializaryCrearJSON(producto);
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Productos",$"Se modificó con éxito el producto {producto.Nombre} cuya ID es: {producto.ProductoID}", jsonProducto);
                     DialogResult = DialogResult.OK;
                     this.Close();
                 }

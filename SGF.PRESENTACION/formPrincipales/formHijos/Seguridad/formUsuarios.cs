@@ -231,8 +231,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             {
                 if (permisoDeUsuario.Exportar)
                 {
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvUsuario, "Lista de Usuarios", "Informe de Usuarios");
-                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de usuarios.");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvUsuario, "Lista de Usuarios", "Informe de Usuarios", "Usuarios");
                 }
                 else
                 {
@@ -242,7 +241,6 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de usuarios.");
             }
         }
 

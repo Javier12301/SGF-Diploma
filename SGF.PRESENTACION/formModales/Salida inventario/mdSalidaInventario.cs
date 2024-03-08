@@ -104,7 +104,7 @@ namespace SGF.PRESENTACION.formModales.Salida_inventario
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            uiUtilidades.ExportarDataGridViewAExcel(dgvSalidas, "Salidas de Inventario", "Informe de salidas de inventario");
+            uiUtilidades.ExportarDataGridViewAExcel(dgvSalidas, "Salidas de Inventario", "Informe de salidas de inventario", "Inventario");
         }
 
         private void filtrarLista()

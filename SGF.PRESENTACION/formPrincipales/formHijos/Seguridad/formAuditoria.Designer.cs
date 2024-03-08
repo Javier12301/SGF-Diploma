@@ -29,16 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formAuditoria));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formAuditoria));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tlpContainer = new System.Windows.Forms.TableLayoutPanel();
+            this.chartResumenMovimientos = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dgvAuditoria = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcFechayHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Modulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcNombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.auditoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bnpCantidadDeItems = new System.Windows.Forms.ToolStripLabel();
             this.bnpUltimoItem = new System.Windows.Forms.ToolStripButton();
@@ -51,6 +62,8 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmbFiltroMovimiento = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.cmbFiltroModulo = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbFiltroUsuario = new System.Windows.Forms.ToolStripComboBox();
@@ -68,23 +81,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnDetalles = new System.Windows.Forms.Button();
             this.btnExportar = new System.Windows.Forms.Button();
-            this.tlpContainer = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvAuditoria = new System.Windows.Forms.DataGridView();
             this.btnGrafico = new System.Windows.Forms.Button();
-            this.chartResumenMovimientos = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcFechayHora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcNombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.auditoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.farmaciaDatosDataSet = new SGF.PRESENTACION.FarmaciaDatosDataSet();
-            this.auditoriaTableAdapter = new SGF.PRESENTACION.FarmaciaDatosDataSetTableAdapters.AuditoriaTableAdapter();
-            this.auditoriaReporteResumenMovimientosPorAñoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportes = new SGF.PRESENTACION.Reportes();
-            this.auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter = new SGF.PRESENTACION.ReportesTableAdapters.Auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter();
+            this.auditoriaTableAdapter = new SGF.PRESENTACION.FarmaciaDatosDataSetTableAdapters.AuditoriaTableAdapter();
             this.panel1.SuspendLayout();
+            this.tlpContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartResumenMovimientos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -92,12 +99,6 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
-            this.tlpContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartResumenMovimientos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditoriaReporteResumenMovimientosPorAñoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,6 +114,176 @@
             this.panel1.Size = new System.Drawing.Size(1081, 360);
             this.panel1.TabIndex = 1;
             // 
+            // tlpContainer
+            // 
+            this.tlpContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpContainer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpContainer.ColumnCount = 2;
+            this.tlpContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.35947F));
+            this.tlpContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.64052F));
+            this.tlpContainer.Controls.Add(this.chartResumenMovimientos, 0, 0);
+            this.tlpContainer.Controls.Add(this.dgvAuditoria, 0, 0);
+            this.tlpContainer.Location = new System.Drawing.Point(6, 139);
+            this.tlpContainer.Name = "tlpContainer";
+            this.tlpContainer.RowCount = 1;
+            this.tlpContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpContainer.Size = new System.Drawing.Size(1071, 169);
+            this.tlpContainer.TabIndex = 14;
+            this.tlpContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpContainer_Paint);
+            // 
+            // chartResumenMovimientos
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartResumenMovimientos.ChartAreas.Add(chartArea1);
+            this.chartResumenMovimientos.Dock = System.Windows.Forms.DockStyle.Fill;
+            legend1.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Top;
+            legend1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            this.chartResumenMovimientos.Legends.Add(legend1);
+            this.chartResumenMovimientos.Location = new System.Drawing.Point(703, 4);
+            this.chartResumenMovimientos.Name = "chartResumenMovimientos";
+            this.chartResumenMovimientos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+            series1.CustomProperties = "DrawingStyle=Wedge, PointWidth=0.5, PixelPointWidth=6";
+            series1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.Legend = "Legend1";
+            series1.MarkerColor = System.Drawing.Color.White;
+            series1.Name = "Movimientos";
+            series1.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            series1.YValuesPerPoint = 4;
+            this.chartResumenMovimientos.Series.Add(series1);
+            this.chartResumenMovimientos.Size = new System.Drawing.Size(364, 161);
+            this.chartResumenMovimientos.TabIndex = 129;
+            this.chartResumenMovimientos.Text = "chart1";
+            this.chartResumenMovimientos.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.SystemDefault;
+            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
+            title1.BorderColor = System.Drawing.Color.White;
+            title1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "Title1";
+            title1.Text = "Resumen de movimientos del año";
+            this.chartResumenMovimientos.Titles.Add(title1);
+            // 
+            // dgvAuditoria
+            // 
+            this.dgvAuditoria.AllowUserToAddRows = false;
+            this.dgvAuditoria.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvAuditoria.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAuditoria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvAuditoria.AutoGenerateColumns = false;
+            this.dgvAuditoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAuditoria.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAuditoria.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAuditoria.ColumnHeadersHeight = 40;
+            this.dgvAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvAuditoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvcID,
+            this.dgvcFechayHora,
+            this.Modulo,
+            this.dgvcMovimiento,
+            this.dgvcNombreUsuario,
+            this.dgvcDescripcion});
+            this.dgvAuditoria.DataSource = this.auditoriaBindingSource;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAuditoria.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvAuditoria.GridColor = System.Drawing.Color.White;
+            this.dgvAuditoria.Location = new System.Drawing.Point(4, 4);
+            this.dgvAuditoria.Name = "dgvAuditoria";
+            this.dgvAuditoria.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvAuditoria.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvAuditoria.RowHeadersVisible = false;
+            this.dgvAuditoria.RowHeadersWidth = 51;
+            this.dgvAuditoria.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAuditoria.Size = new System.Drawing.Size(692, 161);
+            this.dgvAuditoria.TabIndex = 13;
+            this.dgvAuditoria.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuditoria_CellDoubleClick);
+            this.dgvAuditoria.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAuditoria_CellEnter);
+            // 
+            // dgvcID
+            // 
+            this.dgvcID.DataPropertyName = "AuditoriaID";
+            this.dgvcID.HeaderText = "ID";
+            this.dgvcID.MinimumWidth = 6;
+            this.dgvcID.Name = "dgvcID";
+            this.dgvcID.ReadOnly = true;
+            this.dgvcID.Visible = false;
+            // 
+            // dgvcFechayHora
+            // 
+            this.dgvcFechayHora.DataPropertyName = "FechayHora";
+            this.dgvcFechayHora.HeaderText = "Fecha y Hora";
+            this.dgvcFechayHora.MinimumWidth = 6;
+            this.dgvcFechayHora.Name = "dgvcFechayHora";
+            this.dgvcFechayHora.ReadOnly = true;
+            // 
+            // Modulo
+            // 
+            this.Modulo.DataPropertyName = "Modulo";
+            this.Modulo.HeaderText = "Modulo";
+            this.Modulo.Name = "Modulo";
+            this.Modulo.ReadOnly = true;
+            // 
+            // dgvcMovimiento
+            // 
+            this.dgvcMovimiento.DataPropertyName = "Movimiento";
+            this.dgvcMovimiento.HeaderText = "Movimiento";
+            this.dgvcMovimiento.MinimumWidth = 6;
+            this.dgvcMovimiento.Name = "dgvcMovimiento";
+            this.dgvcMovimiento.ReadOnly = true;
+            // 
+            // dgvcNombreUsuario
+            // 
+            this.dgvcNombreUsuario.DataPropertyName = "NombreUsuario";
+            this.dgvcNombreUsuario.HeaderText = "Usuario";
+            this.dgvcNombreUsuario.MinimumWidth = 6;
+            this.dgvcNombreUsuario.Name = "dgvcNombreUsuario";
+            this.dgvcNombreUsuario.ReadOnly = true;
+            // 
+            // dgvcDescripcion
+            // 
+            this.dgvcDescripcion.DataPropertyName = "Descripcion";
+            this.dgvcDescripcion.HeaderText = "Descripcion";
+            this.dgvcDescripcion.MinimumWidth = 6;
+            this.dgvcDescripcion.Name = "dgvcDescripcion";
+            this.dgvcDescripcion.ReadOnly = true;
+            // 
+            // auditoriaBindingSource
+            // 
+            this.auditoriaBindingSource.DataMember = "Auditoria";
+            this.auditoriaBindingSource.DataSource = this.farmaciaDatosDataSet;
+            // 
+            // farmaciaDatosDataSet
+            // 
+            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
+            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
@@ -124,6 +295,7 @@
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bindingNavigator1.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold);
             this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.bindingNavigator1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bnpUltimoItem,
             this.bnpSiguienteItem,
@@ -136,6 +308,8 @@
             this.bindingNavigatorSeparator2,
             this.cmbFiltroMovimiento,
             this.toolStripLabel2,
+            this.cmbFiltroModulo,
+            this.toolStripLabel3,
             this.toolStripSeparator3,
             this.toolStripLabel1,
             this.cmbFiltroUsuario});
@@ -167,7 +341,7 @@
             this.bnpUltimoItem.Image = ((System.Drawing.Image)(resources.GetObject("bnpUltimoItem.Image")));
             this.bnpUltimoItem.Name = "bnpUltimoItem";
             this.bnpUltimoItem.RightToLeftAutoMirrorImage = true;
-            this.bnpUltimoItem.Size = new System.Drawing.Size(23, 46);
+            this.bnpUltimoItem.Size = new System.Drawing.Size(24, 46);
             this.bnpUltimoItem.Text = "Mover último";
             // 
             // bnpSiguienteItem
@@ -177,7 +351,7 @@
             this.bnpSiguienteItem.Image = ((System.Drawing.Image)(resources.GetObject("bnpSiguienteItem.Image")));
             this.bnpSiguienteItem.Name = "bnpSiguienteItem";
             this.bnpSiguienteItem.RightToLeftAutoMirrorImage = true;
-            this.bnpSiguienteItem.Size = new System.Drawing.Size(23, 46);
+            this.bnpSiguienteItem.Size = new System.Drawing.Size(24, 46);
             this.bnpSiguienteItem.Text = "Mover siguiente";
             // 
             // bindingNavigatorSeparator
@@ -210,7 +384,7 @@
             this.bnpItemAnterior.Image = ((System.Drawing.Image)(resources.GetObject("bnpItemAnterior.Image")));
             this.bnpItemAnterior.Name = "bnpItemAnterior";
             this.bnpItemAnterior.RightToLeftAutoMirrorImage = true;
-            this.bnpItemAnterior.Size = new System.Drawing.Size(23, 46);
+            this.bnpItemAnterior.Size = new System.Drawing.Size(24, 46);
             this.bnpItemAnterior.Text = "Mover anterior";
             // 
             // bnpPrimerItem
@@ -220,7 +394,7 @@
             this.bnpPrimerItem.Image = ((System.Drawing.Image)(resources.GetObject("bnpPrimerItem.Image")));
             this.bnpPrimerItem.Name = "bnpPrimerItem";
             this.bnpPrimerItem.RightToLeftAutoMirrorImage = true;
-            this.bnpPrimerItem.Size = new System.Drawing.Size(23, 46);
+            this.bnpPrimerItem.Size = new System.Drawing.Size(24, 46);
             this.bnpPrimerItem.Text = "Mover primero";
             // 
             // bindingNavigatorSeparator2
@@ -245,6 +419,23 @@
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(74, 46);
             this.toolStripLabel2.Text = "Movimiento:";
+            // 
+            // cmbFiltroModulo
+            // 
+            this.cmbFiltroModulo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbFiltroModulo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltroModulo.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.cmbFiltroModulo.Name = "cmbFiltroModulo";
+            this.cmbFiltroModulo.Size = new System.Drawing.Size(160, 49);
+            this.cmbFiltroModulo.SelectedIndexChanged += new System.EventHandler(this.cmbFiltro_SelectedIndexChanged);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(48, 46);
+            this.toolStripLabel3.Text = "Módulo";
             // 
             // toolStripSeparator3
             // 
@@ -427,6 +618,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flpContenedorBotones.BackColor = System.Drawing.Color.LightGray;
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flpContenedorBotones.Controls.Add(this.btnDetalles);
             this.flpContenedorBotones.Controls.Add(this.btnExportar);
             this.flpContenedorBotones.Controls.Add(this.btnGrafico);
             this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
@@ -434,6 +626,27 @@
             this.flpContenedorBotones.Name = "flpContenedorBotones";
             this.flpContenedorBotones.Size = new System.Drawing.Size(833, 68);
             this.flpContenedorBotones.TabIndex = 0;
+            // 
+            // btnDetalles
+            // 
+            this.btnDetalles.BackColor = System.Drawing.Color.White;
+            this.btnDetalles.Enabled = false;
+            this.btnDetalles.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnDetalles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetalles.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetalles.ForeColor = System.Drawing.Color.Black;
+            this.btnDetalles.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalles.Image")));
+            this.btnDetalles.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDetalles.Location = new System.Drawing.Point(3, 3);
+            this.btnDetalles.Name = "btnDetalles";
+            this.btnDetalles.Size = new System.Drawing.Size(112, 57);
+            this.btnDetalles.TabIndex = 11;
+            this.btnDetalles.Tag = "Detalles";
+            this.btnDetalles.Text = "Detalles";
+            this.btnDetalles.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnDetalles.UseVisualStyleBackColor = false;
+            this.btnDetalles.Visible = false;
+            this.btnDetalles.Click += new System.EventHandler(this.btnDetalles_Click);
             // 
             // btnExportar
             // 
@@ -444,7 +657,7 @@
             this.btnExportar.ForeColor = System.Drawing.Color.Black;
             this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
             this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExportar.Location = new System.Drawing.Point(4, 4);
+            this.btnExportar.Location = new System.Drawing.Point(122, 4);
             this.btnExportar.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(112, 57);
@@ -455,79 +668,6 @@
             this.btnExportar.UseVisualStyleBackColor = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
-            // tlpContainer
-            // 
-            this.tlpContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpContainer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tlpContainer.ColumnCount = 2;
-            this.tlpContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.35947F));
-            this.tlpContainer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.64052F));
-            this.tlpContainer.Controls.Add(this.chartResumenMovimientos, 0, 0);
-            this.tlpContainer.Controls.Add(this.dgvAuditoria, 0, 0);
-            this.tlpContainer.Location = new System.Drawing.Point(6, 139);
-            this.tlpContainer.Name = "tlpContainer";
-            this.tlpContainer.RowCount = 1;
-            this.tlpContainer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpContainer.Size = new System.Drawing.Size(1071, 169);
-            this.tlpContainer.TabIndex = 14;
-            // 
-            // dgvAuditoria
-            // 
-            this.dgvAuditoria.AllowUserToAddRows = false;
-            this.dgvAuditoria.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvAuditoria.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvAuditoria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvAuditoria.AutoGenerateColumns = false;
-            this.dgvAuditoria.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAuditoria.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAuditoria.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvAuditoria.ColumnHeadersHeight = 40;
-            this.dgvAuditoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvAuditoria.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvcID,
-            this.dgvcFechayHora,
-            this.dgvcMovimiento,
-            this.dgvcNombreUsuario,
-            this.dgvcDescripcion});
-            this.dgvAuditoria.DataSource = this.auditoriaBindingSource;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAuditoria.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvAuditoria.GridColor = System.Drawing.Color.White;
-            this.dgvAuditoria.Location = new System.Drawing.Point(4, 4);
-            this.dgvAuditoria.Name = "dgvAuditoria";
-            this.dgvAuditoria.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvAuditoria.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvAuditoria.RowHeadersVisible = false;
-            this.dgvAuditoria.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAuditoria.Size = new System.Drawing.Size(692, 161);
-            this.dgvAuditoria.TabIndex = 13;
-            // 
             // btnGrafico
             // 
             this.btnGrafico.BackColor = System.Drawing.Color.White;
@@ -537,7 +677,7 @@
             this.btnGrafico.ForeColor = System.Drawing.Color.Black;
             this.btnGrafico.Image = ((System.Drawing.Image)(resources.GetObject("btnGrafico.Image")));
             this.btnGrafico.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnGrafico.Location = new System.Drawing.Point(124, 4);
+            this.btnGrafico.Location = new System.Drawing.Point(242, 4);
             this.btnGrafico.Margin = new System.Windows.Forms.Padding(4);
             this.btnGrafico.Name = "btnGrafico";
             this.btnGrafico.Size = new System.Drawing.Size(112, 57);
@@ -548,106 +688,14 @@
             this.btnGrafico.UseVisualStyleBackColor = false;
             this.btnGrafico.Click += new System.EventHandler(this.btnGrafico_Click);
             // 
-            // chartResumenMovimientos
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartResumenMovimientos.ChartAreas.Add(chartArea1);
-            this.chartResumenMovimientos.DataSource = this.auditoriaReporteResumenMovimientosPorAñoBindingSource;
-            this.chartResumenMovimientos.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Top;
-            legend1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.Name = "Legend1";
-            this.chartResumenMovimientos.Legends.Add(legend1);
-            this.chartResumenMovimientos.Location = new System.Drawing.Point(703, 4);
-            this.chartResumenMovimientos.Name = "chartResumenMovimientos";
-            this.chartResumenMovimientos.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
-            series1.CustomProperties = "DrawingStyle=Wedge, PointWidth=0.5, PixelPointWidth=6";
-            series1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series1.Legend = "Legend1";
-            series1.MarkerColor = System.Drawing.Color.White;
-            series1.Name = "Movimientos";
-            series1.XValueMember = "Movimiento";
-            series1.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            series1.YValueMembers = "Cantidad";
-            series1.YValuesPerPoint = 4;
-            this.chartResumenMovimientos.Series.Add(series1);
-            this.chartResumenMovimientos.Size = new System.Drawing.Size(364, 161);
-            this.chartResumenMovimientos.TabIndex = 129;
-            this.chartResumenMovimientos.Text = "chart1";
-            this.chartResumenMovimientos.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.SystemDefault;
-            title1.Alignment = System.Drawing.ContentAlignment.TopCenter;
-            title1.BorderColor = System.Drawing.Color.White;
-            title1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.Name = "Title1";
-            title1.Text = "Resumen de movimientos del año";
-            this.chartResumenMovimientos.Titles.Add(title1);
-            // 
-            // dgvcID
-            // 
-            this.dgvcID.DataPropertyName = "AuditoriaID";
-            this.dgvcID.HeaderText = "ID";
-            this.dgvcID.Name = "dgvcID";
-            this.dgvcID.ReadOnly = true;
-            this.dgvcID.Visible = false;
-            // 
-            // dgvcFechayHora
-            // 
-            this.dgvcFechayHora.DataPropertyName = "FechayHora";
-            this.dgvcFechayHora.HeaderText = "Fecha y Hora";
-            this.dgvcFechayHora.Name = "dgvcFechayHora";
-            this.dgvcFechayHora.ReadOnly = true;
-            // 
-            // dgvcMovimiento
-            // 
-            this.dgvcMovimiento.DataPropertyName = "Movimiento";
-            this.dgvcMovimiento.HeaderText = "Movimiento";
-            this.dgvcMovimiento.Name = "dgvcMovimiento";
-            this.dgvcMovimiento.ReadOnly = true;
-            // 
-            // dgvcNombreUsuario
-            // 
-            this.dgvcNombreUsuario.DataPropertyName = "NombreUsuario";
-            this.dgvcNombreUsuario.HeaderText = "Usuario";
-            this.dgvcNombreUsuario.Name = "dgvcNombreUsuario";
-            this.dgvcNombreUsuario.ReadOnly = true;
-            // 
-            // dgvcDescripcion
-            // 
-            this.dgvcDescripcion.DataPropertyName = "Descripcion";
-            this.dgvcDescripcion.HeaderText = "Descripcion";
-            this.dgvcDescripcion.Name = "dgvcDescripcion";
-            this.dgvcDescripcion.ReadOnly = true;
-            // 
-            // auditoriaBindingSource
-            // 
-            this.auditoriaBindingSource.DataMember = "Auditoria";
-            this.auditoriaBindingSource.DataSource = this.farmaciaDatosDataSet;
-            // 
-            // farmaciaDatosDataSet
-            // 
-            this.farmaciaDatosDataSet.DataSetName = "FarmaciaDatosDataSet";
-            this.farmaciaDatosDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // auditoriaTableAdapter
-            // 
-            this.auditoriaTableAdapter.ClearBeforeFill = true;
-            // 
-            // auditoriaReporteResumenMovimientosPorAñoBindingSource
-            // 
-            this.auditoriaReporteResumenMovimientosPorAñoBindingSource.DataMember = "Auditoria_Reporte_ResumenMovimientos_PorAño";
-            this.auditoriaReporteResumenMovimientosPorAñoBindingSource.DataSource = this.reportes;
-            // 
             // reportes
             // 
             this.reportes.DataSetName = "Reportes";
             this.reportes.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter
+            // auditoriaTableAdapter
             // 
-            this.auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter.ClearBeforeFill = true;
+            this.auditoriaTableAdapter.ClearBeforeFill = true;
             // 
             // formAuditoria
             // 
@@ -660,6 +708,11 @@
             this.Text = "formAuditoria";
             this.Load += new System.EventHandler(this.formAuditoria_Load);
             this.panel1.ResumeLayout(false);
+            this.tlpContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartResumenMovimientos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
@@ -671,12 +724,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.flpContenedorBotones.ResumeLayout(false);
-            this.tlpContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAuditoria)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartResumenMovimientos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditoriaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.farmaciaDatosDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.auditoriaReporteResumenMovimientosPorAñoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes)).EndInit();
             this.ResumeLayout(false);
 
@@ -720,15 +767,17 @@
         private System.Windows.Forms.DateTimePicker dtpFin;
         private System.Windows.Forms.TableLayoutPanel tlpContainer;
         private System.Windows.Forms.DataGridView dgvAuditoria;
+        private System.Windows.Forms.Button btnGrafico;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartResumenMovimientos;
+        private PRESENTACION.Reportes reportes;
+        private System.Windows.Forms.Button btnDetalles;
+        private System.Windows.Forms.ToolStripComboBox cmbFiltroModulo;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcFechayHora;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Modulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcMovimiento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombreUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescripcion;
-        private System.Windows.Forms.Button btnGrafico;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartResumenMovimientos;
-        private System.Windows.Forms.BindingSource auditoriaReporteResumenMovimientosPorAñoBindingSource;
-        private PRESENTACION.Reportes reportes;
-        private ReportesTableAdapters.Auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter;
     }
 }

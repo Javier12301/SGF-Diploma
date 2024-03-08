@@ -14,6 +14,7 @@ using Irony;
 using SGF.NEGOCIO.Negocio;
 using SGF.PRESENTACION.UtilidadesComunes;
 using SGF.PRESENTACION.formModales.formImportar;
+using Irony.Parsing;
 
 namespace SGF.PRESENTACION.formPrincipales
 {
@@ -21,6 +22,8 @@ namespace SGF.PRESENTACION.formPrincipales
     {
         private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
         private ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
+        private CategoriaBLL lCategoria = CategoriaBLL.ObtenerInstancia;
+        private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
 
         private int cantidadAntes { get; set; }
@@ -238,8 +241,16 @@ namespace SGF.PRESENTACION.formPrincipales
 
                     foreach (int productosID in productosAEliminar)
                     {
+                        Producto producto = new Producto();
+                        producto = lProducto.ObtenerProductoPorID(productosID);
+                        producto.Categoria = lCategoria.ObtenerCategoriaPorID(producto.Categoria.CategoriaID);
+                        producto.Proveedor = lProveedor.ObtenerProveedorPorID(producto.Proveedor.ProveedorID);
                         if (lProducto.BajaProducto(productosID))
+                        {
+                            string jsonProducto = uiUtilidades.SerializaryCrearJSON(producto);
+                            AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Productos" , $"Se dió de baja con éxito el producto con nombre {producto.Nombre} cuya ID es: {producto.ProductoID}", jsonProducto);
                             productosEliminados++;
+                        }
                         else
                             MessageBox.Show($"Ocurrió un error al intentar eliminar el producto con ID: {productosID}, contacte con el administardor del sistema para solucionar este error.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -314,7 +325,7 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 if (permisosDeUsuario.Exportar)
                 {
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvProductos, "Lista de productos", "Informe de productos");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvProductos, "Lista de productos", "Informe de productos", "Productos");
 
                 }
                 else

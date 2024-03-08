@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formVentas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.lblNumerodeVenta = new System.Windows.Forms.ToolStripLabel();
@@ -65,7 +65,7 @@
             this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnVentas = new System.Windows.Forms.Button();
+            this.btnCierreCja = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lblImpuesto = new System.Windows.Forms.Label();
@@ -197,6 +197,7 @@
             // 
             this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel4,
             this.cmbFactura,
@@ -212,14 +213,15 @@
             this.toolStripLabel4.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel4.ForeColor = System.Drawing.Color.White;
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(273, 22);
-            this.toolStripLabel4.Text = "VENTA DE PRODUCTOS / SERVICIOS";
+            this.toolStripLabel4.Size = new System.Drawing.Size(179, 22);
+            this.toolStripLabel4.Text = "VENTA DE PRODUCTOS";
             // 
             // cmbFactura
             // 
             this.cmbFactura.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.cmbFactura.AutoSize = false;
             this.cmbFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFactura.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbFactura.Margin = new System.Windows.Forms.Padding(1, 1, 4, 1);
             this.cmbFactura.Name = "cmbFactura";
             this.cmbFactura.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -307,22 +309,22 @@
             // dgvVenta
             // 
             this.dgvVenta.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvVenta.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvVenta.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenta.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVenta.ColumnHeadersHeight = 27;
             this.dgvVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -428,29 +430,29 @@
             // 
             this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
-            this.flowLayoutPanel2.Controls.Add(this.btnVentas);
+            this.flowLayoutPanel2.Controls.Add(this.btnCierreCja);
             this.flowLayoutPanel2.Controls.Add(this.button1);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(291, 2);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(230, 64);
             this.flowLayoutPanel2.TabIndex = 24;
             // 
-            // btnVentas
+            // btnCierreCja
             // 
-            this.btnVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.btnVentas.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVentas.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVentas.ForeColor = System.Drawing.Color.Black;
-            this.btnVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnVentas.Image")));
-            this.btnVentas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnVentas.Location = new System.Drawing.Point(3, 3);
-            this.btnVentas.Name = "btnVentas";
-            this.btnVentas.Size = new System.Drawing.Size(113, 59);
-            this.btnVentas.TabIndex = 7;
-            this.btnVentas.Text = "COBRO NORMAL";
-            this.btnVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnVentas.UseVisualStyleBackColor = false;
+            this.btnCierreCja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.btnCierreCja.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnCierreCja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCierreCja.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCierreCja.ForeColor = System.Drawing.Color.Black;
+            this.btnCierreCja.Image = ((System.Drawing.Image)(resources.GetObject("btnCierreCja.Image")));
+            this.btnCierreCja.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCierreCja.Location = new System.Drawing.Point(3, 3);
+            this.btnCierreCja.Name = "btnCierreCja";
+            this.btnCierreCja.Size = new System.Drawing.Size(113, 59);
+            this.btnCierreCja.TabIndex = 7;
+            this.btnCierreCja.Text = "Cierre de caja";
+            this.btnCierreCja.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCierreCja.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
@@ -465,7 +467,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 59);
             this.button1.TabIndex = 8;
-            this.button1.Text = "COBRO RÁPIDO";
+            this.button1.Text = "Cobrar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = false;
             // 
@@ -608,6 +610,7 @@
             this.btnClientes.Text = "CLIENTES";
             this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClientes.UseVisualStyleBackColor = false;
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
             // formVentas
             // 
@@ -623,6 +626,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "formVentas";
             this.Text = "formVentas";
+            this.Load += new System.EventHandler(this.formVentas_Load);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -680,7 +684,7 @@
         private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button btnVentas;
+        private System.Windows.Forms.Button btnCierreCja;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lblImpuesto;

@@ -144,7 +144,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 DialogResult resultado = MessageBox.Show("¿Está seguro de modificar los datos del usuario admin?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if(resultado == DialogResult.Yes)
                 {
-                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin entro al formulario de modificación de datos.");
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Usuarios", "El usuario Admin entro al formulario de modificación de datos.");
                     abrirFormularioMisDatos(usuarioID);
                 }
             }else if(lSesion.UsuarioEnSesion().Usuario.ObtenerNombreGrupo() == "Administrador")
@@ -152,13 +152,13 @@ namespace SGF.PRESENTACION.formPrincipales
                 DialogResult resultado = MessageBox.Show("¿Desea modificar su usuario perteneciente al grupo administrador?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (resultado == DialogResult.Yes)
                 {
-                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario perteneciente al grupo administrador entro al formulario de modificación de datos.");
+                    AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Usuarios", "El usuario perteneciente al grupo administrador entro al formulario de modificación de datos.");
                     abrirFormularioMisDatos(usuarioID);
                 }
             }
             else
             {
-                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario entro al formulario de modificación de datos.");
+                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Usuarios", "El usuario entro al formulario de modificación de datos.");
                 abrirFormularioMisDatos(usuarioID);
             }
         }

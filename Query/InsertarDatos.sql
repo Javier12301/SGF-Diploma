@@ -50,7 +50,8 @@ VALUES
     ('Modificar', 2),
     ('Baja', 2),
     ('Importar', 2),
-    ('Exportar', 2);
+    ('Exportar', 2),
+	('Imprimir', 2);
 
 -- Insertar las acciones para el módulo formProductos
 INSERT INTO Accion(Descripcion, ModuloID)
@@ -82,6 +83,10 @@ VALUES
     ('Entrada', 6),
     ('Salida', 6),
     ('Exportar', 6);
+
+INSERT INTO Accion(Descripcion, ModuloID)
+VALUES 
+('Imprimir', 6)
 
 -- Insertar las acciones para el módulo formDetallesInventario
 INSERT INTO Accion(Descripcion, ModuloID)
@@ -168,7 +173,6 @@ VALUES ('Generar auditoria', 17),
 	   ('Gráfico', 17),
        ('Exportar', 17);
 
-
 -- Insertar las acciones para el módulo formMisDatos
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES ('Permitir acceso', 18);
@@ -177,12 +181,7 @@ GO
 -- Inserta los permisos para el grupo de administradores
 INSERT INTO Permiso (GrupoID, AccionID, Permitido)
 SELECT 1, AccionID, 1
-FROM Accion
-WHERE ModuloID NOT IN 
-    (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros')
-    AND ModuloID NOT IN
-    (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes');
-
+FROM Accion;
 
 
 -- Insertar Compra y Detalles
@@ -239,6 +238,27 @@ VALUES
 GO
 
 -- NEGOCIO TESTING
+
+-- Clientes
+INSERT INTO TipoCliente (Descripcion) VALUES ('Pensionados');
+INSERT INTO TipoCliente (Descripcion) VALUES ('Obrero');
+INSERT INTO TipoCliente (Descripcion) VALUES ('Socio');
+
+INSERT INTO Cliente (TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
+VALUES ('DNI', '12345678', 'Francisco', (SELECT TipoClienteID FROM TipoCliente WHERE Descripcion = 'Pensionados'), 'francisco@mail.com', '123456789', 1);
+
+INSERT INTO Cliente (TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
+VALUES ('DNI', '23456789', 'Ernesto', (SELECT TipoClienteID FROM TipoCliente WHERE Descripcion = 'Obrero'), 'ernesto@mail.com', '234567890', 1);
+
+INSERT INTO Cliente (TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
+VALUES ('DNI', '34567890', 'Marcelo', (SELECT TipoClienteID FROM TipoCliente WHERE Descripcion = 'Socio'), 'marcelo@mail.com', '345678901', 1);
+
+INSERT INTO Cliente (TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
+VALUES ('DNI', '45678901', 'Roberto', 2, 'roberto@mail.com', '456789012', 1);
+
+INSERT INTO Cliente (TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
+VALUES ('DNI', '56789012', 'Franco', (SELECT TipoClienteID FROM TipoCliente WHERE Descripcion = 'Pensionados'), 'franco@mail.com', '567890123', 1);
+GO
 
 -- Insertar Medicamentos
 INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES

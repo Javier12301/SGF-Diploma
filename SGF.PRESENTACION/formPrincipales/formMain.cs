@@ -173,6 +173,11 @@ namespace SGF.PRESENTACION.formPrincipales
             abrirFormularioHijo(new formProductos(), btnProductos);
         }
 
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            abrirFormularioHijo(new formClientes(), btnClientes);
+        }
+
         private void btnProveedores_Click(object sender, EventArgs e)
         {
             abrirFormularioHijo(new formProveedores(), btnProveedor);
@@ -202,9 +207,13 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             try
             {
-                lSesion.Logout();
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cerrar sesión?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(respuesta == DialogResult.Yes)
+                {
+                    lSesion.Logout();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -240,6 +249,6 @@ namespace SGF.PRESENTACION.formPrincipales
             txtFechayHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-        
+       
     }
 }

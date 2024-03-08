@@ -1,5 +1,6 @@
 ﻿using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales.Seguridad;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,67 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             AlternarContainer();
         }
 
+        private void dgvAuditoria_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (permisoDeUsuario.Detalles)
+                {
+                    abrirModalDetalles();
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permisos para ver los detalles de la auditoría", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            if (permisoDeUsuario.Detalles)
+            {
+                abrirModalDetalles();
+            }
+            else
+            {
+                MessageBox.Show("No tiene permisos para ver los detalles de la auditoría", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void abrirModalDetalles()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                if (dgvAuditoria.CurrentCell != null)
+                {
+                    int filaIndex = dgvAuditoria.CurrentCell.RowIndex;
+                    int auditoriaID = Convert.ToInt32(dgvAuditoria.Rows[filaIndex].Cells["dgvcID"].Value);
+                    if (auditoriaID > 0)
+                    {
+                        using (var modal = new mdDetalleAuditoria(permisoDeUsuario, auditoriaID))
+                        {
+                            var resultado = modal.ShowDialog();
+                            if (resultado == DialogResult.OK)
+                            {
+                                cargarLista();
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
         private void AlternarContainer()
         {
             try
@@ -45,11 +107,13 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
                 if (graficoActivo)
                 {
                     tlpContainer.ColumnCount = 2;
+                    chartResumenMovimientos.Visible = true;
                     filtrarGrafico();
                 }
                 else
                 {
                     tlpContainer.ColumnCount = 1;
+                    chartResumenMovimientos.Visible = false;
                 }
                 graficoActivo = !graficoActivo;
             }
@@ -72,7 +136,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         // Manejo de filtros
         private void cargarLista()
         {
-            if (txtBuscar.Text != string.Empty || cmbFiltroBuscar.SelectedIndex > 0 || cmbFiltroMovimiento.SelectedIndex > 0 || cmbFiltroUsuario.SelectedIndex > 0)
+            if (txtBuscar.Text != string.Empty || cmbFiltroBuscar.SelectedIndex > 0 || cmbFiltroModulo.SelectedIndex > 0 || cmbFiltroMovimiento.SelectedIndex > 0 || cmbFiltroUsuario.SelectedIndex > 0)
             {
                 filtrarLista();
             }
@@ -85,22 +149,55 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
 
         private void filtrarLista()
         {
-            if (cmbFiltroBuscar.SelectedIndex == 0 && cmbFiltroMovimiento.SelectedIndex == 0 && cmbFiltroUsuario.SelectedIndex == 0 && string.IsNullOrEmpty(txtBuscar.Text))
+            if (cmbFiltroBuscar.SelectedIndex == 0 && cmbFiltroMovimiento.SelectedIndex == 0 && cmbFiltroModulo.SelectedIndex == 0 && cmbFiltroUsuario.SelectedIndex == 0 && string.IsNullOrEmpty(txtBuscar.Text))
             {
                 this.auditoriaTableAdapter.Fill(this.farmaciaDatosDataSet.Auditoria);
             }
             else
             {
-                this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
+                this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroModulo.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
             }
             filtrarGrafico();
         }
 
+        private DataTable obtenerMovimientos()
+        {
+            DataTable dt = AuditoriaBLL.ObtenerMovimientos(cmbFiltroUsuario.Text, dtpInicio.Value, dtpFin.Value);
+            return dt;
+        }
 
         private void filtrarGrafico()
         {
-            
-            this.auditoria_Reporte_ResumenMovimientos_PorAñoTableAdapter.Fill(this.reportes.Auditoria_Reporte_ResumenMovimientos_PorAño, cmbFiltroUsuario.Text, dtpInicio.Value, dtpFin.Value);
+            // si hay 2 o más columnas es porque se activarn los gráficos
+            try
+            {
+                if (tlpContainer.ColumnCount >= 2)
+                {
+                    DataTable dt = obtenerMovimientos();
+                    if (dt != null)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            chartResumenMovimientos.DataSource = dt;
+                            chartResumenMovimientos.Series[0].XValueMember = "Movimiento";
+                            chartResumenMovimientos.Series[0].YValueMembers = "Cantidad";
+                            chartResumenMovimientos.DataBind();
+                            // Modificar texto de chart, si es Todos se mostrará Resumen de movimientos de todos los usuarios
+                            // si es un usuario en específico se mostrará Resumen de movimientos de usuario: nombreUsuario
+                            Random random = new Random();
+
+                            if (cmbFiltroUsuario.Text == "Todos")
+                                chartResumenMovimientos.Titles[0].Text = "Resumen de movimientos de todos los usuarios";
+                            else
+                                chartResumenMovimientos.Titles[0].Text = "Resumen de movimientos de usuario: " + cmbFiltroUsuario.Text;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnGrafico_Click(object sender, EventArgs e)
@@ -135,6 +232,17 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             // Filtro de fecha
             dtpInicio.Value = DateTime.Now.AddYears(-2);
             dtpFin.Value = DateTime.Now.AddYears(1);
+
+            // Filtro de modulos
+            cmbFiltroModulo.Items.Add("Todos");
+            foreach (var lista in listaAuditoria)
+            {
+                if (!cmbFiltroModulo.Items.Contains(lista.Modulo))
+                {
+                    cmbFiltroModulo.Items.Add(lista.Modulo);
+                }
+            }
+            cmbFiltroModulo.SelectedIndex = 0;
 
             // Filtro de movimiento
             cmbFiltroMovimiento.Items.Add("Todos");
@@ -174,7 +282,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
 
         private void dtp_ValueChanged(object sender, EventArgs e)
         {
-            this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
+            this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroModulo.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
         }
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
@@ -186,7 +294,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
+                this.auditoriaTableAdapter.Filtrar(farmaciaDatosDataSet.Auditoria, cmbFiltroUsuario.Text, cmbFiltroMovimiento.Text, cmbFiltroModulo.Text, cmbFiltroBuscar.Text, txtBuscar.Text, dtpInicio.Value, dtpFin.Value);
             }
         }
 
@@ -196,8 +304,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             {
                 if (permisoDeUsuario.Exportar)
                 {
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvAuditoria, "Lista Auditoria", "Informe de Auditoria");
-                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de auditoria.");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvAuditoria, "Lista Auditoria", "Informe de Auditoria", "Auditoria");
                 }
                 else
                 {
@@ -207,8 +314,27 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de usuarios.");
+                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Auditoria", "Ocurrió un error al exportar la lista de usuarios.");
             }
         }
+
+        private void tlpContainer_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dgvAuditoria_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvAuditoria.CurrentRow.Cells["Modulo"].Value.ToString() == "Productos")
+            {
+                btnDetalles.Enabled = true;
+            }
+            else
+            {
+                btnDetalles.Enabled = false;
+            }
+        }
+
+
     }
 }

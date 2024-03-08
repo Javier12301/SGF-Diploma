@@ -43,8 +43,7 @@ namespace SGF.NEGOCIO.Negocio
         public bool AltaProducto(Producto oProducto)
         {
             if (oProducto != null)
-            {
-                
+            {                          
                 return ProductoDAO.AltaProductoD(oProducto);
             }
             else

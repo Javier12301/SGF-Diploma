@@ -40,11 +40,11 @@ namespace SGF.NEGOCIO
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema","Usuarios", $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", $"Se dio de alta con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }
@@ -52,11 +52,11 @@ namespace SGF.NEGOCIO
                 {
                     if(lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", "Error al dar de alta al usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", "Sistema", "Usuarios", "Error al dar de alta al usuario.");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al dar de alta al usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Error al dar de alta al usuario.");
                     }
                     return false;
                 }
@@ -64,7 +64,7 @@ namespace SGF.NEGOCIO
             else
             {
                 // Excepción indicando que el objeto de usuario es nulo
-                AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al dar de alta al usuario.");
+                AuditoriaBLL.RegistrarMovimiento("Alta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Error al dar de alta al usuario.");
                 throw new ArgumentNullException("Se ha producido un error: el campo de usuario no puede estar vacío. Por favor, asegúrese de proporcionar la información necesaria e inténtelo de nuevo. Si el problema persiste, contactar con el administrador si este error persiste.");
             }
         }
@@ -79,11 +79,11 @@ namespace SGF.NEGOCIO
                     // Revisar si la sesion fue iniciada, sino fue iniciada, la auditoria tiene que poner de nombre de usuario al Sistema que modifico el usuario
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", "Usuarios", $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", $"Se modifico con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }
@@ -91,11 +91,11 @@ namespace SGF.NEGOCIO
                 {
                     if (lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", "Error al modificar el usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", "Usuarios", "Error al modificar el usuario.");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar el usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Error al modificar el usuario.");
                     }
                     return false;
                 }
@@ -103,7 +103,7 @@ namespace SGF.NEGOCIO
             else
             {
                 // Excepción indicando que el objeto de usuario es nulo
-                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al modificar el usuario.");
+                AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Error al modificar el usuario.");
                 throw new ArgumentNullException("El objeto de usuario para modificar no puede ser nulo, contactar con el adminsitrador si el error persiste.");
             }
         }
@@ -118,11 +118,11 @@ namespace SGF.NEGOCIO
                 {
                     if(lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", "Usuarios", $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", $"Se dio de baja con éxito al usuario: {oUsuario.NombreUsuario}");
                     }
                     return true;
                 }
@@ -130,18 +130,18 @@ namespace SGF.NEGOCIO
                 {
                     if(lSesion.UsuarioEnSesion() == null)
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", "Error al dar de baja al usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", "Sistema", "Usuarios", "Error al dar de baja al usuario.");
                     }
                     else
                     {
-                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Error al dar de baja al usuario.");
+                        AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Error al dar de baja al usuario.");
                     }
                     return false;
                 }
             }
             else if (usuarioID == 1)
             {
-                AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se intento dar de baja al usuario Administrador.");
+                AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Usuarios", "Se intento dar de baja al usuario Administrador.");
                 throw new Exception("No se puede eliminar el usuario administrador.");
             }
             else

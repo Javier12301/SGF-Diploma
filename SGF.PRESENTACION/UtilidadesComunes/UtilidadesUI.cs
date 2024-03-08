@@ -15,6 +15,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Navigation;
 
 namespace SGF.PRESENTACION.UtilidadesComunes
 {
@@ -200,6 +201,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                     permisoDeUsuario.Alta = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Alta");
                     permisoDeUsuario.Modificar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Modificar");
                     permisoDeUsuario.Baja = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Baja");
+                    permisoDeUsuario.Detalles = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Detalles");
                     permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
                     permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
                     permisoDeUsuario.Imprimir = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Imprimir");
@@ -212,7 +214,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
-        public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja)
+        public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja, string modulo)
         {
             Cursor.Current = Cursors.WaitCursor;
             if (dgv.Rows.Count < 1)
@@ -253,7 +255,7 @@ namespace SGF.PRESENTACION.UtilidadesComunes
                             hoja.Column(columnasTotales).Width = 15;
 
                             wb.SaveAs(savefile.FileName);
-                            AuditoriaBLL.RegistrarMovimiento("Exportar", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Archivo excel con nombre ({nombreArchivo}) fue exportado con éxito.");
+                            AuditoriaBLL.RegistrarMovimiento("Exportar", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),modulo, $"Archivo excel con nombre ({nombreArchivo}) fue exportado con éxito.");
                             MessageBox.Show("Datos exportados correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -372,6 +374,40 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             else
             {
                 e.Handled = true;
+            }
+        }
+
+        // Serializar JSON utilizando Objeto
+        public string SerializaryCrearJSON(object objeto)
+        {
+            try
+            {
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(objeto);
+                // verificar si el json se creó correctamente
+                if (string.IsNullOrEmpty(json))
+                {
+                    throw new Exception("Ocurrió un error al serializar el objeto, por favor contacte al administrador para solucionar este error.");
+                }
+                return json;
+                
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ocurrió un error al intentar serizalizar y crear el json, contacte con el administraador para solucionar este probleam");
+            }
+        }
+
+        // Deserializar JSON a Objeto
+        public T DeserializarJSON<T>(string json)
+        {
+            try
+            {
+                T objeto = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+                return objeto;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message + " Contacte con el administrador del sistema para solucionar este problema.");
             }
         }
 

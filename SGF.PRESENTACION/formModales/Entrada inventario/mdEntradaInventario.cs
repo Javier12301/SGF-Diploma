@@ -139,7 +139,7 @@ namespace SGF.PRESENTACION.formModales
         // Exportar a Excel
         private void btnExportar_Click(object sender, EventArgs e)
         {
-            uiUtilidades.ExportarDataGridViewAExcel(dgvCompras, "Compras realizadas", "Lista de compras realizadas");
+            uiUtilidades.ExportarDataGridViewAExcel(dgvCompras, "Compras realizadas", "Lista de compras realizadas", "Inventario");
         }
 
         private void filtrarLista()

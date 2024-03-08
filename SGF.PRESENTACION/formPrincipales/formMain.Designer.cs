@@ -52,6 +52,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.lblGrupo = new System.Windows.Forms.ToolStripLabel();
+            this.btnClientes = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.tsSuperior.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -133,6 +134,7 @@
             this.toolStripSeparator1,
             this.btnPrincipal,
             this.btnVentas,
+            this.btnClientes,
             this.btnProductos,
             this.btnProveedor,
             this.btnInventario,
@@ -350,6 +352,22 @@
             this.lblGrupo.Size = new System.Drawing.Size(100, 22);
             this.lblGrupo.Text = "ADMINISTRADOR";
             // 
+            // btnClientes
+            // 
+            this.btnClientes.Font = new System.Drawing.Font("Microsoft JhengHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClientes.ForeColor = System.Drawing.Color.Black;
+            this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
+            this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClientes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnClientes.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(62, 51);
+            this.btnClientes.Tag = "formClientes";
+            this.btnClientes.Text = "Clientes";
+            this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClientes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -398,5 +416,6 @@
         private System.Windows.Forms.ToolStripButton btnAjustes;
         private System.Windows.Forms.ToolStripButton btnLogOut;
         private System.Windows.Forms.ToolStripButton btnPrincipal;
+        private System.Windows.Forms.ToolStripButton btnClientes;
     }
 }

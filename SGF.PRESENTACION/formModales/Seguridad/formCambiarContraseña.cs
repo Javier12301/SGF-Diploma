@@ -94,7 +94,7 @@ namespace SGF.PRESENTACION.frmModales.Seguridad
                     try
                     {
                         contraseñaModificada = lUsuario.ModificarUsuario(oUsuario);
-                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema", $"Se modificó la contraseña del usuario: {oUsuario.NombreUsuario}");
+                        AuditoriaBLL.RegistrarMovimiento("Modificación", "Sistema","Login/Logout", $"Se modificó la contraseña del usuario: {oUsuario.NombreUsuario}");
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }

@@ -17,6 +17,7 @@ using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formPrincipales;
 using SGF.NEGOCIO.Negocio;
 using SGF.MODELO.Negocio;
+using Newtonsoft.Json;
 
 namespace SGF.PRESENTACION
 {
@@ -243,5 +244,6 @@ namespace SGF.PRESENTACION
                 this.Location = new Point(this.Location.X + deltaX, this.Location.Y + deltaY);
             }
         }
+       
     }
 }

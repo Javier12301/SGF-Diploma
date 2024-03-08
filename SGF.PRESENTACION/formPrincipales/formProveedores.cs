@@ -254,7 +254,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 if (permisosDeUsuario.Exportar)
                 {
                     Cursor.Current = Cursors.WaitCursor;
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvProveedores, "Lista de proveedores", "Informe de proveedores");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvProveedores, "Lista de proveedores", "Informe de proveedores", "Proveedores");
                 }
                 else
                 {

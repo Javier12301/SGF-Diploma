@@ -205,7 +205,7 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Inventario.formHij
                             hoja.Column(columnasTotales).Width = 15;
 
                             wb.SaveAs(savefile.FileName);
-                            AuditoriaBLL.RegistrarMovimiento("Exportar", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), $"Archivo excel con nombre ({nombreArchivo}) fue exportado con éxito.");
+                            AuditoriaBLL.RegistrarMovimiento("Exportar", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Reportes", $"Archivo excel con nombre ({nombreArchivo}) fue exportado con éxito.");
                             MessageBox.Show("Datos exportados correctamente.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }

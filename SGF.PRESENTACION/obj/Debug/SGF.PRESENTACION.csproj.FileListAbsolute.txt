@@ -192,3 +192,6 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formPrincipales.formClientes.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Seguridad.mdDetalleAuditoria.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Seguridad.formHijosAuditoria.formDetalleProductos.resources

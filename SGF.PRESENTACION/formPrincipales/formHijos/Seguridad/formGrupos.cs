@@ -114,7 +114,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
                                 {
                                     if (grupoID == 1)
                                     {
-                                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "El usuario Admin modifico el grupo Administradores.");
+                                        AuditoriaBLL.RegistrarMovimiento("Modificación", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Grupos", "El usuario Admin modifico el grupo Administradores.");
                                         MessageBox.Show("Se cerrará la sesión para aplicar los cambios.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         // Obtenemos la instancia del formulario principal que es el padre de todos y luego cerramos la sesión
                                         // haciendo uso de su función encargada de cerrar la sesión.
@@ -271,8 +271,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             {
                 if (permisoDeUsuario.Exportar)
                 {
-                    uiUtilidades.ExportarDataGridViewAExcel(dgvGrupos, "Lista de Grupos", "Informe de Grupos");
-                    AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se exporto con éxito la lista de grupos.");
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvGrupos, "Lista de Grupos", "Informe de Grupos", "Grupos");
                 }
                 else
                 {
@@ -283,7 +282,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad.formHijosPerfiles
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Ocurrió un error al exportar la lista de grupos.");
+                AuditoriaBLL.RegistrarMovimiento("Exportar", SesionBLL.ObtenerInstancia.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Grupos", "Ocurrió un error al exportar la lista de grupos.");
             }
         }
 

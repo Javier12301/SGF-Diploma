@@ -50,13 +50,13 @@ namespace SGF.PRESENTACION.formModales.Seguridad
                 if(contraseñaEncriptada == contraseñaUsuario)
                 {
                     contraseñaConfirmada = true;
-                    AuditoriaBLL.RegistrarMovimiento("Credencial confirmada", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se confirmó la identidad del usuario durante el proceso de cambio de contraseña.");
+                    AuditoriaBLL.RegistrarMovimiento("Credencial confirmada", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Login/Logout", "Se confirmó la identidad del usuario durante el proceso de cambio de contraseña.");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    AuditoriaBLL.RegistrarMovimiento("Contraseña incorrecta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Intento fallido al confirmar credencial del usuario durante el proceso de cambio de contraseña.");
+                    AuditoriaBLL.RegistrarMovimiento("Contraseña incorrecta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Login/Logout", "Intento fallido al confirmar credencial del usuario durante el proceso de cambio de contraseña.");
                     MessageBox.Show("La contraseña ingresada no coincide con la contraseña actual", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     errorProvider.SetError(lblContraseñaActual, "La contraseña ingresada no coincide con la contraseña actual.");
                 }
@@ -72,7 +72,7 @@ namespace SGF.PRESENTACION.formModales.Seguridad
             DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cancelar el proceso de cambio de contraseña?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(respuesta == DialogResult.Yes)
             {
-                AuditoriaBLL.RegistrarMovimiento("Cambio de contraseña cancelado", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Se canceló el proceso de cambio de contraseña.");
+                AuditoriaBLL.RegistrarMovimiento("Cambio de contraseña cancelado", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Login/Logout", "Se canceló el proceso de cambio de contraseña.");
                 this.DialogResult = DialogResult.Cancel;
                 this.Close();
             }

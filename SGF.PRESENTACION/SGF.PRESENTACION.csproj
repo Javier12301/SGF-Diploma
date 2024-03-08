@@ -235,10 +235,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FarmaciaDatosDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="formModales\formImportar\mdImportarProductos.cs">
+    <Compile Include="formModales\Importar\mdImportarProductos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formModales\formImportar\mdImportarProductos.Designer.cs">
+    <Compile Include="formModales\Importar\mdImportarProductos.Designer.cs">
       <DependentUpon>mdImportarProductos.cs</DependentUpon>
     </Compile>
     <Compile Include="formModales\mdAjustes.cs">
@@ -270,6 +270,12 @@
     </Compile>
     <Compile Include="formModales\Entrada inventario\mdEntradaInventario.Designer.cs">
       <DependentUpon>mdEntradaInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\mdClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdClientes.Designer.cs">
+      <DependentUpon>mdClientes.cs</DependentUpon>
     </Compile>
     <Compile Include="formModales\mdGrupo.cs">
       <SubType>Form</SubType>
@@ -307,16 +313,16 @@
     <Compile Include="formModales\mdUsuario.Designer.cs">
       <DependentUpon>mdUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="formModales\modalesBuscadores\mdBuscarMoneda.cs">
+    <Compile Include="formModales\Buscadores\mdBuscarMoneda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formModales\modalesBuscadores\mdBuscarMoneda.Designer.cs">
+    <Compile Include="formModales\Buscadores\mdBuscarMoneda.Designer.cs">
       <DependentUpon>mdBuscarMoneda.cs</DependentUpon>
     </Compile>
-    <Compile Include="formModales\modalesBuscadores\mdBuscarProducto.cs">
+    <Compile Include="formModales\Buscadores\mdBuscarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formModales\modalesBuscadores\mdBuscarProducto.Designer.cs">
+    <Compile Include="formModales\Buscadores\mdBuscarProducto.Designer.cs">
       <DependentUpon>mdBuscarProducto.cs</DependentUpon>
     </Compile>
     <Compile Include="formModales\Salida inventario\mdDetalleSalidaInventario.cs">
@@ -348,6 +354,24 @@
     </Compile>
     <Compile Include="formModales\Seguridad\formConfirmarContraseña.Designer.cs">
       <DependentUpon>formConfirmarContraseña.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\Seguridad\formHijosAuditoria\formDetalleProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\Seguridad\formHijosAuditoria\formDetalleProductos.Designer.cs">
+      <DependentUpon>formDetalleProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\Seguridad\mdDetalleAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\Seguridad\mdDetalleAuditoria.Designer.cs">
+      <DependentUpon>mdDetalleAuditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formClientes.Designer.cs">
+      <DependentUpon>formClientes.cs</DependentUpon>
     </Compile>
     <Compile Include="formPrincipales\formDashboard.cs">
       <SubType>Form</SubType>
@@ -495,7 +519,7 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UtilidadesComunes\UtilidadesUI.cs" />
-    <EmbeddedResource Include="formModales\formImportar\mdImportarProductos.resx">
+    <EmbeddedResource Include="formModales\Importar\mdImportarProductos.resx">
       <DependentUpon>mdImportarProductos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdAjustes.resx">
@@ -512,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\Entrada inventario\mdEntradaInventario.resx">
       <DependentUpon>mdEntradaInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdClientes.resx">
+      <DependentUpon>mdClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdGrupo.resx">
       <DependentUpon>mdGrupo.cs</DependentUpon>
@@ -531,10 +558,10 @@
     <EmbeddedResource Include="formModales\mdUsuario.resx">
       <DependentUpon>mdUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formModales\modalesBuscadores\mdBuscarMoneda.resx">
+    <EmbeddedResource Include="formModales\Buscadores\mdBuscarMoneda.resx">
       <DependentUpon>mdBuscarMoneda.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formModales\modalesBuscadores\mdBuscarProducto.resx">
+    <EmbeddedResource Include="formModales\Buscadores\mdBuscarProducto.resx">
       <DependentUpon>mdBuscarProducto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\Salida inventario\mdDetalleSalidaInventario.resx">
@@ -551,6 +578,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\Seguridad\formConfirmarContraseña.resx">
       <DependentUpon>formConfirmarContraseña.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\Seguridad\formHijosAuditoria\formDetalleProductos.resx">
+      <DependentUpon>formDetalleProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\Seguridad\mdDetalleAuditoria.resx">
+      <DependentUpon>mdDetalleAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formClientes.resx">
+      <DependentUpon>formClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formDashboard.resx">
       <DependentUpon>formDashboard.cs</DependentUpon>

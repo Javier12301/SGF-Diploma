@@ -12,7 +12,7 @@ namespace SGF.NEGOCIO.Negocio
         public string TipoDocumento { get; set; }
         public string Documento { get; set; }
         public string NombreCompleto { get; set; }
-        public Cliente TipoCliente { get; set; }
+        public TipoCliente TipoCliente { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
         public bool Estado { get; set; }

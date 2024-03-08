@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdDetalleSalidaInventario));
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -102,7 +102,7 @@
             this.flowLayoutPanel5.Controls.Add(this.txtTotal);
             this.flowLayoutPanel5.Controls.Add(this.label8);
             this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(552, 334);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(553, 334);
             this.flowLayoutPanel5.MaximumSize = new System.Drawing.Size(591, 26);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(166, 26);
@@ -118,7 +118,7 @@
             this.txtTotal.Location = new System.Drawing.Point(123, 0);
             this.txtTotal.Margin = new System.Windows.Forms.Padding(3, 0, 0, 1);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Padding = new System.Windows.Forms.Padding(2);
+            this.txtTotal.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTotal.Size = new System.Drawing.Size(41, 25);
             this.txtTotal.TabIndex = 245;
             this.txtTotal.Text = "200";
@@ -326,23 +326,23 @@
             // dgvDetallesSalidas
             // 
             this.dgvDetallesSalidas.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvDetallesSalidas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvDetallesSalidas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDetallesSalidas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetallesSalidas.AutoGenerateColumns = false;
             this.dgvDetallesSalidas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetallesSalidas.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetallesSalidas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetallesSalidas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetallesSalidas.ColumnHeadersHeight = 40;
             this.dgvDetallesSalidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetallesSalidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -357,6 +357,7 @@
             this.dgvDetallesSalidas.Location = new System.Drawing.Point(3, 106);
             this.dgvDetallesSalidas.Name = "dgvDetallesSalidas";
             this.dgvDetallesSalidas.ReadOnly = true;
+            this.dgvDetallesSalidas.RowHeadersWidth = 51;
             this.dgvDetallesSalidas.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDetallesSalidas.Size = new System.Drawing.Size(717, 223);
             this.dgvDetallesSalidas.TabIndex = 209;
@@ -366,6 +367,7 @@
             // 
             this.dgvcID.DataPropertyName = "DetalleSalidaID";
             this.dgvcID.HeaderText = "DetalleSalidaID";
+            this.dgvcID.MinimumWidth = 6;
             this.dgvcID.Name = "dgvcID";
             this.dgvcID.ReadOnly = true;
             this.dgvcID.Visible = false;
@@ -374,6 +376,7 @@
             // 
             this.dgvcCodigoBarras.DataPropertyName = "CodigoBarras";
             this.dgvcCodigoBarras.HeaderText = "Código";
+            this.dgvcCodigoBarras.MinimumWidth = 6;
             this.dgvcCodigoBarras.Name = "dgvcCodigoBarras";
             this.dgvcCodigoBarras.ReadOnly = true;
             // 
@@ -381,6 +384,7 @@
             // 
             this.dgvcNombreProducto.DataPropertyName = "NombreProducto";
             this.dgvcNombreProducto.HeaderText = "Producto";
+            this.dgvcNombreProducto.MinimumWidth = 6;
             this.dgvcNombreProducto.Name = "dgvcNombreProducto";
             this.dgvcNombreProducto.ReadOnly = true;
             // 
@@ -388,6 +392,7 @@
             // 
             this.dgvcProveedor.DataPropertyName = "Proveedor";
             this.dgvcProveedor.HeaderText = "Proveedor";
+            this.dgvcProveedor.MinimumWidth = 6;
             this.dgvcProveedor.Name = "dgvcProveedor";
             this.dgvcProveedor.ReadOnly = true;
             // 
@@ -395,6 +400,7 @@
             // 
             this.dgvcCategoria.DataPropertyName = "Categoria";
             this.dgvcCategoria.HeaderText = "Categoria";
+            this.dgvcCategoria.MinimumWidth = 6;
             this.dgvcCategoria.Name = "dgvcCategoria";
             this.dgvcCategoria.ReadOnly = true;
             // 
@@ -402,6 +408,7 @@
             // 
             this.dgvcCantidad.DataPropertyName = "Cantidad";
             this.dgvcCantidad.HeaderText = "Cantidad";
+            this.dgvcCantidad.MinimumWidth = 6;
             this.dgvcCantidad.Name = "dgvcCantidad";
             this.dgvcCantidad.ReadOnly = true;
             // 
@@ -505,7 +512,7 @@
             this.ClientSize = new System.Drawing.Size(723, 403);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(617, 442);
+            this.MinimumSize = new System.Drawing.Size(617, 440);
             this.Name = "mdDetalleSalidaInventario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Detalle de salida de inventario";
