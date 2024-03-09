@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -35,7 +36,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chkOtroCliente = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTipoCliente = new System.Windows.Forms.Label();
             this.cmbTipoCliente = new System.Windows.Forms.ComboBox();
             this.txtTipoCliente = new System.Windows.Forms.TextBox();
             this.pnlTipoDoc = new System.Windows.Forms.Panel();
@@ -45,7 +46,7 @@
             this.txtTipoDocumento = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtNombreCompleto = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblNombreApellido = new System.Windows.Forms.Label();
             this.pnlNroDocumento = new System.Windows.Forms.Panel();
             this.txtDocumento = new System.Windows.Forms.TextBox();
             this.lblDocumento = new System.Windows.Forms.Label();
@@ -60,6 +61,9 @@
             this.pnlControl = new System.Windows.Forms.Panel();
             this.gControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtID = new System.Windows.Forms.TextBox();
+            this.txtTipoClienteID = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -70,6 +74,7 @@
             this.pnlCorreo.SuspendLayout();
             this.panel10.SuspendLayout();
             this.pnlControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -160,8 +165,9 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtTipoClienteID);
             this.panel2.Controls.Add(this.chkOtroCliente);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblTipoCliente);
             this.panel2.Controls.Add(this.cmbTipoCliente);
             this.panel2.Controls.Add(this.txtTipoCliente);
             this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -179,15 +185,16 @@
             this.chkOtroCliente.Text = "Otro";
             this.chkOtroCliente.UseVisualStyleBackColor = true;
             this.chkOtroCliente.CheckedChanged += new System.EventHandler(this.chkOtroCliente_CheckedChanged);
+            this.chkOtroCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chkOtroCliente_KeyPress);
             // 
-            // label1
+            // lblTipoCliente
             // 
-            this.label1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tipo cliente *";
+            this.lblTipoCliente.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoCliente.Location = new System.Drawing.Point(5, 9);
+            this.lblTipoCliente.Name = "lblTipoCliente";
+            this.lblTipoCliente.Size = new System.Drawing.Size(105, 15);
+            this.lblTipoCliente.TabIndex = 0;
+            this.lblTipoCliente.Text = "Tipo cliente *";
             // 
             // cmbTipoCliente
             // 
@@ -213,6 +220,7 @@
             // pnlTipoDoc
             // 
             this.pnlTipoDoc.Controls.Add(this.chkOtroDocumento);
+            this.pnlTipoDoc.Controls.Add(this.txtID);
             this.pnlTipoDoc.Controls.Add(this.lblTipoDocumento);
             this.pnlTipoDoc.Controls.Add(this.cmbTipoDocumento);
             this.pnlTipoDoc.Controls.Add(this.txtTipoDocumento);
@@ -231,6 +239,7 @@
             this.chkOtroDocumento.Text = "Otro";
             this.chkOtroDocumento.UseVisualStyleBackColor = true;
             this.chkOtroDocumento.CheckedChanged += new System.EventHandler(this.chkOtroDocumento_CheckedChanged);
+            this.chkOtroDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.chkOtroDocumento_KeyPress);
             // 
             // lblTipoDocumento
             // 
@@ -265,7 +274,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.txtNombreCompleto);
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.lblNombreApellido);
             this.panel3.Location = new System.Drawing.Point(3, 78);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(195, 54);
@@ -278,15 +287,15 @@
             this.txtNombreCompleto.Size = new System.Drawing.Size(178, 22);
             this.txtNombreCompleto.TabIndex = 6;
             // 
-            // label2
+            // lblNombreApellido
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(5, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 14);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Nombre y Apellido *";
+            this.lblNombreApellido.AutoSize = true;
+            this.lblNombreApellido.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreApellido.Location = new System.Drawing.Point(5, 9);
+            this.lblNombreApellido.Name = "lblNombreApellido";
+            this.lblNombreApellido.Size = new System.Drawing.Size(113, 14);
+            this.lblNombreApellido.TabIndex = 0;
+            this.lblNombreApellido.Text = "Nombre y Apellido *";
             // 
             // pnlNroDocumento
             // 
@@ -397,6 +406,8 @@
             this.pnlControl.Name = "pnlControl";
             this.pnlControl.Size = new System.Drawing.Size(422, 32);
             this.pnlControl.TabIndex = 3;
+            this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
             // 
             // gControlCerrar
             // 
@@ -424,6 +435,33 @@
             this.lblNombreForm.TabIndex = 3;
             this.lblNombreForm.Tag = "";
             this.lblNombreForm.Text = "Registrar cliente";
+            this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseDown);
+            this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTop_MouseMove);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkRate = 300;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // txtID
+            // 
+            this.txtID.Enabled = false;
+            this.txtID.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtID.Location = new System.Drawing.Point(167, 3);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(19, 21);
+            this.txtID.TabIndex = 3;
+            this.txtID.Visible = false;
+            // 
+            // txtTipoClienteID
+            // 
+            this.txtTipoClienteID.Enabled = false;
+            this.txtTipoClienteID.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTipoClienteID.Location = new System.Drawing.Point(167, 3);
+            this.txtTipoClienteID.Name = "txtTipoClienteID";
+            this.txtTipoClienteID.Size = new System.Drawing.Size(19, 21);
+            this.txtTipoClienteID.TabIndex = 6;
+            this.txtTipoClienteID.Visible = false;
             // 
             // mdClientes
             // 
@@ -435,6 +473,7 @@
             this.Name = "mdClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mdClientes";
+            this.Load += new System.EventHandler(this.mdClientes_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -453,6 +492,7 @@
             this.panel10.ResumeLayout(false);
             this.pnlControl.ResumeLayout(false);
             this.pnlControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -486,10 +526,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox chkOtroCliente;
         private System.Windows.Forms.ComboBox cmbTipoCliente;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTipoCliente;
         private System.Windows.Forms.TextBox txtTipoCliente;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox txtNombreCompleto;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblNombreApellido;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.TextBox txtTipoClienteID;
     }
 }

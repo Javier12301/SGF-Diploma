@@ -191,6 +191,13 @@ namespace SGF.DATOS.Negocio
                         baja = filasAfectadas > 0;
                     }
                 }
+                catch (SqlException ex) when (ex.Number == 547)
+                {
+                    Producto producto = ObtenerProductoPorIDD(productoID);
+                    producto.Estado = false;
+                    ModificarProductoD(producto);
+                    throw new Exception("El producto está siendo referenciado por otros registros en la base de datos. Se establecerá el producto como inactivo");
+                }
                 catch (Exception)
                 {
                     throw new Exception("Se ha producido un error al intentar eliminar el producto. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");

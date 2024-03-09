@@ -15,6 +15,7 @@ using SGF.NEGOCIO.Negocio;
 using SGF.PRESENTACION.UtilidadesComunes;
 using SGF.PRESENTACION.formModales.formImportar;
 using Irony.Parsing;
+using System.Data.SqlClient;
 
 namespace SGF.PRESENTACION.formPrincipales
 {
@@ -45,7 +46,8 @@ namespace SGF.PRESENTACION.formPrincipales
                 cargarFiltros();
                 tsmiID.Checked = false;
                 chkVencimiento.Checked = false;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -245,10 +247,11 @@ namespace SGF.PRESENTACION.formPrincipales
                         producto = lProducto.ObtenerProductoPorID(productosID);
                         producto.Categoria = lCategoria.ObtenerCategoriaPorID(producto.Categoria.CategoriaID);
                         producto.Proveedor = lProveedor.ObtenerProveedorPorID(producto.Proveedor.ProveedorID);
+
                         if (lProducto.BajaProducto(productosID))
                         {
                             string jsonProducto = uiUtilidades.SerializaryCrearJSON(producto);
-                            AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(),"Productos" , $"Se dió de baja con éxito el producto con nombre {producto.Nombre} cuya ID es: {producto.ProductoID}", jsonProducto);
+                            AuditoriaBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), "Productos", $"Se dió de baja con éxito el producto con nombre {producto.Nombre} cuya ID es: {producto.ProductoID}", jsonProducto);
                             productosEliminados++;
                         }
                         else
@@ -270,7 +273,14 @@ namespace SGF.PRESENTACION.formPrincipales
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.StartsWith("El producto está siendo referenciado"))
+                {
+                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {
@@ -301,12 +311,12 @@ namespace SGF.PRESENTACION.formPrincipales
             try
             {
                 DialogResult respuesta = MessageBox.Show("¿Desea abrir el módulo de importación de productos?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(respuesta == DialogResult.Yes)
+                if (respuesta == DialogResult.Yes)
                 {
-                    using(var modal = new mdImportarProductos())
+                    using (var modal = new mdImportarProductos())
                     {
                         var resultado = modal.ShowDialog();
-                        if(resultado == DialogResult.OK)
+                        if (resultado == DialogResult.OK)
                         {
                             cargarLista();
                         }
@@ -380,7 +390,7 @@ namespace SGF.PRESENTACION.formPrincipales
         {
             // Filtro de buscar por
             // comprobar si el combobox tiene items, si no tiene cargarlos
-            if(cmbFiltroBuscar.Items.Count == 0)
+            if (cmbFiltroBuscar.Items.Count == 0)
             {
                 cmbFiltroBuscar.Items.Add("Todo");
                 cmbFiltroBuscar.Items.Add("Código");
@@ -395,7 +405,7 @@ namespace SGF.PRESENTACION.formPrincipales
             dtpFin.Value = DateTime.Now.AddYears(5);
 
             // Filtro estado
-            if(cmbFiltroEstado.Items.Count == 0)
+            if (cmbFiltroEstado.Items.Count == 0)
             {
                 cmbFiltroEstado.Items.Add("Todos");
                 cmbFiltroEstado.Items.Add("Activo");
@@ -404,9 +414,9 @@ namespace SGF.PRESENTACION.formPrincipales
             }
 
             // Filtro Categoría
-            if(cmbFiltroCategoria.Items.Count == 0)
+            if (cmbFiltroCategoria.Items.Count == 0)
             {
-            cmbFiltroCategoria.Items.Add("Todos");
+                cmbFiltroCategoria.Items.Add("Todos");
             }
             // Obtener las categorías existentes referenciada en la tabla Producto
             List<Categoria> listaCategorias = lProducto.ObtenerCategoriasExistentes();
@@ -421,7 +431,7 @@ namespace SGF.PRESENTACION.formPrincipales
             cmbFiltroCategoria.SelectedIndex = 0;
 
             // Filtro tipo de productos
-            if(cmbFiltroTipoProducto.Items.Count == 0)
+            if (cmbFiltroTipoProducto.Items.Count == 0)
             {
                 cmbFiltroTipoProducto.Items.Add("Todos");
                 cmbFiltroTipoProducto.Items.Add("Producto general");

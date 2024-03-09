@@ -1,5 +1,7 @@
 ﻿using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
+using SGF.NEGOCIO.Seguridad;
+using SGF.PRESENTACION.formModales;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,12 @@ namespace SGF.PRESENTACION.formPrincipales
         private Permiso permisoDeUsuario { get; set; }
         private ClienteBLL lCliente = ClienteBLL.ObtenerInstancia;
         private UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
+        private SesionBLL lSesion = SesionBLL.ObtenerInstancia;
 
         public formClientes()
         {
             InitializeComponent();
+            permisoDeUsuario = new Permiso();
         }
 
         private void formClientes_Load(object sender, EventArgs e)
@@ -91,31 +95,171 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnNuevoP_Click(object sender, EventArgs e)
         {
-
+            Cursor.Current = Cursors.WaitCursor;
+            if (permisoDeUsuario.Alta)
+            {
+                using(var modal = new mdClientes())
+                {
+                    Cursor.Current = Cursors.Default;
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        cargarLista();
+                    }
+                }
+            }
         }
 
         private void btnModificarP_Click(object sender, EventArgs e)
         {
+            abrirModalModificar();
+        }
 
+        private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                abrirModalModificar();
+            }
+        }
+
+        private void abrirModalModificar()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                if (permisoDeUsuario.Modificar)
+                {
+                    if(dgvClientes.CurrentCell != null)
+                    {
+                        int filaIndex = dgvClientes.CurrentCell.RowIndex;
+                        int clienteID = int.Parse(dgvClientes.Rows[filaIndex].Cells["dgvcID"].Value.ToString());
+                        if(clienteID > 0)
+                        {
+                            using(var modal = new mdClientes(true, clienteID))
+                            {
+                                var resultado = modal.ShowDialog();
+                                if(resultado == DialogResult.OK)
+                                {
+                                    cargarLista();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se ha seleccionado un cliente válido. Por favor, seleccione un cliente de la lista e inténtelo de nuevo.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permiso para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void btnEliminarP_Click(object sender, EventArgs e)
         {
+            bajaCliente();
+        }
 
+        private void dgvClientes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                bajaCliente();
+            }
+        }
+
+        private void bajaCliente()
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                if (permisoDeUsuario.Baja)
+                {
+                    if(dgvClientes.SelectedCells.Count == 0)
+                    {
+                        MessageBox.Show("No se ha seleccionado un cliente válido. Por favor, seleccione un cliente de la lista e inténtelo de nuevo.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    List<int> clientesAEliminar = new List<int>();
+                    DialogResult respuesta = MessageBox.Show("¿Estás seguro que desea eliminar los clientes seleccionados?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (respuesta != DialogResult.Yes)
+                        return;
+                    clientesAEliminar.Clear();
+                    
+                    foreach(DataGridViewCell celda in dgvClientes.SelectedCells)
+                    {
+                        int clienteID = int.Parse(dgvClientes.Rows[celda.RowIndex].Cells["dgvcID"].Value.ToString());
+                        if(clienteID > 0)
+                        {
+                            clientesAEliminar.Add(clienteID);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se puede eliminar el cliente consumidor final.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            continue;
+                        }
+                    }
+
+                    int clientesEliminados = 0;
+                    int cantidadAntes = lCliente.ConteoClientes();
+                    foreach(int clienteID in clientesAEliminar)
+                    {
+                        if (lCliente.BajaCliente(clienteID))
+                            clientesEliminados++;                          
+                        else
+                            MessageBox.Show($"No se pudo eliminar el cliente con ID: {clienteID}", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    if(clientesEliminados > 0)
+                    {
+                        int cantidadDespues = lCliente.ConteoClientes();
+                        RegistroBLL.RegistrarMovimiento("Baja", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), clientesEliminados, cantidadAntes, cantidadDespues, "Clientes", $"Se eliminaron {clientesEliminados} clientes");
+                        MessageBox.Show(clientesEliminados > 1 ? "Clientes eliminados con éxito." : "Cliente eliminado con éxito.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cargarLista();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No tiene permiso para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void btnExportarP_Click(object sender, EventArgs e)
         {
-
+            if (permisoDeUsuario.Exportar)
+            {
+                try
+                {
+                    uiUtilidades.ExportarDataGridViewAExcel(dgvClientes, "Lista de clientes", "Informe de clientes", "Clientes");
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No tiene permiso para realizar esta acción.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        
+      
         // Manejo de interfaz
         private void tsmiButtons_Click(object sender, EventArgs e)
         {
@@ -215,5 +359,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 }
             }
         }
+
+        
     }
 }

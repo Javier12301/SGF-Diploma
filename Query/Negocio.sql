@@ -1,6 +1,10 @@
 use FarmaciaDatos
 GO
 
+
+SELECT * FROM Cliente
+select * from TipoCliente
+
 -- BASE DE DATOS DE PRODUCTOS
 CREATE TABLE Categoria (
     CategoriaID INT IDENTITY PRIMARY KEY,
@@ -14,6 +18,7 @@ INSERT INTO Categoria (CategoriaID, Nombre, Descripcion, Estado)
 VALUES (0, 'N/A', 'N/A', 0);
 SET IDENTITY_INSERT Categoria OFF;
 GO
+
 
 CREATE TABLE Proveedor (
     ProveedorID INT IDENTITY PRIMARY KEY,

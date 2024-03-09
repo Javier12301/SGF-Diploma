@@ -120,12 +120,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>227, 34</value>
   </metadata>
-  <metadata name="clientesTablaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>582, 34</value>
-  </metadata>
-  <metadata name="negocio.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>485, 34</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnNuevoP.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -172,20 +166,6 @@
         ApPg/1qS9AHARnImWv4BvgAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btnImprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAfFJREFUSEvtl81LInEchwe22963/6T/oejarVsQtewpIbQXRHcvqZuLZbC7lU3i
-        FBNr28uWqdDLZFFZhm4FnSKpWyUVXTp86zONMY3KjPPrFfrAAwPO73nAg+Nwpdb1e7TGMzBWywIcis74
-        YlLy6DR3QSzAoeiML7G5c0iMg0PRGd972MzKDjdavQsxaVM5bn5wwKVoC1dvcX9s8wTav/rFbmB1DWVd
-        wgaJUpYJOODKe9FAS47a7faKb35xMTyfpr+L/+9pDWTIPZtjAg61Ew206urED9wXu69qeGr1Wn0DsPJ7
-        RWXlAIfWixaaXIvzV+1IZKPghscMz62kaH1bkq/RQvNZwojmjv7I188aVqMbtvG7RWXlAIfWqxvu4FO3
-        h88KZEZxzZzJDq1XNyzG0+QMpsgRypBTKA+ccQS3ZIfWqxt+Kl5neGgiQb2hCPmFOSbg4CcTD9wlwz2h
-        KDXavOTwBSkQjjMBB1y9QlQ/3B9eouYOH43MLNNu9oQJOOAaHL/71XoQtjh+VguR5P0HeaTkjvJwMz84
-        tF600OQabD8q+0bjx9ob1OHzyytKZvYNgXvzKxZGq8ni/iQ/Gju/8589g9Pb3sC/gzwLa+lr5bzpwaF2
-        otHuHW6Wo6X2Kv5zmf2qmcNm97bCL/YK87QvbRx3A9dJf038JlSSAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="btnExportarP.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -206,6 +186,12 @@
   </data>
   <metadata name="bindingNavigator1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>332, 34</value>
+  </metadata>
+  <metadata name="clientesTablaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>582, 34</value>
+  </metadata>
+  <metadata name="negocio.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>485, 34</value>
   </metadata>
   <data name="bnpUltimoItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -247,6 +233,12 @@
         lf8gBXgVDULAwAAA8HbAq6XlmnAAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>227, 34</value>
+  </metadata>
+  <metadata name="negocio.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>485, 34</value>
+  </metadata>
   <metadata name="clientesTablaTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>780, 34</value>
   </metadata>

@@ -221,11 +221,11 @@
             this.cmbFactura.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.cmbFactura.AutoSize = false;
             this.cmbFactura.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFactura.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbFactura.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbFactura.Margin = new System.Windows.Forms.Padding(1, 1, 4, 1);
             this.cmbFactura.Name = "cmbFactura";
             this.cmbFactura.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cmbFactura.Size = new System.Drawing.Size(121, 23);
+            this.cmbFactura.Size = new System.Drawing.Size(121, 22);
             // 
             // lblTipodeFactura
             // 
@@ -252,10 +252,12 @@
             // cmbMoneda
             // 
             this.cmbMoneda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbMoneda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMoneda.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMoneda.FormattingEnabled = true;
             this.cmbMoneda.Location = new System.Drawing.Point(661, 6);
             this.cmbMoneda.Name = "cmbMoneda";
-            this.cmbMoneda.Size = new System.Drawing.Size(133, 21);
+            this.cmbMoneda.Size = new System.Drawing.Size(133, 22);
             this.cmbMoneda.TabIndex = 31;
             // 
             // label1
