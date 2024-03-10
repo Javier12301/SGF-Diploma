@@ -45,23 +45,24 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.negocio = new SGF.PRESENTACION.Negocio();
+            this.productoTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.ProductoTableAdapter();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcLote = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcTipoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcRefrigerado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvcBajoReceta = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.productoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.negocio = new SGF.PRESENTACION.Negocio();
-            this.productoTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.ProductoTableAdapter();
             this.pnlControl.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlControl
@@ -227,6 +228,20 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // productoBindingSource
+            // 
+            this.productoBindingSource.DataMember = "Producto";
+            this.productoBindingSource.DataSource = this.negocio;
+            // 
+            // negocio
+            // 
+            this.negocio.DataSetName = "Negocio";
+            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // productoTableAdapter
+            // 
+            this.productoTableAdapter.ClearBeforeFill = true;
+            // 
             // dgvProductos
             // 
             this.dgvProductos.AllowUserToAddRows = false;
@@ -254,6 +269,7 @@
             this.dgvcCodigo,
             this.dgvcNombre,
             this.dgvcLote,
+            this.dgvcStock,
             this.dgvcTipoProducto,
             this.dgvcRefrigerado,
             this.dgvcBajoReceta});
@@ -313,6 +329,13 @@
             this.dgvcLote.Name = "dgvcLote";
             this.dgvcLote.ReadOnly = true;
             // 
+            // dgvcStock
+            // 
+            this.dgvcStock.DataPropertyName = "Stock";
+            this.dgvcStock.HeaderText = "Stock";
+            this.dgvcStock.Name = "dgvcStock";
+            this.dgvcStock.ReadOnly = true;
+            // 
             // dgvcTipoProducto
             // 
             this.dgvcTipoProducto.DataPropertyName = "TipoProducto";
@@ -334,20 +357,6 @@
             this.dgvcBajoReceta.Name = "dgvcBajoReceta";
             this.dgvcBajoReceta.ReadOnly = true;
             // 
-            // productoBindingSource
-            // 
-            this.productoBindingSource.DataMember = "Producto";
-            this.productoBindingSource.DataSource = this.negocio;
-            // 
-            // negocio
-            // 
-            this.negocio.DataSetName = "Negocio";
-            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // productoTableAdapter
-            // 
-            this.productoTableAdapter.ClearBeforeFill = true;
-            // 
             // mdBuscarProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -367,9 +376,9 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,14 +397,15 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.DataGridView dgvProductos;
         private Negocio negocio;
         private System.Windows.Forms.BindingSource productoBindingSource;
         private NegocioTableAdapters.ProductoTableAdapter productoTableAdapter;
+        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcLote;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcTipoProducto;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcRefrigerado;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcBajoReceta;

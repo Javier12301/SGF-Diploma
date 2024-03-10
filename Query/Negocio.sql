@@ -19,7 +19,6 @@ VALUES (0, 'N/A', 'N/A', 0);
 SET IDENTITY_INSERT Categoria OFF;
 GO
 
-
 CREATE TABLE Proveedor (
     ProveedorID INT IDENTITY PRIMARY KEY,
     RazonSocial VARCHAR(50),
@@ -53,9 +52,13 @@ CREATE TABLE Cliente (
 SET IDENTITY_INSERT Cliente ON;
 -- Insertar para "Consumidor Final" con ClienteID igual a 0
 INSERT INTO Cliente (ClienteID, TipoDocumento, Documento, NombreCompleto, TipoClienteID, Correo, Telefono, Estado)
-VALUES (0, 'N/A', 'N/A', 'Consumidor Final', 1, 'N/A', 'N/A', 0);
+VALUES (0, '-', '-', 'Consumidor Final', 1, '-', '-', 1);
 SET IDENTITY_INSERT Cliente OFF;
 GO
+
+select * from Producto
+
+
 
 CREATE TABLE TipoCliente (
     TipoClienteID INT IDENTITY PRIMARY KEY,
@@ -85,6 +88,7 @@ CREATE TABLE Producto (
     Estado BIT
 );
 GO
+
 
 --Registros de movimientos en el sistema
 CREATE TABLE Registro (
@@ -147,12 +151,14 @@ CREATE TABLE Venta (
     NumeroDocumento VARCHAR(50),
     DocumentoCliente VARCHAR(50),
     NombreCliente VARCHAR(100),
+	MonedaID INT REFERENCES Moneda(MonedaID),
     MontoPago DECIMAL(10,2),
     MontoCambio DECIMAL(10,2),
     MontoTotal DECIMAL(10,2),
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
+
 
 CREATE TABLE Detalle_Venta (
     DetalleVentaID INT IDENTITY PRIMARY KEY,
@@ -165,6 +171,7 @@ CREATE TABLE Detalle_Venta (
 );
 GO
 
+select * from Impuesto
 
 CREATE TABLE Moneda(
 	MonedaID INT IDENTITY PRIMARY KEY,
@@ -199,3 +206,9 @@ CREATE TABLE Negocio(
     ImpuestoID INT FOREIGN KEY REFERENCES Impuesto(ImpuestoID)
 );
 GO
+
+SELECT * FROM Impuesto
+SELECT * FROM Negocio
+
+SELECT MAX(VentaID) FROM Venta
+

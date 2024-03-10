@@ -416,5 +416,41 @@ namespace SGF.DATOS.Negocio
             }
             return conteo;
         }
+
+        // Listar categorías que tienen productos asignados
+        public static List<Categoria> ListarCategoriaConProductosD()
+        {
+            List<Categoria> listaCategorias = new List<Categoria>();
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();            
+                    query.AppendLine("SELECT DISTINCT C.CategoriaID, C.Nombre, C.Descripcion, C.Estado FROM Categoria C");
+                    query.AppendLine("INNER JOIN Producto P ON C.CategoriaID = P.CategoriaID");
+                    using(SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Categoria oCategoria = new Categoria();
+                                oCategoria.CategoriaID = Convert.ToInt32(reader["CategoriaID"]);
+                                oCategoria.Nombre = reader["Nombre"].ToString();
+                                oCategoria.Descripcion = reader["Descripcion"].ToString();
+                                oCategoria.Estado = Convert.ToBoolean(reader["Estado"]);
+                                listaCategorias.Add(oCategoria);
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener la lista de categorías con productos asignados, contactar con el administrador del sistema si el error persiste.");
+                }
+            }
+            return listaCategorias;
+        }
     }
 }

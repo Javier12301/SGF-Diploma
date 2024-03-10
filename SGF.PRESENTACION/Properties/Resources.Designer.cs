@@ -63,6 +63,16 @@ namespace SGF.PRESENTACION.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Aumentar_15 {
+            get {
+                object obj = ResourceManager.GetObject("Aumentar_15", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cancelado_imagen {
             get {
                 object obj = ResourceManager.GetObject("cancelado_imagen", resourceCulture);
@@ -86,6 +96,16 @@ namespace SGF.PRESENTACION.Properties {
         internal static System.Drawing.Bitmap checkList_Negro {
             get {
                 object obj = ResourceManager.GetObject("checkList_Negro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Decrementar_15 {
+            get {
+                object obj = ResourceManager.GetObject("Decrementar_15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -21,6 +21,7 @@ namespace SGF.PRESENTACION.formPrincipales
     public partial class formMain : Form
     {
         private Form formularioActivo;
+        private bool formularioAntiCierre = false;
         private ToolStripButton botonActivo;
 
         // Controladoras
@@ -131,8 +132,29 @@ namespace SGF.PRESENTACION.formPrincipales
         }
 
         // Abrir Formularios dentro del panel padre
-        private void abrirFormularioHijo(Form formularioHijo, ToolStripButton btnSender)
+        private void abrirFormularioHijo(Form formularioHijo, ToolStripButton btnSender, bool FormAntiCierre = false)
         {
+            if (formularioAntiCierre)
+            {
+                if (formularioActivo != null)
+                {
+                    if(formularioActivo is formVentas)
+                    {
+                        // obtener instancia del formulario venta activa
+                        formVentas formVenta = (formVentas)formularioActivo;
+                        if (formVenta.productoEnGrilla)
+                        {
+                            DialogResult respuesta = MessageBox.Show("¿Está seguro que desea cerrar el formulario? se perderán todos los cambios realizados.", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (respuesta == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                   
+                }
+                
+            }
             Cursor.Current = Cursors.WaitCursor;
             // Resaltamos el botón activado
             activarBoton(btnSender);
@@ -144,6 +166,7 @@ namespace SGF.PRESENTACION.formPrincipales
             }
             // Abrimos el formulario hijo
             formularioActivo = formularioHijo;
+            formularioAntiCierre = FormAntiCierre;
             formularioHijo.TopLevel = false;
             formularioHijo.FormBorderStyle = FormBorderStyle.None;
             formularioHijo.Dock = DockStyle.Fill;
@@ -165,7 +188,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
-            abrirFormularioHijo(new formVentas(), btnVentas);
+            abrirFormularioHijo(new formVentas(), btnVentas, true);
         }
 
         private void btnProductos_Click(object sender, EventArgs e)

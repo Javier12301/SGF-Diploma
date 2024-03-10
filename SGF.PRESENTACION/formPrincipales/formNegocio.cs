@@ -126,18 +126,26 @@ namespace SGF.PRESENTACION.formPrincipales
             negocio.Moneda = monedaSeleccionada;
 
             // Impuestos
-            Impuesto impuesto = rbImpuestoSi.Checked ? new Impuesto
-            {
-                Nombre = txtNombreImpuesto.Text,
-                Porcentaje = Convert.ToDecimal(txtPorcentajeImpuesto.Text)
-            } : lNegocio.ObtenerImpuestoPorID(1);
-
+            Impuesto impuesto;
             if (rbImpuestoSi.Checked)
             {
+                // Obtén el impuesto existente con ID 1
+                impuesto = lNegocio.ObtenerImpuestoPorID(1);
+
+                // Modifica las propiedades del impuesto
+                impuesto.Nombre = txtNombreImpuesto.Text;
+                impuesto.Porcentaje = Convert.ToDecimal(txtPorcentajeImpuesto.Text);
+
+                // Actualiza el impuesto en la base de datos
                 lNegocio.ModificarImpuesto(impuesto);
+                negocio.Impuestos = true;
+            }
+            else
+            {
+                impuesto = lNegocio.ObtenerImpuestoPorID(1);
+                negocio.Impuestos = false;
             }
             negocio.Impuesto = impuesto;
-
             return negocio;
         }
 

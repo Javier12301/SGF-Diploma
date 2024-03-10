@@ -16325,7 +16325,7 @@ GROUP BY
 FROM Cliente C
 INNER JOIN TipoCliente TC ON C.TipoClienteID = TC.TipoClienteID
 WHERE
-    C.ClienteID > 0 AND
+    C.ClienteID >= 0 AND
     (
         (@FiltroBuscarPor = 'Todos' AND 
         (

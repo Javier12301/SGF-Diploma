@@ -1,6 +1,6 @@
-﻿namespace SGF.PRESENTACION.formModales
+﻿namespace SGF.PRESENTACION.formModales.Ventas
 {
-    partial class mdCompraProducto
+    partial class mdBuscarProductoVenta
     {
         /// <summary>
         /// Required designer variable.
@@ -41,12 +41,11 @@
             this.cmbCategoria = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAceptar = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnbuscar = new FontAwesome.Sharp.IconButton();
             this.pnlControl = new System.Windows.Forms.Panel();
             this.gunaControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
-            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).BeginInit();
@@ -68,7 +67,7 @@
             this.panel1.Controls.Add(this.cmbCategoria);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.btnCancelar);
-            this.panel1.Controls.Add(this.btnAceptar);
+            this.panel1.Controls.Add(this.btnRegistrar);
             this.panel1.Controls.Add(this.btnbuscar);
             this.panel1.Controls.Add(this.pnlControl);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -76,7 +75,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(366, 226);
-            this.panel1.TabIndex = 2;
+            this.panel1.TabIndex = 3;
             // 
             // txtPrecio
             // 
@@ -96,9 +95,9 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(209, 130);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 17);
+            this.label4.Size = new System.Drawing.Size(88, 17);
             this.label4.TabIndex = 210;
-            this.label4.Text = "Precio compra:";
+            this.label4.Text = "Precio venta:";
             // 
             // txtCantidad
             // 
@@ -107,6 +106,7 @@
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(91, 23);
             this.txtCantidad.TabIndex = 209;
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
             // label5
             // 
@@ -145,16 +145,13 @@
             // 
             // txtCodigo
             // 
+            this.txtCodigo.BackColor = System.Drawing.Color.White;
+            this.txtCodigo.Enabled = false;
             this.txtCodigo.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpProvider.SetHelpString(this.txtCodigo, "Presione enter si escribio el código de un producto.");
             this.txtCodigo.Location = new System.Drawing.Point(77, 79);
             this.txtCodigo.Name = "txtCodigo";
-            this.helpProvider.SetShowHelp(this.txtCodigo, true);
             this.txtCodigo.Size = new System.Drawing.Size(226, 23);
             this.txtCodigo.TabIndex = 93;
-            this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
-            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
-            this.txtCodigo.Leave += new System.EventHandler(this.txtCodigo_Leave);
             // 
             // label1
             // 
@@ -176,7 +173,6 @@
             this.cmbCategoria.Name = "cmbCategoria";
             this.cmbCategoria.Size = new System.Drawing.Size(226, 23);
             this.cmbCategoria.TabIndex = 91;
-            this.cmbCategoria.SelectedIndexChanged += new System.EventHandler(this.cmbCategoria_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -207,23 +203,23 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnAceptar
+            // btnRegistrar
             // 
-            this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(125)))), ((int)(((byte)(166)))));
-            this.btnAceptar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(137)))), ((int)(((byte)(180)))));
-            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnAceptar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAceptar.Location = new System.Drawing.Point(259, 190);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(103, 31);
-            this.btnAceptar.TabIndex = 88;
-            this.btnAceptar.Text = "Registrar";
-            this.btnAceptar.UseVisualStyleBackColor = false;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnRegistrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRegistrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(125)))), ((int)(((byte)(166)))));
+            this.btnRegistrar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnRegistrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(137)))), ((int)(((byte)(180)))));
+            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnRegistrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRegistrar.Location = new System.Drawing.Point(259, 190);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(103, 31);
+            this.btnRegistrar.TabIndex = 88;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = false;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // btnbuscar
             // 
@@ -278,10 +274,10 @@
             this.lblNombreForm.ForeColor = System.Drawing.SystemColors.Control;
             this.lblNombreForm.Location = new System.Drawing.Point(7, 8);
             this.lblNombreForm.Name = "lblNombreForm";
-            this.lblNombreForm.Size = new System.Drawing.Size(135, 17);
+            this.lblNombreForm.Size = new System.Drawing.Size(122, 17);
             this.lblNombreForm.TabIndex = 3;
             this.lblNombreForm.Tag = "";
-            this.lblNombreForm.Text = "Compra de producto";
+            this.lblNombreForm.Text = "Venta de producto";
             this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
             this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
             // 
@@ -290,17 +286,17 @@
             this.errorProvider.BlinkRate = 300;
             this.errorProvider.ContainerControl = this;
             // 
-            // mdCompraProducto
+            // mdBuscarProductoVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 226);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "mdCompraProducto";
+            this.Name = "mdBuscarProductoVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "mdCompraProducto";
-            this.Load += new System.EventHandler(this.mdCompraProducto_Load);
+            this.Text = "mdBuscarProductoVenta";
+            this.Load += new System.EventHandler(this.mdBuscarProductoVenta_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).EndInit();
@@ -314,23 +310,22 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtPrecio;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pctLineSeparator;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbCategoria;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnAceptar;
+        private System.Windows.Forms.Button btnRegistrar;
         private FontAwesome.Sharp.IconButton btnbuscar;
         private System.Windows.Forms.Panel pnlControl;
         private Guna.UI.WinForms.GunaControlBox gunaControlCerrar;
         private System.Windows.Forms.Label lblNombreForm;
-        private System.Windows.Forms.PictureBox pctLineSeparator;
-        private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.TextBox txtPrecio;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtCantidad;
-        private System.Windows.Forms.Label label5;
     }
 }

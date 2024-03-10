@@ -89,3 +89,23 @@ join Accion op on op.AccionID = p.AccionID
 join Modulo M on M.ModuloID = op.ModuloID
 WHERE Gr.GrupoID = @GrupoID AND M.Descripcion = @moduloDescripcion AND p.Permitido = 1
 GO
+
+CREATE TABLE Compra (
+    CompraID INT IDENTITY PRIMARY KEY,
+    UsuarioID INT REFERENCES Usuario(UsuarioID),
+    ProveedorID INT REFERENCES Proveedor(ProveedorID),
+    Factura VARCHAR(50),
+    FechaCompra DATETIME DEFAULT GETDATE(),
+	Estado BIT
+);
+GO
+
+CREATE TABLE Detalle_Compra (
+    DetalleCompraID INT IDENTITY PRIMARY KEY,
+    CompraID INT REFERENCES Compra(CompraID),
+    ProductoID INT REFERENCES Producto(ProductoID),
+    PrecioCompra DECIMAL(10,2) DEFAULT 0,
+    Cantidad INT,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+GO

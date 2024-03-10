@@ -24,6 +24,20 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Listar categorias con productos
+        public List<Categoria> ListarCategoriasConProductos()
+        {
+            List<Categoria> listaCategorias = CategoriaDAO.ListarCategoriaConProductosD();
+            if (listaCategorias != null)
+            {
+                return listaCategorias;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error inesperado al intentar listar las categorías, contactar con el administrador del sistema si el error persiste.");
+            }
+        }
+
         // Conteo de categorías
         public int ConteoCategorias()
         {

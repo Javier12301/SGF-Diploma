@@ -2710,38 +2710,25 @@
 </value>
   </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>217, 17</value>
   </metadata>
-  <metadata name="dgvcID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcProducto.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcCantidad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcPrecio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcDescuento.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcTotal.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dgvcDisponible.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnAumentar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnDecrementar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="btnEliminar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <data name="btnLimpiar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAAAolJREFUSEvtkk1oE1EQgLdrdlesipCTP7dSLeLBsz/ZiOQkJpuCaG8KvXoQlF5q
+        oxUPoh4qvVSCtCAYU2k1u0kJNuRHjxEsCoJKG+0GEatGbX7Kbnact3nWuJFNGnrsB0Oy896bb9/MMhu0
+        TUTVrkdUPR3+DFtpak2I/mi/S1Jei5LSR1ONEIGc11Zii7BnSgWnrOrx2Afoosu2iL2RHhSUUQQuKfqS
+        phuJf4JOIiD/Y0uwPZLXxuWPsNtctCMQYF1+5RkRmBK/MkBX7InkoWd6AXbQR1uwPZf+CES/8kP0TTc/
+        h20blPM6yKr2ZSYHO2n6vxzzzuwTpWipTnKDLtmDgllTgvEkr3loupHGNlUOeR/voqv2yIuaGwVz+LXd
+        z2aBo2kT0accxMG+MotKypu/NzAjSLe1D+k1CnKWwkS2jG0yjnhj++nW9oAJxvnzJr8QunDyrVuSdasI
+        57JytDd6mm5fO5Diu7WQY744yACJwjWhcqX/4jurCG9U8HjinfRYa0BC6IK0cAtSQgl/AUVQucNC6WpN
+        pg47v53tG1XrRS0NHouN4JvHIc2/x+IGKW4NfZKD4lBNVLzMwNxQd+7EqdBX8kHQMvZAZvNhLF5tKJ7C
+        SPCrz8ZTHvQpDkrDHabsV4A1wgO+87RMcyDKB40oB0aMB0PhoBp2QHXSURPVizGqMg+VERbKt9nvkGQc
+        tERzIMzw2hib00c7QB/fZIqsxetvZbY1Kbjp8daBLMPhXCb+KUwigW//CG81WydJ83fpsfbANzxXlbll
+        0i5yK32MNeexKkjx8/Cc2Ua3tw884PfqQTarP3SULXMpQJI7QLetD9jCLZDhzmB77qHsBWSE43Rpg/WC
+        YX4DlU7y7bsANwYAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnCierreCja.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -2831,4 +2818,31 @@
         sMxs/N7WbP0vQCD8Dfgsv1g8Ed43AAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="dgvcID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dgvcProducto.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dgvcCantidad.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dgvcPrecio.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dgvcDescuento.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dgvcSubTotal.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnAumentar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnDecrementar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnEliminar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -366,16 +366,5 @@ namespace SGF.PRESENTACION.formModales
             }
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtCodigo.Text))
-            {
-                Producto producto = BuscarProductoPorCodigo(txtCodigo.Text);
-                if (producto != null)
-                {
-                    txtCantidad.Focus();
-                }
-            }
-        }
     }
 }

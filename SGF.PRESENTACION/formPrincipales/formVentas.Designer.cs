@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formVentas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.lblNumerodeVenta = new System.Windows.Forms.ToolStripLabel();
@@ -47,22 +47,12 @@
             this.cmbFactura = new System.Windows.Forms.ToolStripComboBox();
             this.lblTipodeFactura = new System.Windows.Forms.ToolStripLabel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.cmbMoneda = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnBuscadorProducto = new FontAwesome.Sharp.IconButton();
+            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
             this.icoCandado = new FontAwesome.Sharp.IconPictureBox();
-            this.dgvVenta = new System.Windows.Forms.DataGridView();
-            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvcDisponible = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAumentar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnDecrementar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCierreCja = new System.Windows.Forms.Button();
@@ -72,11 +62,22 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblSubTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnImprimirUltimoTicket = new System.Windows.Forms.Button();
             this.btnHistorialDeVenta = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.dgvVenta = new System.Windows.Forms.DataGridView();
+            this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcPrecio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcDescuento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAumentar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnDecrementar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.toolStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -84,11 +85,12 @@
             this.toolStrip1.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
             this.panel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip2
@@ -107,7 +109,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(798, 25);
-            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripLabel1
@@ -157,7 +159,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(798, 72);
-            this.panel1.TabIndex = 21;
+            this.panel1.TabIndex = 0;
             // 
             // panel3
             // 
@@ -167,7 +169,7 @@
             this.panel3.Location = new System.Drawing.Point(99, 3);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(695, 46);
-            this.panel3.TabIndex = 12;
+            this.panel3.TabIndex = 0;
             // 
             // lblNombreEmpresa
             // 
@@ -178,7 +180,7 @@
             this.lblNombreEmpresa.Location = new System.Drawing.Point(30, 9);
             this.lblNombreEmpresa.Name = "lblNombreEmpresa";
             this.lblNombreEmpresa.Size = new System.Drawing.Size(605, 34);
-            this.lblNombreEmpresa.TabIndex = 1;
+            this.lblNombreEmpresa.TabIndex = 0;
             this.lblNombreEmpresa.Text = "SISTEMA DE GESTIÓN FARMACÉUTICA";
             this.lblNombreEmpresa.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -190,7 +192,7 @@
             this.pbLogoEmpresa.Name = "pbLogoEmpresa";
             this.pbLogoEmpresa.Size = new System.Drawing.Size(89, 66);
             this.pbLogoEmpresa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogoEmpresa.TabIndex = 11;
+            this.pbLogoEmpresa.TabIndex = 0;
             this.pbLogoEmpresa.TabStop = false;
             // 
             // toolStrip1
@@ -205,7 +207,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 97);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(798, 25);
-            this.toolStrip1.TabIndex = 22;
+            this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel4
@@ -238,16 +240,32 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.btnLimpiar);
             this.panel6.Controls.Add(this.cmbMoneda);
             this.panel6.Controls.Add(this.label1);
-            this.panel6.Controls.Add(this.iconButton1);
-            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.btnBuscadorProducto);
+            this.panel6.Controls.Add(this.txtBuscarProducto);
             this.panel6.Controls.Add(this.icoCandado);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 122);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(798, 32);
-            this.panel6.TabIndex = 24;
+            this.panel6.TabIndex = 2;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.White;
+            this.btnLimpiar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
+            this.btnLimpiar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpiar.Image")));
+            this.btnLimpiar.Location = new System.Drawing.Point(309, 3);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(29, 26);
+            this.btnLimpiar.TabIndex = 217;
+            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnLimpiar.UseVisualStyleBackColor = false;
             // 
             // cmbMoneda
             // 
@@ -258,7 +276,9 @@
             this.cmbMoneda.Location = new System.Drawing.Point(661, 6);
             this.cmbMoneda.Name = "cmbMoneda";
             this.cmbMoneda.Size = new System.Drawing.Size(133, 22);
-            this.cmbMoneda.TabIndex = 31;
+            this.cmbMoneda.TabIndex = 5;
+            this.cmbMoneda.SelectedIndexChanged += new System.EventHandler(this.cmbMoneda_SelectedIndexChanged);
+            this.cmbMoneda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbMoneda_KeyPress);
             // 
             // label1
             // 
@@ -268,30 +288,35 @@
             this.label1.Location = new System.Drawing.Point(588, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 19);
-            this.label1.TabIndex = 30;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Moneda";
             // 
-            // iconButton1
+            // btnBuscadorProducto
             // 
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.IconSize = 24;
-            this.iconButton1.Location = new System.Drawing.Point(274, 3);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(29, 26);
-            this.iconButton1.TabIndex = 29;
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.btnBuscadorProducto.BackColor = System.Drawing.Color.White;
+            this.btnBuscadorProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscadorProducto.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.btnBuscadorProducto.IconColor = System.Drawing.Color.Black;
+            this.btnBuscadorProducto.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBuscadorProducto.IconSize = 24;
+            this.btnBuscadorProducto.Location = new System.Drawing.Point(274, 3);
+            this.btnBuscadorProducto.Name = "btnBuscadorProducto";
+            this.btnBuscadorProducto.Size = new System.Drawing.Size(29, 26);
+            this.btnBuscadorProducto.TabIndex = 4;
+            this.btnBuscadorProducto.UseVisualStyleBackColor = false;
+            this.btnBuscadorProducto.Click += new System.EventHandler(this.btnBuscadorProducto_Click);
             // 
-            // textBox1
+            // txtBuscarProducto
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(252)))), ((int)(((byte)(209)))));
-            this.textBox1.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(39, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(231, 26);
-            this.textBox1.TabIndex = 28;
+            this.txtBuscarProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(254)))), ((int)(((byte)(196)))));
+            this.txtBuscarProducto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBuscarProducto.Font = new System.Drawing.Font("Roboto", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarProducto.Location = new System.Drawing.Point(38, 3);
+            this.txtBuscarProducto.Name = "txtBuscarProducto";
+            this.txtBuscarProducto.Size = new System.Drawing.Size(231, 26);
+            this.txtBuscarProducto.TabIndex = 3;
+            this.txtBuscarProducto.TextChanged += new System.EventHandler(this.txtBuscarProducto_TextChanged);
+            this.txtBuscarProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarProducto_KeyPress);
             // 
             // icoCandado
             // 
@@ -305,28 +330,236 @@
             this.icoCandado.Name = "icoCandado";
             this.icoCandado.Size = new System.Drawing.Size(29, 29);
             this.icoCandado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.icoCandado.TabIndex = 27;
+            this.icoCandado.TabIndex = 0;
             this.icoCandado.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(141)))), ((int)(((byte)(202)))));
+            this.panel2.Controls.Add(this.flowLayoutPanel2);
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 293);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(798, 71);
+            this.panel2.TabIndex = 0;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
+            this.flowLayoutPanel2.Controls.Add(this.btnCierreCja);
+            this.flowLayoutPanel2.Controls.Add(this.button1);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(291, 2);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(230, 64);
+            this.flowLayoutPanel2.TabIndex = 9;
+            // 
+            // btnCierreCja
+            // 
+            this.btnCierreCja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.btnCierreCja.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnCierreCja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCierreCja.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCierreCja.ForeColor = System.Drawing.Color.Black;
+            this.btnCierreCja.Image = ((System.Drawing.Image)(resources.GetObject("btnCierreCja.Image")));
+            this.btnCierreCja.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnCierreCja.Location = new System.Drawing.Point(3, 3);
+            this.btnCierreCja.Name = "btnCierreCja";
+            this.btnCierreCja.Size = new System.Drawing.Size(113, 59);
+            this.btnCierreCja.TabIndex = 10;
+            this.btnCierreCja.Text = "Cierre de caja";
+            this.btnCierreCja.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnCierreCja.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Location = new System.Drawing.Point(122, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(104, 59);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Cobrar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
+            this.panel5.Controls.Add(this.lblImpuesto);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.lblSubTotal);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.lblTotal);
+            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(127)))), ((int)(((byte)(176)))));
+            this.panel5.Location = new System.Drawing.Point(524, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(270, 64);
+            this.panel5.TabIndex = 0;
+            // 
+            // lblImpuesto
+            // 
+            this.lblImpuesto.AutoEllipsis = true;
+            this.lblImpuesto.BackColor = System.Drawing.Color.White;
+            this.lblImpuesto.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblImpuesto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
+            this.lblImpuesto.Location = new System.Drawing.Point(67, 33);
+            this.lblImpuesto.Name = "lblImpuesto";
+            this.lblImpuesto.Size = new System.Drawing.Size(68, 27);
+            this.lblImpuesto.TabIndex = 0;
+            this.lblImpuesto.Text = "0%";
+            this.lblImpuesto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(3, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Impuesto:";
+            // 
+            // lblSubTotal
+            // 
+            this.lblSubTotal.AutoEllipsis = true;
+            this.lblSubTotal.BackColor = System.Drawing.Color.White;
+            this.lblSubTotal.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
+            this.lblSubTotal.Location = new System.Drawing.Point(67, 3);
+            this.lblSubTotal.Name = "lblSubTotal";
+            this.lblSubTotal.Size = new System.Drawing.Size(68, 27);
+            this.lblSubTotal.TabIndex = 0;
+            this.lblSubTotal.Text = "0.00";
+            this.lblSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(3, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 15);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Subtotal:";
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotal.AutoEllipsis = true;
+            this.lblTotal.BackColor = System.Drawing.Color.White;
+            this.lblTotal.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
+            this.lblTotal.Location = new System.Drawing.Point(141, 3);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(123, 57);
+            this.lblTotal.TabIndex = 0;
+            this.lblTotal.Text = "0.00";
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblTotal.UseCompatibleTextRendering = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
+            this.panel4.Controls.Add(this.btnImprimirUltimoTicket);
+            this.panel4.Controls.Add(this.btnHistorialDeVenta);
+            this.panel4.Controls.Add(this.btnClientes);
+            this.panel4.Location = new System.Drawing.Point(4, 2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(275, 64);
+            this.panel4.TabIndex = 6;
+            // 
+            // btnImprimirUltimoTicket
+            // 
+            this.btnImprimirUltimoTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.btnImprimirUltimoTicket.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnImprimirUltimoTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimirUltimoTicket.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImprimirUltimoTicket.ForeColor = System.Drawing.Color.Black;
+            this.btnImprimirUltimoTicket.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimirUltimoTicket.Image")));
+            this.btnImprimirUltimoTicket.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImprimirUltimoTicket.Location = new System.Drawing.Point(8, 33);
+            this.btnImprimirUltimoTicket.Name = "btnImprimirUltimoTicket";
+            this.btnImprimirUltimoTicket.Size = new System.Drawing.Size(167, 27);
+            this.btnImprimirUltimoTicket.TabIndex = 8;
+            this.btnImprimirUltimoTicket.Text = "Reimprimir última venta";
+            this.btnImprimirUltimoTicket.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImprimirUltimoTicket.UseVisualStyleBackColor = false;
+            // 
+            // btnHistorialDeVenta
+            // 
+            this.btnHistorialDeVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.btnHistorialDeVenta.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnHistorialDeVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHistorialDeVenta.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnHistorialDeVenta.ForeColor = System.Drawing.Color.Black;
+            this.btnHistorialDeVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorialDeVenta.Image")));
+            this.btnHistorialDeVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHistorialDeVenta.Location = new System.Drawing.Point(8, 3);
+            this.btnHistorialDeVenta.Name = "btnHistorialDeVenta";
+            this.btnHistorialDeVenta.Size = new System.Drawing.Size(167, 27);
+            this.btnHistorialDeVenta.TabIndex = 7;
+            this.btnHistorialDeVenta.Text = "Historial de Venta";
+            this.btnHistorialDeVenta.UseVisualStyleBackColor = false;
+            // 
+            // btnClientes
+            // 
+            this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
+            this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClientes.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClientes.ForeColor = System.Drawing.Color.Black;
+            this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
+            this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClientes.Location = new System.Drawing.Point(182, 2);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(84, 59);
+            this.btnClientes.TabIndex = 9;
+            this.btnClientes.Text = "CLIENTES";
+            this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClientes.UseVisualStyleBackColor = false;
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.Controls.Add(this.dgvVenta);
+            this.panel7.Location = new System.Drawing.Point(4, 157);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(790, 135);
+            this.panel7.TabIndex = 3;
             // 
             // dgvVenta
             // 
             this.dgvVenta.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvVenta.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvVenta.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvVenta.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVenta.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVenta.ColumnHeadersHeight = 27;
             this.dgvVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -335,18 +568,21 @@
             this.dgvcCantidad,
             this.dgvcPrecio,
             this.dgvcDescuento,
-            this.dgvcTotal,
-            this.dgvcDisponible,
+            this.dgvcSubTotal,
             this.btnAumentar,
             this.btnDecrementar,
             this.btnEliminar});
+            this.dgvVenta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvVenta.GridColor = System.Drawing.Color.White;
-            this.dgvVenta.Location = new System.Drawing.Point(0, 160);
+            this.dgvVenta.Location = new System.Drawing.Point(0, 0);
             this.dgvVenta.Name = "dgvVenta";
             this.dgvVenta.ReadOnly = true;
             this.dgvVenta.RowHeadersVisible = false;
-            this.dgvVenta.Size = new System.Drawing.Size(798, 127);
-            this.dgvVenta.TabIndex = 25;
+            this.dgvVenta.Size = new System.Drawing.Size(790, 135);
+            this.dgvVenta.TabIndex = 1;
+            this.dgvVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVenta_CellContentClick);
+            this.dgvVenta.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvVenta_CellPainting);
+            this.dgvVenta.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvVenta_KeyDown);
             // 
             // dgvcID
             // 
@@ -383,244 +619,41 @@
             this.dgvcDescuento.Name = "dgvcDescuento";
             this.dgvcDescuento.ReadOnly = true;
             // 
-            // dgvcTotal
+            // dgvcSubTotal
             // 
-            this.dgvcTotal.FillWeight = 51.2655F;
-            this.dgvcTotal.HeaderText = "Importe";
-            this.dgvcTotal.Name = "dgvcTotal";
-            this.dgvcTotal.ReadOnly = true;
-            // 
-            // dgvcDisponible
-            // 
-            this.dgvcDisponible.FillWeight = 78.08739F;
-            this.dgvcDisponible.HeaderText = "Disponible";
-            this.dgvcDisponible.Name = "dgvcDisponible";
-            this.dgvcDisponible.ReadOnly = true;
+            this.dgvcSubTotal.FillWeight = 51.2655F;
+            this.dgvcSubTotal.HeaderText = "Subtotal";
+            this.dgvcSubTotal.Name = "dgvcSubTotal";
+            this.dgvcSubTotal.ReadOnly = true;
             // 
             // btnAumentar
             // 
+            this.btnAumentar.FillWeight = 20F;
             this.btnAumentar.HeaderText = "";
             this.btnAumentar.Name = "btnAumentar";
             this.btnAumentar.ReadOnly = true;
             // 
             // btnDecrementar
             // 
+            this.btnDecrementar.FillWeight = 20F;
             this.btnDecrementar.HeaderText = "";
             this.btnDecrementar.Name = "btnDecrementar";
             this.btnDecrementar.ReadOnly = true;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.FillWeight = 50F;
+            this.btnEliminar.FillWeight = 20F;
             this.btnEliminar.HeaderText = "";
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.ReadOnly = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(141)))), ((int)(((byte)(202)))));
-            this.panel2.Controls.Add(this.flowLayoutPanel2);
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 293);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(798, 71);
-            this.panel2.TabIndex = 26;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
-            this.flowLayoutPanel2.Controls.Add(this.btnCierreCja);
-            this.flowLayoutPanel2.Controls.Add(this.button1);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(291, 2);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(230, 64);
-            this.flowLayoutPanel2.TabIndex = 24;
-            // 
-            // btnCierreCja
-            // 
-            this.btnCierreCja.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.btnCierreCja.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnCierreCja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCierreCja.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCierreCja.ForeColor = System.Drawing.Color.Black;
-            this.btnCierreCja.Image = ((System.Drawing.Image)(resources.GetObject("btnCierreCja.Image")));
-            this.btnCierreCja.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCierreCja.Location = new System.Drawing.Point(3, 3);
-            this.btnCierreCja.Name = "btnCierreCja";
-            this.btnCierreCja.Size = new System.Drawing.Size(113, 59);
-            this.btnCierreCja.TabIndex = 7;
-            this.btnCierreCja.Text = "Cierre de caja";
-            this.btnCierreCja.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnCierreCja.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(122, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 59);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Cobrar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
-            this.panel5.Controls.Add(this.lblImpuesto);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Controls.Add(this.lblSubTotal);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.label2);
-            this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(127)))), ((int)(((byte)(176)))));
-            this.panel5.Location = new System.Drawing.Point(524, 2);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(270, 64);
-            this.panel5.TabIndex = 25;
-            // 
-            // lblImpuesto
-            // 
-            this.lblImpuesto.AutoEllipsis = true;
-            this.lblImpuesto.BackColor = System.Drawing.Color.White;
-            this.lblImpuesto.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImpuesto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
-            this.lblImpuesto.Location = new System.Drawing.Point(67, 33);
-            this.lblImpuesto.Name = "lblImpuesto";
-            this.lblImpuesto.Size = new System.Drawing.Size(68, 27);
-            this.lblImpuesto.TabIndex = 19;
-            this.lblImpuesto.Text = "2.800,20";
-            this.lblImpuesto.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(3, 38);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 15);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Impuesto:";
-            // 
-            // lblSubTotal
-            // 
-            this.lblSubTotal.AutoEllipsis = true;
-            this.lblSubTotal.BackColor = System.Drawing.Color.White;
-            this.lblSubTotal.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
-            this.lblSubTotal.Location = new System.Drawing.Point(67, 3);
-            this.lblSubTotal.Name = "lblSubTotal";
-            this.lblSubTotal.Size = new System.Drawing.Size(68, 27);
-            this.lblSubTotal.TabIndex = 17;
-            this.lblSubTotal.Text = "2.800,20";
-            this.lblSubTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(3, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 15);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Subtotal:";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(110)))), ((int)(((byte)(142)))));
-            this.label2.Location = new System.Drawing.Point(141, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 57);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "5";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(101)))), ((int)(((byte)(147)))), ((int)(((byte)(233)))));
-            this.panel4.Controls.Add(this.btnImprimirUltimoTicket);
-            this.panel4.Controls.Add(this.btnHistorialDeVenta);
-            this.panel4.Controls.Add(this.btnClientes);
-            this.panel4.Location = new System.Drawing.Point(4, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(275, 64);
-            this.panel4.TabIndex = 18;
-            // 
-            // btnImprimirUltimoTicket
-            // 
-            this.btnImprimirUltimoTicket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.btnImprimirUltimoTicket.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnImprimirUltimoTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimirUltimoTicket.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImprimirUltimoTicket.ForeColor = System.Drawing.Color.Black;
-            this.btnImprimirUltimoTicket.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimirUltimoTicket.Image")));
-            this.btnImprimirUltimoTicket.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnImprimirUltimoTicket.Location = new System.Drawing.Point(8, 33);
-            this.btnImprimirUltimoTicket.Name = "btnImprimirUltimoTicket";
-            this.btnImprimirUltimoTicket.Size = new System.Drawing.Size(167, 27);
-            this.btnImprimirUltimoTicket.TabIndex = 10;
-            this.btnImprimirUltimoTicket.Text = "Reimprimir última venta";
-            this.btnImprimirUltimoTicket.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnImprimirUltimoTicket.UseVisualStyleBackColor = false;
-            // 
-            // btnHistorialDeVenta
-            // 
-            this.btnHistorialDeVenta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.btnHistorialDeVenta.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnHistorialDeVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHistorialDeVenta.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnHistorialDeVenta.ForeColor = System.Drawing.Color.Black;
-            this.btnHistorialDeVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnHistorialDeVenta.Image")));
-            this.btnHistorialDeVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHistorialDeVenta.Location = new System.Drawing.Point(8, 3);
-            this.btnHistorialDeVenta.Name = "btnHistorialDeVenta";
-            this.btnHistorialDeVenta.Size = new System.Drawing.Size(167, 27);
-            this.btnHistorialDeVenta.TabIndex = 9;
-            this.btnHistorialDeVenta.Text = "Historial de Venta";
-            this.btnHistorialDeVenta.UseVisualStyleBackColor = false;
-            // 
-            // btnClientes
-            // 
-            this.btnClientes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(223)))), ((int)(((byte)(241)))));
-            this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientes.ForeColor = System.Drawing.Color.Black;
-            this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
-            this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnClientes.Location = new System.Drawing.Point(182, 2);
-            this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(84, 59);
-            this.btnClientes.TabIndex = 8;
-            this.btnClientes.Text = "CLIENTES";
-            this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnClientes.UseVisualStyleBackColor = false;
-            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
             // formVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 364);
+            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.dgvVenta);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
@@ -639,12 +672,13 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icoCandado)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).EndInit();
             this.panel2.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVenta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -670,20 +704,9 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.ComboBox cmbMoneda;
         private System.Windows.Forms.Label label1;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private System.Windows.Forms.TextBox textBox1;
+        private FontAwesome.Sharp.IconButton btnBuscadorProducto;
+        private System.Windows.Forms.TextBox txtBuscarProducto;
         private FontAwesome.Sharp.IconPictureBox icoCandado;
-        private System.Windows.Forms.DataGridView dgvVenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcProducto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcCantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcPrecio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescuento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDisponible;
-        private System.Windows.Forms.DataGridViewButtonColumn btnAumentar;
-        private System.Windows.Forms.DataGridViewButtonColumn btnDecrementar;
-        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button btnCierreCja;
@@ -693,10 +716,22 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblSubTotal;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btnImprimirUltimoTicket;
         private System.Windows.Forms.Button btnHistorialDeVenta;
         private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.DataGridView dgvVenta;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcCantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcPrecio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcDescuento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvcSubTotal;
+        private System.Windows.Forms.DataGridViewButtonColumn btnAumentar;
+        private System.Windows.Forms.DataGridViewButtonColumn btnDecrementar;
+        private System.Windows.Forms.DataGridViewButtonColumn btnEliminar;
     }
 }

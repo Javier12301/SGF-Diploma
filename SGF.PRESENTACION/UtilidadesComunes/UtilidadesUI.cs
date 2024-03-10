@@ -575,6 +575,20 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             return moneda;
         }
 
+        public string FormatearMonedaPersonalizada(decimal numeroMoneda, Moneda monedaSeleccionada)
+        {
+            string moneda = string.Empty;
+            if(monedaSeleccionada.Posicion == "Antes")
+            {
+                moneda = monedaSeleccionada.Simbolo + " " + numeroMoneda.ToString("N2");
+            }
+            else
+            {
+                moneda = numeroMoneda.ToString("N2") + " " + monedaSeleccionada.Simbolo;
+            }
+            return moneda;
+        }
+
         // Manejo de Textbox con Formato Moneda
         public void TextboxMoneda_KeyPress(TextBox textbox, KeyPressEventArgs e, ErrorProvider error)
         {
