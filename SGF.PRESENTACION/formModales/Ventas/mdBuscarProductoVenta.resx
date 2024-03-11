@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>140, 17</value>
+  </metadata>
+  <data name="txtDescuento.HelpString" xml:space="preserve">
+    <value>Para aplicar un descuento, puedes ingresar un número fijo y este se restará del precio de venta. O puedes escribir el porcentaje seguido de '%' y el sistema lo tomará como válido, redondeando a 2 decimales.</value>
+  </data>
   <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

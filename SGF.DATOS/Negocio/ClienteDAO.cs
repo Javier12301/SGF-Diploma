@@ -34,6 +34,65 @@ namespace SGF.DATOS.Negocio
             return conteo;
         }
 
+        // conteo clientes activos o sea estado = true
+        public static int ConteoClientesActivosD()
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Cliente WHERE Estado = 1");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        conteo = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el conteo de proveedores, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return conteo;
+        }
+
+        // Conteo clientes inactivos o sea estado = false o también dados de baja, se hará una tabla relacional Registro, buscando obtener toda las bajas de clientes
+
+        public static int ConteoClientesInactivosYDadosDeBajaD()
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT ");
+                    query.AppendLine("((SELECT COUNT(*) FROM Cliente WHERE Estado = 0) +");
+                    query.AppendLine("(SELECT SUM(Cantidad) FROM Registro WHERE Movimiento = 'Baja' AND Modulo = 'Clientes')) AS TotalClientesInactivosYDadosDeBaja");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        object result = cmd.ExecuteScalar();
+                        if (result == DBNull.Value)
+                        {
+                            conteo = 0;
+                        }
+                        else
+                        {
+                            conteo = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el conteo de clientes inactivos y dados de baja, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return conteo;
+        }
+
         // listar todo los tipos de clientes
         public static List<TipoCliente> ListarTipoClientes()
         {

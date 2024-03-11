@@ -198,3 +198,7 @@ C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.mdClientes.resources
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Buscadores.mdBuscarCliente.resources
 C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Ventas.mdBuscarProductoVenta.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Ventas.mdCobrar.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Ventas.mdHistorialVentas.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formModales.Salida_inventario.mdDetalleVentas.resources
+C:\Users\javie\OneDrive\Documentos\Programacion-Net\FarmaciaSGF\SGF.PRESENTACION\obj\Debug\SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Ventas.mdReporteResumen.resources

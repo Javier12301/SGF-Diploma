@@ -34,7 +34,6 @@
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnInventario = new System.Windows.Forms.Button();
             this.btnVentas = new System.Windows.Forms.Button();
-            this.btnClientes = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +67,6 @@
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpContenedorBotones.Controls.Add(this.btnInventario);
             this.flpContenedorBotones.Controls.Add(this.btnVentas);
-            this.flpContenedorBotones.Controls.Add(this.btnClientes);
             this.flpContenedorBotones.Location = new System.Drawing.Point(0, 6);
             this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
             this.flpContenedorBotones.Name = "flpContenedorBotones";
@@ -107,30 +105,11 @@
             this.btnVentas.Name = "btnVentas";
             this.btnVentas.Size = new System.Drawing.Size(118, 54);
             this.btnVentas.TabIndex = 18;
-            this.btnVentas.Tag = "Ventas";
-            this.btnVentas.Text = "Ventas";
+            this.btnVentas.Tag = "Resumen total";
+            this.btnVentas.Text = "Resumen total";
             this.btnVentas.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnVentas.UseVisualStyleBackColor = false;
             this.btnVentas.Click += new System.EventHandler(this.btnExistencias_Click);
-            // 
-            // btnClientes
-            // 
-            this.btnClientes.BackColor = System.Drawing.Color.White;
-            this.btnClientes.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientes.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientes.ForeColor = System.Drawing.Color.Black;
-            this.btnClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnClientes.Image")));
-            this.btnClientes.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnClientes.Location = new System.Drawing.Point(251, 3);
-            this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(118, 54);
-            this.btnClientes.TabIndex = 16;
-            this.btnClientes.Tag = "Clientes";
-            this.btnClientes.Text = "Clientes";
-            this.btnClientes.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnClientes.UseVisualStyleBackColor = false;
-            this.btnClientes.Click += new System.EventHandler(this.btnSalidas_Click);
             // 
             // formReportes
             // 
@@ -154,7 +133,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnVentas;
         private System.Windows.Forms.Button btnInventario;
-        private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Panel pnlReportesPadre;
     }
 }

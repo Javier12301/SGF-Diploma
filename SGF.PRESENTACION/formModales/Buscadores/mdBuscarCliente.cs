@@ -125,5 +125,13 @@ namespace SGF.PRESENTACION.formModales.Buscadores
                 mousePosicion = e.Location;
             }
         }
+
+        private void dgvClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                seleccionarCliente(e.RowIndex);
+            }
+        }
     }
 }

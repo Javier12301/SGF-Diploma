@@ -240,6 +240,69 @@ namespace SGF.PRESENTACION.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Detalle Compra&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///        table.border th {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        table.border td {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;table style=&quot;width:100%&quot;&gt;
+        ///        &lt;tr&gt;
+        ///            &lt;td style=&quot;width:20% [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string detalle_venta {
+            get {
+                return ResourceManager.GetString("detalle_venta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a &lt;!DOCTYPE html&gt;
+        ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;title&gt;Detalle Compra&lt;/title&gt;
+        ///    &lt;style&gt;
+        ///        table.border {
+        ///            border-collapse: collapse;
+        ///        }
+        ///
+        ///        table.border th {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        table.border td {
+        ///            padding: 5px;
+        ///            border: 1px solid black;
+        ///        }
+        ///
+        ///        #cancelado {
+        ///            position: relative;
+        ///            width: 100%;
+        ///            text-align: ce [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        internal static string detalle_venta_cancelado {
+            get {
+                return ResourceManager.GetString("detalle_venta_cancelado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap eliminar_boton_15 {

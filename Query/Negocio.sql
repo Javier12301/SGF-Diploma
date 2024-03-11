@@ -37,6 +37,9 @@ VALUES (0, 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 0);
 SET IDENTITY_INSERT Proveedor OFF;
 GO
 
+SELECT TOP 1 VentaID
+FROM Venta
+ORDER BY VentaID DESC;
 
 SELECT * FROM Cliente
 CREATE TABLE Cliente (
@@ -147,17 +150,22 @@ GO
 CREATE TABLE Venta (
     VentaID INT IDENTITY PRIMARY KEY,
     UsuarioID INT REFERENCES Usuario(UsuarioID),
+	TipoComprobante VARCHAR(50),
     TipoDocumento VARCHAR(50),
     NumeroDocumento VARCHAR(50),
     DocumentoCliente VARCHAR(50),
     NombreCliente VARCHAR(100),
+	TipoCliente VARCHAR(50),
 	MonedaID INT REFERENCES Moneda(MonedaID),
-    MontoPago DECIMAL(10,2),
+    MontoPagado DECIMAL(10,2),
     MontoCambio DECIMAL(10,2),
+	Impuesto VARCHAR (10),
     MontoTotal DECIMAL(10,2),
-    FechaRegistro DATETIME DEFAULT GETDATE()
+    FechaVenta DATETIME DEFAULT GETDATE(),
+	Estado BIT,
 );
 GO
+
 
 
 CREATE TABLE Detalle_Venta (
@@ -166,12 +174,18 @@ CREATE TABLE Detalle_Venta (
     ProductoID INT REFERENCES PRODUCTO(ProductoID),
     PrecioVenta DECIMAL(10,2),
     Cantidad INT,
+	Descuento DECIMAL(10,2),
     SubTotal DECIMAL(10,2),
     FechaRegistro DATETIME DEFAULT GETDATE()
 );
 GO
 
-select * from Impuesto
+DROP TABLE Venta
+DROP TABLE Detalle_Venta
+
+
+select * from Venta
+select * from Detalle_Venta
 
 CREATE TABLE Moneda(
 	MonedaID INT IDENTITY PRIMARY KEY,
@@ -211,4 +225,12 @@ SELECT * FROM Impuesto
 SELECT * FROM Negocio
 
 SELECT MAX(VentaID) FROM Venta
+
+select * from Proveedor
+WHERE Estado = 0
+
+SELECT 
+    ((SELECT COUNT(*) FROM Proveedor WHERE Estado = 0) +
+    (SELECT SUM(Cantidad) FROM Registro WHERE Modulo = 'Proveedores')) AS Total
+
 

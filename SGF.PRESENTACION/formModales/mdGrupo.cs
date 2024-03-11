@@ -488,13 +488,9 @@ namespace SGF.PRESENTACION.formModales
             {
                 ActualizarPermisos("formReporteInventario", flpPermisosReportes);
             }
-            else if (lbAccionesReportes.SelectedItem.ToString() == "REPORTES DE VENTAS")
+            else if (lbAccionesReportes.SelectedItem.ToString() == "REPORTES RESUMEN TOTAL")
             {
-                ActualizarPermisos("formReporteVentas", flpPermisosReportes);
-            }
-            else if (lbAccionesReportes.SelectedItem.ToString() == "REPORTES DE CLIENTES")
-            {
-                ActualizarPermisos("formReporteClientes", flpPermisosReportes);
+                ActualizarPermisos("formReporteResumenTotal", flpPermisosReportes);
             }
         }
 

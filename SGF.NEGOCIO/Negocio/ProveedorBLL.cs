@@ -37,6 +37,34 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // conteo proveedores activos
+        public int ConteoProveedoresActivos()
+        {
+            int conteo = ProveedorDAO.ConteoProveedoresActivosD();
+            if (conteo >= 0)
+            {
+                return conteo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el conteo de proveedores activos. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
+        // conteo proveedores inactivos y dados de baja
+        public int ConteoProveedoresInactivos()
+        {
+            int conteo = ProveedorDAO.ConteoProveedoresInactivosD();
+            if (conteo >= 0)
+            {
+                return conteo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el conteo de proveedores inactivos. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
         // Alta
         public bool AltaProveedor(Proveedor oProveedor)
         {

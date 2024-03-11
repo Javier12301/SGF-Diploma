@@ -302,5 +302,125 @@ namespace SGF.DATOS.Negocio
             return conteo;
         }
 
+        // Obtener cantidad de compras por tipo de producto
+        public static int ObtenerCantidadDeComprasPorTipoProducto(string tipoProducto)
+        {
+            int cantidad = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT SUM(DC.Cantidad) ");
+                    query.AppendLine("FROM Detalle_Compra DC ");
+                    query.AppendLine("INNER JOIN Producto P ON DC.ProductoID = P.ProductoID ");
+                    query.AppendLine("WHERE P.TipoProducto = @TipoProducto ");
+                    query.AppendLine("AND DC.CompraID IN (SELECT CompraID FROM Compra WHERE Estado = 1)");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@TipoProducto", tipoProducto);
+                        oContexto.Open();
+                        object resultado = cmd.ExecuteScalar();
+                        if (resultado != null)
+                        {
+                            cantidad = Convert.ToInt32(resultado);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener la cantidad de compras por tipo de producto, contacte con el administrador del sistema si este error persiste.");
+                }
+            }
+            return cantidad;
+        }
+
+        // Obtener ventas canceladas
+        public static int ObtenerCompraCancelada()
+        {
+            int cantidad = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Compra WHERE Estado = 0");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        object resultado = cmd.ExecuteScalar();
+                        if (resultado != DBNull.Value)
+                        {
+                            cantidad = Convert.ToInt32(resultado);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al obtener la cantidad de compras canceladas: " + ex.Message);
+                }
+            }
+            return cantidad;
+        }
+
+        public static DataTable ObtenerComprasPorFecha(DateTime fechaInicio, DateTime fechaHasta)
+        {
+            DataTable dt = new DataTable();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT YEAR(FechaCompra) AS Year, FORMAT(FechaCompra, 'MMMM', 'es-ES') AS Month, COUNT(*) AS NumeroDeCompras FROM Compra WHERE FechaCompra BETWEEN @FechaInicio AND @FechaHasta GROUP BY YEAR(FechaCompra), MONTH(FechaCompra), FORMAT(FechaCompra, 'MMMM', 'es-ES') ORDER BY Year, MONTH(FechaCompra)");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+                        oContexto.Open();
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener las compras por fecha, contacte con el administrador del sistema si este error persiste.");
+                }
+                return dt;
+            }
+        }
+
+        public static DataTable ObtenerComprasPorDiaDeLaSemana(DateTime fechaInicio, DateTime fechaHasta)
+        {
+            DataTable dt = new DataTable();
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT DATENAME(WEEKDAY, FechaCompra) AS DiaSemana, COUNT(*) AS NumeroDeCompras FROM Compra WHERE FechaCompra BETWEEN @FechaInicio AND @FechaHasta GROUP BY DATENAME(WEEKDAY, FechaCompra) ORDER BY CASE DATENAME(WEEKDAY, FechaCompra) WHEN 'Lunes' THEN 1 WHEN 'Martes' THEN 2 WHEN 'Miércoles' THEN 3 WHEN 'Jueves' THEN 4 WHEN 'Viernes' THEN 5 WHEN 'Sábado' THEN 6 WHEN 'Domingo' THEN 7 END");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                        cmd.Parameters.AddWithValue("@FechaHasta", fechaHasta);
+                        oContexto.Open();
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener las compras por día de la semana, contacte con el administrador del sistema si este error persiste.");
+                }
+                return dt;
+            }
+        }
+
+
+
+
     }
 }

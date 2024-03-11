@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdBuscarCliente));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdBuscarCliente));
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -45,39 +45,39 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.clientesTablaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.negocio = new SGF.PRESENTACION.Negocio();
+            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmbFiltroTipoCliente = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clientesTablaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.negocio = new SGF.PRESENTACION.Negocio();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.dgvcID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcTipoDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcNombreCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcTipoClienteID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcTipoCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clientesTablaTableAdapter = new SGF.PRESENTACION.NegocioTableAdapters.ClientesTablaTableAdapter();
             this.panel3.SuspendLayout();
             this.pnlControl.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientesTablaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -256,6 +256,131 @@
             this.panel1.Size = new System.Drawing.Size(572, 247);
             this.panel1.TabIndex = 113;
             // 
+            // bindingNavigator1
+            // 
+            this.bindingNavigator1.AddNewItem = null;
+            this.bindingNavigator1.BindingSource = this.clientesTablaBindingSource;
+            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
+            this.bindingNavigator1.DeleteItem = null;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.bindingNavigatorPositionItem,
+            this.bindingNavigatorCountItem,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2,
+            this.cmbFiltroTipoCliente,
+            this.toolStripLabel2});
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 220);
+            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
+            this.bindingNavigator1.Size = new System.Drawing.Size(570, 25);
+            this.bindingNavigator1.TabIndex = 2;
+            this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
+            // clientesTablaBindingSource
+            // 
+            this.clientesTablaBindingSource.DataMember = "ClientesTabla";
+            this.clientesTablaBindingSource.DataSource = this.negocio;
+            // 
+            // negocio
+            // 
+            this.negocio.DataSetName = "Negocio";
+            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
+            this.bindingNavigatorCountItem.Text = "de {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveFirstItem.Text = "Mover primero";
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMovePreviousItem.Text = "Mover anterior";
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Posición";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveNextItem.Text = "Mover siguiente";
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorMoveLastItem.Text = "Mover último";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // cmbFiltroTipoCliente
+            // 
+            this.cmbFiltroTipoCliente.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.cmbFiltroTipoCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbFiltroTipoCliente.Font = new System.Drawing.Font("Roboto", 9.75F);
+            this.cmbFiltroTipoCliente.Name = "cmbFiltroTipoCliente";
+            this.cmbFiltroTipoCliente.Size = new System.Drawing.Size(160, 25);
+            this.cmbFiltroTipoCliente.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroTipoCliente_SelectedIndexChanged);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(72, 22);
+            this.toolStripLabel2.Text = "Tipo cliente:";
+            // 
             // dgvClientes
             // 
             this.dgvClientes.AllowUserToAddRows = false;
@@ -296,145 +421,7 @@
             this.dgvClientes.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvClientes.Size = new System.Drawing.Size(572, 218);
             this.dgvClientes.TabIndex = 1;
-            // 
-            // bindingNavigator1
-            // 
-            this.bindingNavigator1.AddNewItem = null;
-            this.bindingNavigator1.BindingSource = this.clientesTablaBindingSource;
-            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.cmbFiltroTipoCliente,
-            this.toolStripLabel2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 220);
-            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigator1.Name = "bindingNavigator1";
-            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(570, 25);
-            this.bindingNavigator1.TabIndex = 2;
-            this.bindingNavigator1.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Mover primero";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Mover anterior";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Posición";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Posición actual";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
-            this.bindingNavigatorCountItem.Text = "de {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Mover siguiente";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Mover último";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // cmbFiltroTipoCliente
-            // 
-            this.cmbFiltroTipoCliente.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.cmbFiltroTipoCliente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFiltroTipoCliente.Font = new System.Drawing.Font("Roboto", 9.75F);
-            this.cmbFiltroTipoCliente.Name = "cmbFiltroTipoCliente";
-            this.cmbFiltroTipoCliente.Size = new System.Drawing.Size(160, 25);
-            this.cmbFiltroTipoCliente.SelectedIndexChanged += new System.EventHandler(this.cmbFiltroTipoCliente_SelectedIndexChanged);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel2.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(72, 22);
-            this.toolStripLabel2.Text = "Tipo cliente:";
-            // 
-            // Correo
-            // 
-            this.Correo.DataPropertyName = "Correo";
-            this.Correo.HeaderText = "Correo";
-            this.Correo.Name = "Correo";
-            this.Correo.ReadOnly = true;
-            // 
-            // Telefono
-            // 
-            this.Telefono.DataPropertyName = "Telefono";
-            this.Telefono.HeaderText = "Teléfono";
-            this.Telefono.Name = "Telefono";
-            this.Telefono.ReadOnly = true;
-            // 
-            // clientesTablaBindingSource
-            // 
-            this.clientesTablaBindingSource.DataMember = "ClientesTabla";
-            this.clientesTablaBindingSource.DataSource = this.negocio;
-            // 
-            // negocio
-            // 
-            this.negocio.DataSetName = "Negocio";
-            this.negocio.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dgvClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellDoubleClick);
             // 
             // dgvcID
             // 
@@ -480,6 +467,20 @@
             this.dgvcTipoCliente.Name = "dgvcTipoCliente";
             this.dgvcTipoCliente.ReadOnly = true;
             // 
+            // Correo
+            // 
+            this.Correo.DataPropertyName = "Correo";
+            this.Correo.HeaderText = "Correo";
+            this.Correo.Name = "Correo";
+            this.Correo.ReadOnly = true;
+            // 
+            // Telefono
+            // 
+            this.Telefono.DataPropertyName = "Telefono";
+            this.Telefono.HeaderText = "Teléfono";
+            this.Telefono.Name = "Telefono";
+            this.Telefono.ReadOnly = true;
+            // 
             // clientesTablaTableAdapter
             // 
             this.clientesTablaTableAdapter.ClearBeforeFill = true;
@@ -507,12 +508,12 @@
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clientesTablaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.negocio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
 
         }

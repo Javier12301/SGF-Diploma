@@ -501,8 +501,7 @@
             this.lbAccionesReportes.Items.AddRange(new object[] {
             "REPORTES",
             "REPORTES DE INVENTARIO",
-            "REPORTES DE VENTAS",
-            "REPORTES DE CLIENTES"});
+            "REPORTES RESUMEN TOTAL"});
             this.lbAccionesReportes.Location = new System.Drawing.Point(6, 10);
             this.lbAccionesReportes.Name = "lbAccionesReportes";
             this.lbAccionesReportes.Size = new System.Drawing.Size(338, 213);

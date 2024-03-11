@@ -61,6 +61,8 @@ CREATE TABLE Auditoria (
 GO
 
 
+
+
 DECLARE @moduloDescripcion VARCHAR(50) = 'formCategorias'
 SELECT op.* FROM Accion op
 INNER JOIN Modulo m ON m.ModuloID = op.ModuloID

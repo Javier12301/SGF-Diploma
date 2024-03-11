@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdBuscarProductoVenta));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtExistencia = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
@@ -47,6 +52,8 @@
             this.gunaControlCerrar = new Guna.UI.WinForms.GunaControlBox();
             this.lblNombreForm = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctLineSeparator)).BeginInit();
             this.pnlControl.SuspendLayout();
@@ -56,6 +63,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.txtDescuento);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.txtExistencia);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtPrecio);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.txtCantidad);
@@ -74,18 +87,71 @@
             this.panel1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(366, 226);
+            this.panel1.Size = new System.Drawing.Size(393, 239);
             this.panel1.TabIndex = 3;
+            // 
+            // txtDescuento
+            // 
+            this.txtDescuento.BackColor = System.Drawing.Color.White;
+            this.txtDescuento.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDescuento.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtDescuento.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpProvider.SetHelpString(this.txtDescuento, resources.GetString("txtDescuento.HelpString"));
+            this.txtDescuento.Location = new System.Drawing.Point(270, 161);
+            this.txtDescuento.Name = "txtDescuento";
+            this.helpProvider.SetShowHelp(this.txtDescuento, true);
+            this.txtDescuento.Size = new System.Drawing.Size(92, 23);
+            this.txtDescuento.TabIndex = 215;
+            this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
+            this.txtDescuento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDescuento_KeyPress);
+            this.txtDescuento.Leave += new System.EventHandler(this.txtDescuento_Leave);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(187, 163);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.TabIndex = 214;
+            this.label3.Text = "Descuento:";
+            // 
+            // txtExistencia
+            // 
+            this.txtExistencia.BackColor = System.Drawing.Color.White;
+            this.txtExistencia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtExistencia.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtExistencia.Enabled = false;
+            this.txtExistencia.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExistencia.Location = new System.Drawing.Point(258, 132);
+            this.txtExistencia.Name = "txtExistencia";
+            this.txtExistencia.ReadOnly = true;
+            this.txtExistencia.Size = new System.Drawing.Size(104, 23);
+            this.txtExistencia.TabIndex = 213;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(187, 135);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 17);
+            this.label2.TabIndex = 212;
+            this.label2.Text = "Existencia:";
             // 
             // txtPrecio
             // 
             this.txtPrecio.BackColor = System.Drawing.Color.White;
+            this.txtPrecio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPrecio.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtPrecio.Enabled = false;
             this.txtPrecio.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrecio.Location = new System.Drawing.Point(212, 150);
+            this.txtPrecio.Location = new System.Drawing.Point(77, 160);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.ReadOnly = true;
-            this.txtPrecio.Size = new System.Drawing.Size(91, 23);
+            this.txtPrecio.Size = new System.Drawing.Size(104, 23);
             this.txtPrecio.TabIndex = 211;
             // 
             // label4
@@ -93,18 +159,19 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(209, 130);
+            this.label4.Location = new System.Drawing.Point(7, 163);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 17);
+            this.label4.Size = new System.Drawing.Size(50, 17);
             this.label4.TabIndex = 210;
-            this.label4.Text = "Precio venta:";
+            this.label4.Text = "Precio:";
             // 
             // txtCantidad
             // 
+            this.txtCantidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCantidad.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(77, 150);
+            this.txtCantidad.Location = new System.Drawing.Point(77, 132);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(91, 23);
+            this.txtCantidad.Size = new System.Drawing.Size(104, 23);
             this.txtCantidad.TabIndex = 209;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
             // 
@@ -113,7 +180,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(74, 130);
+            this.label5.Location = new System.Drawing.Point(7, 132);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 17);
             this.label5.TabIndex = 208;
@@ -124,10 +191,10 @@
             this.pctLineSeparator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pctLineSeparator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.pctLineSeparator.Location = new System.Drawing.Point(4, 180);
+            this.pctLineSeparator.Location = new System.Drawing.Point(4, 191);
             this.pctLineSeparator.Margin = new System.Windows.Forms.Padding(3, 2, 3, 3);
             this.pctLineSeparator.Name = "pctLineSeparator";
-            this.pctLineSeparator.Size = new System.Drawing.Size(360, 2);
+            this.pctLineSeparator.Size = new System.Drawing.Size(385, 2);
             this.pctLineSeparator.TabIndex = 207;
             this.pctLineSeparator.TabStop = false;
             this.pctLineSeparator.Tag = "txtUser";
@@ -140,7 +207,7 @@
             this.txtNombre.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(77, 106);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(226, 21);
+            this.txtNombre.Size = new System.Drawing.Size(285, 21);
             this.txtNombre.TabIndex = 94;
             // 
             // txtCodigo
@@ -150,7 +217,7 @@
             this.txtCodigo.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.Location = new System.Drawing.Point(77, 79);
             this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(226, 23);
+            this.txtCodigo.Size = new System.Drawing.Size(246, 23);
             this.txtCodigo.TabIndex = 93;
             // 
             // label1
@@ -171,7 +238,7 @@
             this.cmbCategoria.FormattingEnabled = true;
             this.cmbCategoria.Location = new System.Drawing.Point(77, 47);
             this.cmbCategoria.Name = "cmbCategoria";
-            this.cmbCategoria.Size = new System.Drawing.Size(226, 23);
+            this.cmbCategoria.Size = new System.Drawing.Size(285, 23);
             this.cmbCategoria.TabIndex = 91;
             // 
             // label11
@@ -195,7 +262,7 @@
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnCancelar.Location = new System.Drawing.Point(149, 190);
+            this.btnCancelar.Location = new System.Drawing.Point(174, 199);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(104, 31);
             this.btnCancelar.TabIndex = 89;
@@ -213,11 +280,11 @@
             this.btnRegistrar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnRegistrar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnRegistrar.Location = new System.Drawing.Point(259, 190);
+            this.btnRegistrar.Location = new System.Drawing.Point(284, 199);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(103, 31);
             this.btnRegistrar.TabIndex = 88;
-            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.Text = "Aceptar";
             this.btnRegistrar.UseVisualStyleBackColor = false;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
@@ -232,7 +299,7 @@
             this.btnbuscar.IconColor = System.Drawing.Color.Black;
             this.btnbuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnbuscar.IconSize = 16;
-            this.btnbuscar.Location = new System.Drawing.Point(306, 79);
+            this.btnbuscar.Location = new System.Drawing.Point(329, 79);
             this.btnbuscar.Name = "btnbuscar";
             this.btnbuscar.Size = new System.Drawing.Size(33, 23);
             this.btnbuscar.TabIndex = 86;
@@ -247,7 +314,7 @@
             this.pnlControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlControl.Location = new System.Drawing.Point(0, 0);
             this.pnlControl.Name = "pnlControl";
-            this.pnlControl.Size = new System.Drawing.Size(366, 32);
+            this.pnlControl.Size = new System.Drawing.Size(391, 32);
             this.pnlControl.TabIndex = 3;
             this.pnlControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
             this.pnlControl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
@@ -259,7 +326,7 @@
             this.gunaControlCerrar.AnimationSpeed = 0.03F;
             this.gunaControlCerrar.IconColor = System.Drawing.Color.White;
             this.gunaControlCerrar.IconSize = 15F;
-            this.gunaControlCerrar.Location = new System.Drawing.Point(321, 0);
+            this.gunaControlCerrar.Location = new System.Drawing.Point(346, 0);
             this.gunaControlCerrar.Name = "gunaControlCerrar";
             this.gunaControlCerrar.OnHoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
             this.gunaControlCerrar.OnHoverIconColor = System.Drawing.Color.White;
@@ -274,10 +341,10 @@
             this.lblNombreForm.ForeColor = System.Drawing.SystemColors.Control;
             this.lblNombreForm.Location = new System.Drawing.Point(7, 8);
             this.lblNombreForm.Name = "lblNombreForm";
-            this.lblNombreForm.Size = new System.Drawing.Size(122, 17);
+            this.lblNombreForm.Size = new System.Drawing.Size(140, 17);
             this.lblNombreForm.TabIndex = 3;
             this.lblNombreForm.Tag = "";
-            this.lblNombreForm.Text = "Venta de producto";
+            this.lblNombreForm.Text = "Movimiento de venta";
             this.lblNombreForm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseDown);
             this.lblNombreForm.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlControl_MouseMove);
             // 
@@ -286,11 +353,22 @@
             this.errorProvider.BlinkRate = 300;
             this.errorProvider.ContainerControl = this;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(364, 164);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 17);
+            this.label6.TabIndex = 216;
+            this.label6.Text = "%";
+            // 
             // mdBuscarProductoVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 226);
+            this.ClientSize = new System.Drawing.Size(393, 239);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "mdBuscarProductoVenta";
@@ -327,5 +405,11 @@
         private Guna.UI.WinForms.GunaControlBox gunaControlCerrar;
         private System.Windows.Forms.Label lblNombreForm;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.TextBox txtExistencia;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDescuento;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.Label label6;
     }
 }

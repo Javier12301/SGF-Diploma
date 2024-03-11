@@ -1,6 +1,7 @@
 ﻿using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Inventario;
+using SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Ventas;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,10 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnExistencias_Click(object sender, EventArgs e)
         {
-
+            using(var modal = new mdReporteResumen())
+            {
+                modal.ShowDialog();
+            }
         }
 
         private void btnSalidas_Click(object sender, EventArgs e)

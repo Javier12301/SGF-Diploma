@@ -32,6 +32,13 @@ namespace SGF.NEGOCIO.Negocio
             return conteo;
         }
 
+        // ConteoProductosInactivosYDadosDeBajaD
+        public int ConteoProductosInactivosYDadosDeBaja()
+        {
+            int conteo = ProductoDAO.ConteoProductosInactivosYDadosDeBajaD();
+            return conteo;
+        }
+
         // Obtener existencias
         public int ObtenerExistencias(int productoID)
         {
@@ -143,6 +150,20 @@ namespace SGF.NEGOCIO.Negocio
         {
             int existencia = ProductoDAO.ExistenciaProductosPorTipoProductoD(tipoProducto);
             return existencia;
+        }
+
+        // Obtener costo inventario
+        public decimal ObtenerCostoInventario()
+        {
+            decimal costoInventario = ProductoDAO.ObtenerCostoInventarioD();
+            return costoInventario;
+        }
+
+        // Obtener precio inventario
+        public decimal ObtenerPrecioInventario()
+        {
+            decimal precioInventario = ProductoDAO.ObtenerPrecioInventarioD();
+            return precioInventario;
         }
 
     }

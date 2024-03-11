@@ -25,8 +25,7 @@ VALUES
     ('formRegistros'),
     ('formReportes'),
     ('formReporteInventario'),
-    ('formReporteVentas'),
-    ('formReporteClientes'),
+    ('formReporteResumenTotal'),
     ('formAjustes'),
     ('formPerfiles'),
     ('formUsuarios'),
@@ -34,149 +33,147 @@ VALUES
     ('formAuditoria'),
     ('formMisDatos');
 
+	select * from Accion
+	where ModuloID = 11
+
 -- Insertar las acciones para el módulo formVentas
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Historial de ventas', 1),
-    ('Buscar clientes', 1),
-    ('Vender medicamentos', 1),
-    ('Dar crédito', 1),
-    ('Vender producto general', 1);
+    ('Historial', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
+    ('Buscar clientes', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
+    ('Detalles', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
+    ('Vender producto general', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas'));
 
 -- Insertar las acciones para el módulo formClientes
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 2),
-    ('Modificar', 2),
-    ('Baja', 2),
-    ('Importar', 2),
-    ('Exportar', 2),
-	('Imprimir', 2);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes')),
+    ('Importar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes')),
+    ('Imprimir', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formClientes'));
 
 -- Insertar las acciones para el módulo formProductos
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 3),
-    ('Modificar', 3),
-    ('Baja', 3),
-    ('Importar', 3),
-    ('Exportar', 3);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProductos')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProductos')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProductos')),
+    ('Importar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProductos')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProductos'));
 
 -- Insertar las acciones para el módulo formCategorias
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 4),
-    ('Modificar', 4),
-    ('Baja', 4);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formCategorias')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formCategorias')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formCategorias'));
 
 -- Insertar las acciones para el módulo formProveedores
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 5),
-    ('Modificar', 5),
-    ('Baja', 5),
-    ('Exportar', 5);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProveedores')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProveedores')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProveedores')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formProveedores'));
 
 -- Insertar las acciones para el módulo formInventario
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Entrada', 6),
-    ('Salida', 6),
-    ('Exportar', 6);
-
-INSERT INTO Accion(Descripcion, ModuloID)
-VALUES 
-('Imprimir', 6)
+    ('Entrada', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formInventario')),
+    ('Salida', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formInventario')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formInventario')),
+    ('Imprimir', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formInventario'));
 
 -- Insertar las acciones para el módulo formDetallesInventario
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES
-	('Imprimir', 7),
-	('Cancelar', 7);
+    ('Imprimir', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formDetallesInventario')),
+    ('Cancelar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formDetallesInventario'));
 
 -- Insertar las acciones para el módulo formRegistros
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Generar registro', 8),
-    ('Exportar', 8),
-	('Baja', 8);
+    ('Generar registro', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formRegistros'));
 
 -- Insertar las acciones para el módulo formReportes
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Inventario', 9),
-    ('Ventas', 9),
-    ('Clientes', 9);
+    ('Inventario', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes')),
+    ('Resumen total', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes')),
+    ('Clientes', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReportes'));
+
+select * from accion
+where ModuloID = 9
+
+update Accion
+set Descripcion = 'Resumen total'
+where AccionID = 33
+
+select * from Modulo
 
 -- Insertar las acciones para el módulo formReporteInventario
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Existencias de inventario', 10),
-    ('Resumen de inventario', 10),
-    ('Exportar', 10),
-	('Imprimir', 10),
-	('Gráfico', 10);
+    ('Existencias de inventario', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteInventario')),
+    ('Resumen de inventario', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteInventario')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteInventario')),
+    ('Imprimir', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteInventario')),
+    ('Gráfico', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteInventario'));
 
--- Insertar las acciones para el módulo formReporteVentas
+-- INSERTAR ACCIONES PARA MODULO formReporteResumenTotal
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Ventas', 11),
-    ('Ventas por clientes', 11),
-    ('Exportar', 11),
-	('Imprimir', 11),
-	('Gráfico', 11);
-
-
--- Insertar las acciones para el módulo formReporteClientes
-INSERT INTO Accion(Descripcion, ModuloID)
-VALUES 
-    ('Pagos de clientes', 12),
-    ('Cuentas por cobrar', 12),
-    ('Exportar', 12),
-	('Imprimir', 12);
-
+    ('Permitir acceso', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteResumenTotal')),
+    ('Imprimir', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formReporteResumenTotal'));
 
 -- Insertar las acciones para el módulo formAjustes
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Perfiles', 13),
-    ('Datos de negocio', 13),
-    ('Gestionar base de datos', 13),
-    ('Otras configuraciones', 13);
+    ('Perfiles', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAjustes')),
+    ('Datos de negocio', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAjustes')),
+    ('Gestionar base de datos', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAjustes')),
+    ('Otras configuraciones', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAjustes'));
 
 -- Insertar las acciones para el módulo formPerfiles
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Usuarios', 14),
-    ('Grupos', 14),
-    ('Auditoria', 14),
-    ('Mis datos', 14);
+    ('Usuarios', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formPerfiles')),
+    ('Grupos', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formPerfiles')),
+    ('Auditoria', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formPerfiles')),
+    ('Mis datos', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formPerfiles'));
+
 -- Insertar las acciones para el módulo formUsuarios
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 15),
-    ('Modificar', 15),
-    ('Baja', 15),
-    ('Exportar', 15);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formUsuarios')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formUsuarios')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formUsuarios')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formUsuarios'));
 
 -- Insertar las acciones para el módulo formGrupos
 INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
-    ('Alta', 16),
-    ('Modificar', 16),
-    ('Baja', 16),
-    ('Exportar', 16);
+    ('Alta', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formGrupos')),
+    ('Modificar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formGrupos')),
+    ('Baja', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formGrupos')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formGrupos'));
 
 -- Insertar las acciones para el módulo formAuditoria
 INSERT INTO Accion(Descripcion, ModuloID)
-VALUES ('Generar auditoria', 17),
-	   ('Gráfico', 17),
-       ('Exportar', 17);
+VALUES 
+    ('Generar auditoria', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria')),
+    ('Gráfico', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria')),
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria'));
 
 -- Insertar las acciones para el módulo formMisDatos
 INSERT INTO Accion(Descripcion, ModuloID)
-VALUES ('Permitir acceso', 18);
-GO
+VALUES 
+    ('Permitir acceso', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formMisDatos'));
+
 
 -- Inserta los permisos para el grupo de administradores
 INSERT INTO Permiso (GrupoID, AccionID, Permitido)
@@ -277,3 +274,23 @@ INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioComp
 INSERT INTO Producto (CodigoBarras, Nombre, CategoriaID, ProveedorID, PrecioCompra, PrecioVenta, NumeroLote, FechaVencimiento, Refrigerado, BajoReceta, Stock, CantidadMinima, TipoProducto, Estado) VALUES
 ('55553', 'Penicilina', 3, 1, 0.75, 1.50, 'LoteAB00', '2027-01-01', 0, 0, 200, 20, 'Medicamentos', 1);
 
+
+CREATE TABLE Compra (
+    CompraID INT IDENTITY PRIMARY KEY,
+    UsuarioID INT REFERENCES Usuario(UsuarioID),
+    ProveedorID INT REFERENCES Proveedor(ProveedorID),
+    Factura VARCHAR(50),
+    FechaCompra DATETIME DEFAULT GETDATE(),
+	Estado BIT
+);
+GO
+
+CREATE TABLE Detalle_Compra (
+    DetalleCompraID INT IDENTITY PRIMARY KEY,
+    CompraID INT REFERENCES Compra(CompraID),
+    ProductoID INT REFERENCES Producto(ProductoID),
+    PrecioCompra DECIMAL(10,2) DEFAULT 0,
+    Cantidad INT,
+    FechaRegistro DATETIME DEFAULT GETDATE()
+);
+GO

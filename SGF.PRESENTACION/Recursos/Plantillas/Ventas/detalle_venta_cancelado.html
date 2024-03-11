@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Detalle Compra</title>
+    <style>
+        table.border {
+            border-collapse: collapse;
+        }
+
+        table.border th {
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        table.border td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        #cancelado {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            background-color: red;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+            <td style="width:20%"></td>
+            <td style="width:60%" align="center" valign="top">
+                <table>
+                    <tr><td align="center"><h4 style="margin:0px">@NombreNegocio</h4></td></tr>
+                    <tr><td align="center"><h5 style="margin:0px">@TipoMovimiento</h5></td></tr>
+                    <tr><td align="center">@DireccionNegocio, Argentina</td></tr>
+                    <tr><td align="center">@TelefonoNegocio</td></tr>
+                </table>
+            </td>
+            <td style="width:20%">
+                <table class="border" style="width:100%">
+                    <tr><td align="center">@TipoDocumentoNegocio: @DocumentoNegocio</td></tr>
+                    <tr><td align="center" style="background-color:#D8D8D8">@TipoComprobante</td></tr>
+                    <tr><td align="center">Folio: @NumeroFolio</td></tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr><td colspan="3" height="20"></td></tr>
+
+        <tr>
+            <td colspan="2">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="1" style="width:20%">Venta realizada por:</td>
+                        <td colspan="3" style="width:30%;border-bottom:1px solid black">@NombreApellidoUsuario</td>
+                        <td colspan="1" style="width:20%">Documento:</td>
+                        <td colspan="3" style="width:30%;border-bottom:1px solid black">@DocumentoUsuario</td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="1" style="width:20%">Cliente:</td>
+                        <td colspan="3" style="width:30%;border-bottom:1px solid black">@NombreCliente</td>
+                        <td style="width:20%">@TipoDocumentoCliente:</td>
+                        <td style="width:30%;border-bottom:1px solid black">@DocumentoCliente</td>
+                    </tr>
+                </table>
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="1" style="width:20%">Tipo de cliente:</td>
+                        <td colspan="3" style="width:30%;border-bottom:1px solid black">@TipoCliente</td>
+                        <td colspan="1" style="width:20%">Fecha:</td>
+                        <td colspan="3" style="width:30%;border-bottom:1px solid black">@Fecha</td>
+
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr><td colspan="3" height="30"></td></tr>
+
+        <tr>
+            <td colspan="3">
+                <table class="border" style="width:100%;">
+                    <thead>
+                        <tr style="background-color:#D8D8D8">
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Cantidad vendida</th>
+                            <th>Precio de venta</th>
+                            <th>Descuento</th>
+                            <th>Sub total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @FILAS
+                        <tr>
+                            <td style="border: 0px !important"></td>
+                            <td style="border: 0px !important"></td>
+                            <td align="right" style="font-weight: 600;">Impuesto aplicado:</td>
+                            <td>@Impuesto</td>
+                            <td align="right" style="font-weight: 600;">Precio total:</td>
+                            <td>@Total</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="cancelado">CANCELADO</div>
+    <p style="text-align: center; font-size: 0.8em; margin-top: 10px ; text-decoration: underline;">Este documento no es válido para ningún trámite</p>
+</body>
+</html>

@@ -337,6 +337,12 @@
     <Compile Include="formModales\Salida inventario\mdDetalleSalidaInventario.Designer.cs">
       <DependentUpon>mdDetalleSalidaInventario.cs</DependentUpon>
     </Compile>
+    <Compile Include="formModales\Ventas\mdDetalleVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\Ventas\mdDetalleVentas.Designer.cs">
+      <DependentUpon>mdDetalleVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="formModales\Salida inventario\mdRegistrarSalida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,18 @@
     <Compile Include="formModales\Ventas\mdBuscarProductoVenta.Designer.cs">
       <DependentUpon>mdBuscarProductoVenta.cs</DependentUpon>
     </Compile>
+    <Compile Include="formModales\Ventas\mdCobrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\Ventas\mdCobrar.Designer.cs">
+      <DependentUpon>mdCobrar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formModales\Ventas\mdHistorialVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\Ventas\mdHistorialVentas.Designer.cs">
+      <DependentUpon>mdHistorialVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="formPrincipales\formClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,6 +426,12 @@
     </Compile>
     <Compile Include="formPrincipales\formHijos\Reportes\Inventario\formReporteInventario.Designer.cs">
       <DependentUpon>formReporteInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\Reportes\Ventas\mdReportesVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPrincipales\formHijos\Reportes\Ventas\mdReportesVentas.Designer.cs">
+      <DependentUpon>mdReportesVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="formPrincipales\formHijos\Seguridad\formAuditoria.cs">
       <SubType>Form</SubType>
@@ -530,6 +554,7 @@
       <DependentUpon>Reportes.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UtilidadesComunes\Conversion.cs" />
     <Compile Include="UtilidadesComunes\UtilidadesUI.cs" />
     <EmbeddedResource Include="formModales\Buscadores\mdBuscarCliente.resx">
       <DependentUpon>mdBuscarCliente.cs</DependentUpon>
@@ -582,6 +607,9 @@
     <EmbeddedResource Include="formModales\Salida inventario\mdDetalleSalidaInventario.resx">
       <DependentUpon>mdDetalleSalidaInventario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formModales\Ventas\mdDetalleVentas.resx">
+      <DependentUpon>mdDetalleVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formModales\Salida inventario\mdRegistrarSalida.resx">
       <DependentUpon>mdRegistrarSalida.cs</DependentUpon>
     </EmbeddedResource>
@@ -603,6 +631,12 @@
     <EmbeddedResource Include="formModales\Ventas\mdBuscarProductoVenta.resx">
       <DependentUpon>mdBuscarProductoVenta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="formModales\Ventas\mdCobrar.resx">
+      <DependentUpon>mdCobrar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\Ventas\mdHistorialVentas.resx">
+      <DependentUpon>mdHistorialVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formClientes.resx">
       <DependentUpon>formClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -617,6 +651,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formHijos\Reportes\Inventario\formReporteInventario.resx">
       <DependentUpon>formReporteInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPrincipales\formHijos\Reportes\Ventas\mdReportesVentas.resx">
+      <DependentUpon>mdReportesVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formPrincipales\formHijos\Seguridad\formAuditoria.resx">
       <DependentUpon>formAuditoria.cs</DependentUpon>
@@ -790,6 +827,8 @@
     <Content Include="Recursos\Logo negocio\logo.png" />
     <Content Include="Recursos\Logo negocio\style.css" />
     <None Include="Recursos\Plantillas\Reportes\reporte_productos_mayor_stock.html" />
+    <Content Include="Recursos\Plantillas\Ventas\detalle_venta.html" />
+    <Content Include="Recursos\Plantillas\Ventas\detalle_venta_cancelado.html" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -817,7 +856,6 @@
   <ItemGroup>
     <Folder Include="formPrincipales\formHijos\Reportes\Clientes\" />
     <Folder Include="formPrincipales\formHijos\Reportes\Inventario\rvInventario\" />
-    <Folder Include="formPrincipales\formHijos\Reportes\Ventas\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

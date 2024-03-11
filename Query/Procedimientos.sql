@@ -26,7 +26,8 @@ WHERE
 ORDER BY 
     FechaVencimiento ASC;
 
-	
+
+
 -- Seleccionar Usuario y el nombre de grupo
 SELECT U.UsuarioID, U.NombreUsuario, U.Contraseña, U.Nombre AS NombreU, U.Apellido, U.Email, U.DNI, U.GrupoID, U.Estado AS EstadoU, G.GrupoID, G.Nombre AS NombreG, G.Estado AS EstadoG
 FROM Usuario U
@@ -641,3 +642,116 @@ WHERE
     AND (@TipoDocumento = 'Todos' OR C.TipoDocumento = @TipoDocumento)
     AND (@Estado = 'Todos' OR (C.Estado = 1 AND @Estado = 'Activo') OR (C.Estado = 0 AND @Estado = 'Inactivo'))
     AND (@TipoCliente = 'Todos' OR TC.Descripcion = @TipoCliente);
+
+-- FILTRO VENTA
+DECLARE @FiltroEstado varchar(50)= 'Todos'
+DECLARE @FechaDesde datetime ='2023-02-20'
+DECLARE @FechaHasta datetime = '2028-05-20'
+SELECT 
+    V.VentaID,
+    V.FechaVenta,
+	V.TipoComprobante,
+    SUM(DV.Cantidad) AS CantidadTotal,
+    SUM(DV.SubTotal) AS TotalConDescuento,
+    V.NombreCliente,
+    V.DocumentoCliente,
+    V.TipoCliente,
+    V.MontoPagado,
+    V.MontoCambio,
+	V.Impuesto,
+    V.MontoTotal
+FROM 
+    Venta V
+    INNER JOIN Detalle_Venta DV ON V.VentaID = DV.VentaID
+WHERE 
+    (@FiltroEstado = 'Todos' OR
+    (@FiltroEstado = 'Activo' AND V.Estado = 1) OR
+    (@FiltroEstado = 'Cancelado' AND V.Estado = 0))
+    AND V.FechaVenta BETWEEN @FechaDesde AND @FechaHasta
+GROUP BY 
+    V.VentaID,
+    V.FechaVenta,
+	V.TipoComprobante,
+    V.NombreCliente,
+    V.DocumentoCliente,
+    V.TipoCliente,
+    V.MontoPagado,
+    V.MontoCambio,
+	V.Impuesto,
+    V.MontoTotal;
+
+
+-- Detalle de ventas
+SELECT 
+    P.CodigoBarras,
+    P.Nombre AS 'Nombre de Producto',
+    DV.Cantidad AS 'Cantidad Vendida',
+    DV.PrecioVenta AS 'Precio de Venta',
+    DV.Descuento AS 'Descuento',
+    DV.SubTotal AS 'Sub Total'
+FROM 
+    Detalle_Venta DV
+    INNER JOIN Producto P ON DV.ProductoID = P.ProductoID
+WHERE 
+    DV.VentaID = @FiltroVentaID;
+
+
+-- TOP 10 PRODUCTOS MÁS VENDIDOS
+SELECT TOP 10
+    P.CodigoBarras,
+	P.NumeroLote,
+    P.Nombre AS 'Nombre de Producto',
+	P.TipoProducto,
+    SUM(DV.Cantidad) AS 'Cantidad Vendida'
+FROM 
+    Detalle_Venta DV
+    INNER JOIN Producto P ON DV.ProductoID = P.ProductoID
+GROUP BY 
+    P.CodigoBarras,
+	P.NumeroLote,
+    P.Nombre,
+	P.TipoProducto
+ORDER BY 
+    'Cantidad Vendida' DESC;
+
+
+
+SELECT 
+    YEAR(FechaVenta) AS Year,
+    LEFT(FORMAT(FechaVenta, 'MMMM', 'es-ES'), 3) AS Month,
+    COUNT(*) AS NumeroDeVentas
+FROM 
+    Venta
+WHERE 
+    FechaVenta BETWEEN '2024-01-01' AND '2024-12-31'
+GROUP BY 
+    YEAR(FechaVenta),
+    MONTH(FechaVenta),
+    LEFT(FORMAT(FechaVenta, 'MMMM', 'es-ES'), 3)
+ORDER BY 
+    Year,
+    MONTH(FechaVenta);
+
+
+	select * from Venta
+
+
+-- Query para obtener los productos generales más vendidos
+SELECT 
+    P.Nombre, 
+    SUM(DV.Cantidad) AS NumeroDeVentas
+FROM 
+    Detalle_Venta DV
+INNER JOIN 
+    Producto P ON DV.ProductoID = P.ProductoID
+WHERE 
+    P.TipoProducto = @TipoProducto AND
+    DV.FechaRegistro BETWEEN @FechaInicio AND @FechaHasta
+GROUP BY 
+    P.Nombre
+ORDER BY 
+    NumeroDeVentas DESC;
+
+
+-- Ventas realizadas tipo producto
+SELECT SUM(DV.Cantidad) FROM Detalle_Venta DV INNER JOIN Producto P ON DV.ProductoID = P.ProductoID WHERE P.TipoProducto = 'Medicamentos' AND DV.VentaID IN (SELECT VentaID FROM Venta WHERE Estado = 1)

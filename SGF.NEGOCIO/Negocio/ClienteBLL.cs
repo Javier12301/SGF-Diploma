@@ -73,6 +73,34 @@ namespace SGF.NEGOCIO.Negocio
             }
         }
 
+        // Conteo clientes activos
+        public int ConteoClientesActivos()
+        {
+            int conteo = ClienteDAO.ConteoClientesActivosD();
+            if (conteo >= 0)
+            {
+                return conteo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el conteo de clientes activos. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
+        // Conteo clientes inactivos y dados de baja
+        public int ConteoClientesInactivos()
+        {
+            int conteo = ClienteDAO.ConteoClientesInactivosYDadosDeBajaD();
+            if (conteo >= 0)
+            {
+                return conteo;
+            }
+            else
+            {
+                throw new Exception("Ocurrió un error al intentar obtener el conteo de clientes inactivos. Por favor, vuelva a intentarlo y, si el problema persiste, póngase en contacto con el administrador del sistema.");
+            }
+        }
+
         // listar cliente
         public List<Cliente> ListarClientes()
         {

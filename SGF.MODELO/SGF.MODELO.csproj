@@ -45,6 +45,7 @@
     <Compile Include="Negocio\Cliente.cs" />
     <Compile Include="Negocio\Compra.cs" />
     <Compile Include="Negocio\DetalleCompra.cs" />
+    <Compile Include="Negocio\DetalleVenta.cs" />
     <Compile Include="Negocio\Impuesto.cs" />
     <Compile Include="Negocio\Moneda.cs" />
     <Compile Include="Negocio\NegocioModelo.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Negocio\Registro.cs" />
     <Compile Include="Negocio\SalidaInventario.cs" />
     <Compile Include="Negocio\TipoCliente.cs" />
+    <Compile Include="Negocio\Venta.cs" />
     <Compile Include="Operacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\Auditoria.cs" />

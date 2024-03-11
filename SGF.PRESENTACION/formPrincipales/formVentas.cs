@@ -1,6 +1,8 @@
 ﻿using SGF.MODELO.Negocio;
 using SGF.NEGOCIO.Negocio;
+using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formModales.Buscadores;
+using SGF.PRESENTACION.formModales.Salida_inventario;
 using SGF.PRESENTACION.formModales.Ventas;
 using SGF.PRESENTACION.UtilidadesComunes;
 using System;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,7 @@ namespace SGF.PRESENTACION.formPrincipales
         UtilidadesUI uiUtilidades = UtilidadesUI.ObtenerInstancia;
         ClienteBLL lCliente = ClienteBLL.ObtenerInstancia;
         VentaBLL lVenta = VentaBLL.ObtenerInstancia;
+        SesionBLL lSesion = SesionBLL.ObtenerInstancia;
 
         // Fuentes usadas, lblSubTotal, lblTotal y lblImpuesto
         private Font fuenteTotal { get; set; }
@@ -59,6 +63,8 @@ namespace SGF.PRESENTACION.formPrincipales
             }
         }
 
+        
+
         private void cargarFuentes()
         {
             // obtener fuente de lblSubTotal
@@ -78,18 +84,20 @@ namespace SGF.PRESENTACION.formPrincipales
                 {
                     productoSeleccionado = modal.productoSeleccionado;
                     int cantidad = modal.cantidadSeleccionada == 0 ? 1 : modal.cantidadSeleccionada;
+                    decimal descuento = modal.descuentoSeleccionado;
                     textboxColorizador(true);
-                    cargarGrilla(productoSeleccionado, cantidad);
+                    cargarGrilla(productoSeleccionado, cantidad, descuento);
                 }
             }
         }
+
 
         private void cargarVenta()
         {
             datosDelNegocio = lNegocio.NegocioEnSesion().DatosDelNegocio;
             cargarCombobox();
             cargarImpuesto();
-            cargarCliente();
+            cargarCliente(lCliente.ObtenerClientePorID(0));
 
             // Cargar datos del negocio
             lblNombreEmpresa.Text = datosDelNegocio.Nombre;
@@ -105,10 +113,34 @@ namespace SGF.PRESENTACION.formPrincipales
             lblNumerodeVenta.Text = lVenta.ContadorDeVenta();
         }
 
-        private void cargarCliente()
+        private void cargarCliente(Cliente cliente)
         {
+            if(cliente != null)
+            {
+                clienteSeleccionado = cliente;
+                if(cliente.ClienteID == 0)
+                {
+                    lblCliente.Text = cliente.NombreCompleto;
+                    lblTipo.Visible = false;
+                    lblTipoCliente.Visible = false;
+                    lblTipoDocumento.Visible = false;
+                    lblDocumento.Visible = false;
+                }
+                else
+                {
+                    lblTipo.Visible = true;
+                    lblTipoCliente.Visible = true;
+                    lblTipoDocumento.Visible = true;
+                    lblDocumento.Visible = true;
+
+                    lblTipoCliente.Text = cliente.TipoCliente.Descripcion;
+                    lblTipoDocumento.Text = cliente.TipoDocumento+ ": ";
+                    lblDocumento.Text = cliente.Documento;
+                    lblCliente.Text = cliente.NombreCompleto;
+                }
+            }
             // Cargar consumidor final
-            clienteSeleccionado = lCliente.ObtenerClientePorID(0);
+
         }
 
         private void cargarImpuesto()
@@ -151,7 +183,7 @@ namespace SGF.PRESENTACION.formPrincipales
                 if (resultado == DialogResult.OK)
                 {
                     clienteSeleccionado = modal.clienteSeleccionado;
-                    lblCliente.Text = clienteSeleccionado.NombreCompleto;
+                    cargarCliente(clienteSeleccionado);
                 }
             }
         }
@@ -196,7 +228,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     productoSeleccionado = lProducto.ObtenerProductoPorCodigo(txtBuscarProducto.Text);
                     if (productoSeleccionado != null)
                     {
-                        cargarGrilla(productoSeleccionado, 1);
+                        cargarGrilla(productoSeleccionado, 1, 0);
                         textboxColorizador(true);
                     }
                     else
@@ -223,48 +255,42 @@ namespace SGF.PRESENTACION.formPrincipales
             {
                 txtBuscarProducto.BackColor = Color.FromArgb(255, 254, 196);
             }
-
         }
 
         private void AjustarTamanoFuente(Label label, Font fuenteOriginal)
         {
-            // Crear una nueva fuente basada en la fuente original
+            // Tamaño de fuente mínimo
+            float tamanoMinimo = 6f;
+
+            // Tamaño de fuente máximo
+            float tamanoMaximo = fuenteOriginal.Size;
+
+            // Copiar la fuente original para ajustarla
             Font fuente = new Font(fuenteOriginal.FontFamily, fuenteOriginal.Size, fuenteOriginal.Style);
 
-            // Calcular el tamaño del texto con la fuente actual
-            SizeF tamanoTexto = TextRenderer.MeasureText(label.Text, fuente);
-
-            // Si el ancho del texto es mayor que el ancho del label
-            while (tamanoTexto.Width > label.Width)
+            // Iterar hasta alcanzar el tamaño de fuente adecuado
+            while (fuente.Size > tamanoMinimo)
             {
+                // Calcular el tamaño del texto con la fuente actual
+                SizeF tamanoTexto = TextRenderer.MeasureText(label.Text, fuente);
+
+                // Si el ancho del texto es menor que el ancho del label
+                if (tamanoTexto.Width <= label.Width && tamanoTexto.Height <= label.Height)
+                {
+                    break;
+                }
+
                 // Reducir el tamaño de la fuente
-                fuente = new Font(fuente.FontFamily, fuente.Size - 0.5f, fuente.Style);
-
-                // Volver a calcular el tamaño del texto
-                tamanoTexto = TextRenderer.MeasureText(label.Text, fuente);
-            }
-
-            // Si el ancho del texto es menor que el ancho del label y la fuente es menor que el tamaño original
-            while (tamanoTexto.Width < label.Width && fuente.Size < fuenteOriginal.Size)
-            {
-                // Aumentar el tamaño de la fuente
-                fuente = new Font(fuente.FontFamily, fuente.Size + 0.5f, fuente.Style);
-
-                // Volver a calcular el tamaño del texto
-                tamanoTexto = TextRenderer.MeasureText(label.Text, fuente);
-            }
-
-            // Si el texto es "0.00", restablecer al tamaño de fuente original
-            if (label.Text == "0.00")
-            {
-                fuente = new Font(fuente.FontFamily, fuenteOriginal.Size, fuente.Style);
+                fuente = new Font(fuente.FontFamily, fuente.Size - 1f, fuente.Style);
             }
 
             // Aplicar la nueva fuente al label
             label.Font = fuente;
         }
 
-        private void cargarGrilla(Producto producto, int cantidadElegida)
+
+
+        private void cargarGrilla(Producto producto, int cantidadElegida, decimal descuento)
         {
             if (producto == null)
             {
@@ -272,8 +298,6 @@ namespace SGF.PRESENTACION.formPrincipales
                 return;
             }
 
-            // Verificar si el producto ya está en la lista
-            int descuento = 0;
             if (cantidadElegida <= producto.Stock)
             {
                 DataGridViewRow existeFila = dgvVenta.Rows
@@ -282,8 +306,6 @@ namespace SGF.PRESENTACION.formPrincipales
 
                 if (existeFila != null)
                 {
-                    // entero de sumar cantidadExistente y la elegida verificando con el stock del producto real
-                    descuento = Convert.ToInt32(existeFila.Cells["dgvcDescuento"].Value);
                     int cantidadExistente = Convert.ToInt32(existeFila.Cells["dgvcCantidad"].Value);
                     if (cantidadExistente + cantidadElegida > producto.Stock)
                     {
@@ -293,19 +315,29 @@ namespace SGF.PRESENTACION.formPrincipales
                     }
 
                     existeFila.Cells["dgvcCantidad"].Value = cantidadExistente + cantidadElegida;
-                    //existeFila.Cells["dgvcSubTotal"].Value = (cantidadExistente + cantidadElegida) * producto.PrecioVenta;
-                    // existeFila.cells de subtotal usando la ecuación pero agregando descuento
-                    existeFila.Cells["dgvcSubTotal"].Value = (cantidadExistente + cantidadElegida) * producto.PrecioVenta - descuento;
+                    decimal subtotal = (cantidadExistente + cantidadElegida) * producto.PrecioVenta;
 
-                    if(cantidadExistente + cantidadElegida == 0)
+                    // Aplicar el descuento
+                    // se utilizará la ecuación (Porcentaje de descuento * valor subtotal) / 100
+                    subtotal -= subtotal * descuento / 100;
+
+                    // insertar en el dgvcDescuento el valor del descuento y un % para indicar que es un porcentaje
+                    string descuentoStr = descuento + "%";
+                    existeFila.Cells["dgvcDescuento"].Value = descuentoStr;
+                    existeFila.Cells["dgvcSubTotal"].Value = formatoMoneda(subtotal.ToString());
+
+                    if (cantidadExistente + cantidadElegida == 0)
                     {
                         eliminarProducto(producto, existeFila);
                     }
                 }
                 else
                 {
-                    decimal subTotal = cantidadElegida * producto.PrecioVenta - descuento;
-                    dgvVenta.Rows.Add(producto.ProductoID, producto.Nombre, cantidadElegida, producto.PrecioVenta, descuento, subTotal);
+                    decimal subtotal = cantidadElegida * producto.PrecioVenta;
+                    // aplicar descuento
+                    subtotal -= subtotal * descuento / 100;
+                    string descuentoStr = descuento + "%";
+                    dgvVenta.Rows.Add(producto.ProductoID, producto.Nombre, cantidadElegida, producto.PrecioVenta, descuentoStr, subtotal);
                     listaProductosSeleccionados.Add(producto);
                 }
                 calcularTotal();
@@ -318,6 +350,58 @@ namespace SGF.PRESENTACION.formPrincipales
                 return;
             }
         }
+
+        private void modificarGrilla(Producto producto, int cantidad, decimal descuento)
+        {
+            // Usar la misma lógica de cargarGrilla, solo que aquí se comprueba si el producto ya está en la grilla y luego se modifica directamente
+            // si se pudo abrir esta función significa que el producto ya está en la grilla entonces no se agregará así nomas
+            DataGridViewRow existeFila = dgvVenta.Rows
+                .Cast<DataGridViewRow>()
+                .FirstOrDefault(row => Convert.ToInt32(row.Cells["dgvcID"].Value) == producto.ProductoID);
+
+            if (existeFila != null)
+            {
+                int cantidadExistente = Convert.ToInt32(existeFila.Cells["dgvcCantidad"].Value);
+                if (cantidad > producto.Stock)
+                {
+                    MessageBox.Show("No se puede cargar el producto, ya que supera el stock registrado disponible en el inventario.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    textboxColorizador(false);
+                    return;
+                }
+
+                existeFila.Cells["dgvcCantidad"].Value = cantidad;
+                decimal subtotal = (cantidad) * producto.PrecioVenta;
+
+                // Aplicar el descuento
+                // se utilizará la ecuación (Porcentaje de descuento * valor subtotal) / 100
+                subtotal -= subtotal * descuento / 100;
+
+                // insertar en el dgvcDescuento el valor del descuento y un % para indicar que es un porcentaje
+                string descuentoStr = descuento + "%";
+                existeFila.Cells["dgvcDescuento"].Value = descuentoStr;
+                existeFila.Cells["dgvcSubTotal"].Value = formatoMoneda(subtotal.ToString());
+
+                if (cantidad == 0)
+                {
+                    eliminarProducto(producto, existeFila);
+                }
+                calcularTotal();
+            }
+            else
+            {
+                MessageBox.Show("Ocurrió un error al modificar el producto, contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string formatoMoneda(string texto)
+        {
+            if (string.IsNullOrEmpty(texto))
+                texto = "0.00";
+            return string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(texto));
+        }
+
+
+
 
         private void calcularTotal()
         {
@@ -361,40 +445,42 @@ namespace SGF.PRESENTACION.formPrincipales
         private void aumentarCantidad(Producto producto, DataGridViewRow fila)
         {
             int cantidadElegida = 1;
-            cargarGrilla(producto, cantidadElegida);
+            decimal descuento = Convert.ToDecimal(fila.Cells["dgvcDescuento"].Value.ToString().Replace("%", ""));
+            cargarGrilla(producto, cantidadElegida, descuento);
         }
 
         private void decrementarCantidad(Producto producto, DataGridViewRow fila)
         {
             int cantidadElegida = -1;
-            cargarGrilla(producto, cantidadElegida);
+            decimal descuento = Convert.ToDecimal(fila.Cells["dgvcDescuento"].Value.ToString().Replace("%", ""));
+            cargarGrilla(producto, cantidadElegida, descuento);
         }
 
-        private void eliminarProducto(Producto producto,DataGridViewRow fila)
+        private void eliminarProducto(Producto producto, DataGridViewRow fila)
         {
             try
             {
-                // verificar si el datagridview tiene filas
-                if(dgvVenta.Rows.Count == 0)
+                if (dgvVenta.Rows.Count == 0)
                 {
                     MessageBox.Show("No hay productos en la grilla de venta para eliminar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Eliminar producto solo eliminará un producto de la filla correspondiente
-                if(producto != null)
+                if (producto != null)
                 {
                     int filaIndex = fila.Index;
                     listaProductosSeleccionados.Remove(producto);
                     dgvVenta.Rows.RemoveAt(filaIndex);
                     calcularTotal();
                 }
-                
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error al intentar eliminar el producto de la grilla de venta: " + ex.Message);
             }
         }
+
 
         private void dgvVenta_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
@@ -478,7 +564,7 @@ namespace SGF.PRESENTACION.formPrincipales
                     }
                     else if (dgvVenta.Columns[e.ColumnIndex].Name == "btnEliminar")
                     {
-                        eliminarProducto(producto,fila);
+                        eliminarProducto(producto, fila);
                     }
                 }
             }
@@ -489,12 +575,13 @@ namespace SGF.PRESENTACION.formPrincipales
         }
 
 
+
         private void cmbMoneda_SelectedIndexChanged(object sender, EventArgs e)
         {
             calcularTotal();
         }
 
-        
+
 
         private void dgvVenta_KeyDown(object sender, KeyEventArgs e)
         {
@@ -522,6 +609,237 @@ namespace SGF.PRESENTACION.formPrincipales
                         break;
                 }
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            // conteo de filas
+            if (dgvVenta.Rows.Count > 0)
+            {
+                DialogResult resultado = MessageBox.Show("¿Desea limpiar la grilla de venta?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultado == DialogResult.Yes)
+                {
+                    limpiarCampos();
+                }
+            }
+        }
+
+        // privatea void limpiar acmpos
+        private void limpiarCampos()
+        {
+            dgvVenta.Rows.Clear();
+            listaProductosSeleccionados.Clear();
+            calcularTotal();
+            productoEnGrilla = false;
+        }
+
+        private void abrirModalModificar(Producto producto, int cantidad, decimal descuento)
+        {
+            using (var modal = new mdBuscarProductoVenta(true, producto, cantidad, descuento))
+            {
+                var resultado = modal.ShowDialog();
+                if (resultado == DialogResult.OK)
+                {
+                    textboxColorizador(true);
+                    cantidad = modal.cantidadSeleccionada;
+                    descuento = modal.descuentoSeleccionado;
+                    modificarGrilla(producto, cantidad, descuento);
+                }
+
+            }
+        }
+
+        private void dgvVenta_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                try
+                {
+                    if (dgvVenta.CurrentCell != null)
+                    {
+                        int filaIndex = dgvVenta.CurrentCell.RowIndex;
+                        int productoID = Convert.ToInt32(dgvVenta.Rows[filaIndex].Cells["dgvcID"].Value);
+                        int cantidadElegida = Convert.ToInt32(dgvVenta.Rows[filaIndex].Cells["dgvcCantidad"].Value);
+                        decimal descuentoElegido = Convert.ToDecimal(dgvVenta.Rows[filaIndex].Cells["dgvcDescuento"].Value.ToString().Replace("%", ""));
+                        Producto producto = listaProductosSeleccionados.Find(p => p.ProductoID == productoID);
+                        if (producto != null)
+                        {
+                            abrirModalModificar(producto, cantidadElegida, descuentoElegido);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrió un error al intentar abrir el formulario para modificar el producto. Contacte con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
+
+        private void btnCobrar_Click(object sender, EventArgs e)
+        {
+            if (listaProductosSeleccionados.Count > 0)
+            {
+                DataTable dtDetalleVenta = new DataTable();
+                dtDetalleVenta.Columns.Add("dgvcID", typeof(int));
+                dtDetalleVenta.Columns.Add("dgvcProducto", typeof(string));
+                dtDetalleVenta.Columns.Add("dgvcCantidad", typeof(int));
+                dtDetalleVenta.Columns.Add("dgvcPrecio", typeof(decimal));
+                dtDetalleVenta.Columns.Add("dgvcDescuento", typeof(decimal));
+                dtDetalleVenta.Columns.Add("dgvcSubTotal", typeof(decimal));
+
+                foreach (DataGridViewRow fila in dgvVenta.Rows)
+                {
+                    dtDetalleVenta.Rows.Add(
+                        new object[]
+                        {
+                            Convert.ToInt32(fila.Cells["dgvcID"].Value),
+                            fila.Cells["dgvcProducto"].Value.ToString(),
+                            Convert.ToInt32(fila.Cells["dgvcCantidad"].Value),
+                            Convert.ToDecimal(fila.Cells["dgvcPrecio"].Value),
+                            Convert.ToDecimal(fila.Cells["dgvcDescuento"].Value.ToString().Replace("%", "")),
+                            Convert.ToDecimal(fila.Cells["dgvcSubTotal"].Value)
+                        });
+                    foreach (Producto producto in listaProductosSeleccionados)
+                    {
+                        if (producto.ProductoID == Convert.ToInt32(fila.Cells["dgvcID"].Value))
+                        {
+                            producto.Stock -= Convert.ToInt32(fila.Cells["dgvcCantidad"].Value);
+                        }
+                    }
+                }
+
+                // Venta
+                Venta venta = new Venta();
+                venta.usuario = lSesion.UsuarioEnSesion().Usuario;
+                venta.TipoComprobante = cmbFactura.SelectedItem.ToString();
+                venta.TipoDocumento = clienteSeleccionado.TipoDocumento;
+                venta.NumeroDocumento = clienteSeleccionado.Documento;
+                venta.NombreCliente = clienteSeleccionado.NombreCompleto;
+                venta.TipoCliente = clienteSeleccionado.TipoCliente.Descripcion;
+                venta.Moneda = (Moneda)cmbMoneda.SelectedItem;
+                venta.MontoPagado = 0; // se establecerá en el formulario de cobro
+                venta.MontoCambio = 0; // se establecerá en el formulario de cobro
+                venta.Impuesto = lblImpuesto.Text;
+                venta.MontoTotal = Convert.ToDecimal(lblTotal.Text.Replace(venta.Moneda.Simbolo, ""));
+                venta.FechaVenta = DateTime.Now;
+                venta.Estado = true;
+
+                using (var modal = new mdCobrar(venta))
+                {
+                    var resultado = modal.ShowDialog();
+                    if (resultado == DialogResult.OK)
+                    {
+                        venta = modal.ObjectVenta;
+                        if (lVenta.RegistrarVenta(venta, dtDetalleVenta))
+                        {
+                            foreach (Producto producto in listaProductosSeleccionados)
+                            {
+                                int cantidadAntes = lProducto.ObtenerExistencias(producto.ProductoID);
+                                try
+                                {
+                                    if (lProducto.ModificarProducto(producto))
+                                    {
+                                        int cantidadDespues = lProducto.ObtenerExistencias(producto.ProductoID);
+                                        int cantidadVendida = cantidadAntes - cantidadDespues;
+                                        RegistroBLL.RegistrarMovimiento("Venta", lSesion.UsuarioEnSesion().Usuario.ObtenerNombreUsuario(), cantidadVendida, cantidadAntes, cantidadDespues, "Ventas", $"Se realizo de manera exitosa la venta del producto: {producto.Nombre}");
+                                    }
+
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show($"No se pudo actualizar el stock del producto: {producto.Nombre} el cual tiene ID: {producto.ProductoID}, contacte con el administrador del sistema para solucionar este problema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    continue;
+                                }
+                            }
+                            MessageBox.Show("La venta se realizó de manera exitosa.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            venta.VentaID = lVenta.ObtenerUltimaVenta();
+                            if (modal.OpcionSeleccionada == mdCobrar.Opciones.CobrarEimprimir)
+                            {
+                                MessageBox.Show("Se imprimirá el comprobante de venta.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                using (var modalImpresion = new mdDetalleVentas(venta, true))
+                                {
+                                    modalImpresion.ShowDialog();
+                                }
+                            }
+                            else
+                            {
+                                using (var modalImpresion = new mdDetalleVentas(venta))
+                                {
+                                    modalImpresion.ShowDialog();
+                                }
+                            }
+                            DialogResult respuesta = MessageBox.Show("¿Desea limpiar la grilla de venta?", "Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (respuesta == DialogResult.Yes)
+                            {
+                                limpiarCampos();
+                            }
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No hay productos en la grilla de venta para cobrar.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnHistorialDeVenta_Click(object sender, EventArgs e)
+        {
+            using(var modal = new mdHistorialVentas())
+            {
+                modal.ShowDialog();
+            }
+        }
+
+        private void btnImprimirUltimoTicket_Click(object sender, EventArgs e)
+        {
+            // Buscamos la última venta realizada, por si fue eliminada o cancelada, se deberá revisar la última id, si no es esa se buscara la anterior y así
+            // hasta encontrar una venta válida y luego imprimirla, permitiremos imprimir también ventas canceladas.
+            try
+            {
+                int ultimaVentaID = lVenta.ObtenerUltimaVenta();
+                if(ultimaVentaID > 0)
+                {
+                    Venta venta = lVenta.ObtenerVentaPorID(ultimaVentaID);
+                    if(venta != null)
+                    {
+                        using(var modal = new mdDetalleVentas(venta))
+                        {
+                            modal.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo obtener la última venta, esto se puede deber que no existan ventas registradas en el sistema. Si usted cree que esto es un error, por favor, póngase en contacto con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo obtener la última venta, esto se puede deber que no existan ventas registradas en el sistema. Si usted cree que esto es un error, por favor, póngase en contacto con el administrador del sistema.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCierreCja_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

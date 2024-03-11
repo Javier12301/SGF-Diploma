@@ -14,6 +14,8 @@ namespace SGF.PRESENTACION.formModales.modalesBuscadores
     public partial class mdBuscarProducto : Form
     {
         private ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
+        private CategoriaBLL lCategoria = CategoriaBLL.ObtenerInstancia;
+        private ProveedorBLL lProveedor = ProveedorBLL.ObtenerInstancia;
 
         private string filtroProveedor;
         private string filtroCategoria;
@@ -74,6 +76,9 @@ namespace SGF.PRESENTACION.formModales.modalesBuscadores
             {
                 int productoID = Convert.ToInt32(dgvProductos.Rows[filaIndex].Cells["dgvcID"].Value);
                 productoSeleccionado = lProducto.ObtenerProductoPorID(productoID);
+                productoSeleccionado.Categoria = lCategoria.ObtenerCategoriaPorID(productoSeleccionado.Categoria.CategoriaID);
+                productoSeleccionado.Proveedor = lProveedor.ObtenerProveedorPorID(productoSeleccionado.Proveedor.ProveedorID);
+
                 if (productoSeleccionado != null)
                 {
                     this.DialogResult = DialogResult.OK;

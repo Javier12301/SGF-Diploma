@@ -54,6 +54,10 @@ namespace SGF.PRESENTACION {
         
         private ClientesTablaDataTable tableClientesTabla;
         
+        private HistorialVentaDataTable tableHistorialVenta;
+        
+        private Detalle_Ventas_HistorialDataTable tableDetalle_Ventas_Historial;
+        
         private global::System.Data.DataRelation relationFK__Cliente__TipoCli__1352D76D;
         
         private global::System.Data.DataRelation relationFK__Detalle_V__Produ__34B3CB38;
@@ -63,6 +67,8 @@ namespace SGF.PRESENTACION {
         private global::System.Data.DataRelation relationFK__Negocio__MonedaI__75586032;
         
         private global::System.Data.DataRelation relationFK__Cliente__TipoCli__33208881;
+        
+        private global::System.Data.DataRelation relationFK__Detalle_V__Venta__69478F08;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -136,6 +142,12 @@ namespace SGF.PRESENTACION {
                 }
                 if ((ds.Tables["ClientesTabla"] != null)) {
                     base.Tables.Add(new ClientesTablaDataTable(ds.Tables["ClientesTabla"]));
+                }
+                if ((ds.Tables["HistorialVenta"] != null)) {
+                    base.Tables.Add(new HistorialVentaDataTable(ds.Tables["HistorialVenta"]));
+                }
+                if ((ds.Tables["Detalle_Ventas_Historial"] != null)) {
+                    base.Tables.Add(new Detalle_Ventas_HistorialDataTable(ds.Tables["Detalle_Ventas_Historial"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -307,6 +319,26 @@ namespace SGF.PRESENTACION {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public HistorialVentaDataTable HistorialVenta {
+            get {
+                return this.tableHistorialVenta;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public Detalle_Ventas_HistorialDataTable Detalle_Ventas_Historial {
+            get {
+                return this.tableDetalle_Ventas_Historial;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -416,6 +448,12 @@ namespace SGF.PRESENTACION {
                 }
                 if ((ds.Tables["ClientesTabla"] != null)) {
                     base.Tables.Add(new ClientesTablaDataTable(ds.Tables["ClientesTabla"]));
+                }
+                if ((ds.Tables["HistorialVenta"] != null)) {
+                    base.Tables.Add(new HistorialVentaDataTable(ds.Tables["HistorialVenta"]));
+                }
+                if ((ds.Tables["Detalle_Ventas_Historial"] != null)) {
+                    base.Tables.Add(new Detalle_Ventas_HistorialDataTable(ds.Tables["Detalle_Ventas_Historial"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -540,11 +578,24 @@ namespace SGF.PRESENTACION {
                     this.tableClientesTabla.InitVars();
                 }
             }
+            this.tableHistorialVenta = ((HistorialVentaDataTable)(base.Tables["HistorialVenta"]));
+            if ((initTable == true)) {
+                if ((this.tableHistorialVenta != null)) {
+                    this.tableHistorialVenta.InitVars();
+                }
+            }
+            this.tableDetalle_Ventas_Historial = ((Detalle_Ventas_HistorialDataTable)(base.Tables["Detalle_Ventas_Historial"]));
+            if ((initTable == true)) {
+                if ((this.tableDetalle_Ventas_Historial != null)) {
+                    this.tableDetalle_Ventas_Historial.InitVars();
+                }
+            }
             this.relationFK__Cliente__TipoCli__1352D76D = this.Relations["FK__Cliente__TipoCli__1352D76D"];
             this.relationFK__Detalle_V__Produ__34B3CB38 = this.Relations["FK__Detalle_V__Produ__34B3CB38"];
             this.relationFK__Detalle_V__Venta__33BFA6FF = this.Relations["FK__Detalle_V__Venta__33BFA6FF"];
             this.relationFK__Negocio__MonedaI__75586032 = this.Relations["FK__Negocio__MonedaI__75586032"];
             this.relationFK__Cliente__TipoCli__33208881 = this.Relations["FK__Cliente__TipoCli__33208881"];
+            this.relationFK__Detalle_V__Venta__69478F08 = this.Relations["FK__Detalle_V__Venta__69478F08"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -585,6 +636,10 @@ namespace SGF.PRESENTACION {
             base.Tables.Add(this.tableSalidaInventario);
             this.tableClientesTabla = new ClientesTablaDataTable();
             base.Tables.Add(this.tableClientesTabla);
+            this.tableHistorialVenta = new HistorialVentaDataTable();
+            base.Tables.Add(this.tableHistorialVenta);
+            this.tableDetalle_Ventas_Historial = new Detalle_Ventas_HistorialDataTable();
+            base.Tables.Add(this.tableDetalle_Ventas_Historial);
             this.relationFK__Cliente__TipoCli__1352D76D = new global::System.Data.DataRelation("FK__Cliente__TipoCli__1352D76D", new global::System.Data.DataColumn[] {
                         this.tableTipoCliente.TipoClienteIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCliente.TipoClienteIDColumn}, false);
@@ -605,6 +660,10 @@ namespace SGF.PRESENTACION {
                         this.tableTipoCliente.TipoClienteIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableClientesTabla.TipoClienteIDColumn}, false);
             this.Relations.Add(this.relationFK__Cliente__TipoCli__33208881);
+            this.relationFK__Detalle_V__Venta__69478F08 = new global::System.Data.DataRelation("FK__Detalle_V__Venta__69478F08", new global::System.Data.DataColumn[] {
+                        this.tableHistorialVenta.VentaIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDetalle_Venta.VentaIDColumn}, false);
+            this.Relations.Add(this.relationFK__Detalle_V__Venta__69478F08);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -694,6 +753,18 @@ namespace SGF.PRESENTACION {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeClientesTabla() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeHistorialVenta() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeDetalle_Ventas_Historial() {
             return false;
         }
         
@@ -796,6 +867,12 @@ namespace SGF.PRESENTACION {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void ClientesTablaRowChangeEventHandler(object sender, ClientesTablaRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void HistorialVentaRowChangeEventHandler(object sender, HistorialVentaRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void Detalle_Ventas_HistorialRowChangeEventHandler(object sender, Detalle_Ventas_HistorialRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -6105,6 +6182,748 @@ namespace SGF.PRESENTACION {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class HistorialVentaDataTable : global::System.Data.TypedTableBase<HistorialVentaRow> {
+            
+            private global::System.Data.DataColumn columnVentaID;
+            
+            private global::System.Data.DataColumn columnFechaVenta;
+            
+            private global::System.Data.DataColumn columnTipoComprobante;
+            
+            private global::System.Data.DataColumn columnCantidadTotal;
+            
+            private global::System.Data.DataColumn columnNombreCliente;
+            
+            private global::System.Data.DataColumn columnDocumentoCliente;
+            
+            private global::System.Data.DataColumn columnTipoCliente;
+            
+            private global::System.Data.DataColumn columnMontoPagado;
+            
+            private global::System.Data.DataColumn columnMontoCambio;
+            
+            private global::System.Data.DataColumn columnMontoTotal;
+            
+            private global::System.Data.DataColumn columnTotalConDescuento;
+            
+            private global::System.Data.DataColumn columnImpuesto;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaDataTable() {
+                this.TableName = "HistorialVenta";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal HistorialVentaDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected HistorialVentaDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn VentaIDColumn {
+                get {
+                    return this.columnVentaID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn FechaVentaColumn {
+                get {
+                    return this.columnFechaVenta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TipoComprobanteColumn {
+                get {
+                    return this.columnTipoComprobante;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CantidadTotalColumn {
+                get {
+                    return this.columnCantidadTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn NombreClienteColumn {
+                get {
+                    return this.columnNombreCliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DocumentoClienteColumn {
+                get {
+                    return this.columnDocumentoCliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TipoClienteColumn {
+                get {
+                    return this.columnTipoCliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn MontoPagadoColumn {
+                get {
+                    return this.columnMontoPagado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn MontoCambioColumn {
+                get {
+                    return this.columnMontoCambio;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn MontoTotalColumn {
+                get {
+                    return this.columnMontoTotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn TotalConDescuentoColumn {
+                get {
+                    return this.columnTotalConDescuento;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ImpuestoColumn {
+                get {
+                    return this.columnImpuesto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow this[int index] {
+                get {
+                    return ((HistorialVentaRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event HistorialVentaRowChangeEventHandler HistorialVentaRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event HistorialVentaRowChangeEventHandler HistorialVentaRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event HistorialVentaRowChangeEventHandler HistorialVentaRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event HistorialVentaRowChangeEventHandler HistorialVentaRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddHistorialVentaRow(HistorialVentaRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow AddHistorialVentaRow(System.DateTime FechaVenta, string TipoComprobante, int CantidadTotal, string NombreCliente, string DocumentoCliente, string TipoCliente, decimal MontoPagado, decimal MontoCambio, decimal MontoTotal, decimal TotalConDescuento, string Impuesto) {
+                HistorialVentaRow rowHistorialVentaRow = ((HistorialVentaRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        FechaVenta,
+                        TipoComprobante,
+                        CantidadTotal,
+                        NombreCliente,
+                        DocumentoCliente,
+                        TipoCliente,
+                        MontoPagado,
+                        MontoCambio,
+                        MontoTotal,
+                        TotalConDescuento,
+                        Impuesto};
+                rowHistorialVentaRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowHistorialVentaRow);
+                return rowHistorialVentaRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow FindByVentaID(int VentaID) {
+                return ((HistorialVentaRow)(this.Rows.Find(new object[] {
+                            VentaID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                HistorialVentaDataTable cln = ((HistorialVentaDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new HistorialVentaDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnVentaID = base.Columns["VentaID"];
+                this.columnFechaVenta = base.Columns["FechaVenta"];
+                this.columnTipoComprobante = base.Columns["TipoComprobante"];
+                this.columnCantidadTotal = base.Columns["CantidadTotal"];
+                this.columnNombreCliente = base.Columns["NombreCliente"];
+                this.columnDocumentoCliente = base.Columns["DocumentoCliente"];
+                this.columnTipoCliente = base.Columns["TipoCliente"];
+                this.columnMontoPagado = base.Columns["MontoPagado"];
+                this.columnMontoCambio = base.Columns["MontoCambio"];
+                this.columnMontoTotal = base.Columns["MontoTotal"];
+                this.columnTotalConDescuento = base.Columns["TotalConDescuento"];
+                this.columnImpuesto = base.Columns["Impuesto"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnVentaID = new global::System.Data.DataColumn("VentaID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVentaID);
+                this.columnFechaVenta = new global::System.Data.DataColumn("FechaVenta", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaVenta);
+                this.columnTipoComprobante = new global::System.Data.DataColumn("TipoComprobante", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTipoComprobante);
+                this.columnCantidadTotal = new global::System.Data.DataColumn("CantidadTotal", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidadTotal);
+                this.columnNombreCliente = new global::System.Data.DataColumn("NombreCliente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombreCliente);
+                this.columnDocumentoCliente = new global::System.Data.DataColumn("DocumentoCliente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDocumentoCliente);
+                this.columnTipoCliente = new global::System.Data.DataColumn("TipoCliente", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTipoCliente);
+                this.columnMontoPagado = new global::System.Data.DataColumn("MontoPagado", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMontoPagado);
+                this.columnMontoCambio = new global::System.Data.DataColumn("MontoCambio", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMontoCambio);
+                this.columnMontoTotal = new global::System.Data.DataColumn("MontoTotal", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMontoTotal);
+                this.columnTotalConDescuento = new global::System.Data.DataColumn("TotalConDescuento", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalConDescuento);
+                this.columnImpuesto = new global::System.Data.DataColumn("Impuesto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImpuesto);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnVentaID}, true));
+                this.columnVentaID.AutoIncrement = true;
+                this.columnVentaID.AutoIncrementSeed = -1;
+                this.columnVentaID.AutoIncrementStep = -1;
+                this.columnVentaID.AllowDBNull = false;
+                this.columnVentaID.ReadOnly = true;
+                this.columnVentaID.Unique = true;
+                this.columnTipoComprobante.MaxLength = 50;
+                this.columnCantidadTotal.ReadOnly = true;
+                this.columnNombreCliente.MaxLength = 100;
+                this.columnDocumentoCliente.MaxLength = 50;
+                this.columnTipoCliente.MaxLength = 50;
+                this.columnTotalConDescuento.ReadOnly = true;
+                this.columnImpuesto.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow NewHistorialVentaRow() {
+                return ((HistorialVentaRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new HistorialVentaRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(HistorialVentaRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.HistorialVentaRowChanged != null)) {
+                    this.HistorialVentaRowChanged(this, new HistorialVentaRowChangeEvent(((HistorialVentaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.HistorialVentaRowChanging != null)) {
+                    this.HistorialVentaRowChanging(this, new HistorialVentaRowChangeEvent(((HistorialVentaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.HistorialVentaRowDeleted != null)) {
+                    this.HistorialVentaRowDeleted(this, new HistorialVentaRowChangeEvent(((HistorialVentaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.HistorialVentaRowDeleting != null)) {
+                    this.HistorialVentaRowDeleting(this, new HistorialVentaRowChangeEvent(((HistorialVentaRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveHistorialVentaRow(HistorialVentaRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                Negocio ds = new Negocio();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "HistorialVentaDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class Detalle_Ventas_HistorialDataTable : global::System.Data.TypedTableBase<Detalle_Ventas_HistorialRow> {
+            
+            private global::System.Data.DataColumn columnCodigoBarras;
+            
+            private global::System.Data.DataColumn columnNombre_de_Producto;
+            
+            private global::System.Data.DataColumn columnCantidad_Vendida;
+            
+            private global::System.Data.DataColumn columnPrecio_de_Venta;
+            
+            private global::System.Data.DataColumn columnDescuento;
+            
+            private global::System.Data.DataColumn columnSub_Total;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialDataTable() {
+                this.TableName = "Detalle_Ventas_Historial";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal Detalle_Ventas_HistorialDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected Detalle_Ventas_HistorialDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CodigoBarrasColumn {
+                get {
+                    return this.columnCodigoBarras;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Nombre_de_ProductoColumn {
+                get {
+                    return this.columnNombre_de_Producto;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Cantidad_VendidaColumn {
+                get {
+                    return this.columnCantidad_Vendida;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Precio_de_VentaColumn {
+                get {
+                    return this.columnPrecio_de_Venta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn DescuentoColumn {
+                get {
+                    return this.columnDescuento;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn Sub_TotalColumn {
+                get {
+                    return this.columnSub_Total;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialRow this[int index] {
+                get {
+                    return ((Detalle_Ventas_HistorialRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event Detalle_Ventas_HistorialRowChangeEventHandler Detalle_Ventas_HistorialRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event Detalle_Ventas_HistorialRowChangeEventHandler Detalle_Ventas_HistorialRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event Detalle_Ventas_HistorialRowChangeEventHandler Detalle_Ventas_HistorialRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event Detalle_Ventas_HistorialRowChangeEventHandler Detalle_Ventas_HistorialRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddDetalle_Ventas_HistorialRow(Detalle_Ventas_HistorialRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialRow AddDetalle_Ventas_HistorialRow(string CodigoBarras, string Nombre_de_Producto, int Cantidad_Vendida, decimal Precio_de_Venta, decimal Descuento, decimal Sub_Total) {
+                Detalle_Ventas_HistorialRow rowDetalle_Ventas_HistorialRow = ((Detalle_Ventas_HistorialRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        CodigoBarras,
+                        Nombre_de_Producto,
+                        Cantidad_Vendida,
+                        Precio_de_Venta,
+                        Descuento,
+                        Sub_Total};
+                rowDetalle_Ventas_HistorialRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDetalle_Ventas_HistorialRow);
+                return rowDetalle_Ventas_HistorialRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                Detalle_Ventas_HistorialDataTable cln = ((Detalle_Ventas_HistorialDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new Detalle_Ventas_HistorialDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnCodigoBarras = base.Columns["CodigoBarras"];
+                this.columnNombre_de_Producto = base.Columns["Nombre de Producto"];
+                this.columnCantidad_Vendida = base.Columns["Cantidad Vendida"];
+                this.columnPrecio_de_Venta = base.Columns["Precio de Venta"];
+                this.columnDescuento = base.Columns["Descuento"];
+                this.columnSub_Total = base.Columns["Sub Total"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnCodigoBarras = new global::System.Data.DataColumn("CodigoBarras", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCodigoBarras);
+                this.columnNombre_de_Producto = new global::System.Data.DataColumn("Nombre de Producto", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombre_de_Producto);
+                this.columnCantidad_Vendida = new global::System.Data.DataColumn("Cantidad Vendida", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCantidad_Vendida);
+                this.columnPrecio_de_Venta = new global::System.Data.DataColumn("Precio de Venta", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrecio_de_Venta);
+                this.columnDescuento = new global::System.Data.DataColumn("Descuento", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescuento);
+                this.columnSub_Total = new global::System.Data.DataColumn("Sub Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSub_Total);
+                this.columnCodigoBarras.MaxLength = 50;
+                this.columnNombre_de_Producto.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialRow NewDetalle_Ventas_HistorialRow() {
+                return ((Detalle_Ventas_HistorialRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new Detalle_Ventas_HistorialRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(Detalle_Ventas_HistorialRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.Detalle_Ventas_HistorialRowChanged != null)) {
+                    this.Detalle_Ventas_HistorialRowChanged(this, new Detalle_Ventas_HistorialRowChangeEvent(((Detalle_Ventas_HistorialRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.Detalle_Ventas_HistorialRowChanging != null)) {
+                    this.Detalle_Ventas_HistorialRowChanging(this, new Detalle_Ventas_HistorialRowChangeEvent(((Detalle_Ventas_HistorialRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.Detalle_Ventas_HistorialRowDeleted != null)) {
+                    this.Detalle_Ventas_HistorialRowDeleted(this, new Detalle_Ventas_HistorialRowChangeEvent(((Detalle_Ventas_HistorialRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.Detalle_Ventas_HistorialRowDeleting != null)) {
+                    this.Detalle_Ventas_HistorialRowDeleting(this, new Detalle_Ventas_HistorialRowChangeEvent(((Detalle_Ventas_HistorialRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveDetalle_Ventas_HistorialRow(Detalle_Ventas_HistorialRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                Negocio ds = new Negocio();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "Detalle_Ventas_HistorialDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class CategoriaRow : global::System.Data.DataRow {
@@ -6911,6 +7730,17 @@ namespace SGF.PRESENTACION {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK__Detalle_V__Venta__33BFA6FF"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow HistorialVentaRow {
+                get {
+                    return ((HistorialVentaRow)(this.GetParentRow(this.Table.ParentRelations["FK__Detalle_V__Venta__69478F08"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__Detalle_V__Venta__69478F08"]);
                 }
             }
             
@@ -9258,6 +10088,542 @@ namespace SGF.PRESENTACION {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class HistorialVentaRow : global::System.Data.DataRow {
+            
+            private HistorialVentaDataTable tableHistorialVenta;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal HistorialVentaRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableHistorialVenta = ((HistorialVentaDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int VentaID {
+                get {
+                    return ((int)(this[this.tableHistorialVenta.VentaIDColumn]));
+                }
+                set {
+                    this[this.tableHistorialVenta.VentaIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime FechaVenta {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableHistorialVenta.FechaVentaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FechaVenta\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.FechaVentaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TipoComprobante {
+                get {
+                    try {
+                        return ((string)(this[this.tableHistorialVenta.TipoComprobanteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TipoComprobante\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.TipoComprobanteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int CantidadTotal {
+                get {
+                    try {
+                        return ((int)(this[this.tableHistorialVenta.CantidadTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CantidadTotal\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.CantidadTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string NombreCliente {
+                get {
+                    try {
+                        return ((string)(this[this.tableHistorialVenta.NombreClienteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'NombreCliente\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.NombreClienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string DocumentoCliente {
+                get {
+                    try {
+                        return ((string)(this[this.tableHistorialVenta.DocumentoClienteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'DocumentoCliente\' de la tabla \'HistorialVenta\' es DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.DocumentoClienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string TipoCliente {
+                get {
+                    try {
+                        return ((string)(this[this.tableHistorialVenta.TipoClienteColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TipoCliente\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.TipoClienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal MontoPagado {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableHistorialVenta.MontoPagadoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'MontoPagado\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.MontoPagadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal MontoCambio {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableHistorialVenta.MontoCambioColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'MontoCambio\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.MontoCambioColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal MontoTotal {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableHistorialVenta.MontoTotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'MontoTotal\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.MontoTotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal TotalConDescuento {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableHistorialVenta.TotalConDescuentoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TotalConDescuento\' de la tabla \'HistorialVenta\' es DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.TotalConDescuentoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Impuesto {
+                get {
+                    try {
+                        return ((string)(this[this.tableHistorialVenta.ImpuestoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Impuesto\' de la tabla \'HistorialVenta\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHistorialVenta.ImpuestoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsFechaVentaNull() {
+                return this.IsNull(this.tableHistorialVenta.FechaVentaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetFechaVentaNull() {
+                this[this.tableHistorialVenta.FechaVentaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTipoComprobanteNull() {
+                return this.IsNull(this.tableHistorialVenta.TipoComprobanteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTipoComprobanteNull() {
+                this[this.tableHistorialVenta.TipoComprobanteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCantidadTotalNull() {
+                return this.IsNull(this.tableHistorialVenta.CantidadTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCantidadTotalNull() {
+                this[this.tableHistorialVenta.CantidadTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNombreClienteNull() {
+                return this.IsNull(this.tableHistorialVenta.NombreClienteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNombreClienteNull() {
+                this[this.tableHistorialVenta.NombreClienteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDocumentoClienteNull() {
+                return this.IsNull(this.tableHistorialVenta.DocumentoClienteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDocumentoClienteNull() {
+                this[this.tableHistorialVenta.DocumentoClienteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTipoClienteNull() {
+                return this.IsNull(this.tableHistorialVenta.TipoClienteColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTipoClienteNull() {
+                this[this.tableHistorialVenta.TipoClienteColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMontoPagadoNull() {
+                return this.IsNull(this.tableHistorialVenta.MontoPagadoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMontoPagadoNull() {
+                this[this.tableHistorialVenta.MontoPagadoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMontoCambioNull() {
+                return this.IsNull(this.tableHistorialVenta.MontoCambioColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMontoCambioNull() {
+                this[this.tableHistorialVenta.MontoCambioColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsMontoTotalNull() {
+                return this.IsNull(this.tableHistorialVenta.MontoTotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetMontoTotalNull() {
+                this[this.tableHistorialVenta.MontoTotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsTotalConDescuentoNull() {
+                return this.IsNull(this.tableHistorialVenta.TotalConDescuentoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetTotalConDescuentoNull() {
+                this[this.tableHistorialVenta.TotalConDescuentoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsImpuestoNull() {
+                return this.IsNull(this.tableHistorialVenta.ImpuestoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetImpuestoNull() {
+                this[this.tableHistorialVenta.ImpuestoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_VentaRow[] GetDetalle_VentaRows() {
+                if ((this.Table.ChildRelations["FK__Detalle_V__Venta__69478F08"] == null)) {
+                    return new Detalle_VentaRow[0];
+                }
+                else {
+                    return ((Detalle_VentaRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Detalle_V__Venta__69478F08"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class Detalle_Ventas_HistorialRow : global::System.Data.DataRow {
+            
+            private Detalle_Ventas_HistorialDataTable tableDetalle_Ventas_Historial;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal Detalle_Ventas_HistorialRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableDetalle_Ventas_Historial = ((Detalle_Ventas_HistorialDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string CodigoBarras {
+                get {
+                    try {
+                        return ((string)(this[this.tableDetalle_Ventas_Historial.CodigoBarrasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CodigoBarras\' de la tabla \'Detalle_Ventas_Historial\' es D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.CodigoBarrasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string Nombre_de_Producto {
+                get {
+                    try {
+                        return ((string)(this[this.tableDetalle_Ventas_Historial.Nombre_de_ProductoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Nombre de Producto\' de la tabla \'Detalle_Ventas_Historial" +
+                                "\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.Nombre_de_ProductoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int Cantidad_Vendida {
+                get {
+                    try {
+                        return ((int)(this[this.tableDetalle_Ventas_Historial.Cantidad_VendidaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Cantidad Vendida\' de la tabla \'Detalle_Ventas_Historial\' " +
+                                "es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.Cantidad_VendidaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal Precio_de_Venta {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDetalle_Ventas_Historial.Precio_de_VentaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Precio de Venta\' de la tabla \'Detalle_Ventas_Historial\' e" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.Precio_de_VentaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal Descuento {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDetalle_Ventas_Historial.DescuentoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Descuento\' de la tabla \'Detalle_Ventas_Historial\' es DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.DescuentoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal Sub_Total {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableDetalle_Ventas_Historial.Sub_TotalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Sub Total\' de la tabla \'Detalle_Ventas_Historial\' es DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableDetalle_Ventas_Historial.Sub_TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCodigoBarrasNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.CodigoBarrasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCodigoBarrasNull() {
+                this[this.tableDetalle_Ventas_Historial.CodigoBarrasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsNombre_de_ProductoNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.Nombre_de_ProductoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetNombre_de_ProductoNull() {
+                this[this.tableDetalle_Ventas_Historial.Nombre_de_ProductoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCantidad_VendidaNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.Cantidad_VendidaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCantidad_VendidaNull() {
+                this[this.tableDetalle_Ventas_Historial.Cantidad_VendidaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsPrecio_de_VentaNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.Precio_de_VentaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetPrecio_de_VentaNull() {
+                this[this.tableDetalle_Ventas_Historial.Precio_de_VentaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsDescuentoNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.DescuentoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetDescuentoNull() {
+                this[this.tableDetalle_Ventas_Historial.DescuentoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsSub_TotalNull() {
+                return this.IsNull(this.tableDetalle_Ventas_Historial.Sub_TotalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetSub_TotalNull() {
+                this[this.tableDetalle_Ventas_Historial.Sub_TotalColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -9753,6 +11119,74 @@ namespace SGF.PRESENTACION {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public ClientesTablaRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class HistorialVentaRowChangeEvent : global::System.EventArgs {
+            
+            private HistorialVentaRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRowChangeEvent(HistorialVentaRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public HistorialVentaRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class Detalle_Ventas_HistorialRowChangeEvent : global::System.EventArgs {
+            
+            private Detalle_Ventas_HistorialRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialRowChangeEvent(Detalle_Ventas_HistorialRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public Detalle_Ventas_HistorialRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -16437,6 +17871,450 @@ WHERE
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class HistorialVentaTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public HistorialVentaTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "HistorialVenta";
+            tableMapping.ColumnMappings.Add("VentaID", "VentaID");
+            tableMapping.ColumnMappings.Add("FechaVenta", "FechaVenta");
+            tableMapping.ColumnMappings.Add("TipoComprobante", "TipoComprobante");
+            tableMapping.ColumnMappings.Add("CantidadTotal", "CantidadTotal");
+            tableMapping.ColumnMappings.Add("NombreCliente", "NombreCliente");
+            tableMapping.ColumnMappings.Add("DocumentoCliente", "DocumentoCliente");
+            tableMapping.ColumnMappings.Add("TipoCliente", "TipoCliente");
+            tableMapping.ColumnMappings.Add("MontoPagado", "MontoPagado");
+            tableMapping.ColumnMappings.Add("MontoCambio", "MontoCambio");
+            tableMapping.ColumnMappings.Add("MontoTotal", "MontoTotal");
+            tableMapping.ColumnMappings.Add("TotalConDescuento", "TotalConDescuento");
+            tableMapping.ColumnMappings.Add("Impuesto", "Impuesto");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SGF.PRESENTACION.Properties.Settings.Default.FarmaciaDatosConexionTableAdapter;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT 
+    V.VentaID,
+    V.FechaVenta,
+	V.TipoComprobante,
+    SUM(DV.Cantidad) AS CantidadTotal,
+    SUM(DV.SubTotal) AS TotalConDescuento,
+    V.NombreCliente,
+    V.DocumentoCliente,
+    V.TipoCliente,
+    V.MontoPagado,
+    V.MontoCambio,
+	V.Impuesto,
+    V.MontoTotal
+FROM 
+    Venta V
+    INNER JOIN Detalle_Venta DV ON V.VentaID = DV.VentaID
+WHERE 
+    (@FiltroEstado = 'Todos' OR
+    (@FiltroEstado = 'Activo' AND V.Estado = 1) OR
+    (@FiltroEstado = 'Cancelado' AND V.Estado = 0))
+    AND V.FechaVenta BETWEEN @FechaDesde AND @FechaHasta
+GROUP BY 
+    V.VentaID,
+    V.FechaVenta,
+	V.TipoComprobante,
+    V.NombreCliente,
+    V.DocumentoCliente,
+    V.TipoCliente,
+    V.MontoPagado,
+    V.MontoCambio,
+	V.Impuesto,
+    V.MontoTotal;";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroEstado", global::System.Data.SqlDbType.VarChar, 1024, global::System.Data.ParameterDirection.Input, 0, 0, "", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaDesde", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaVenta", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FechaHasta", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "FechaVenta", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Filtrar(Negocio.HistorialVentaDataTable dataTable, string FiltroEstado, global::System.Nullable<global::System.DateTime> FechaDesde, global::System.Nullable<global::System.DateTime> FechaHasta) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroEstado));
+            }
+            if ((FechaDesde.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(FechaDesde.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((FechaHasta.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(FechaHasta.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual Negocio.HistorialVentaDataTable GetData(string FiltroEstado, global::System.Nullable<global::System.DateTime> FechaDesde, global::System.Nullable<global::System.DateTime> FechaHasta) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((FiltroEstado == null)) {
+                throw new global::System.ArgumentNullException("FiltroEstado");
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(FiltroEstado));
+            }
+            if ((FechaDesde.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((System.DateTime)(FechaDesde.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((FechaHasta.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((System.DateTime)(FechaHasta.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            Negocio.HistorialVentaDataTable dataTable = new Negocio.HistorialVentaDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class Detalle_Ventas_HistorialTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public Detalle_Ventas_HistorialTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Detalle_Ventas_Historial";
+            tableMapping.ColumnMappings.Add("CodigoBarras", "CodigoBarras");
+            tableMapping.ColumnMappings.Add("Nombre de Producto", "Nombre de Producto");
+            tableMapping.ColumnMappings.Add("Cantidad Vendida", "Cantidad Vendida");
+            tableMapping.ColumnMappings.Add("Precio de Venta", "Precio de Venta");
+            tableMapping.ColumnMappings.Add("Descuento", "Descuento");
+            tableMapping.ColumnMappings.Add("Sub Total", "Sub Total");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SGF.PRESENTACION.Properties.Settings.Default.FarmaciaDatosConexionTableAdapter;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT 
+    P.CodigoBarras,
+    P.Nombre AS 'Nombre de Producto',
+    DV.Cantidad AS 'Cantidad Vendida',
+    DV.PrecioVenta AS 'Precio de Venta',
+    DV.Descuento AS 'Descuento',
+    DV.SubTotal AS 'Sub Total'
+FROM 
+    Detalle_Venta DV
+    INNER JOIN Producto P ON DV.ProductoID = P.ProductoID
+WHERE 
+    DV.VentaID = @FiltroVentaID;";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FiltroVentaID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "VentaID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Filtrar(Negocio.Detalle_Ventas_HistorialDataTable dataTable, global::System.Nullable<int> FiltroVentaID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((FiltroVentaID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FiltroVentaID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual Negocio.Detalle_Ventas_HistorialDataTable GetData(global::System.Nullable<int> FiltroVentaID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((FiltroVentaID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(FiltroVentaID.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            Negocio.Detalle_Ventas_HistorialDataTable dataTable = new Negocio.Detalle_Ventas_HistorialDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -16713,15 +18591,6 @@ WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(Negocio dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._tipoClienteTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._tipoClienteTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._ventaTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Venta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -16740,30 +18609,30 @@ WHERE
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._tipoClienteTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tipoClienteTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._negocioTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._negocioTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._categoriaTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Categoria.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._categoriaTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._clienteTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Cliente.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._clienteTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._detalle_VentaTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._detalle_VentaTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -16776,21 +18645,30 @@ WHERE
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._detalle_VentaTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._detalle_VentaTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._clienteTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Cliente.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._clienteTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._registroTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Registro.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._registroTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._negocioTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._negocioTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -16804,14 +18682,6 @@ WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(Negocio dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._tipoClienteTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._tipoClienteTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._ventaTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Venta.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -16828,27 +18698,27 @@ WHERE
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._tipoClienteTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tipoClienteTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._negocioTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._negocioTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._categoriaTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Categoria.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._categoriaTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._clienteTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Cliente.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._clienteTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._detalle_VentaTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._detalle_VentaTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -16860,19 +18730,27 @@ WHERE
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._detalle_VentaTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._detalle_VentaTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._clienteTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Cliente.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._clienteTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._registroTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Registro.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._registroTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._negocioTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._negocioTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -16886,35 +18764,11 @@ WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(Negocio dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._negocioTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._negocioTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._registroTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Registro.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._registroTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._proveedorTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Proveedor.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._proveedorTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._detalle_VentaTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._detalle_VentaTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -16926,11 +18780,43 @@ WHERE
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._detalle_VentaTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Detalle_Venta.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._detalle_VentaTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._proveedorTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Proveedor.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._proveedorTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._categoriaTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Categoria.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._categoriaTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._negocioTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet._Negocio.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._negocioTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tipoClienteTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tipoClienteTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -16947,14 +18833,6 @@ WHERE
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._ventaTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._tipoClienteTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TipoCliente.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._tipoClienteTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

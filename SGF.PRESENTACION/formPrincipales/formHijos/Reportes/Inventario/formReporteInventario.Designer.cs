@@ -34,7 +34,6 @@
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnExistencias = new System.Windows.Forms.Button();
             this.btnEntradas = new System.Windows.Forms.Button();
-            this.btnMedicamentos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
             this.SuspendLayout();
@@ -45,9 +44,8 @@
             this.panel1.Controls.Add(this.flpContenedorBotones);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1441, 443);
+            this.panel1.Size = new System.Drawing.Size(1081, 360);
             this.panel1.TabIndex = 1;
             // 
             // pnlPadreReporteInventario
@@ -55,10 +53,9 @@
             this.pnlPadreReporteInventario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPadreReporteInventario.Location = new System.Drawing.Point(0, 86);
-            this.pnlPadreReporteInventario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPadreReporteInventario.Location = new System.Drawing.Point(0, 70);
             this.pnlPadreReporteInventario.Name = "pnlPadreReporteInventario";
-            this.pnlPadreReporteInventario.Size = new System.Drawing.Size(1441, 357);
+            this.pnlPadreReporteInventario.Size = new System.Drawing.Size(1081, 290);
             this.pnlPadreReporteInventario.TabIndex = 108;
             // 
             // flpContenedorBotones
@@ -69,11 +66,10 @@
             this.flpContenedorBotones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flpContenedorBotones.Controls.Add(this.btnExistencias);
             this.flpContenedorBotones.Controls.Add(this.btnEntradas);
-            this.flpContenedorBotones.Controls.Add(this.btnMedicamentos);
-            this.flpContenedorBotones.Location = new System.Drawing.Point(5, 5);
-            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.flpContenedorBotones.Location = new System.Drawing.Point(4, 4);
+            this.flpContenedorBotones.Margin = new System.Windows.Forms.Padding(4);
             this.flpContenedorBotones.Name = "flpContenedorBotones";
-            this.flpContenedorBotones.Size = new System.Drawing.Size(1142, 76);
+            this.flpContenedorBotones.Size = new System.Drawing.Size(857, 62);
             this.flpContenedorBotones.TabIndex = 107;
             // 
             // btnExistencias
@@ -85,10 +81,10 @@
             this.btnExistencias.ForeColor = System.Drawing.Color.Black;
             this.btnExistencias.Image = ((System.Drawing.Image)(resources.GetObject("btnExistencias.Image")));
             this.btnExistencias.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExistencias.Location = new System.Drawing.Point(5, 5);
-            this.btnExistencias.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnExistencias.Location = new System.Drawing.Point(4, 4);
+            this.btnExistencias.Margin = new System.Windows.Forms.Padding(4);
             this.btnExistencias.Name = "btnExistencias";
-            this.btnExistencias.Size = new System.Drawing.Size(157, 66);
+            this.btnExistencias.Size = new System.Drawing.Size(118, 54);
             this.btnExistencias.TabIndex = 9;
             this.btnExistencias.Tag = "Existencias de inventario";
             this.btnExistencias.Text = "Existencias";
@@ -105,10 +101,10 @@
             this.btnEntradas.ForeColor = System.Drawing.Color.Black;
             this.btnEntradas.Image = ((System.Drawing.Image)(resources.GetObject("btnEntradas.Image")));
             this.btnEntradas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnEntradas.Location = new System.Drawing.Point(172, 5);
-            this.btnEntradas.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnEntradas.Location = new System.Drawing.Point(130, 4);
+            this.btnEntradas.Margin = new System.Windows.Forms.Padding(4);
             this.btnEntradas.Name = "btnEntradas";
-            this.btnEntradas.Size = new System.Drawing.Size(223, 66);
+            this.btnEntradas.Size = new System.Drawing.Size(145, 54);
             this.btnEntradas.TabIndex = 10;
             this.btnEntradas.Tag = "Resumen de inventario";
             this.btnEntradas.Text = "Resumen de inventario";
@@ -116,33 +112,13 @@
             this.btnEntradas.UseVisualStyleBackColor = false;
             this.btnEntradas.Click += new System.EventHandler(this.btnModificarP_Click);
             // 
-            // btnMedicamentos
-            // 
-            this.btnMedicamentos.BackColor = System.Drawing.Color.White;
-            this.btnMedicamentos.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnMedicamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMedicamentos.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMedicamentos.ForeColor = System.Drawing.Color.Black;
-            this.btnMedicamentos.Image = ((System.Drawing.Image)(resources.GetObject("btnMedicamentos.Image")));
-            this.btnMedicamentos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnMedicamentos.Location = new System.Drawing.Point(405, 5);
-            this.btnMedicamentos.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.btnMedicamentos.Name = "btnMedicamentos";
-            this.btnMedicamentos.Size = new System.Drawing.Size(157, 66);
-            this.btnMedicamentos.TabIndex = 14;
-            this.btnMedicamentos.Tag = "Medicamentos por vencer";
-            this.btnMedicamentos.Text = "Medicamentos";
-            this.btnMedicamentos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnMedicamentos.UseVisualStyleBackColor = false;
-            // 
             // formReporteInventario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1441, 443);
+            this.ClientSize = new System.Drawing.Size(1081, 360);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "formReporteInventario";
             this.Text = "formReporteInventario";
             this.Load += new System.EventHandler(this.formReporteInventario_Load);
@@ -158,7 +134,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpContenedorBotones;
         private System.Windows.Forms.Button btnExistencias;
         private System.Windows.Forms.Button btnEntradas;
-        private System.Windows.Forms.Button btnMedicamentos;
         private System.Windows.Forms.Panel pnlPadreReporteInventario;
     }
 }

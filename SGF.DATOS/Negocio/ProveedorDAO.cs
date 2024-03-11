@@ -318,6 +318,68 @@ namespace SGF.DATOS.Negocio
             return oProveedor;
 
         }
-        // Obtener por ID
+
+        // Conteo proveedores activos, o sea que esten en estado true
+        public static int ConteoProveedoresActivosD()
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT COUNT(*) FROM Proveedor WHERE Estado = 1");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        conteo = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el conteo de proveedores activos, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return conteo;
+        }
+
+        /*SELECT 
+    ((SELECT COUNT(*) FROM Proveedor WHERE Estado = 0) +
+    (SELECT SUM(Cantidad) FROM Registro WHERE Modulo = 'Proveedores')) AS Total*/
+
+        // Obtener la cantidad de proveedores inactivos/baja
+        public static int ConteoProveedoresInactivosD()
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    StringBuilder query = new StringBuilder();
+                    query.AppendLine("SELECT");
+                    query.AppendLine("((SELECT COUNT(*) FROM Proveedor WHERE Estado = 0) +");
+                    query.AppendLine("(SELECT ISNULL(SUM(Cantidad), 0) FROM Registro WHERE Modulo = 'Proveedores')) AS Total");
+                    using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
+                    {
+                        oContexto.Open();
+                        object result = cmd.ExecuteScalar();
+                        if(result == DBNull.Value)
+                        {
+                            conteo = 0;
+                        }
+                        else
+                        {
+                            conteo = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Ocurrió un error al intentar obtener el conteo de proveedores inactivos, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return conteo;
+        }
+
     }
 }

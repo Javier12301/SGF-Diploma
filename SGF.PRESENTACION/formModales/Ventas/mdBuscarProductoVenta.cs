@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,17 @@ namespace SGF.PRESENTACION.formModales.Ventas
 
         public Producto productoSeleccionado { get; set; }
         public int cantidadSeleccionada { get; set; }
+        public decimal descuentoSeleccionado { get; set; }
 
-        public mdBuscarProductoVenta()
+        private bool modificandoProducto { get; set; }
+
+        public mdBuscarProductoVenta(bool modificar = false, Producto producto = null, int cantidad = 0, decimal descuento = 0)
         {
             InitializeComponent();
-            cantidadSeleccionada = 0;
+            modificandoProducto = modificar;
+            productoSeleccionado = producto;
+            cantidadSeleccionada = cantidad;
+            descuentoSeleccionado = descuento;
         }
 
         private Point mousePosicion;
@@ -59,7 +66,9 @@ namespace SGF.PRESENTACION.formModales.Ventas
                     txtCodigo.Text = "";
                     txtNombre.Text = "";
                     txtPrecio.Text = "";
+                    txtDescuento.Text = "";
                     txtCantidad.Text = "";
+                    txtExistencia.Text = "";
                     cmbCategoria.SelectedIndex = 0;
                 }
                 else
@@ -89,7 +98,12 @@ namespace SGF.PRESENTACION.formModales.Ventas
                         productoSeleccionado = modal.productoSeleccionado;
                         txtCodigo.Text = productoSeleccionado.Codigo;
                         txtNombre.Text = productoSeleccionado.Nombre;
+                        txtCantidad.Text = "1";
+                        // usar productoSeleccionado.Categoria.CategoriaID para cargar el combobox
+                        cmbCategoria.SelectedValue = productoSeleccionado.Categoria.CategoriaID;
                         txtPrecio.Text = productoSeleccionado.PrecioVenta.ToString();
+                        txtExistencia.Text = productoSeleccionado.Stock.ToString();
+                        txtDescuento.Text = "0";
                         txtCantidad.Focus();
                     }
 
@@ -104,6 +118,20 @@ namespace SGF.PRESENTACION.formModales.Ventas
         private void mdBuscarProductoVenta_Load(object sender, EventArgs e)
         {
             cargarCombobox();
+            if (modificandoProducto)
+            {
+                txtCodigo.Text = productoSeleccionado.Codigo;
+                txtNombre.Text = productoSeleccionado.Nombre;
+                txtCantidad.Text = cantidadSeleccionada.ToString();
+                txtPrecio.Text = productoSeleccionado.PrecioVenta.ToString();
+                txtExistencia.Text = productoSeleccionado.Stock.ToString();
+                txtDescuento.Text = descuentoSeleccionado.ToString();
+
+                // Deshabilitar campos buscador
+                btnbuscar.Enabled = false;
+                cmbCategoria.Enabled = false;
+            }
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -167,6 +195,18 @@ namespace SGF.PRESENTACION.formModales.Ventas
                 
         }
 
+        private void textboxColorizador(bool error = false)
+        {
+            if (error)
+            {
+                txtDescuento.BackColor = Color.LightCoral;
+            }
+            else
+            {
+                txtDescuento.BackColor = Color.White;
+            }
+        }
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (ValidarCampos())
@@ -177,6 +217,14 @@ namespace SGF.PRESENTACION.formModales.Ventas
                     if (cantidadVenta <= productoSeleccionado.Stock)
                     {
                         cantidadSeleccionada = cantidadVenta;
+                        // descuento solo será porcentaje, no se permite > 100%
+                        descuentoSeleccionado = decimal.Parse(txtDescuento.Text);
+                        if (descuentoSeleccionado > 100)
+                        {
+                            MessageBox.Show("El descuento no puede ser mayor al 100%.", "Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            textboxColorizador(true);
+                            return;
+                        }
                         DialogResult = DialogResult.OK;
                         this.Close();
                     }
@@ -187,6 +235,45 @@ namespace SGF.PRESENTACION.formModales.Ventas
                     }
                 }
             }
+        }
+
+        private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Formato regional de Argentina
+            if (e.KeyChar == '.')
+            {
+                e.Handled = true;
+                SendKeys.Send(",");
+            }
+
+            // Solo puede haber una coma en el textbox
+            if (e.KeyChar == ',')
+            {
+                if (txtDescuento.Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+            }
+
+            // Solo permite números y control keys (como backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !(e.KeyChar == '.' || e.KeyChar == ','))
+            {
+                e.Handled = true;
+            }
+
+        }
+ 
+        private void txtDescuento_Leave(object sender, EventArgs e)
+        {
+            
+            if (string.IsNullOrEmpty(txtDescuento.Text))
+                txtDescuento.Text = "0.00";
+            txtDescuento.Text = string.Format(CultureInfo.GetCultureInfo("es-AR"), "{0:N2}", Convert.ToDecimal(txtDescuento.Text));
+        }
+
+        private void txtDescuento_TextChanged(object sender, EventArgs e)
+        {
+            textboxColorizador();
         }
     }
 }

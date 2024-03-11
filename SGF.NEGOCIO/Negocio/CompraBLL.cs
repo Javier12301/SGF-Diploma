@@ -47,14 +47,14 @@ namespace SGF.NEGOCIO.Negocio
                 List<int> productosID = CompraDAO.ObtenerProductosIDPorCompraID(compraID);
                 List<Producto> listaProductos = new List<Producto>();
                 ProductoBLL lProducto = ProductoBLL.ObtenerInstancia;
-                foreach(int productoID in productosID)
+                foreach (int productoID in productosID)
                 {
                     Producto producto = lProducto.ObtenerProductoPorID(productoID);
                     listaProductos.Add(producto);
                 }
 
                 // Una vez obtenido, se procede a devolver los productos usando la cantidad comprada que sale en el detalle de compra
-                foreach(Producto producto in listaProductos)
+                foreach (Producto producto in listaProductos)
                 {
                     int cantidad = CompraDAO.ObtenerCantidadProductosComprados(producto.ProductoID, compraID);
                     // los productos pueden quedar como negativos si es que se realizo ventas o salidas de inventario con ellos.
@@ -102,7 +102,7 @@ namespace SGF.NEGOCIO.Negocio
             {
                 throw new Exception("Se ha producido un error al listar el reporte, contacte con el administrador para que solucione este problema.");
             }
-        }      
+        }
 
         public DataTable ListarGastoTotal()
         {
@@ -116,5 +116,30 @@ namespace SGF.NEGOCIO.Negocio
                 throw new Exception("Se ha producido un error al listar el reporte, contacte con el administrador para que solucione este problema.");
             }
         }
+
+        public int ObtenerCompraRealizada(string tipo)
+        {
+            return CompraDAO.ObtenerCantidadDeComprasPorTipoProducto(tipo);
+        }
+
+        // compras canceladsa
+        public int ObtenerCompraCancelada()
+        {
+            return CompraDAO.ObtenerCompraCancelada();
+        }
+
+        // ObtenerComprasPorFecha
+        public DataTable ObtenerComprasPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return CompraDAO.ObtenerComprasPorFecha(fechaInicio, fechaFin);
+        }
+
+        // obtenercompra semana
+        public DataTable ObtenerComprasPorSemana(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return CompraDAO.ObtenerComprasPorDiaDeLaSemana(fechaInicio, fechaFin);
+        }
+
+
     }
 }

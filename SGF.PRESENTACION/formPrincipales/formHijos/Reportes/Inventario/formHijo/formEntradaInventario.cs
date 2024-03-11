@@ -69,6 +69,11 @@ namespace SGF.PRESENTACION.formPrincipales.formHijos.Reportes.Inventario.formHij
                 this.producto_Reporte_MasCompradosTableAdapter.Fill(this.reportes.Producto_Reporte_MasComprados, 5);
                 chartProductosMasComprados.Series["Productos"].IsValueShownAsLabel = true; // Muestra la cantidad comprada en los labels de las barras
                 chartProductosMasComprados.Legends[0].Enabled = true;
+                chartProductosMasComprados.Series["Productos"].LabelForeColor = Color.White;
+                chartProductosMasComprados.Series["Productos"].LabelBackColor = Color.Black;
+                chartProductosMasComprados.Series["Productos"].LabelBorderColor = Color.Black;
+                chartProductosMasComprados.Series["Productos"].LabelBorderWidth = 1;
+                
                 
             }
             catch (Exception ex)

@@ -450,7 +450,7 @@ namespace SGF.DATOS.Negocio
                 try
                 {
                     StringBuilder query = new StringBuilder();
-                    query.AppendLine("SELECT COUNT(*) FROM Producto");
+                    query.AppendLine("SELECT SUM(Stock) FROM Producto");
                     query.AppendLine("WHERE TipoProducto = @tipoProducto");
                     using (SqlCommand cmd = new SqlCommand(query.ToString(), oContexto))
                     {
@@ -462,11 +462,137 @@ namespace SGF.DATOS.Negocio
                 }
                 catch (Exception)
                 {
-                    throw new Exception("Error al verificar si existe el producto, contactar con el administrador si el problema persiste.");
+                    throw new Exception("Error al verificar la existencia del producto, contactar con el administrador si el problema persiste.");
                 }
             }
             return existencia;
         }
+
+        public static decimal ObtenerCostoInventarioD()
+        {
+            decimal costo = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT SUM(PrecioCompra * Stock) AS CostoDeInventario FROM Producto WHERE Estado = 1";
+                    using(SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        oContexto.Open();
+                        costo = Convert.ToDecimal(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al obtener el costo de inventario, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return costo;
+        }
+
+        public static decimal ObtenerPrecioInventarioD()
+        {
+            decimal precio = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT SUM(PrecioVenta * Stock) AS PrecioDeInventario FROM Producto WHERE Estado = 1";
+                    using(SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        oContexto.Open();
+                        precio = Convert.ToDecimal(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al obtener el precio de inventario, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return precio;
+        }
+
+        // Obtener existencia de producto por tipo
+        public static int ExistenciaDeProductoD(string tipoProducto)
+        {
+            int existencia = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT SUM(Stock) FROM Producto WHERE TipoProducto = @tipoProducto";
+                    using(SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@tipoProducto", tipoProducto);
+                        oContexto.Open();
+                        existencia = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al obtener la existencia del producto, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return existencia;
+        }
+
+        // Obtener existencia de producto por tipo
+        public static int ExistenciaDeProductoPorCategoriaD(int categoriaID)
+        {
+            int existencia = 0;
+            using(var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT SUM(Stock) FROM Producto WHERE CategoriaID = @categoriaID";
+                    using(SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        cmd.Parameters.AddWithValue("@categoriaID", categoriaID);
+                        oContexto.Open();
+                        existencia = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al obtener la existencia del producto, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return existencia;
+        }
+
+
+        public static int ConteoProductosInactivosYDadosDeBajaD()
+        {
+            int conteo = 0;
+            using (var oContexto = new SqlConnection(ConexionSGF.cadena))
+            {
+                try
+                {
+                    string query = "SELECT ((SELECT COUNT(*) FROM Producto WHERE Estado = 0) + (SELECT SUM(Cantidad) FROM Registro WHERE Movimiento = 'Baja' AND Modulo = 'Productos')) AS TotalProductosInactivosYDadosDeBaja";
+                    using (SqlCommand cmd = new SqlCommand(query, oContexto))
+                    {
+                        oContexto.Open();
+                        object result = cmd.ExecuteScalar();
+                        if (result == DBNull.Value)
+                        {
+                            conteo = 0;
+                        }
+                        else
+                        {
+                            conteo = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Error al obtener el conteo de productos inactivos y dados de baja, contactar con el administrador si el problema persiste.");
+                }
+            }
+            return conteo;
+        }
+
+
+
 
     }
 }

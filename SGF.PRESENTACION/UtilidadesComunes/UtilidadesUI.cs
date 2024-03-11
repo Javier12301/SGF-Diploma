@@ -638,6 +638,27 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
+        // Solo numero y "%"
+        public void SoloNumeroPorcentaje(KeyPressEventArgs e, TextBox textbox)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != '%')
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == '%')
+            {
+                if (textbox.Text.Contains("%"))
+                {
+                    e.Handled = true;
+                }
+                else if (textbox.SelectionStart == 0 || textbox.Text.Length == 0)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+
         // Solo mayusculas y numeros sin espacios con keypresseventargs
         public void SoloMayusculasYNumeros(KeyPressEventArgs e)
         {
