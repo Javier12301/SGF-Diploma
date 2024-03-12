@@ -167,7 +167,13 @@ INSERT INTO Accion(Descripcion, ModuloID)
 VALUES 
     ('Generar auditoria', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria')),
     ('Gráfico', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria')),
-    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria'));
+    ('Exportar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria')),
+
+	INSERT INTO Accion(Descripcion, ModuloID)
+VALUES 
+	    ('Detalles', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formAuditoria'));
+
+
 
 -- Insertar las acciones para el módulo formMisDatos
 INSERT INTO Accion(Descripcion, ModuloID)

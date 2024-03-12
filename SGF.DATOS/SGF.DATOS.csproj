@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\AccionDAO.cs" />
     <Compile Include="Seguridad\AuditoriaDAO.cs" />
+    <Compile Include="Seguridad\BackupDAO.cs" />
     <Compile Include="Seguridad\GrupoDAO.cs" />
     <Compile Include="Seguridad\ModuloDAO.cs" />
     <Compile Include="Seguridad\PermisoDAO.cs" />

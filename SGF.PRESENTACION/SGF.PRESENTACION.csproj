@@ -253,6 +253,12 @@
     <Compile Include="formModales\mdAjustes.Designer.cs">
       <DependentUpon>mdAjustes.cs</DependentUpon>
     </Compile>
+    <Compile Include="formModales\mdBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formModales\mdBackup.Designer.cs">
+      <DependentUpon>mdBackup.cs</DependentUpon>
+    </Compile>
     <Compile Include="formModales\mdCategorias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -564,6 +570,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdAjustes.resx">
       <DependentUpon>mdAjustes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formModales\mdBackup.resx">
+      <DependentUpon>mdBackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formModales\mdCategorias.resx">
       <DependentUpon>mdCategorias.cs</DependentUpon>

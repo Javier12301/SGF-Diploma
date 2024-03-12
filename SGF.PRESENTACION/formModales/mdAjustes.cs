@@ -44,8 +44,11 @@ namespace SGF.PRESENTACION.formModales
 
         private void btnBaseDatos_Click(object sender, EventArgs e)
         {
-            OpcionSeleccionada = "Database";
-            this.Close();
+            using(var modal = new mdBackup())
+            {
+                modal.ShowDialog();
+                this.Close();
+            }
         }
 
 

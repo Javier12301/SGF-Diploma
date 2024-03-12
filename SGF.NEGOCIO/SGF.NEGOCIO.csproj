@@ -56,6 +56,7 @@
     <Compile Include="Negocio\VentaBLL.cs" />
     <Compile Include="Seguridad\AccionBLL.cs" />
     <Compile Include="Seguridad\AuditoriaBLL.cs" />
+    <Compile Include="Seguridad\BackupBLL.cs" />
     <Compile Include="Seguridad\GrupoBLL.cs" />
     <Compile Include="Seguridad\ModuloBLL.cs" />
     <Compile Include="Seguridad\PermisoBLL.cs" />
