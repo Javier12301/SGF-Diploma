@@ -117,19 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnImprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAAUpJREFUOE/NlUFLAkEcxefT1KfqM5gmdMguZmtRFIS6rbVghpRYloEouCQRJQtF
-        TUiXiIqQJCrq0qXDP5/ukNlsTinRg8fAzHu/0/xnWKdmzcziQnIroWJknZq7ctbhNSkKWafmrv8N9E4a
-        +kZx/83JdxWy6Dj1ljzB2OD4fOo0GE1fhfTM3ZBm0bB+pGRk0UE3MLfKwWK+sKlny2e0vVdt2muc0Ezh
-        WcnIih4YYDF/eDkhNn8LrN/sNFew+gIUlgI9MZum809SQLuRQba9KwWuFDiNmTaNxivfOtDIJIu8O7AX
-        fwHqaYsmImsUiq4rGVl0XIEj2hJFUnk6v31UMrL+RucTsPMeliqc7l9eqXpZo9yuLTXOkEFW9DbLvHUP
-        xaRMGdkL+KejJ3qYFJ8WH3AG8EPicajVH6h0cCw1zqC/f22gvgN7+wIYewef/R3fCMqk/AAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
   <metadata name="productoReporteSinStockBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 54</value>
   </metadata>
@@ -138,6 +125,25 @@
   </metadata>
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 54</value>
+  </metadata>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnImprimir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DQAACw0B7QfALAAAAUpJREFUOE/NlUFLAkEcxefT1KfqM5gmdMguZmtRFIS6rbVghpRYloEouCQRJQtF
+        TUiXiIqQJCrq0qXDP5/ukNlsTinRg8fAzHu/0/xnWKdmzcziQnIroWJknZq7ctbhNSkKWafmrv8N9E4a
+        +kZx/83JdxWy6Dj1ljzB2OD4fOo0GE1fhfTM3ZBm0bB+pGRk0UE3MLfKwWK+sKlny2e0vVdt2muc0Ezh
+        WcnIih4YYDF/eDkhNn8LrN/sNFew+gIUlgI9MZum809SQLuRQba9KwWuFDiNmTaNxivfOtDIJIu8O7AX
+        fwHqaYsmImsUiq4rGVl0XIEj2hJFUnk6v31UMrL+RucTsPMeliqc7l9eqXpZo9yuLTXOkEFW9DbLvHUP
+        xaRMGdkL+KejJ3qYFJ8WH3AG8EPicajVH6h0cCw1zqC/f22gvgN7+wIYewef/R3fCMqk/AAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <metadata name="reportes.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <metadata name="Categoria.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -156,5 +162,8 @@
   </metadata>
   <metadata name="producto_Reporte_SinStockTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>388, 54</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>44</value>
   </metadata>
 </root>

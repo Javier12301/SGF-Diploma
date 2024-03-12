@@ -30,26 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mdReporteResumen));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flpContenedorBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnImprimir = new System.Windows.Forms.Button();
@@ -133,28 +133,14 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbVentas = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cMedicamentos = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.cProductos = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.cVentas = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tbInventario = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.cProductos = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.cMedicamentos = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.cCompras = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.dgvProductosPorVencer = new System.Windows.Forms.DataGridView();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.pnlSinStock = new System.Windows.Forms.Panel();
             this.dgvProductoSinStock = new System.Windows.Forms.DataGridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.productoReporteVencimientoTempranoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.reportes = new SGF.PRESENTACION.Reportes();
-            this.producto_Reporte_VencimientoTempranoTableAdapter = new SGF.PRESENTACION.ReportesTableAdapters.Producto_Reporte_VencimientoTempranoTableAdapter();
-            this.productoReporteSinStockBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.producto_Reporte_SinStockTableAdapter = new SGF.PRESENTACION.ReportesTableAdapters.Producto_Reporte_SinStockTableAdapter();
             this.productoIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoBarrasDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -162,12 +148,26 @@
             this.razonSocialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidadMinimaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productoReporteSinStockBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reportes = new SGF.PRESENTACION.Reportes();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.pnlProductosPorVencer = new System.Windows.Forms.Panel();
+            this.dgvProductosPorVencer = new System.Windows.Forms.DataGridView();
             this.productoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.codigoBarrasDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvcVencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productoReporteVencimientoTempranoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.cCompras = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.producto_Reporte_VencimientoTempranoTableAdapter = new SGF.PRESENTACION.ReportesTableAdapters.Producto_Reporte_VencimientoTempranoTableAdapter();
+            this.producto_Reporte_SinStockTableAdapter = new SGF.PRESENTACION.ReportesTableAdapters.Producto_Reporte_SinStockTableAdapter();
             this.panel1.SuspendLayout();
             this.flpContenedorBotones.SuspendLayout();
             this.flpVencimiento.SuspendLayout();
@@ -201,22 +201,22 @@
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tbVentas.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cMedicamentos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cVentas)).BeginInit();
             this.tbInventario.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cProductos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cMedicamentos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cCompras)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosPorVencer)).BeginInit();
-            this.panel12.SuspendLayout();
+            this.pnlSinStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductoSinStock)).BeginInit();
-            this.toolStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.productoReporteVencimientoTempranoBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoReporteSinStockBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportes)).BeginInit();
+            this.toolStrip2.SuspendLayout();
+            this.pnlProductosPorVencer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosPorVencer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoReporteVencimientoTempranoBindingSource)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cCompras)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -257,6 +257,7 @@
             this.btnImprimir.Tag = "Imprimir";
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = false;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // flpVencimiento
             // 
@@ -1284,45 +1285,6 @@
             this.tbVentas.TabIndex = 0;
             this.tbVentas.Text = "Ventas";
             // 
-            // cVentas
-            // 
-            this.cVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea3.Name = "ChartArea1";
-            this.cVentas.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.cVentas.Legends.Add(legend3);
-            this.cVentas.Location = new System.Drawing.Point(3, 3);
-            this.cVentas.Name = "cVentas";
-            series3.ChartArea = "ChartArea1";
-            series3.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series3.Legend = "Legend1";
-            series3.MarkerBorderWidth = 5;
-            series3.Name = "Ventas";
-            series3.XValueMember = "Month";
-            series3.YValueMembers = "NumeroDeVentas";
-            series3.YValuesPerPoint = 3;
-            this.cVentas.Series.Add(series3);
-            this.cVentas.Size = new System.Drawing.Size(735, 187);
-            this.cVentas.TabIndex = 115;
-            this.cVentas.Text = "chart1";
-            title3.Name = "Title";
-            title3.Text = "Resumen de ventas por";
-            this.cVentas.Titles.Add(title3);
-            // 
-            // tbInventario
-            // 
-            this.tbInventario.Controls.Add(this.tableLayoutPanel2);
-            this.tbInventario.Controls.Add(this.cCompras);
-            this.tbInventario.Location = new System.Drawing.Point(4, 22);
-            this.tbInventario.Name = "tbInventario";
-            this.tbInventario.Padding = new System.Windows.Forms.Padding(3);
-            this.tbInventario.Size = new System.Drawing.Size(744, 487);
-            this.tbInventario.TabIndex = 1;
-            this.tbInventario.Text = "Inventario";
-            this.tbInventario.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -1339,86 +1301,98 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(732, 280);
             this.tableLayoutPanel1.TabIndex = 118;
             // 
-            // cProductos
-            // 
-            this.cProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.cProductos.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.cProductos.Legends.Add(legend2);
-            this.cProductos.Location = new System.Drawing.Point(3, 3);
-            this.cProductos.Name = "cProductos";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.IsValueShownAsLabel = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            series2.YValuesPerPoint = 4;
-            this.cProductos.Series.Add(series2);
-            this.cProductos.Size = new System.Drawing.Size(360, 274);
-            this.cProductos.TabIndex = 117;
-            this.cProductos.Text = "chart3";
-            title2.Alignment = System.Drawing.ContentAlignment.TopLeft;
-            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title2.Name = "Title1";
-            title2.Text = "Productos generales más vendidos";
-            this.cProductos.Titles.Add(title2);
-            // 
             // cMedicamentos
             // 
             this.cMedicamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.cMedicamentos.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.cMedicamentos.Legends.Add(legend1);
+            chartArea6.Name = "ChartArea1";
+            this.cMedicamentos.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.cMedicamentos.Legends.Add(legend6);
             this.cMedicamentos.Location = new System.Drawing.Point(369, 3);
             this.cMedicamentos.Name = "cMedicamentos";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsValueShownAsLabel = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.YValuesPerPoint = 4;
-            this.cMedicamentos.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.IsValueShownAsLabel = true;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            series6.YValuesPerPoint = 4;
+            this.cMedicamentos.Series.Add(series6);
             this.cMedicamentos.Size = new System.Drawing.Size(360, 274);
             this.cMedicamentos.TabIndex = 118;
             this.cMedicamentos.Text = "chart3";
-            title1.Alignment = System.Drawing.ContentAlignment.TopLeft;
-            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.Name = "Title1";
-            title1.Text = "Medicamentos más vendidos";
-            this.cMedicamentos.Titles.Add(title1);
+            title6.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title6.Name = "Title1";
+            title6.Text = "Medicamentos más vendidos";
+            this.cMedicamentos.Titles.Add(title6);
             // 
-            // cCompras
+            // cProductos
             // 
-            this.cCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.cProductos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea4.Name = "ChartArea1";
-            this.cCompras.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.cCompras.Legends.Add(legend4);
-            this.cCompras.Location = new System.Drawing.Point(3, 3);
-            this.cCompras.Name = "cCompras";
-            series4.ChartArea = "ChartArea1";
-            series4.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series4.Legend = "Legend1";
-            series4.MarkerBorderWidth = 5;
-            series4.Name = "Ventas";
-            series4.XValueMember = "Month";
-            series4.YValueMembers = "NumeroDeVentas";
-            series4.YValuesPerPoint = 3;
-            this.cCompras.Series.Add(series4);
-            this.cCompras.Size = new System.Drawing.Size(735, 187);
-            this.cCompras.TabIndex = 116;
-            this.cCompras.Text = "chart1";
-            title4.Name = "Title";
-            title4.Text = "Resumen de compras por";
-            this.cCompras.Titles.Add(title4);
+            chartArea7.Name = "ChartArea1";
+            this.cProductos.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.cProductos.Legends.Add(legend7);
+            this.cProductos.Location = new System.Drawing.Point(3, 3);
+            this.cProductos.Name = "cProductos";
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series7.IsValueShownAsLabel = true;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            series7.YValuesPerPoint = 4;
+            this.cProductos.Series.Add(series7);
+            this.cProductos.Size = new System.Drawing.Size(360, 274);
+            this.cProductos.TabIndex = 117;
+            this.cProductos.Text = "chart3";
+            title7.Alignment = System.Drawing.ContentAlignment.TopLeft;
+            title7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title7.Name = "Title1";
+            title7.Text = "Productos generales más vendidos";
+            this.cProductos.Titles.Add(title7);
+            // 
+            // cVentas
+            // 
+            this.cVentas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea8.Name = "ChartArea1";
+            this.cVentas.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.cVentas.Legends.Add(legend8);
+            this.cVentas.Location = new System.Drawing.Point(3, 3);
+            this.cVentas.Name = "cVentas";
+            series8.ChartArea = "ChartArea1";
+            series8.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series8.Legend = "Legend1";
+            series8.MarkerBorderWidth = 5;
+            series8.Name = "Ventas";
+            series8.XValueMember = "Month";
+            series8.YValueMembers = "NumeroDeVentas";
+            series8.YValuesPerPoint = 3;
+            this.cVentas.Series.Add(series8);
+            this.cVentas.Size = new System.Drawing.Size(735, 187);
+            this.cVentas.TabIndex = 115;
+            this.cVentas.Text = "chart1";
+            title8.Name = "Title";
+            title8.Text = "Resumen de ventas por";
+            this.cVentas.Titles.Add(title8);
+            // 
+            // tbInventario
+            // 
+            this.tbInventario.Controls.Add(this.tableLayoutPanel2);
+            this.tbInventario.Controls.Add(this.cCompras);
+            this.tbInventario.Location = new System.Drawing.Point(4, 22);
+            this.tbInventario.Name = "tbInventario";
+            this.tbInventario.Padding = new System.Windows.Forms.Padding(3);
+            this.tbInventario.Size = new System.Drawing.Size(744, 487);
+            this.tbInventario.TabIndex = 1;
+            this.tbInventario.Text = "Inventario";
+            this.tbInventario.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -1427,8 +1401,8 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.panel12, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.panel11, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.pnlSinStock, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.pnlProductosPorVencer, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 202);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -1436,115 +1410,38 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(732, 280);
             this.tableLayoutPanel2.TabIndex = 119;
             // 
-            // panel11
+            // pnlSinStock
             // 
-            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnlSinStock.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel11.Controls.Add(this.dgvProductosPorVencer);
-            this.panel11.Controls.Add(this.toolStrip1);
-            this.panel11.Location = new System.Drawing.Point(3, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Padding = new System.Windows.Forms.Padding(5, 2, 5, 0);
-            this.panel11.Size = new System.Drawing.Size(360, 274);
-            this.panel11.TabIndex = 112;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.toolStripLabel1});
-            this.toolStrip1.Location = new System.Drawing.Point(5, 2);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(350, 25);
-            this.toolStrip1.TabIndex = 111;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(131, 22);
-            this.toolStripLabel1.Text = "Productos por vencer";
-            // 
-            // dgvProductosPorVencer
-            // 
-            this.dgvProductosPorVencer.AllowUserToAddRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProductosPorVencer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvProductosPorVencer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvProductosPorVencer.AutoGenerateColumns = false;
-            this.dgvProductosPorVencer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductosPorVencer.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductosPorVencer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvProductosPorVencer.ColumnHeadersHeight = 40;
-            this.dgvProductosPorVencer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvProductosPorVencer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.productoIDDataGridViewTextBoxColumn,
-            this.codigoBarrasDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
-            this.Categoria,
-            this.Proveedor,
-            this.dgvcVencimiento});
-            this.dgvProductosPorVencer.DataSource = this.productoReporteVencimientoTempranoBindingSource;
-            this.dgvProductosPorVencer.GridColor = System.Drawing.Color.White;
-            this.dgvProductosPorVencer.Location = new System.Drawing.Point(5, 30);
-            this.dgvProductosPorVencer.Name = "dgvProductosPorVencer";
-            this.dgvProductosPorVencer.ReadOnly = true;
-            this.dgvProductosPorVencer.RowHeadersVisible = false;
-            this.dgvProductosPorVencer.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductosPorVencer.Size = new System.Drawing.Size(350, 241);
-            this.dgvProductosPorVencer.TabIndex = 112;
-            // 
-            // panel12
-            // 
-            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel12.Controls.Add(this.dgvProductoSinStock);
-            this.panel12.Controls.Add(this.toolStrip2);
-            this.panel12.Location = new System.Drawing.Point(369, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Padding = new System.Windows.Forms.Padding(5, 2, 5, 0);
-            this.panel12.Size = new System.Drawing.Size(360, 274);
-            this.panel12.TabIndex = 113;
+            this.pnlSinStock.Controls.Add(this.dgvProductoSinStock);
+            this.pnlSinStock.Controls.Add(this.toolStrip2);
+            this.pnlSinStock.Location = new System.Drawing.Point(369, 3);
+            this.pnlSinStock.Name = "pnlSinStock";
+            this.pnlSinStock.Padding = new System.Windows.Forms.Padding(5, 2, 5, 0);
+            this.pnlSinStock.Size = new System.Drawing.Size(360, 274);
+            this.pnlSinStock.TabIndex = 113;
             // 
             // dgvProductoSinStock
             // 
             this.dgvProductoSinStock.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvProductoSinStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvProductoSinStock.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvProductoSinStock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProductoSinStock.AutoGenerateColumns = false;
             this.dgvProductoSinStock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductoSinStock.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductoSinStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductoSinStock.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvProductoSinStock.ColumnHeadersHeight = 40;
             this.dgvProductoSinStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProductoSinStock.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1564,55 +1461,6 @@
             this.dgvProductoSinStock.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductoSinStock.Size = new System.Drawing.Size(350, 241);
             this.dgvProductoSinStock.TabIndex = 112;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator2,
-            this.toolStripLabel2});
-            this.toolStrip2.Location = new System.Drawing.Point(5, 2);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(350, 25);
-            this.toolStrip2.TabIndex = 111;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripLabel2.ForeColor = System.Drawing.Color.White;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(186, 22);
-            this.toolStripLabel2.Text = "Productos por quedar sin stock";
-            // 
-            // productoReporteVencimientoTempranoBindingSource
-            // 
-            this.productoReporteVencimientoTempranoBindingSource.DataMember = "Producto_Reporte_VencimientoTemprano";
-            this.productoReporteVencimientoTempranoBindingSource.DataSource = this.reportes;
-            // 
-            // reportes
-            // 
-            this.reportes.DataSetName = "Reportes";
-            this.reportes.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // producto_Reporte_VencimientoTempranoTableAdapter
-            // 
-            this.producto_Reporte_VencimientoTempranoTableAdapter.ClearBeforeFill = true;
-            // 
-            // productoReporteSinStockBindingSource
-            // 
-            this.productoReporteSinStockBindingSource.DataMember = "Producto_Reporte_SinStock";
-            this.productoReporteSinStockBindingSource.DataSource = this.reportes;
-            // 
-            // producto_Reporte_SinStockTableAdapter
-            // 
-            this.producto_Reporte_SinStockTableAdapter.ClearBeforeFill = true;
             // 
             // productoIDDataGridViewTextBoxColumn1
             // 
@@ -1663,6 +1511,93 @@
             this.dgvcStock.Name = "dgvcStock";
             this.dgvcStock.ReadOnly = true;
             // 
+            // productoReporteSinStockBindingSource
+            // 
+            this.productoReporteSinStockBindingSource.DataMember = "Producto_Reporte_SinStock";
+            this.productoReporteSinStockBindingSource.DataSource = this.reportes;
+            // 
+            // reportes
+            // 
+            this.reportes.DataSetName = "Reportes";
+            this.reportes.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator2,
+            this.toolStripLabel2});
+            this.toolStrip2.Location = new System.Drawing.Point(5, 2);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(350, 25);
+            this.toolStrip2.TabIndex = 111;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel2.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(186, 22);
+            this.toolStripLabel2.Text = "Productos por quedar sin stock";
+            // 
+            // pnlProductosPorVencer
+            // 
+            this.pnlProductosPorVencer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlProductosPorVencer.Controls.Add(this.dgvProductosPorVencer);
+            this.pnlProductosPorVencer.Controls.Add(this.toolStrip1);
+            this.pnlProductosPorVencer.Location = new System.Drawing.Point(3, 3);
+            this.pnlProductosPorVencer.Name = "pnlProductosPorVencer";
+            this.pnlProductosPorVencer.Padding = new System.Windows.Forms.Padding(5, 2, 5, 0);
+            this.pnlProductosPorVencer.Size = new System.Drawing.Size(360, 274);
+            this.pnlProductosPorVencer.TabIndex = 112;
+            // 
+            // dgvProductosPorVencer
+            // 
+            this.dgvProductosPorVencer.AllowUserToAddRows = false;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvProductosPorVencer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvProductosPorVencer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvProductosPorVencer.AutoGenerateColumns = false;
+            this.dgvProductosPorVencer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductosPorVencer.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductosPorVencer.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvProductosPorVencer.ColumnHeadersHeight = 40;
+            this.dgvProductosPorVencer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProductosPorVencer.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productoIDDataGridViewTextBoxColumn,
+            this.codigoBarrasDataGridViewTextBoxColumn,
+            this.nombreDataGridViewTextBoxColumn,
+            this.Categoria,
+            this.Proveedor,
+            this.dgvcVencimiento});
+            this.dgvProductosPorVencer.DataSource = this.productoReporteVencimientoTempranoBindingSource;
+            this.dgvProductosPorVencer.GridColor = System.Drawing.Color.White;
+            this.dgvProductosPorVencer.Location = new System.Drawing.Point(5, 30);
+            this.dgvProductosPorVencer.Name = "dgvProductosPorVencer";
+            this.dgvProductosPorVencer.ReadOnly = true;
+            this.dgvProductosPorVencer.RowHeadersVisible = false;
+            this.dgvProductosPorVencer.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductosPorVencer.Size = new System.Drawing.Size(350, 241);
+            this.dgvProductosPorVencer.TabIndex = 112;
+            // 
             // productoIDDataGridViewTextBoxColumn
             // 
             this.productoIDDataGridViewTextBoxColumn.DataPropertyName = "ProductoID";
@@ -1705,6 +1640,72 @@
             this.dgvcVencimiento.HeaderText = "Vencimiento";
             this.dgvcVencimiento.Name = "dgvcVencimiento";
             this.dgvcVencimiento.ReadOnly = true;
+            // 
+            // productoReporteVencimientoTempranoBindingSource
+            // 
+            this.productoReporteVencimientoTempranoBindingSource.DataMember = "Producto_Reporte_VencimientoTemprano";
+            this.productoReporteVencimientoTempranoBindingSource.DataSource = this.reportes;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(141)))), ((int)(((byte)(196)))));
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.toolStripLabel1});
+            this.toolStrip1.Location = new System.Drawing.Point(5, 2);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(350, 25);
+            this.toolStrip1.TabIndex = 111;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(131, 22);
+            this.toolStripLabel1.Text = "Productos por vencer";
+            // 
+            // cCompras
+            // 
+            this.cCompras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea5.Name = "ChartArea1";
+            this.cCompras.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.cCompras.Legends.Add(legend5);
+            this.cCompras.Location = new System.Drawing.Point(3, 3);
+            this.cCompras.Name = "cCompras";
+            series5.ChartArea = "ChartArea1";
+            series5.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series5.Legend = "Legend1";
+            series5.MarkerBorderWidth = 5;
+            series5.Name = "Ventas";
+            series5.XValueMember = "Month";
+            series5.YValueMembers = "NumeroDeVentas";
+            series5.YValuesPerPoint = 3;
+            this.cCompras.Series.Add(series5);
+            this.cCompras.Size = new System.Drawing.Size(735, 187);
+            this.cCompras.TabIndex = 116;
+            this.cCompras.Text = "chart1";
+            title5.Name = "Title";
+            title5.Text = "Resumen de compras por";
+            this.cCompras.Titles.Add(title5);
+            // 
+            // producto_Reporte_VencimientoTempranoTableAdapter
+            // 
+            this.producto_Reporte_VencimientoTempranoTableAdapter.ClearBeforeFill = true;
+            // 
+            // producto_Reporte_SinStockTableAdapter
+            // 
+            this.producto_Reporte_SinStockTableAdapter.ClearBeforeFill = true;
             // 
             // mdReporteResumen
             // 
@@ -1776,26 +1777,26 @@
             this.panel2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tbVentas.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cMedicamentos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cProductos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cVentas)).EndInit();
             this.tbInventario.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cProductos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cMedicamentos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cCompras)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosPorVencer)).EndInit();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
+            this.pnlSinStock.ResumeLayout(false);
+            this.pnlSinStock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductoSinStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productoReporteSinStockBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reportes)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.pnlProductosPorVencer.ResumeLayout(false);
+            this.pnlProductosPorVencer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosPorVencer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productoReporteVencimientoTempranoBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reportes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productoReporteSinStockBindingSource)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cCompras)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1893,14 +1894,14 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart cProductos;
         private System.Windows.Forms.DataVisualization.Charting.Chart cCompras;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel pnlProductosPorVencer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.BindingSource productoReporteVencimientoTempranoBindingSource;
         private ReportesTableAdapters.Producto_Reporte_VencimientoTempranoTableAdapter producto_Reporte_VencimientoTempranoTableAdapter;
         private System.Windows.Forms.DataGridView dgvProductosPorVencer;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel pnlSinStock;
         private System.Windows.Forms.DataGridView dgvProductoSinStock;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

@@ -214,6 +214,35 @@ namespace SGF.PRESENTACION.UtilidadesComunes
             }
         }
 
+        public void cargarPermisosUsuario(string nombreFormulario, Permiso permisoDeUsuario)
+        {
+            List<Modulo> modulosPermitidos = lSesion.UsuarioEnSesion().Usuario.ObtenerModulosPermitidos();
+
+            // Buscar el módulo correspondiente al formulario actual
+            Modulo moduloActual = modulosPermitidos.FirstOrDefault(m => m.Descripcion == nombreFormulario);
+
+            // Si se encuentra el módulo, cargar las opciones
+            if (moduloActual != null && permisoDeUsuario != null)
+            {
+                permisoDeUsuario.Alta = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Alta");
+                permisoDeUsuario.Modificar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Modificar");
+                permisoDeUsuario.Baja = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Baja");
+                permisoDeUsuario.Detalles = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Detalles");
+                permisoDeUsuario.Importar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Importar");
+                permisoDeUsuario.Exportar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Exportar");
+                permisoDeUsuario.Imprimir = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Imprimir");
+                permisoDeUsuario.Grafico = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Gráfico");
+                permisoDeUsuario.Cancelar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Cancelar");
+                permisoDeUsuario.EntradaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Entrada");
+                permisoDeUsuario.SalidaMasiva = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Salida");
+                permisoDeUsuario.GenerarRegistro = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Generar registro");
+                // ventas
+                permisoDeUsuario.Historial = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Historial");
+                permisoDeUsuario.BuscarCliente = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Buscar clientes");
+                permisoDeUsuario.Cobrar = moduloActual.ListaAcciones.Any(accion => accion.Descripcion == "Cobrar");
+            }
+        }
+
         public void ExportarDataGridViewAExcel(DataGridView dgv, string nombreArchivo, string nombreHoja, string modulo)
         {
             Cursor.Current = Cursors.WaitCursor;

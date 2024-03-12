@@ -1,4 +1,5 @@
 ﻿using SGF.MODELO.Negocio;
+using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
 using SGF.NEGOCIO.Seguridad;
 using SGF.PRESENTACION.formModales.Buscadores;
@@ -40,6 +41,8 @@ namespace SGF.PRESENTACION.formPrincipales
         public bool productoEnGrilla { get; set; }
         NegocioModelo datosDelNegocio { get; set; }
 
+        private Permiso permisoDeUsuario { get; set; }
+
         public formVentas()
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace SGF.PRESENTACION.formPrincipales
             productoSeleccionado = new Producto();
             listaProductosSeleccionados = new List<Producto>();
             datosDelNegocio = new NegocioModelo();
+            permisoDeUsuario = new Permiso();
         }
 
         private void formVentas_Load(object sender, EventArgs e)
@@ -56,10 +60,52 @@ namespace SGF.PRESENTACION.formPrincipales
                 cargarFuentes();
                 cargarVenta();
                 txtBuscarProducto.Focus();
+                uiUtilidades.cargarPermisosUsuario("formVentas", permisoDeUsuario);
+                cargarPermisos();
+               
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cargarPermisos()
+        {
+            if(permisoDeUsuario.Cobrar)
+            {
+                btnCobrar.Enabled = true;
+            }
+            else
+            {
+                btnCobrar.Enabled = false;
+            }
+
+            if(permisoDeUsuario.Detalles)
+            {
+                btnImprimirUltimoTicket.Enabled = true;
+            }
+            else
+            {
+                btnImprimirUltimoTicket.Enabled = false;
+            }
+
+            if(permisoDeUsuario.Historial)
+            {
+                btnHistorialDeVenta.Enabled = true;
+            }
+            else
+            {
+                btnHistorialDeVenta.Enabled = false;
+            }
+
+            if(permisoDeUsuario.BuscarCliente)
+            {
+                btnClientes.Enabled = true;
+            }
+            else
+            {
+                btnClientes.Enabled = false;
             }
         }
 
@@ -796,7 +842,7 @@ namespace SGF.PRESENTACION.formPrincipales
 
         private void btnHistorialDeVenta_Click(object sender, EventArgs e)
         {
-            using(var modal = new mdHistorialVentas())
+            using(var modal = new mdHistorialVentas(permisoDeUsuario))
             {
                 modal.ShowDialog();
             }

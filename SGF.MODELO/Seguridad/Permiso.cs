@@ -30,6 +30,10 @@ namespace SGF.MODELO.Seguridad
         public bool SalidaMasiva { get; set; }
         public bool GenerarReporte { get; set; }
         public bool GenerarRegistro { get; set; }
+        // ventas
+        public bool Historial { get; set; }
+        public bool BuscarCliente { get; set; }
+        public bool Cobrar { get; set; }
 
 
 

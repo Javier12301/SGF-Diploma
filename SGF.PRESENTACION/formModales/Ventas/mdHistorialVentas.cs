@@ -1,4 +1,5 @@
 ﻿using SGF.MODELO.Negocio;
+using SGF.MODELO.Seguridad;
 using SGF.NEGOCIO.Negocio;
 using SGF.PRESENTACION.formModales;
 using SGF.PRESENTACION.formModales.Salida_inventario;
@@ -22,9 +23,11 @@ namespace SGF.PRESENTACION.formModales.Ventas
         VentaBLL lVenta = VentaBLL.ObtenerInstancia;
         NegocioBLL lNegocio = NegocioBLL.ObtenerInstancia;
 
-        public mdHistorialVentas()
+        private Permiso permisoUsuario { get; set; }
+        public mdHistorialVentas(Permiso permisoDeUsuario)
         {
             InitializeComponent();
+            this.permisoUsuario = permisoDeUsuario;
         }
 
         private void mdHistorialVentas_Load(object sender, EventArgs e)
@@ -34,6 +37,16 @@ namespace SGF.PRESENTACION.formModales.Ventas
             {
                 cargarNegocio();
                 filtrarLista();
+                if (permisoUsuario.Detalles)
+                {
+                    btnDetalles.Enabled = true;
+                    btnDetalles.Visible = true;
+                }
+                else
+                {
+                    btnDetalles.Enabled = false;
+                    btnDetalles.Visible = false;
+                }
             }
             catch (Exception ex)
             {

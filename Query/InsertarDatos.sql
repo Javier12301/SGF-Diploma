@@ -42,7 +42,7 @@ VALUES
     ('Historial', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
     ('Buscar clientes', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
     ('Detalles', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas')),
-    ('Vender producto general', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas'));
+    ('Cobrar', (SELECT ModuloID FROM Modulo WHERE Descripcion = 'formVentas'));
 
 -- Insertar las acciones para el módulo formClientes
 INSERT INTO Accion(Descripcion, ModuloID)

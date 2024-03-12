@@ -827,6 +827,7 @@
     <Content Include="Recursos\Logo negocio\logo.png" />
     <Content Include="Recursos\Logo negocio\style.css" />
     <None Include="Recursos\Plantillas\Reportes\reporte_productos_mayor_stock.html" />
+    <None Include="Recursos\Plantillas\Reportes\Plantilla_Reporte_Ventas.html" />
     <Content Include="Recursos\Plantillas\Ventas\detalle_venta.html" />
     <Content Include="Recursos\Plantillas\Ventas\detalle_venta_cancelado.html" />
     <Content Include="SqlServerTypes\readme.htm" />
